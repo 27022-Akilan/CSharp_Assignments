@@ -47,7 +47,7 @@ namespace Assignments
                     }
                     else if (userInput == 5)
                     {
-                        //SortContact();
+                        SortContact();
                     }
                     else if (userInput == 6)
                     {
@@ -69,74 +69,83 @@ namespace Assignments
         /// <summary>
         /// To add the Contact
         /// </summary>
-        public static void AddContact()
+        private static void AddContact()
         {
             string? name;
             Console.WriteLine("Enter name:");
             name = Console.ReadLine();
-            if (name == null)
+            if (string.IsNullOrWhiteSpace(name))
             {
-                Console.WriteLine("Cant be null");
+                Console.WriteLine("Cant be null or Empty!!");
+                return;
             }
-            else if (contact.ContainsKey(name))
+
+            if (contact.ContainsKey(name))
             {
                 Console.WriteLine("Name already exists!!");
+                return;
             }
-            else
+
+            string? phone;
+            while (true)
             {
-                List<string> list = new List<string>() {null, null, null};
-                contact[name] = list;
-                string? string_number;
-                do
+                Console.WriteLine("Enter the Phone number");
+                phone = Console.ReadLine();
+
+                if (string.IsNullOrWhiteSpace(phone))
                 {
-                    Console.WriteLine("Enter the phone number");
-                    string_number = Console.ReadLine();
+                    continue;
                 }
-                while (string_number.Length == 0);
-                long number;
-                if (long.TryParse(string_number, out number))
+
+                if (!long.TryParse(phone, out _))
                 {
-                    bool exists = false;
-                    foreach (var ls in contact.Values)
+                    Console.WriteLine("Invalid Number");
+                    continue;
+                }
+
+                bool exists = false;
+                foreach (var details in contact.Values)
+                {
+                    if (details[0] == phone)
                     {
-                        if (ls[0] == string_number)
-                        {
-                            Console.WriteLine("Already number exists");
-                            exists = true;
-                            AddContact();
-                        }
-                    }
-                    if (exists == false)
-                    {
-                        list[0] = string_number;
+                        exists = true;
+                        break;
                     }
                 }
-                string? email = null;
-                Console.WriteLine("Enter email");
-                email = Console.ReadLine();
-                List<string> info = contact[name];
-                if (email != null)
+                if (exists)
                 {
-                    info[1] = email;
+                    Console.WriteLine("Number already exists");
+                    continue;
                 }
-                Console.WriteLine("Enter additonal info");
-                string? addInfo = Console.ReadLine();
-                if (addInfo != null)
-                {
-                    info[2] = addInfo;
-                }
+
+                break;
             }
+
+            Console.WriteLine("Enter email");
+            string? email = Console.ReadLine();
+
+            Console.WriteLine("Enter Additional Info");
+            string? addInfo = Console.ReadLine();
+            contact[name] = new List<string>
+        {
+            phone,
+            email,
+            addInfo
+        };
+
+            Console.WriteLine("Contact Added Successfully");
         }
 
         /// <summary>
         /// to display all contacts
         /// </summary>
-        public static void ShowContact()
+        private static void ShowContact()
         {
             if (contact.Count == 0)
             {
-                Console.WriteLine("Empty!!!!!!!!!!!!!!!!!!!!!!!!!!!!1");
+                Console.WriteLine("Empty!!!!");
             }
+
             foreach (string key in contact.Keys)
             {
                 var ls = contact[key];
@@ -147,7 +156,7 @@ namespace Assignments
         /// <summary>
         /// to Edit the contacts
         /// </summary>
-        public static void EditContact()
+        private static void EditContact()
         {
             string search = GetNameOrNum();
             string res;
@@ -156,48 +165,71 @@ namespace Assignments
             {
                 bool canParse = false;
                 int choice;
-                Console.WriteLine("10 for edit name \n20 for edit phone number \n30 for Edit email \n40 for edit additonal info \n50 for abort");
-                string? strCh = Console.ReadLine();
-                if (int.TryParse(strCh, out choice))
-                {
-                    canParse = true;
-                }
-                else
-                {
-                    canParse = false;
-                }
 
+                do
+                {
+                    Console.WriteLine("10 for edit name \n20 for edit phone number \n30 for Edit email \n40 for edit additonal info \n50 for abort");
+                    string? strCh = Console.ReadLine();
+                    if (int.TryParse(strCh, out choice))
+                    {
+                        canParse = true;
+                    }
+                    else
+                    {
+                        canParse = false;
+                        Console.WriteLine("Enter the choice(numbers)");
+                    }
+                }
+                while (canParse == false);
                 if (canParse)
                 {
                     List<string> temp = contact[res];
                     if (choice == 10)
                     {
-                        contact.Remove(res);
                         string? name;
-                        Console.WriteLine("Enter new name:");
-                        name = Console.ReadLine();
-                        if (name == null)
+                        while (true)
                         {
-                            Console.WriteLine("Cant be null");
+                            Console.WriteLine("Enter new name:");
+                            name = Console.ReadLine();
+                            if (string.IsNullOrWhiteSpace(name))
+                            {
+                                Console.WriteLine("Cant be null or Empty");
+                                continue;
+                            }
+
+                            if (contact.ContainsKey(name))
+                            {
+                                Console.WriteLine("Name already exists!!");
+                                continue;
+                            }
+
+                            break;
                         }
-                        else if (contact.ContainsKey(name))
-                        {
-                            Console.WriteLine("Name already exists!!");
-                        }
-                        else
-                        {
-                            contact[name] = temp;
-                        }
+
+                        contact.Remove(res);
+                        contact[name] = temp;
                     }
 
                     if (choice == 20)
                     {
-                        Console.WriteLine("Enter new phone numeber");
                         string? newPh;
-                        newPh = Console.ReadLine();
-                        long number;
-                        if (long.TryParse(newPh, out number))
+                        while (true)
                         {
+                            Console.WriteLine("Enter new phone numeber");
+                            newPh = Console.ReadLine();
+
+                            if (string.IsNullOrWhiteSpace(newPh))
+                            {
+                                Console.WriteLine("Number Cant be empty or null");
+                                continue;
+                            }
+
+                            if (!long.TryParse(newPh, out _))
+                            {
+                                Console.WriteLine("Enter only number no letters");
+                                continue;
+                            }
+
                             bool canChange = true;
                             foreach (var findName in contact.Keys)
                             {
@@ -214,25 +246,21 @@ namespace Assignments
                                 }
                             }
 
-                            if (canChange)
-                            {
-                                temp[0] = newPh;
-                            }
-                            else
+                            if (!canChange)
                             {
                                 Console.WriteLine("Already this number exists cant update");
+                                continue;
                             }
-                        }
-                        else
-                        {
-                            Console.WriteLine("Empty or invalid number!! Aborting ");
+
+                            temp[0] = newPh;
+                            break;
                         }
                     }
 
                     if (choice == 30)
                     {
                         Console.WriteLine("Enter new email");
-                        string newEmail=Console.ReadLine();
+                        string newEmail = Console.ReadLine();
                         temp[1] = newEmail;
                     }
 
@@ -243,7 +271,7 @@ namespace Assignments
                         temp[2] = newAddCon;
                     }
 
-                    if(choice == 50)
+                    if (choice == 50)
                     {
                         Console.WriteLine("Aborted");
                         return;
@@ -255,44 +283,59 @@ namespace Assignments
                 Console.WriteLine("Not found!!!");
             }
         }
+
         private static int SearchContact(string search, out string res)
         {
             if (contact.ContainsKey(search))
             {
                 res = search;
-                Console.WriteLine($"{res}    {string.Join("\t", contact[search])} ");
+                Console.WriteLine($"{res} {string.Join("\t", contact[search])} ");
                 return 1;
             }
+
             foreach (string key in contact.Keys)
             {
                 List<string> ls = contact[key];
                 if (ls[0] == search)
                 {
                     res = key;
-                    Console.WriteLine($"{res}    {string.Join("\t", contact[key])} ");
+                    Console.WriteLine($"{res} {string.Join("\t", contact[key])} ");
                     return 1;
                 }
             }
 
-            res =null;
+            res = null;
             return 0;
         }
 
         private static void DeleteContact()
         {
-            Console.WriteLine("enter name or number to be searched");
+            Console.WriteLine("Enter name or number to be searched");
             string? search;
             search = Console.ReadLine();
             string res;
-            int found = SearchContact(search, out res);
-            if (found == 1)
+            if (!string.IsNullOrWhiteSpace(search))
             {
-                contact.Remove(res);
-                Console.WriteLine("Contact deleted");
+                int found = SearchContact(search, out res);
+                if (found == 1)
+                {
+                    contact.Remove(res);
+                    Console.WriteLine("Contact deleted");
+                }
+                else
+                {
+                    Console.WriteLine("No contact found");
+                }
             }
-            else
+        }
+
+        private static void SortContact()
+        {
+            var sortedContact = contact.OrderBy(k => k.Key);
+
+            foreach (var k in sortedContact)
             {
-                Console.WriteLine("No contact found");
+                Console.WriteLine($"{k.Key}\t{string.Join("\t", k.Value)} ");
             }
         }
 
