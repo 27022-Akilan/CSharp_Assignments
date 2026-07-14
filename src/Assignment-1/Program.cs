@@ -283,7 +283,12 @@ namespace Assignments
                 Console.WriteLine("Not found!!!");
             }
         }
-
+        /// <summary>
+        /// to search the contacts
+        /// </summary>
+        /// <param name="search">Name or number to be Searched</param>
+        /// <param name="res">returns the name of the founded contact</param>
+        /// <returns>Returns found or not</returns>
         private static int SearchContact(string search, out string res)
         {
             if (contact.ContainsKey(search))
@@ -307,7 +312,9 @@ namespace Assignments
             res = null;
             return 0;
         }
-
+        /// <summary>
+        /// To Delete the contact
+        /// </summary>
         private static void DeleteContact()
         {
             Console.WriteLine("Enter name or number to be searched");
@@ -328,7 +335,9 @@ namespace Assignments
                 }
             }
         }
-
+        /// <summary>
+        /// to sort the contact
+        /// </summary>
         private static void SortContact()
         {
             var sortedContact = contact.OrderBy(k => k.Key);
@@ -339,6 +348,10 @@ namespace Assignments
             }
         }
 
+        /// <summary>
+        /// To get the name or number
+        /// </summary>
+        /// <returns>returns name or number</returns>
         private static string GetNameOrNum()
         {
             Console.WriteLine("Enter name or number to be searched");
