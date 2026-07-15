@@ -11,7 +11,7 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "unit", "unit", "{C778E127-C
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "acceptance", "acceptance", "{93EBAE55-A8BA-40FF-93AA-7D9E4359B6B9}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Assignment-1", "src\Assignment-1\Assignment-1.csproj", "{FF4518A2-B259-491C-8C8A-2D8A79AF4DAE}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Assignment1", "src\Assignment-1\Assignment1.csproj", "{FF4518A2-B259-491C-8C8A-2D8A79AF4DAE}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
