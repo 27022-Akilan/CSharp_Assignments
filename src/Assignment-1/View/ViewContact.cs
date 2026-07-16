@@ -43,18 +43,21 @@ namespace Assignment1.View
                             else
                             {
                                 Console.WriteLine("Cant be Added");
-                                if (res == "IG")
-                                {
-                                    Console.WriteLine("Invaid GuiId");
-                                }
-
                                 if (res == "IN")
                                 {
                                     Console.WriteLine("Invalid Name");
                                 }
+                                else if (res == "IPL")
+                                {
+                                    Console.WriteLine("Invalid Phone Length");
+                                }
+                                else if (res == "IPL")
+                                {
+                                    Console.WriteLine("Invalid Phone Length (Should be 10)");
+                                }
                                 else if (res == "IP")
                                 {
-                                    Console.WriteLine("Invalid Phone");
+                                    Console.WriteLine("Invalid Phone (Can only be numbers without spaces)");
                                 }
                                 else
                                 {
@@ -114,6 +117,10 @@ namespace Assignment1.View
                             else if (res == "IN")
                             {
                                 Console.WriteLine("Invalid Name");
+                            }
+                            else if (res == "IPL")
+                            {
+                                Console.WriteLine("Invalid Phone Length");
                             }
                             else if (res == "IP")
                             {

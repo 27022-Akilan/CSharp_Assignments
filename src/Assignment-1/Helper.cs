@@ -76,10 +76,19 @@ namespace Assignment1
         {
             if (long.TryParse(phone, out _))
             {
+                if (phone.Length != 10)
+                {
+                    // Invalid Phone Number Length
+                    return "IPL";
+                }
+
                 return "VP";
             }
 
-            // Console.WriteLine("Invalid Phone number!");
+            if (phone == null)
+            {
+                phone = string.Empty;
+            }
             return "IP";
         }
 

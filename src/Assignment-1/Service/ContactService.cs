@@ -28,7 +28,8 @@ namespace Assignment1.Service
         {
             if (Helper.IsValidName(contact.Name) == "VN")
             {
-                if (Helper.IsValidPhone(contact.Phone) == "VP")
+                string phoneRes = Helper.IsValidPhone(contact.Phone);
+                if (phoneRes == "VP")
                 {
                     if (Helper.IsValidEmail(contact.Email) == "VE")
                     {
@@ -41,7 +42,7 @@ namespace Assignment1.Service
                 }
                 else
                 {
-                    return "IP";
+                    return phoneRes;
                 }
             }
 
