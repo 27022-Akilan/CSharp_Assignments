@@ -114,7 +114,7 @@ namespace Assignment1
         }
 
         /// <summary>
-        /// hcgxh
+        /// Validating Gui Id
         /// </summary>
         /// <param name="gId">inpt</param>
         /// <param name="id">out</param>

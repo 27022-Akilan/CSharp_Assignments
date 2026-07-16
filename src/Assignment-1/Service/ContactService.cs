@@ -20,7 +20,7 @@ namespace Assignment1.Service
         private Repository _repository = new Repository();
 
         /// <summary>
-        /// gh
+        /// Add the contact into list
         /// </summary>
         /// <param name="contact">hjd</param>
         /// <returns>bool</returns>
@@ -99,7 +99,7 @@ namespace Assignment1.Service
         }
 
         /// <summary>
-        /// hjhjhj
+        /// Delete contact
         /// </summary>
         /// <param name="userInp">usrch</param>
         /// <returns>string</returns>
