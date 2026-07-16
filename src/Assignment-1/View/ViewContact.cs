@@ -23,7 +23,7 @@ namespace Assignment1.View
             int userInput;
             do
             {
-                Console.Write("\n1.Add Contacts \n2.Show Contacts \n3.Edit Contacts \n4.Delete Contacts\n5.Sort Contacts\n6.Search Contacts\n7.Exit");
+                Console.WriteLine("1.Add Contacts \n2.Show Contacts \n3.Edit Contacts \n4.Delete Contacts\n5.Sort Contacts\n6.Search Contacts\n7.Exit");
                 Console.WriteLine("\nEnter the number to navigate");
                 string? userInputString = Console.ReadLine();
                 if (int.TryParse(userInputString, out userInput))
@@ -64,7 +64,7 @@ namespace Assignment1.View
                         }
                         else
                         {
-                            Console.WriteLine("Name, Phone, Email and Notes are all required");
+                            Console.WriteLine("Cant Add");
                         }
                     }
 
@@ -96,7 +96,7 @@ namespace Assignment1.View
                             Console.WriteLine($"{indx++}\t{x.Name}\t{x.Phone}\t{x.Email}\t{x.Notes}\t{x.Id}");
                         }
 
-                        Console.WriteLine("enter the number of the field to be edited");
+                        Console.WriteLine("Enter the GUID of the contact to be edited");
                         string? userInp = Console.ReadLine();
                         Helper.GetInput(out string? name, out string? phone, out string? email, out string? notes);
                         string res = contactService.EditContact(name, phone, email, notes, userInp);

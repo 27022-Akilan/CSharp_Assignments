@@ -23,7 +23,7 @@ namespace Assignment1
             Console.WriteLine("Enter name");
             name = Console.ReadLine();
 
-            Console.WriteLine("Enter phonenumber");
+            Console.WriteLine("Enter Phone number");
             phone = Console.ReadLine();
 
             Console.WriteLine("Enter email");
