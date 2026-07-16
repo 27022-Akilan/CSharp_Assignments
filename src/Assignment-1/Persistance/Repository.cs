@@ -36,39 +36,51 @@ namespace Assignment1.Persistance
         }
 
         /// <summary>
-        /// Gets all contacts.
-        /// </summary>
-        /// <returns>list</returns>
-        public List<ContactInfo> Get()
-        {
-            return new List<ContactInfo>(this._contactInfoList);
-        }
-
-        /// <summary>
         /// Edits an existing contact.
         /// </summary>
-        /// <param name="contact">obj</param>
         /// <param name="name">name</param>
         /// <param name="phone">ph</param>
         /// <param name="email">em</param>
         /// <param name="notes">notes</param>
-        public void Edit(ContactInfo contact, string? name, string? phone, string? email, string? notes)
+        /// <param name="id">id</param>
+        public void Edit(string? name, string? phone, string? email, string? notes, Guid id)
         {
-            contact.Name = name;
-            contact.Phone = phone;
-            contact.Email = email;
-            contact.Notes = notes;
+            foreach (var x in this._contactInfoList)
+            {
+                if (x.Id == id)
+                {
+                    x.Name = name;
+                    x.Phone = phone;
+                    x.Email = email;
+                    x.Notes = notes;
+                }
+            }
         }
 
         /// <summary>
-        /// Deletes a contact.
+        /// Deleting the contact
         /// </summary>
-        /// <param name="contact">hjhg</param>
-        /// <returns>bool</returns>
-        public bool Delete(ContactInfo contact)
+        /// <param name="userInp">Guid</param>
+        /// <returns>string</returns>
+        public string Delete(string? userInp)
         {
-            this._contactInfoList.Remove(contact);
-            return true;
+            Guid id;
+            if (Helper.IsValidGId(userInp, out id))
+            {
+                foreach (var x in this._contactInfoList)
+                {
+                    if (x.Id == id)
+                    {
+                        this._contactInfoList.Remove(x);
+                        return string.Empty;
+                    }
+                }
+
+                // Guid Not found
+                return "GNF";
+            }
+
+            return "IG";
         }
 
         /// <summary>
@@ -95,6 +107,30 @@ namespace Assignment1.Persistance
             }
 
             return list;
+        }
+
+        /// <summary>
+        /// To return the Search results
+        /// </summary>
+        /// <param name="name">name</param>
+        /// <param name="phone">ph</param>
+        /// <param name="email">em</param>
+        /// <param name="notes">not</param>
+        /// <returns>list</returns>
+        public List<ContactInfo> Search(string? name, string? phone,  string? email, string? notes)
+        {
+            List<ContactInfo> searchedList = new List<ContactInfo>();
+
+            foreach (var x in this._contactInfoList)
+            {
+                if (x.Name == name || x.Phone == phone || x.Email == email || x.Notes == notes)
+                {
+                    ContactInfo clonedContact = new ContactInfo(x.Name, x.Phone, x.Email, x.Notes, x.Id);
+                    searchedList.Add(clonedContact);
+                }
+            }
+
+            return searchedList;
         }
     }
 }

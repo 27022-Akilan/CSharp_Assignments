@@ -43,26 +43,7 @@ namespace Assignment1.View
                             else
                             {
                                 Console.WriteLine("Cant be Added");
-                                if (res == "IN")
-                                {
-                                    Console.WriteLine("Invalid Name");
-                                }
-                                else if (res == "IPL")
-                                {
-                                    Console.WriteLine("Invalid Phone Length");
-                                }
-                                else if (res == "IPL")
-                                {
-                                    Console.WriteLine("Invalid Phone Length (Should be 10)");
-                                }
-                                else if (res == "IP")
-                                {
-                                    Console.WriteLine("Invalid Phone (Can only be numbers without spaces)");
-                                }
-                                else
-                                {
-                                    Console.WriteLine("Invalid Email");
-                                }
+                                this.ReturnResultSimplification(res);
                             }
                         }
                         else
@@ -114,21 +95,9 @@ namespace Assignment1.View
                             {
                                 Console.WriteLine("Invalid GUiID");
                             }
-                            else if (res == "IN")
-                            {
-                                Console.WriteLine("Invalid Name");
-                            }
-                            else if (res == "IPL")
-                            {
-                                Console.WriteLine("Invalid Phone Length");
-                            }
-                            else if (res == "IP")
-                            {
-                                Console.WriteLine("Invalid Phone");
-                            }
                             else
                             {
-                                Console.WriteLine("Invalid Email");
+                                this.ReturnResultSimplification(res);
                             }
                         }
                     }
@@ -155,7 +124,11 @@ namespace Assignment1.View
                             Console.WriteLine("Cant Delete contact");
                             if (res == "IG")
                             {
-                                Console.WriteLine("Ivalid Gui Id");
+                                Console.WriteLine("Ivalid Gui Id Type");
+                            }
+                            else
+                            {
+                                Console.WriteLine("ID not found on the contact");
                             }
                         }
                     }
@@ -172,8 +145,8 @@ namespace Assignment1.View
                     else if (userInput == 6)
                     {
                         Helper.GetInput(out string? name, out string? phone, out string? email, out string? notes);
-                        List<ContactInfo> list = contactService.SearchContact(name, phone, email, notes);
-                        if (list.Count == 0)
+                        List<ContactInfo> searchedlist = contactService.SearchContact(name, phone, email, notes);
+                        if (searchedlist.Count == 0)
                         {
                             Console.WriteLine("No Contact Found");
                         }
@@ -181,15 +154,15 @@ namespace Assignment1.View
                         {
                             Console.WriteLine("Contact Found");
                             int indx = 1;
-                            foreach (var x in list)
+                            foreach (var x in searchedlist)
                             {
-                                Console.WriteLine($"{indx++}\t{x.Name}\t{x.Phone}\t{x.Email}\t{x.Notes}");
+                                Console.WriteLine($"{indx++}\t{x.Name}\t{x.Phone}\t{x.Email}\t{x.Notes}\t{x.Id}");
                             }
                         }
                     }
-                    else
+                    else if (userInput == 7)
                     {
-                        Console.WriteLine("Enter number between 1 to 7");
+                        Console.WriteLine("Exiting!!!!");
                     }
                 }
                 else
@@ -199,6 +172,30 @@ namespace Assignment1.View
                 }
             }
             while (userInput != 7);
+        }
+
+        /// <summary>
+        /// Simplication method
+        /// </summary>
+        /// <param name="res">the result </param>
+        public void ReturnResultSimplification(string res)
+        {
+            if (res == "IN")
+            {
+                Console.WriteLine("Invalid Name");
+            }
+            else if (res == "IPL")
+            {
+                Console.WriteLine("Invalid Phone NUmber Length (Should be 10)");
+            }
+            else if (res == "IP")
+            {
+                Console.WriteLine("Invalid Phone Number (Can only be numbers without spaces)");
+            }
+            else
+            {
+                Console.WriteLine("Invalid Email");
+            }
         }
     }
 }

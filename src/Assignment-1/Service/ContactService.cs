@@ -55,7 +55,7 @@ namespace Assignment1.Service
         /// <returns>list</returns>
         public List<ContactInfo> Show()
         {
-            return this._repository.Get();
+            return this._repository.GetClone();
         }
 
         /// <summary>
@@ -69,26 +69,19 @@ namespace Assignment1.Service
         /// <returns>string</returns>
         public string EditContact(string? name, string? phone, string? email, string? notes, string? userInp)
         {
-            List<ContactInfo> list = this._repository.Get();
             if (Helper.IsValidName(name) == "VN")
             {
-                if (Helper.IsValidPhone(phone) == "VP")
+                string phoneRes = Helper.IsValidPhone(phone);
+                if (phoneRes == "VP")
                 {
                     if (Helper.IsValidEmail(email) == "VE")
                     {
                         Guid id;
                         if (Helper.IsValidGId(userInp, out id))
                         {
-                            foreach (var x in list)
-                            {
-                                if (x.Id == id)
-                                {
-                                    this._repository.Edit(x, name, phone, email, notes);
-                                    return string.Empty;
-                                }
-                            }
+                            this._repository.Edit(name, phone, email,  notes, id);
 
-                            return "IG";
+                            return string.Empty;
                         }
 
                         return "IG";
@@ -98,7 +91,7 @@ namespace Assignment1.Service
                 }
                 else
                 {
-                    return "IP";
+                    return phoneRes;
                 }
             }
 
@@ -112,21 +105,7 @@ namespace Assignment1.Service
         /// <returns>string</returns>
         public string DeleteContact(string? userInp)
         {
-            List<ContactInfo> list = this._repository.Get();
-            Guid id;
-            if (Helper.IsValidGId(userInp, out id))
-            {
-                foreach (var x in list)
-                {
-                    if (x.Id == id)
-                    {
-                        this._repository.Delete(x);
-                        return string.Empty;
-                    }
-                }
-            }
-
-            return "IG";
+            return this._repository.Delete(userInp);
         }
 
         /// <summary>
@@ -139,17 +118,7 @@ namespace Assignment1.Service
         /// <returns>List</returns>
         public List<ContactInfo> SearchContact(string? name, string? phone, string? email, string? notes)
         {
-            List<ContactInfo> list = this._repository.Get();
-            List<ContactInfo> outList = new List<ContactInfo>();
-            foreach (var x in list)
-            {
-                if (x.Name == name || x.Phone == phone || x.Email == email || x.Notes == notes)
-                {
-                    outList.Add(x);
-                }
-            }
-
-            return new List<ContactInfo>(outList);
+            return this._repository.Search(name, phone, email, notes);
         }
 
         /// <summary>
