@@ -184,6 +184,10 @@ namespace Assignment1.View
             {
                 Console.WriteLine("Invalid Name");
             }
+            else if (res == "PAE")
+            {
+                Console.WriteLine("The Phone Number Already Exists");
+            }
             else if (res == "IPL")
             {
                 Console.WriteLine("Invalid Phone NUmber Length (Should be 10)");

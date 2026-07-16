@@ -26,11 +26,28 @@ namespace Assignment1.Service
         /// <returns>bool</returns>
         public string AddContact(ContactInfo contact)
         {
+            List<ContactInfo> listForPhoneNumberCheck = this._repository.GetClone();
             if (Helper.IsValidName(contact.Name) == "VN")
             {
                 string phoneRes = Helper.IsValidPhone(contact.Phone);
                 if (phoneRes == "VP")
                 {
+                    bool flag = false;
+                    foreach (var x in listForPhoneNumberCheck)
+                    {
+                        if (x.Phone == contact.Phone)
+                        {
+                            flag = true;
+                            break;
+                        }
+                    }
+
+                    if (flag == true)
+                    {
+                        // PhoneNumber already exists
+                        return "PAE";
+                    }
+
                     if (Helper.IsValidEmail(contact.Email) == "VE")
                     {
                         Guid id = Guid.NewGuid();
@@ -69,17 +86,34 @@ namespace Assignment1.Service
         /// <returns>string</returns>
         public string EditContact(string? name, string? phone, string? email, string? notes, string? userInp)
         {
+            List<ContactInfo> listForPhoneNumberCheck = this._repository.GetClone();
             if (Helper.IsValidName(name) == "VN")
             {
                 string phoneRes = Helper.IsValidPhone(phone);
                 if (phoneRes == "VP")
                 {
+                    bool flag = false;
+                    foreach (var x in listForPhoneNumberCheck)
+                    {
+                        if (x.Phone == phone)
+                        {
+                            flag = true;
+                            break;
+                        }
+                    }
+
+                    if (flag == true)
+                    {
+                        // PhoneNumber already exists
+                        return "PAE";
+                    }
+
                     if (Helper.IsValidEmail(email) == "VE")
                     {
                         Guid id;
                         if (Helper.IsValidGId(userInp, out id))
                         {
-                            this._repository.Edit(name, phone, email,  notes, id);
+                            this._repository.Edit(name, phone, email, notes, id);
 
                             return string.Empty;
                         }
