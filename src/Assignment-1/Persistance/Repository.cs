@@ -14,10 +14,10 @@ namespace Assignment1.Persistance
     /// </summary>
     internal class Repository
     {
-        private List<ContactInfo> _contactInfoList;
+        private readonly List<ContactInfo> _contactInfoList;
 
         /// <summary>
-        /// Initializes a new instance of the <see cref="Repository"/> class .
+        /// Initializes a new instance of the <see cref="Repository"/> class.
         /// </summary>
         public Repository()
         {
@@ -25,10 +25,10 @@ namespace Assignment1.Persistance
         }
 
         /// <summary>
-        /// qwertyu
+        /// Adds a contact with the given id.
         /// </summary>
         /// <param name="contact">add</param>
-        /// /// <param name="id">id</param>
+        /// <param name="id">id</param>
         public void Add(ContactInfo contact, Guid id)
         {
             contact.Id = id;
@@ -36,7 +36,7 @@ namespace Assignment1.Persistance
         }
 
         /// <summary>
-        /// ghghghgh
+        /// Gets all contacts.
         /// </summary>
         /// <returns>list</returns>
         public List<ContactInfo> Get()
@@ -45,22 +45,23 @@ namespace Assignment1.Persistance
         }
 
         /// <summary>
-        /// done 
+        /// Edits an existing contact.
         /// </summary>
         /// <param name="contact">obj</param>
         /// <param name="name">name</param>
         /// <param name="phone">ph</param>
         /// <param name="email">em</param>
         /// <param name="notes">notes</param>
-        public void Edit(ContactInfo contact, string name, string phone, string email, string notes)
+        public void Edit(ContactInfo contact, string? name, string? phone, string? email, string? notes)
         {
             contact.Name = name;
             contact.Phone = phone;
             contact.Email = email;
             contact.Notes = notes;
         }
+
         /// <summary>
-        /// Deleting
+        /// Deletes a contact.
         /// </summary>
         /// <param name="contact">hjhg</param>
         /// <returns>bool</returns>
@@ -71,7 +72,7 @@ namespace Assignment1.Persistance
         }
 
         /// <summary>
-        /// Guid get
+        /// Gets the id at a given index.
         /// </summary>
         /// <param name="indx">indx</param>
         /// <returns>guid</returns>
@@ -81,17 +82,18 @@ namespace Assignment1.Persistance
         }
 
         /// <summary>
-        /// Returning a cloned 
+        /// Returns a cloned list.
         /// </summary>
         /// <returns>list</returns>
         public List<ContactInfo> GetClone()
         {
             List<ContactInfo> list = new List<ContactInfo>();
-            foreach(var contact in this._contactInfoList)
+            foreach (var contact in this._contactInfoList)
             {
                 ContactInfo cloned = new ContactInfo(contact.Name, contact.Phone, contact.Email, contact.Notes, contact.Id);
                 list.Add(cloned);
             }
+
             return list;
         }
     }

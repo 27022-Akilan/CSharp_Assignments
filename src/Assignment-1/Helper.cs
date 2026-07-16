@@ -57,12 +57,13 @@ namespace Assignment1
         /// </summary>
         /// <param name="name">name</param>
         /// <returns>bool</returns>
-        public static string IsValidName(string name)
+        public static string IsValidName(string? name)
         {
             if (string.IsNullOrWhiteSpace(name))
             {
                 return "IN";
             }
+
             return "VN";
         }
 
@@ -71,9 +72,9 @@ namespace Assignment1
         /// </summary>
         /// <param name="phone">Phone</param>
         /// <returns>bool</returns>
-        public static string IsValidPhone(string phone)
+        public static string IsValidPhone(string? phone)
         {
-            if (long.TryParse(phone, out long number))
+            if (long.TryParse(phone, out _))
             {
                 return "VP";
             }
@@ -87,12 +88,18 @@ namespace Assignment1
         /// </summary>
         /// <param name="email">em</param>
         /// <returns>string</returns>
-        public static string IsValidEmail(string email)
+        public static string IsValidEmail(string? email)
         {
+            if (string.IsNullOrWhiteSpace(email))
+            {
+                return "VE";
+            }
+
             if (email.Length == 0 || email.Contains('@'))
             {
                 return "VE";
             }
+
             return "IE";
         }
 
@@ -102,9 +109,27 @@ namespace Assignment1
         /// <param name="gId">inpt</param>
         /// <param name="id">out</param>
         /// <returns>bool</returns>
-        public static bool IsValidGId(string gId, out Guid id)
+        public static bool IsValidGId(string? gId, out Guid id)
         {
             return Guid.TryParse(gId, out id);
+        }
+
+        /// <summary>
+        /// Checking isnull
+        /// </summary>
+        /// <param name="name">name</param>
+        /// <param name="phone">phone</param>
+        /// <param name="email">eamil</param>
+        /// <param name="notes">notes</param>
+        /// <returns>bool</returns>
+        public static bool IsNotNull(string? name, string? phone, string? email, string? notes)
+        {
+            if (string.IsNullOrEmpty(name) || string.IsNullOrEmpty(phone) || string.IsNullOrEmpty(email) || string.IsNullOrEmpty(notes))
+            {
+                return false;
+            }
+
+            return true;
         }
     }
 }

@@ -32,31 +32,39 @@ namespace Assignment1.View
                     if (userInput == 1)
                     {
                         Helper.GetInput(out string? name, out string? phone, out string? email, out string? notes);
-                        ContactInfo contact = new ContactInfo(name, phone, email, notes, Guid.Empty);
-                        string res=contactService.AddContact(contact);
-                        if (res == "")
+                        if (Helper.IsNotNull(name, phone, email, notes))
                         {
-                            Console.WriteLine("Added");
-                        }
-                        else
-                        {
-                            Console.WriteLine("Cant be Added");
-                            if (res == "IG")
+                            ContactInfo contact = new ContactInfo(name, phone, email, notes, Guid.Empty);
+                            string res = contactService.AddContact(contact);
+                            if (res == string.Empty)
                             {
-                                Console.WriteLine("Invaid GuiId");
-                            }
-                            if (res == "IN")
-                            {
-                                Console.WriteLine("Invalid Name");
-                            }
-                            else if (res == "IP")
-                            {
-                                Console.WriteLine("Invalid Phone");
+                                Console.WriteLine("Added");
                             }
                             else
                             {
-                                Console.WriteLine("Invalid Email");
+                                Console.WriteLine("Cant be Added");
+                                if (res == "IG")
+                                {
+                                    Console.WriteLine("Invaid GuiId");
+                                }
+
+                                if (res == "IN")
+                                {
+                                    Console.WriteLine("Invalid Name");
+                                }
+                                else if (res == "IP")
+                                {
+                                    Console.WriteLine("Invalid Phone");
+                                }
+                                else
+                                {
+                                    Console.WriteLine("Invalid Email");
+                                }
                             }
+                        }
+                        else
+                        {
+                            Console.WriteLine("Name, Phone, Email and Notes are all required");
                         }
                     }
 
@@ -92,7 +100,7 @@ namespace Assignment1.View
                         string? userInp = Console.ReadLine();
                         Helper.GetInput(out string? name, out string? phone, out string? email, out string? notes);
                         string res = contactService.EditContact(name, phone, email, notes, userInp);
-                        if (res == "")
+                        if (res == string.Empty)
                         {
                             Console.WriteLine("Edited Successfully");
                         }
@@ -131,7 +139,7 @@ namespace Assignment1.View
                         Console.WriteLine("Enter the GUI ID to be deleted");
                         string? userChoice = Console.ReadLine();
                         string res = contactService.DeleteContact(userChoice);
-                        if (res == "")
+                        if (res == string.Empty)
                         {
                             Console.WriteLine("Contact Deleted Successfully");
                         }
@@ -146,7 +154,7 @@ namespace Assignment1.View
                     }
                     else if (userInput == 5)
                     {
-                        List<ContactInfo> sortedContact= contactService.SortContact();
+                        List<ContactInfo> sortedContact = contactService.SortContact();
                         foreach (var x in sortedContact)
                         {
                             Console.WriteLine($"{x.Name}\t{x.Phone}\t{x.Email}\t{x.Notes}");

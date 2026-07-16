@@ -19,7 +19,7 @@ namespace Assignment1.Models
         /// <param name="email">email</param>
         /// <param name="notes">notes</param>
         /// <param name="id">guid</param>
-        public ContactInfo(string name, string phone, string email, string notes, Guid id)
+        public ContactInfo(string? name, string? phone, string? email, string? notes, Guid id)
         {
             this.Id = id;
             this.Name = name;
@@ -29,7 +29,7 @@ namespace Assignment1.Models
         }
 
         /// <summary>
-        /// Gets Id
+        /// Gets or sets Id
         /// </summary>
         /// /// <value>
         /// A <see cref="string"/> containing the name of the product.

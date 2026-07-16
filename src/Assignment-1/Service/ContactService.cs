@@ -18,6 +18,7 @@ namespace Assignment1.Service
     internal class ContactService
     {
         private Repository _repository = new Repository();
+
         /// <summary>
         /// gh
         /// </summary>
@@ -31,9 +32,9 @@ namespace Assignment1.Service
                 {
                     if (Helper.IsValidEmail(contact.Email) == "VE")
                     {
-                        Guid id= Guid.NewGuid();
+                        Guid id = Guid.NewGuid();
                         this._repository.Add(contact, id);
-                        return "";
+                        return string.Empty;
                     }
 
                     return "IE";
@@ -65,7 +66,7 @@ namespace Assignment1.Service
         /// <param name="notes">notes</param>
         /// <param name="userInp">userinp</param>
         /// <returns>string</returns>
-        public string EditContact(string name, string phone, string email, string notes, string userInp)
+        public string EditContact(string? name, string? phone, string? email, string? notes, string? userInp)
         {
             List<ContactInfo> list = this._repository.Get();
             if (Helper.IsValidName(name) == "VN")
@@ -82,7 +83,7 @@ namespace Assignment1.Service
                                 if (x.Id == id)
                                 {
                                     this._repository.Edit(x, name, phone, email, notes);
-                                    return "";
+                                    return string.Empty;
                                 }
                             }
 
@@ -99,6 +100,7 @@ namespace Assignment1.Service
                     return "IP";
                 }
             }
+
             return "IN";
         }
 
@@ -107,7 +109,7 @@ namespace Assignment1.Service
         /// </summary>
         /// <param name="userInp">usrch</param>
         /// <returns>string</returns>
-        public string DeleteContact(string userInp)
+        public string DeleteContact(string? userInp)
         {
             List<ContactInfo> list = this._repository.Get();
             Guid id;
@@ -118,7 +120,7 @@ namespace Assignment1.Service
                     if (x.Id == id)
                     {
                         this._repository.Delete(x);
-                        return "";
+                        return string.Empty;
                     }
                 }
             }
@@ -134,7 +136,7 @@ namespace Assignment1.Service
         /// <param name="email">email</param>
         /// <param name="notes">notes</param>
         /// <returns>List</returns>
-        public List<ContactInfo> SearchContact(string name, string phone, string email, string notes)
+        public List<ContactInfo> SearchContact(string? name, string? phone, string? email, string? notes)
         {
             List<ContactInfo> list = this._repository.Get();
             List<ContactInfo> outList = new List<ContactInfo>();
@@ -148,13 +150,14 @@ namespace Assignment1.Service
 
             return new List<ContactInfo>(outList);
         }
+
         /// <summary>
         /// Sorting
         /// </summary>
         /// <returns>list</returns>
         public List<ContactInfo> SortContact()
         {
-            List<ContactInfo> sortedList=_repository.GetClone();
+            List<ContactInfo> sortedList = this._repository.GetClone();
             sortedList.Sort((c1, c2) => string.Compare(c1.Name, c2.Name, StringComparison.OrdinalIgnoreCase));
             return sortedList;
         }
