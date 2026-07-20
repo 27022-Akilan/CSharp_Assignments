@@ -10,7 +10,7 @@
         /// </summary>
         /// <param name="name">name</param>
         /// <param name="salary">salary</param>
-        public Manager(string name, double salary)
+        public Manager(string name, decimal salary)
             : base(name, salary, "Manager")
         {
         }
@@ -18,10 +18,11 @@
         /// <summary>
         /// THis is for calculating Bonus
         /// </summary>
-        /// <returns>double</returns>
-        public override double CalculateBonus()
+        /// <returns>decimal</returns>
+        public override decimal CalculateBonus()
         {
-            return (this.Salary * 0.1) + this.Salary;
+            double rate = 0.1;
+            return (this.Salary * (decimal)rate) + this.Salary;
         }
     }
 }

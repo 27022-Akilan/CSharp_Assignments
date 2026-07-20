@@ -29,7 +29,7 @@ namespace AssignmentTwo.View
                             string? color = GetColor();
                             Console.WriteLine("Enter the radius");
                             string? r = Console.ReadLine() ?? string.Empty;
-                            if (Helper.IsNumber(r, out double number))
+                            if (Helper.IsNumber(r, out decimal number))
                             {
                                 Console.WriteLine(this._sserve.GetArea(new Circle("circle", color, number)));
                             }
@@ -47,7 +47,7 @@ namespace AssignmentTwo.View
                             string? length = Console.ReadLine() ?? string.Empty;
                             Console.WriteLine("Enter the Breadth");
                             string? breadth = Console.ReadLine() ?? string.Empty;
-                            if (Helper.IsNumber(length, out double resultLength) && Helper.IsNumber(breadth, out double resultBreadth))
+                            if (Helper.IsNumber(length, out decimal resultLength) && Helper.IsNumber(breadth, out decimal resultBreadth))
                             {
                                 Console.WriteLine(this._sserve.GetArea(new Rectangle("Rectangle", color, resultLength, resultBreadth)));
                             }

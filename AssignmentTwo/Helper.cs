@@ -11,9 +11,9 @@
         /// <param name="number">string num</param>
         /// <param name="res">res to be outed</param>
         /// <returns>bool</returns>
-        public static bool IsNumber(string number, out double res)
+        public static bool IsNumber(string number, out decimal res)
         {
-            if (double.TryParse(number, out res))
+            if (decimal.TryParse(number, out res))
             {
                 return true;
             }

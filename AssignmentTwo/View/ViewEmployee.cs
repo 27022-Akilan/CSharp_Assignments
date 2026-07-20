@@ -27,7 +27,7 @@ namespace AssignmentTwo.View
                         // Manager
                         case 1:
                             string name;
-                            double salary;
+                            decimal salary;
                             GetNameAndSalary(out name, out salary);
                             Console.WriteLine(this._employeeService.GetDetails(new Manager(name, salary)));
                             break;
@@ -53,7 +53,7 @@ namespace AssignmentTwo.View
             while (choice != 3);
         }
 
-        private static void GetNameAndSalary(out string employeeName, out double employeeSalary)
+        private static void GetNameAndSalary(out string employeeName, out decimal employeeSalary)
         {
             do
             {
@@ -73,7 +73,7 @@ namespace AssignmentTwo.View
             {
                 Console.WriteLine("Enter the Salary");
                 string? salary = Console.ReadLine() ?? string.Empty;
-                if (Helper.IsNumber(salary, out double resSalary))
+                if (Helper.IsNumber(salary, out decimal resSalary))
                 {
                     employeeSalary = resSalary;
                     break;

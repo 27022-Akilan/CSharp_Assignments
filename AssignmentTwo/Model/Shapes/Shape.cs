@@ -45,6 +45,6 @@
         /// this is a abstract method for calculate area
         /// </summary>
         /// <returns>long</returns>
-        public abstract double GetArea();
+        public abstract decimal GetArea();
     }
 }

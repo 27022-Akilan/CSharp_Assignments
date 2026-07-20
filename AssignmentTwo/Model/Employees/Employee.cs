@@ -11,7 +11,7 @@
         /// <param name="name">name</param>
         /// <param name="salary">salary</param>
         /// <param name="designation">designation</param>
-        public Employee(string name, double salary, string designation)
+        public Employee(string name, decimal salary, string designation)
         {
             this.Name = name;
             this.Salary = salary;
@@ -32,7 +32,7 @@
         /// <value>
         /// A <see cref="string"/> containing the Salary of the Employee.
         /// </value>
-        public double Salary { get; set; }
+        public decimal Salary { get; set; }
 
         /// <summary>
         /// Gets or sets Designation
@@ -55,6 +55,6 @@
         /// this is a abstract method for calculate area
         /// </summary>
         /// <returns>long</returns>
-        public abstract double CalculateBonus();
+        public abstract decimal CalculateBonus();
     }
 }

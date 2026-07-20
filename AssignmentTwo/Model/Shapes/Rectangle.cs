@@ -12,7 +12,7 @@
         /// <param name="l">len</param>
         /// <param name="b">breadth</param>
         /// <param name="name">name</param>
-        public Rectangle(string name, string color, double l, double b)
+        public Rectangle(string name, string color, decimal l, decimal b)
             : base(name, color)
         {
             this.Length = l;
@@ -23,23 +23,23 @@
         /// Gets or sets Length
         /// </summary>
         /// <value>
-        /// A <see cref="double"/> containing the radius of the circle.
+        /// A <see cref="decimal"/> containing the radius of the circle.
         /// </value>
-        public double Length { get; set; }
+        public decimal Length { get; set; }
 
         /// <summary>
         /// Gets or sets Breadth
         /// </summary>
         /// <value>
-        /// A <see cref="double"/> containing the radius of the circle.
+        /// A <see cref="decimal"/> containing the radius of the circle.
         /// </value>
-        public double Breadth { get; set; }
+        public decimal Breadth { get; set; }
 
         /// <summary>
         /// THis is for calculating area
         /// </summary>
-        /// <returns>double</returns>
-        public override double GetArea()
+        /// <returns>decimal</returns>
+        public override decimal GetArea()
         {
             return this.Length * this.Breadth;
         }
