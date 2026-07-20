@@ -34,25 +34,6 @@ namespace Assignment1
         }
 
         /// <summary>
-        /// Check option
-        /// </summary>
-        /// <param name="userChoice">user ch</param>
-        /// <param name="number">number convversion</param>
-        /// <returns>bool</returns>
-        public static bool IsValidChoice(string userChoice, out int number)
-        {
-            if (int.TryParse(userChoice, out number))
-            {
-                return true;
-            }
-            else
-            {
-                // Console.WriteLine("Invalid Number");
-                return false;
-            }
-        }
-
-        /// <summary>
         /// Check name is valid
         /// </summary>
         /// <param name="name">name</param>
@@ -68,9 +49,9 @@ namespace Assignment1
         }
 
         /// <summary>
-        /// Check Phone num is valid
+        /// Check phone  is valid
         /// </summary>
-        /// <param name="phone">Phone</param>
+        /// <param name="phone">ph</param>
         /// <returns>bool</returns>
         public static string IsValidPhone(string? phone)
         {
@@ -94,7 +75,7 @@ namespace Assignment1
         }
 
         /// <summary>
-        /// Check if eamil is valid
+        /// check eamil is valid
         /// </summary>
         /// <param name="email">em</param>
         /// <returns>string</returns>
@@ -129,17 +110,26 @@ namespace Assignment1
         /// </summary>
         /// <param name="name">name</param>
         /// <param name="phone">phone</param>
-        /// <param name="email">eamil</param>
-        /// <param name="notes">notes</param>
         /// <returns>bool</returns>
-        public static bool IsNotNull(string? name, string? phone, string? email, string? notes)
+        public static bool IsNotNull(string? name, string? phone)
         {
-            if (string.IsNullOrEmpty(name) || string.IsNullOrEmpty(phone) || string.IsNullOrEmpty(email) || string.IsNullOrEmpty(notes))
+            if (string.IsNullOrWhiteSpace(name) || string.IsNullOrWhiteSpace(phone))
             {
                 return false;
             }
 
             return true;
+        }
+
+        /// <summary>
+        /// String comparison
+        /// </summary>
+        /// <param name="a">1st str</param>
+        /// <param name="b">2nd str</param>
+        /// <returns>bool</returns>
+        public static bool Compare(string? a, string? b)
+        {
+            return string.Equals(a, b, StringComparison.OrdinalIgnoreCase);
         }
     }
 }

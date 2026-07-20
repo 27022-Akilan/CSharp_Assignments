@@ -15,159 +15,189 @@ namespace Assignment1.View
     internal class ViewContact
     {
         /// <summary>
-        /// Method for viewing contacts
+        /// Viewing contacts
         /// </summary>
         public void ViewContacts()
         {
             ContactService contactService = new ContactService();
             int userInput;
+
             do
             {
-                Console.WriteLine("1.Add Contacts \n2.Show Contacts \n3.Edit Contacts \n4.Delete Contacts\n5.Sort Contacts\n6.Search Contacts\n7.Exit");
+                Console.WriteLine("\n1.Add Contacts \n2.Show Contacts \n3.Edit Contacts \n4.Delete Contacts\n5.Sort Contacts\n6.Search Contacts\n7.Exit");
                 Console.WriteLine("\nEnter the number to navigate");
+
                 string? userInputString = Console.ReadLine();
+
                 if (int.TryParse(userInputString, out userInput))
                 {
-                    // ADD
-                    if (userInput == 1)
+                    switch (userInput)
                     {
-                        Helper.GetInput(out string? name, out string? phone, out string? email, out string? notes);
-                        if (Helper.IsNotNull(name, phone, email, notes))
-                        {
-                            ContactInfo contact = new ContactInfo(name, phone, email, notes, Guid.Empty);
-                            string res = contactService.AddContact(contact);
-                            if (res == string.Empty)
+                        // Add
+                        case 1:
+                            Helper.GetInput(out string? name, out string? phone, out string? email, out string? notes);
+
+                            if (Helper.IsNotNull(name, phone))
                             {
-                                Console.WriteLine("Added");
+                                ContactInfo contact = new ContactInfo(name, phone, email, notes, Guid.Empty);
+                                string res = contactService.AddContact(contact);
+
+                                if (res == string.Empty)
+                                {
+                                    Console.WriteLine("Added");
+                                }
+                                else
+                                {
+                                    Console.WriteLine("Cant be Added");
+                                    this.ReturnResultSimplification(res);
+                                }
                             }
                             else
                             {
-                                Console.WriteLine("Cant be Added");
-                                this.ReturnResultSimplification(res);
+                                Console.WriteLine("Name or Number cant be Empty");
                             }
-                        }
-                        else
-                        {
-                            Console.WriteLine("Cant Add");
-                        }
-                    }
 
-                    // display
-                    else if (userInput == 2)
-                    {
-                        List<ContactInfo> contactList = contactService.Show();
-                        long indx = 1;
-                        if (contactList.Count > 0)
-                        {
+                            break;
+
+                        // Show
+                        case 2:
+                            List<ContactInfo> contactList = contactService.Show();
+                            long indx = 1;
+
+                            if (contactList.Count > 0)
+                            {
+                                foreach (var x in contactList)
+                                {
+                                    Console.WriteLine($"{indx++}\t{x.Name}\t{x.Phone}\t{x.Email}\t{x.Notes}\t{x.Id}");
+                                }
+                            }
+                            else
+                            {
+                                Console.WriteLine("Empty No Contacts!!!");
+                            }
+
+                            break;
+
+                        // Edit
+                        case 3:
+                            contactList = contactService.Show();
+                            indx = 1;
+
                             foreach (var x in contactList)
                             {
                                 Console.WriteLine($"{indx++}\t{x.Name}\t{x.Phone}\t{x.Email}\t{x.Notes}\t{x.Id}");
                             }
-                        }
-                        else
-                        {
-                            Console.WriteLine("Empty No Contacts!!!");
-                        }
-                    }
 
-                    // edit
-                    else if (userInput == 3)
-                    {
-                        List<ContactInfo> contactList = contactService.Show();
-                        long indx = 1;
-                        foreach (var x in contactList)
-                        {
-                            Console.WriteLine($"{indx++}\t{x.Name}\t{x.Phone}\t{x.Email}\t{x.Notes}\t{x.Id}");
-                        }
+                            Console.WriteLine("Enter the GUID of the contact to be edited");
+                            string? userInp = Console.ReadLine();
 
-                        Console.WriteLine("Enter the GUID of the contact to be edited");
-                        string? userInp = Console.ReadLine();
-                        Helper.GetInput(out string? name, out string? phone, out string? email, out string? notes);
-                        string res = contactService.EditContact(name, phone, email, notes, userInp);
-                        if (res == string.Empty)
-                        {
-                            Console.WriteLine("Edited Successfully");
-                        }
-                        else
-                        {
-                            Console.WriteLine("Cant be Edited");
-                            if (res == "IG")
+                            Helper.GetInput(out name, out phone, out email, out notes);
+
+                            string result = contactService.EditContact(name, phone, email, notes, userInp);
+
+                            if (result == string.Empty)
                             {
-                                Console.WriteLine("Invalid GUiID");
+                                Console.WriteLine("Edited Successfully");
                             }
                             else
                             {
-                                this.ReturnResultSimplification(res);
-                            }
-                        }
-                    }
+                                Console.WriteLine("Cant be Edited");
 
-                    // delete
-                    else if (userInput == 4)
-                    {
-                        List<ContactInfo> contactList = contactService.Show();
-                        long indx = 1;
-                        foreach (var x in contactList)
-                        {
-                            Console.WriteLine($"{indx++}\t{x.Name}\t{x.Phone}\t{x.Email}\t{x.Notes}\t{x.Id}");
-                        }
-
-                        Console.WriteLine("Enter the GUI ID to be deleted");
-                        string? userChoice = Console.ReadLine();
-                        string res = contactService.DeleteContact(userChoice);
-                        if (res == string.Empty)
-                        {
-                            Console.WriteLine("Contact Deleted Successfully");
-                        }
-                        else
-                        {
-                            Console.WriteLine("Cant Delete contact");
-                            if (res == "IG")
-                            {
-                                Console.WriteLine("Ivalid Gui Id Type");
+                                if (result == "IG")
+                                {
+                                    Console.Write("\t Invalid GUiID");
+                                }
+                                else
+                                {
+                                    this.ReturnResultSimplification(result);
+                                }
                             }
-                            else
-                            {
-                                Console.WriteLine("ID not found on the contact");
-                            }
-                        }
-                    }
-                    else if (userInput == 5)
-                    {
-                        List<ContactInfo> sortedContact = contactService.SortContact();
-                        foreach (var x in sortedContact)
-                        {
-                            Console.WriteLine($"{x.Name}\t{x.Phone}\t{x.Email}\t{x.Notes}");
-                        }
-                    }
 
-                    // search
-                    else if (userInput == 6)
-                    {
-                        Helper.GetInput(out string? name, out string? phone, out string? email, out string? notes);
-                        List<ContactInfo> searchedlist = contactService.SearchContact(name, phone, email, notes);
-                        if (searchedlist.Count == 0)
-                        {
-                            Console.WriteLine("No Contact Found");
-                        }
-                        else
-                        {
-                            Console.WriteLine("Contact Found");
-                            int indx = 1;
-                            foreach (var x in searchedlist)
+                            break;
+
+                        // Delete
+                        case 4:
+                            contactList = contactService.Show();
+                            indx = 1;
+
+                            foreach (var x in contactList)
                             {
                                 Console.WriteLine($"{indx++}\t{x.Name}\t{x.Phone}\t{x.Email}\t{x.Notes}\t{x.Id}");
                             }
-                        }
-                    }
-                    else if (userInput == 7)
-                    {
-                        Console.WriteLine("Exiting!!!!");
+
+                            Console.WriteLine("Enter the GUI ID to be deleted");
+                            string? userChoice = Console.ReadLine();
+
+                            result = contactService.DeleteContact(userChoice);
+
+                            if (result == string.Empty)
+                            {
+                                Console.WriteLine("Contact Deleted Successfully");
+                            }
+                            else
+                            {
+                                Console.WriteLine("Cant Delete contact");
+
+                                if (result == "IG")
+                                {
+                                    Console.Write("\t Ivalid Gui Id Type");
+                                }
+                                else
+                                {
+                                    Console.Write("\t ID not found on the contact");
+                                }
+                            }
+
+                            break;
+
+                        // Sort
+                        case 5:
+                            List<ContactInfo> sortedContact = contactService.SortContact();
+
+                            foreach (var x in sortedContact)
+                            {
+                                Console.WriteLine($"{x.Name}\t{x.Phone}\t{x.Email}\t{x.Notes}");
+                            }
+
+                            break;
+
+                        // Search
+                        case 6:
+                            Helper.GetInput(out name, out phone, out email, out notes);
+
+                            List<ContactInfo> searchedlist = contactService.SearchContact(name, phone, email, notes);
+
+                            if (searchedlist.Count == 0)
+                            {
+                                Console.WriteLine("No Contact Found");
+                            }
+                            else
+                            {
+                                Console.WriteLine("Contact Found");
+                                indx = 1;
+
+                                foreach (var x in searchedlist)
+                                {
+                                    Console.WriteLine($"{indx++}\t{x.Name}\t{x.Phone}\t{x.Email}\t{x.Notes}\t{x.Id}");
+                                }
+                            }
+
+                            break;
+
+                        // Exit
+                        case 7:
+                            Console.WriteLine("Exiting!!!!");
+                            break;
+
+                        default:
+                            Console.WriteLine("Choose the correct number");
+                            userInput = -1;
+                            break;
                     }
                 }
                 else
                 {
-                    Console.WriteLine("choose the crct num");
+                    Console.WriteLine("Choose the correct number");
                     userInput = -1;
                 }
             }
@@ -175,30 +205,34 @@ namespace Assignment1.View
         }
 
         /// <summary>
-        /// Simplication method
+        /// Simplification method
         /// </summary>
-        /// <param name="res">the result </param>
+        /// <param name="res">The result</param>
         public void ReturnResultSimplification(string res)
         {
-            if (res == "IN")
+            switch (res)
             {
-                Console.WriteLine("Invalid Name");
-            }
-            else if (res == "PAE")
-            {
-                Console.WriteLine("The Phone Number Already Exists");
-            }
-            else if (res == "IPL")
-            {
-                Console.WriteLine("Invalid Phone NUmber Length (Should be 10)");
-            }
-            else if (res == "IP")
-            {
-                Console.WriteLine("Invalid Phone Number (Can only be numbers without spaces)");
-            }
-            else
-            {
-                Console.WriteLine("Invalid Email");
+                case "IN":
+                    Console.Write(" Invalid Name");
+                    break;
+
+                case "PAE":
+                    Console.Write(" The Phone Number Already Exists");
+                    break;
+
+                case "IPL":
+                    Console.Write(" Invalid Phone Number Length (Should be 10)");
+                    break;
+
+                case "IP":
+                    Console.Write(" Invalid Phone Number (Can only be numbers without spaces)");
+                    break;
+                case "GNF":
+                    Console.Write(" Guid Not Found");
+                    break;
+                default:
+                    Console.Write(" Invalid Email");
+                    break;
             }
         }
     }

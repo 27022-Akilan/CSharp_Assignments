@@ -43,7 +43,8 @@ namespace Assignment1.Persistance
         /// <param name="email">em</param>
         /// <param name="notes">notes</param>
         /// <param name="id">id</param>
-        public void Edit(string? name, string? phone, string? email, string? notes, Guid id)
+        /// < returns>bool</returns>
+        public bool Edit(string? name, string? phone, string? email, string? notes, Guid id)
         {
             foreach (var x in this._contactInfoList)
             {
@@ -53,8 +54,11 @@ namespace Assignment1.Persistance
                     x.Phone = phone;
                     x.Email = email;
                     x.Notes = notes;
+                    return true;
                 }
             }
+
+            return false;
         }
 
         /// <summary>
@@ -99,14 +103,7 @@ namespace Assignment1.Persistance
         /// <returns>list</returns>
         public List<ContactInfo> GetClone()
         {
-            List<ContactInfo> list = new List<ContactInfo>();
-            foreach (var contact in this._contactInfoList)
-            {
-                ContactInfo cloned = new ContactInfo(contact.Name, contact.Phone, contact.Email, contact.Notes, contact.Id);
-                list.Add(cloned);
-            }
-
-            return list;
+            return this._contactInfoList.Select(c => new ContactInfo(c.Name, c.Phone, c.Email, c.Notes, c.Id)).ToList();
         }
 
         /// <summary>
@@ -117,13 +114,16 @@ namespace Assignment1.Persistance
         /// <param name="email">em</param>
         /// <param name="notes">not</param>
         /// <returns>list</returns>
-        public List<ContactInfo> Search(string? name, string? phone,  string? email, string? notes)
+        public List<ContactInfo> Search(string? name, string? phone, string? email, string? notes)
         {
             List<ContactInfo> searchedList = new List<ContactInfo>();
 
             foreach (var x in this._contactInfoList)
             {
-                if (x.Name == name || x.Phone == phone || x.Email == email || x.Notes == notes)
+                if (Helper.Compare(x.Name, name)
+                    || Helper.Compare(x.Phone, phone)
+                    || Helper.Compare(x.Email, email)
+                    || Helper.Compare(x.Notes, notes))
                 {
                     ContactInfo clonedContact = new ContactInfo(x.Name, x.Phone, x.Email, x.Notes, x.Id);
                     searchedList.Add(clonedContact);
