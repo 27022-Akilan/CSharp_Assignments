@@ -18,7 +18,15 @@ namespace Assignment1.View
             MenuOption option;
             do
             {
-                Console.WriteLine("\n1.Add Contacts \n2.Show Contacts \n3.Edit Contacts \n4.Delete Contacts\n5.Sort Contacts\n6.Search Contacts\n7.Exit");
+                Console.WriteLine("\n====================================" +
+                    "\n1.Add Contacts " +
+                    "\n2.Show Contacts " +
+                    "\n3.Edit Contacts " +
+                    "\n4.Delete Contacts" +
+                    "\n5.Sort Contacts" +
+                    "\n6.Search Contacts" +
+                    "\n7.Exit" +
+                    "\n====================================");
                 Console.WriteLine("\nEnter the number to navigate");
 
                 string? userInputString = Console.ReadLine();
@@ -208,25 +216,25 @@ namespace Assignment1.View
             switch (res)
             {
                 case "INVALID NAME":
-                    Console.Write(" Invalid Name");
+                    Console.WriteLine("Invalid Name");
                     break;
 
                 case "PHONE ALREADY EXISTS":
-                    Console.Write(" The Phone Number Already Exists");
+                    Console.WriteLine("The Phone Number Already Exists");
                     break;
 
                 case "INVALID PHONE LENGTH":
-                    Console.Write(" Invalid Phone Number Length (Should be 10)");
+                    Console.WriteLine("Invalid Phone Number Length (Should be 10)");
                     break;
 
                 case "INVALID PHONE":
-                    Console.Write(" Invalid Phone Number (Can only be numbers without spaces)");
+                    Console.WriteLine("Invalid Phone Number (Can only be numbers without spaces)");
                     break;
                 case "GUID NOT FOUND":
-                    Console.Write(" Guid Not Found");
+                    Console.WriteLine("Guid Not Found");
                     break;
                 default:
-                    Console.Write(" Invalid Email");
+                    Console.WriteLine("Invalid Email");
                     break;
             }
         }
