@@ -1,29 +1,20 @@
-﻿using System;
-using System.Collections.Generic;
-using System.ComponentModel;
-using System.ComponentModel.Design;
-using System.Linq;
-using System.Numerics;
-using System.Text;
-using System.Threading.Tasks;
-using System.Xml.Linq;
-using Assignment1.Models;
+﻿using Assignment1.Models;
 using Assignment1.Persistance;
 
 namespace Assignment1.Service
 {
     /// <summary>
-    /// Business logic
+    /// Service provider for contact management
     /// </summary>
     internal class ContactService
     {
-        private Repository _repository = new Repository();
+        private ContactRepository _contactRepository = new ContactRepository();
 
         /// <summary>
         /// Add the contact into list
         /// </summary>
-        /// <param name="contact">hjd</param>
-        /// <returns>bool</returns>
+        /// <param name="contact">Contact</param>
+        /// <returns>String</returns>
         public string AddContact(ContactInfo contact)
         {
             string res = this.IsValidNamePhoneEmail(contact.Name, contact.Phone, contact.Email, contact.Notes, contact.Id);
@@ -31,7 +22,7 @@ namespace Assignment1.Service
             {
                 Guid idToBeAdded = Guid.NewGuid();
                 ContactInfo contactToBeAdded = new ContactInfo(contact.Name, contact.Phone, contact.Email, contact.Notes, contact.Id);
-                this._repository.Add(contactToBeAdded, idToBeAdded);
+                this._contactRepository.Add(contactToBeAdded, idToBeAdded);
                 return string.Empty;
             }
 
@@ -42,56 +33,65 @@ namespace Assignment1.Service
         /// Get List of Contact
         /// </summary>
         /// <returns>list</returns>
-        public List<ContactInfo> Show()
+        public List<ContactInfo> GetContacts()
         {
-            return this._repository.GetClone();
+            return this._contactRepository.Show();
         }
 
         /// <summary>
-        /// ghghghghg
+        /// Updates the contact
         /// </summary>
         /// <param name="name">name</param>
         /// <param name="phone">phone</param>
         /// <param name="email">email</param>
         /// <param name="notes">notes</param>
-        /// <param name="userInp">userinp</param>
+        /// <param name="editContactGuid">user Input Guid</param>
         /// <returns>string</returns>
-        public string EditContact(string? name, string? phone, string? email, string? notes, string? userInp)
+        public string UpdateContact(string? name, string? phone, string? email, string? notes, string? editContactGuid)
         {
-            Guid id;
-            if (Helper.IsValidGId(userInp, out id))
+            Guid validGuid;
+            if (Helper.IsValidGId(editContactGuid, out validGuid))
             {
-                string res = this.IsValidNamePhoneEmail(name, phone, email, notes, id);
-                if (res == string.Empty)
+                string result = this.IsValidNamePhoneEmail(name, phone, email, notes, validGuid);
+                if (result == string.Empty)
                 {
-                    if (this._repository.Edit(name, phone, email, notes, id))
+                    if (this._contactRepository.Edit(name, phone, email, notes, validGuid))
                     {
                         return string.Empty;
                     }
                     else
                     {
-                        return "GNF";
+                        // Guid Not Found
+                        return "GUID NOT FOUND";
                     }
                 }
 
-                return res;
+                return result;
             }
 
-            return "IG";
+            // InValid Guid
+            return "INVALID GUID";
         }
 
         /// <summary>
-        /// Delete contact
+        /// Deletes the contact
         /// </summary>
-        /// <param name="userInp">usrch</param>
+        /// <param name="guidofContactToBeDeleted">Guid to delete</param>
         /// <returns>string</returns>
-        public string DeleteContact(string? userInp)
+        public string DeleteContact(string? guidofContactToBeDeleted)
         {
-            return this._repository.Delete(userInp);
+            Guid validatedGuid;
+            if (Helper.IsValidGId(guidofContactToBeDeleted, out validatedGuid))
+            {
+                return this._contactRepository.Delete(validatedGuid);
+            }
+
+            // Invalid Guid
+            return "INVALID GUID";
         }
 
         /// <summary>
-        /// Searchin for Contact
+        /// Searching for Contact
         /// </summary>
         /// <param name="name">name</param>
         /// <param name="phone">phone</param>
@@ -100,7 +100,7 @@ namespace Assignment1.Service
         /// <returns>List</returns>
         public List<ContactInfo> SearchContact(string? name, string? phone, string? email, string? notes)
         {
-            return this._repository.Search(name, phone, email, notes);
+            return this._contactRepository.Search(name, phone, email, notes);
         }
 
         /// <summary>
@@ -109,9 +109,9 @@ namespace Assignment1.Service
         /// <returns>list</returns>
         public List<ContactInfo> SortContact()
         {
-            List<ContactInfo> sortedList = this._repository.GetClone();
-            sortedList.Sort((c1, c2) => string.Compare(c1.Name, c2.Name, StringComparison.OrdinalIgnoreCase));
-            return sortedList;
+            List<ContactInfo> sortedContactList = this._contactRepository.Show();
+            sortedContactList.Sort((c1, c2) => string.Compare(c1.Name, c2.Name, StringComparison.OrdinalIgnoreCase));
+            return sortedContactList;
         }
 
         /// <summary>
@@ -125,24 +125,25 @@ namespace Assignment1.Service
         /// <returns>string</returns>
         private string IsValidNamePhoneEmail(string? name, string? phone, string? email, string? notes, Guid id)
         {
-            if (Helper.IsValidName(name) == "VN")
+            if (Helper.IsValidName(name) == "VALID NAME")
             {
                 string phoneRes = Helper.IsValidPhone(phone);
-                if (phoneRes == "VP")
+                if (phoneRes == "VALID PHONE")
                 {
                     bool flag = this.IsPhoneExists(phone, id);
                     if (flag == true)
                     {
                         // PhoneNumber already exists
-                        return "PAE";
+                        return "PHONE NUMBER ALREADY EXISTS";
                     }
 
-                    if (Helper.IsValidEmail(email) == "VE")
+                    if (Helper.IsValidEmail(email) == "VALID EMAIL")
                     {
                         return string.Empty;
                     }
 
-                    return "IE";
+                    // Invalid Email
+                    return "INVALID EMAIL";
                 }
                 else
                 {
@@ -150,21 +151,22 @@ namespace Assignment1.Service
                 }
             }
 
-            return "IN";
+            // INvalid Name
+            return "INVALID NAME";
         }
 
         /// <summary>
-        /// checks for existing phone num
+        /// checks for existing phone number
         /// </summary>
         /// <param name="phone">ph</param>
         /// <param name="id">id</param>
         /// <returns>bool</returns>
         private bool IsPhoneExists(string? phone, Guid id)
         {
-            List<ContactInfo> listForPhoneNumberCheck = this._repository.GetClone();
-            foreach (var x in listForPhoneNumberCheck)
+            List<ContactInfo> listForPhoneNumberCheck = this._contactRepository.Show();
+            foreach (var contact in listForPhoneNumberCheck)
             {
-                if (x.Phone == phone && id != x.Id)
+                if (contact.Phone == phone && id != contact.Id)
                 {
                     // if exists
                     return true;
@@ -182,10 +184,10 @@ namespace Assignment1.Service
         /// <returns>bool</returns>
         private bool IsGuidExists(Guid id)
         {
-            List<ContactInfo> list = this._repository.GetClone();
-            foreach (var x in list)
+            List<ContactInfo> list = this._contactRepository.Show();
+            foreach (var contact in list)
             {
-                if (x.Id == id)
+                if (contact.Id == id)
                 {
                     return true;
                 }

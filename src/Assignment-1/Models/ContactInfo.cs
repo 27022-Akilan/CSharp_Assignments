@@ -1,13 +1,7 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-
-namespace Assignment1.Models
+﻿namespace Assignment1.Models
 {
     /// <summary>
-    /// this is the model
+    /// Base model of the data
     /// </summary>
     internal class ContactInfo
     {

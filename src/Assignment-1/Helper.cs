@@ -1,10 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-
-namespace Assignment1
+﻿namespace Assignment1
 {
     /// <summary>
     /// hjjh
@@ -12,7 +6,7 @@ namespace Assignment1
     internal class Helper
     {
         /// <summary>
-        /// input
+        /// Get Name , Phone, Email, notes from user
         /// </summary>
         /// <param name="name">name</param>
         /// <param name="phone">phone</param>
@@ -42,16 +36,18 @@ namespace Assignment1
         {
             if (string.IsNullOrWhiteSpace(name))
             {
-                return "IN";
+                // Invalid Name
+                return "INVALID NAME";
             }
 
-            return "VN";
+            // Valid Name
+            return "VALID NAME";
         }
 
         /// <summary>
         /// Check phone  is valid
         /// </summary>
-        /// <param name="phone">ph</param>
+        /// <param name="phone">phone</param>
         /// <returns>bool</returns>
         public static string IsValidPhone(string? phone)
         {
@@ -60,10 +56,11 @@ namespace Assignment1
                 if (phone.Length != 10)
                 {
                     // Invalid Phone Number Length
-                    return "IPL";
+                    return "INVALID PHONE LENGTH";
                 }
 
-                return "VP";
+                // Valid Phone
+                return "VALID PHONE";
             }
 
             if (phone == null)
@@ -71,42 +68,44 @@ namespace Assignment1
                 phone = string.Empty;
             }
 
-            return "IP";
+            // Invalid Phone
+            return "INVALID PHONE";
         }
 
         /// <summary>
-        /// check eamil is valid
+        /// Check email is valid
         /// </summary>
-        /// <param name="email">em</param>
+        /// <param name="email">email</param>
         /// <returns>string</returns>
         public static string IsValidEmail(string? email)
         {
-            if (string.IsNullOrWhiteSpace(email))
+            if (string.IsNullOrWhiteSpace(email) || email.Length == 0)
             {
-                return "VE";
+                // Valid Email
+                return "VALID EMAIL";
             }
 
-            if (email.Length == 0 || email.Contains('@'))
+            if (email.Contains("@"))
             {
-                return "VE";
+                return "VALID EMAIL";
             }
 
-            return "IE";
+            return "INVALID EMAIL";
         }
 
         /// <summary>
         /// Validating Gui Id
         /// </summary>
-        /// <param name="gId">inpt</param>
-        /// <param name="id">out</param>
+        /// <param name="guiId">Guid to be validated</param>
+        /// <param name="validatedId">Out field to give the validated Guid</param>
         /// <returns>bool</returns>
-        public static bool IsValidGId(string? gId, out Guid id)
+        public static bool IsValidGId(string? guiId, out Guid validatedId)
         {
-            return Guid.TryParse(gId, out id);
+            return Guid.TryParse(guiId, out validatedId);
         }
 
         /// <summary>
-        /// Checking isnull
+        /// Checking name or phone is null
         /// </summary>
         /// <param name="name">name</param>
         /// <param name="phone">phone</param>

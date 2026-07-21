@@ -1,10 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.ComponentModel.Design;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using Assignment1.Models;
+﻿using Assignment1.Models;
 using Assignment1.Service;
 
 namespace Assignment1.View
@@ -20,8 +14,8 @@ namespace Assignment1.View
         public void ViewContacts()
         {
             ContactService contactService = new ContactService();
-            int userInput;
-
+            int choice;
+            MenuOption option;
             do
             {
                 Console.WriteLine("\n1.Add Contacts \n2.Show Contacts \n3.Edit Contacts \n4.Delete Contacts\n5.Sort Contacts\n6.Search Contacts\n7.Exit");
@@ -29,12 +23,13 @@ namespace Assignment1.View
 
                 string? userInputString = Console.ReadLine();
 
-                if (int.TryParse(userInputString, out userInput))
+                if (int.TryParse(userInputString, out choice))
                 {
-                    switch (userInput)
+                    option = (MenuOption)choice;
+                    switch (option)
                     {
                         // Add
-                        case 1:
+                        case MenuOption.Add:
                             Helper.GetInput(out string? name, out string? phone, out string? email, out string? notes);
 
                             if (Helper.IsNotNull(name, phone))
@@ -60,8 +55,8 @@ namespace Assignment1.View
                             break;
 
                         // Show
-                        case 2:
-                            List<ContactInfo> contactList = contactService.Show();
+                        case MenuOption.Show:
+                            List<ContactInfo> contactList = contactService.GetContacts();
                             long indx = 1;
 
                             if (contactList.Count > 0)
@@ -79,8 +74,8 @@ namespace Assignment1.View
                             break;
 
                         // Edit
-                        case 3:
-                            contactList = contactService.Show();
+                        case MenuOption.Edit:
+                            contactList = contactService.GetContacts();
                             indx = 1;
 
                             foreach (var x in contactList)
@@ -93,7 +88,7 @@ namespace Assignment1.View
 
                             Helper.GetInput(out name, out phone, out email, out notes);
 
-                            string result = contactService.EditContact(name, phone, email, notes, userInp);
+                            string result = contactService.UpdateContact(name, phone, email, notes, userInp);
 
                             if (result == string.Empty)
                             {
@@ -103,7 +98,7 @@ namespace Assignment1.View
                             {
                                 Console.WriteLine("Cant be Edited");
 
-                                if (result == "IG")
+                                if (result == "INVALID GUID")
                                 {
                                     Console.Write("\t Invalid GUiID");
                                 }
@@ -116,8 +111,8 @@ namespace Assignment1.View
                             break;
 
                         // Delete
-                        case 4:
-                            contactList = contactService.Show();
+                        case MenuOption.Delete:
+                            contactList = contactService.GetContacts();
                             indx = 1;
 
                             foreach (var x in contactList)
@@ -125,10 +120,10 @@ namespace Assignment1.View
                                 Console.WriteLine($"{indx++}\t{x.Name}\t{x.Phone}\t{x.Email}\t{x.Notes}\t{x.Id}");
                             }
 
-                            Console.WriteLine("Enter the GUI ID to be deleted");
-                            string? userChoice = Console.ReadLine();
+                            Console.WriteLine("Enter the GUID to be deleted");
+                            string? guidToDelete = Console.ReadLine();
 
-                            result = contactService.DeleteContact(userChoice);
+                            result = contactService.DeleteContact(guidToDelete);
 
                             if (result == string.Empty)
                             {
@@ -138,7 +133,7 @@ namespace Assignment1.View
                             {
                                 Console.WriteLine("Cant Delete contact");
 
-                                if (result == "IG")
+                                if (result == "INVALID GUID")
                                 {
                                     Console.Write("\t Ivalid Gui Id Type");
                                 }
@@ -151,7 +146,7 @@ namespace Assignment1.View
                             break;
 
                         // Sort
-                        case 5:
+                        case MenuOption.Sort:
                             List<ContactInfo> sortedContact = contactService.SortContact();
 
                             foreach (var x in sortedContact)
@@ -162,7 +157,7 @@ namespace Assignment1.View
                             break;
 
                         // Search
-                        case 6:
+                        case MenuOption.Search:
                             Helper.GetInput(out name, out phone, out email, out notes);
 
                             List<ContactInfo> searchedlist = contactService.SearchContact(name, phone, email, notes);
@@ -185,23 +180,23 @@ namespace Assignment1.View
                             break;
 
                         // Exit
-                        case 7:
+                        case MenuOption.Exit:
                             Console.WriteLine("Exiting!!!!");
                             break;
 
                         default:
                             Console.WriteLine("Choose the correct number");
-                            userInput = -1;
+                            choice = -1;
                             break;
                     }
                 }
                 else
                 {
                     Console.WriteLine("Choose the correct number");
-                    userInput = -1;
+                    choice = -1;
                 }
             }
-            while (userInput != 7);
+            while (choice != 7);
         }
 
         /// <summary>
@@ -212,22 +207,22 @@ namespace Assignment1.View
         {
             switch (res)
             {
-                case "IN":
+                case "INVALID NAME":
                     Console.Write(" Invalid Name");
                     break;
 
-                case "PAE":
+                case "PHONE ALREADY EXISTS":
                     Console.Write(" The Phone Number Already Exists");
                     break;
 
-                case "IPL":
+                case "INVALID PHONE LENGTH":
                     Console.Write(" Invalid Phone Number Length (Should be 10)");
                     break;
 
-                case "IP":
+                case "INVALID PHONE":
                     Console.Write(" Invalid Phone Number (Can only be numbers without spaces)");
                     break;
-                case "GNF":
+                case "GUID NOT FOUND":
                     Console.Write(" Guid Not Found");
                     break;
                 default:
