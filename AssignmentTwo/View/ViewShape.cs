@@ -31,7 +31,7 @@ namespace AssignmentTwo.View
                             string? r = Console.ReadLine() ?? string.Empty;
                             if (Helper.IsNumber(r, out decimal number))
                             {
-                                Console.WriteLine(this._sserve.GetArea(new Circle("circle", color, number)));
+                                Console.WriteLine(this._sserve.GetDetails(new Circle("circle", color, number)));
                             }
                             else
                             {
@@ -49,7 +49,7 @@ namespace AssignmentTwo.View
                             string? breadth = Console.ReadLine() ?? string.Empty;
                             if (Helper.IsNumber(length, out decimal resultLength) && Helper.IsNumber(breadth, out decimal resultBreadth))
                             {
-                                Console.WriteLine(this._sserve.GetArea(new Rectangle("Rectangle", color, resultLength, resultBreadth)));
+                                Console.WriteLine(this._sserve.GetDetails(new Rectangle("Rectangle", color, resultLength, resultBreadth)));
                             }
                             else
                             {

@@ -12,7 +12,7 @@ namespace AssignmentTwo.Service
         /// </summary>
         /// <param name="shape">shape obj</param>
         /// <returns>string</returns>
-        public string GetArea(Shape shape)
+        public string GetDetails(Shape shape)
         {
             return shape.PrintDetails();
         }

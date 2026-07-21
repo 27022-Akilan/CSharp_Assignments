@@ -1,5 +1,4 @@
 ﻿using AssignmentTwo.View;
-
 namespace Assignments
 {
     /// <summary>
@@ -16,8 +15,10 @@ namespace Assignments
             // ViewShape viewShape = new ViewShape();
 
             // viewShape.Menu();
-            ViewEmployee viewEmployee = new ViewEmployee();
-            viewEmployee.Menu();
+            // ViewEmployee viewEmployee = new ViewEmployee();
+            // viewEmployee.Menu();
+            ViewAccounts viewAccount = new ViewAccounts();
+            viewAccount.Menu();
         }
     }
 }
