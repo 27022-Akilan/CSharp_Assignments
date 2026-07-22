@@ -36,17 +36,12 @@ namespace Assignment1.Service
         /// Updates the contact
         /// </summary>
         /// <param name="stringValueToreplace">name</param>
-        /// <param name="editContactGuid">user Input Guid</param>
+        /// <param name="guid">user Input Guid</param>
         /// <param name="editOption">option for which field to be edited</param>
         /// <returns>ContactValidationResult</returns>
-        public ContactValidationResult UpdateContact(string? stringValueToreplace, Guid editContactGuid, OptionForEdit editOption)
+        public ContactValidationResult UpdateContact(string? stringValueToreplace, Guid guid, OptionForEdit editOption)
         {
-            if (!this.IsGuidExists(editContactGuid))
-            {
-                return ContactValidationResult.GuidNotFound;
-            }
-
-            if (this._contactRepository.Edit(stringValueToreplace, editContactGuid, editOption))
+            if (this._contactRepository.Edit(stringValueToreplace, guid, editOption))
             {
                 return ContactValidationResult.Success;
             }
@@ -57,23 +52,12 @@ namespace Assignment1.Service
         /// <summary>
         /// Deletes the contact
         /// </summary>
-        /// <param name="guidofContactToBeDeleted">Guid to delete</param>
+        /// <param name="id">Guid to delete</param>
         /// <returns>ContactContactValidationResult</returns>
-        public ContactValidationResult DeleteContact(string? guidofContactToBeDeleted)
+        public ContactValidationResult DeleteContact(Guid id)
         {
-            Guid validatedGuid;
-            if (Helper.IsValidGId(guidofContactToBeDeleted, out validatedGuid))
-            {
-                if (!this.IsGuidExists(validatedGuid))
-                {
-                    return ContactValidationResult.GuidNotFound;
-                }
-
-                this._contactRepository.Delete(validatedGuid);
-                return ContactValidationResult.Success;
-            }
-
-            return ContactValidationResult.InvalidGuid;
+            this._contactRepository.Delete(id);
+            return ContactValidationResult.Success;
         }
 
         /// <summary>
@@ -98,6 +82,23 @@ namespace Assignment1.Service
             List<ContactInfo> sortedContactList = this._contactRepository.Show();
             sortedContactList.Sort((c1, c2) => string.Compare(c1.Name, c2.Name, StringComparison.OrdinalIgnoreCase));
             return sortedContactList;
+        }
+
+        /// <summary>
+        /// Gets guid
+        /// </summary>
+        /// <param name="sno">sno </param>
+        /// <returns>guid</returns>
+        public Guid GetGuid(int sno)
+        {
+            List<ContactInfo> list = this._contactRepository.Show();
+            if (sno < 1 || sno > list.Count)
+            {
+                return Guid.Empty;
+            }
+
+            ContactInfo contact = list[sno - 1];
+            return contact.Id;
         }
 
         /// <summary>
@@ -162,25 +163,6 @@ namespace Assignment1.Service
             }
 
             // if doesnt exists
-            return false;
-        }
-
-        /// <summary>
-        /// Guid exists or not
-        /// </summary>
-        /// <param name="id">Guid </param>
-        /// <returns>bool</returns>
-        private bool IsGuidExists(Guid id)
-        {
-            List<ContactInfo> list = this._contactRepository.Show();
-            foreach (var contact in list)
-            {
-                if (contact.Id == id)
-                {
-                    return true;
-                }
-            }
-
             return false;
         }
     }

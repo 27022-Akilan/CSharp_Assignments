@@ -183,17 +183,6 @@ namespace Assignment1
         }
 
         /// <summary>
-        /// Validating Gui Id
-        /// </summary>
-        /// <param name="guiId">Guid to be validated</param>
-        /// <param name="validatedId">Out field to give the validated Guid</param>
-        /// <returns>bool</returns>
-        public static bool IsValidGId(string? guiId, out Guid validatedId)
-        {
-            return Guid.TryParse(guiId, out validatedId);
-        }
-
-        /// <summary>
         /// Checking name or phone is null
         /// </summary>
         /// <param name="name">name</param>

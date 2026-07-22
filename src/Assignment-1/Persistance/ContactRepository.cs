@@ -52,6 +52,9 @@ namespace Assignment1.Persistance
                         case OptionForEdit.Email:
                             contact.Email = stringToBeReplaced;
                             break;
+                        case OptionForEdit.Notes:
+                            contact.Notes = stringToBeReplaced;
+                            break;
                     }
 
                     return true;
