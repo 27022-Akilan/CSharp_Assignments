@@ -19,14 +19,14 @@ namespace Assignment1.View
             do
             {
                 Console.WriteLine("\n====================================" +
-                    "\n1.Add Contacts " +
-                    "\n2.Show Contacts " +
-                    "\n3.Edit Contacts " +
-                    "\n4.Delete Contacts" +
-                    "\n5.Sort Contacts" +
-                    "\n6.Search Contacts" +
-                    "\n7.Exit" +
-                    "\n====================================");
+                "\n1.Add Contacts " +
+                "\n2.Show Contacts " +
+                "\n3.Edit Contacts " +
+                "\n4.Delete Contacts" +
+                "\n5.Sort Contacts" +
+                "\n6.Search Contacts" +
+                "\n7.Exit" +
+                "\n====================================");
                 Console.WriteLine("\nEnter the number to navigate");
 
                 string? userInputString = Console.ReadLine();
@@ -38,26 +38,39 @@ namespace Assignment1.View
                     {
                         // Add
                         case MenuOption.Add:
-                            Helper.GetInput(out string? name, out string? phone, out string? email, out string? notes);
-
-                            if (Helper.IsNotNull(name, phone))
+                            if (Helper.ReadNameAndValidate(out string? name) == ContactValidationResult.TrysCompleted)
                             {
-                                ContactInfo contact = new ContactInfo(name, phone, email, notes, Guid.Empty);
-                                string res = contactService.AddContact(contact);
+                                break;
+                            }
 
-                                if (res == string.Empty)
-                                {
-                                    Console.WriteLine("Added");
-                                }
-                                else
-                                {
-                                    Console.WriteLine("Cant be Added");
-                                    this.ReturnResultSimplification(res);
-                                }
+                            if (Helper.ReadPhoneAndValidate(out string? phone) == ContactValidationResult.TrysCompleted)
+                            {
+                                break;
+                            }
+
+                            if (Helper.ReadEmailAndValidate(out string? email) == ContactValidationResult.TrysCompleted)
+                            {
+                                break;
+                            }
+
+                            if (Helper.ReadNotesAndValidate(out string? notes) == ContactValidationResult.TrysCompleted)
+                            {
+                                break;
+                            }
+
+                            // Console.WriteLine("hii before call");
+                            ContactInfo contact = new ContactInfo(name, phone, email, notes, Guid.Empty);
+                            ContactValidationResult res = contactService.AddContact(contact);
+
+                            // Console.WriteLine("hii after call");
+                            if (res == ContactValidationResult.Success)
+                            {
+                                Console.WriteLine("Contact Added");
                             }
                             else
                             {
-                                Console.WriteLine("Name or Number cant be Empty");
+                                Console.WriteLine("Cant be Added");
+                                this.ReturnResultSimplification(res);
                             }
 
                             break;
@@ -91,29 +104,77 @@ namespace Assignment1.View
                                 Console.WriteLine($"{indx++}\t{x.Name}\t{x.Phone}\t{x.Email}\t{x.Notes}\t{x.Id}");
                             }
 
+                            bool flagForExit = false;
+                            OptionForEdit optionForEdit;
                             Console.WriteLine("Enter the GUID of the contact to be edited");
-                            string? userInp = Console.ReadLine();
-
-                            Helper.GetInput(out name, out phone, out email, out notes);
-
-                            string result = contactService.UpdateContact(name, phone, email, notes, userInp);
-
-                            if (result == string.Empty)
+                            string? userInputGuid = Console.ReadLine();
+                            if (Guid.TryParse(userInputGuid, out Guid validGuid))
                             {
-                                Console.WriteLine("Edited Successfully");
-                            }
-                            else
-                            {
-                                Console.WriteLine("Cant be Edited");
-
-                                if (result == "INVALID GUID")
+                                string? stringchoiceForEdit;
+                                Console.WriteLine("Edit?\n1.Name" +
+                                    "\n2.Phone NUmber" +
+                                    "\n3.Email" +
+                                    "\n4.Notes" +
+                                    "\n5.Exit");
+                                stringchoiceForEdit = Console.ReadLine();
+                                if (int.TryParse(stringchoiceForEdit, out int choiceForEdit))
                                 {
-                                    Console.Write("\t Invalid GUiID");
+                                    optionForEdit = (OptionForEdit)choiceForEdit;
+                                    switch (optionForEdit)
+                                    {
+                                        case OptionForEdit.Name:
+                                            if (Helper.ReadNameAndValidate(out string? editName) == ContactValidationResult.TrysCompleted)
+                                            {
+                                                break;
+                                            }
+
+                                            Console.WriteLine(contactService.UpdateContact(editName, validGuid, optionForEdit));
+                                            break;
+
+                                        case OptionForEdit.PhoneNumber:
+                                            if (Helper.ReadPhoneAndValidate(out string? editPhone) == ContactValidationResult.TrysCompleted)
+                                            {
+                                                break;
+                                            }
+
+                                            Console.WriteLine(contactService.UpdateContact(editPhone, validGuid, optionForEdit));
+                                            break;
+
+                                        case OptionForEdit.Email:
+                                            if (Helper.ReadEmailAndValidate(out string? editEmail) == ContactValidationResult.TrysCompleted)
+                                            {
+                                                break;
+                                            }
+
+                                            Console.WriteLine(contactService.UpdateContact(editEmail, validGuid, optionForEdit));
+                                            break;
+
+                                        case OptionForEdit.Notes:
+                                            if (Helper.ReadNameAndValidate(out string? editNotes) == ContactValidationResult.TrysCompleted)
+                                            {
+                                                break;
+                                            }
+
+                                            Console.WriteLine(contactService.UpdateContact(editNotes, validGuid, optionForEdit));
+                                            break;
+                                        case OptionForEdit.Exit:
+                                            flagForExit = true;
+                                            break;
+                                    }
+
+                                    if (flagForExit)
+                                    {
+                                        break;
+                                    }
                                 }
                                 else
                                 {
-                                    this.ReturnResultSimplification(result);
+                                    Console.WriteLine("Enter Valid Number Choice");
                                 }
+                            }
+                            else
+                            {
+                                Console.WriteLine("Not a type of Guid");
                             }
 
                             break;
@@ -122,32 +183,30 @@ namespace Assignment1.View
                         case MenuOption.Delete:
                             contactList = contactService.GetContacts();
                             indx = 1;
-
-                            foreach (var x in contactList)
+                            if (contactList.Count == 0)
                             {
-                                Console.WriteLine($"{indx++}\t{x.Name}\t{x.Phone}\t{x.Email}\t{x.Notes}\t{x.Id}");
-                            }
-
-                            Console.WriteLine("Enter the GUID to be deleted");
-                            string? guidToDelete = Console.ReadLine();
-
-                            result = contactService.DeleteContact(guidToDelete);
-
-                            if (result == string.Empty)
-                            {
-                                Console.WriteLine("Contact Deleted Successfully");
+                                this.ReturnResultSimplification(ContactValidationResult.ListEmpty);
                             }
                             else
                             {
-                                Console.WriteLine("Cant Delete contact");
-
-                                if (result == "INVALID GUID")
+                                foreach (var x in contactList)
                                 {
-                                    Console.Write("\t Ivalid Gui Id Type");
+                                    Console.WriteLine($"{indx++}\t{x.Name}\t{x.Phone}\t{x.Email}\t{x.Notes}\t{x.Id}");
+                                }
+
+                                Console.WriteLine("Enter the GUID to be deleted");
+                                string? guidToDelete = Console.ReadLine();
+
+                                ContactValidationResult result = contactService.DeleteContact(guidToDelete);
+
+                                if (result == ContactValidationResult.Success)
+                                {
+                                    Console.WriteLine("Contact Deleted Successfully");
                                 }
                                 else
                                 {
-                                    Console.Write("\t ID not found on the contact");
+                                    Console.WriteLine("Cant Delete contact");
+                                    this.ReturnResultSimplification(result);
                                 }
                             }
 
@@ -211,30 +270,42 @@ namespace Assignment1.View
         /// Simplification method
         /// </summary>
         /// <param name="res">The result</param>
-        public void ReturnResultSimplification(string res)
+        public void ReturnResultSimplification(ContactValidationResult res)
         {
             switch (res)
             {
-                case "INVALID NAME":
+                case ContactValidationResult.InvalidName:
                     Console.WriteLine("Invalid Name");
                     break;
 
-                case "PHONE ALREADY EXISTS":
+                case ContactValidationResult.PhoneAlreadyExists:
                     Console.WriteLine("The Phone Number Already Exists");
                     break;
 
-                case "INVALID PHONE LENGTH":
+                case ContactValidationResult.InvalidPhoneLength:
                     Console.WriteLine("Invalid Phone Number Length (Should be 10)");
                     break;
 
-                case "INVALID PHONE":
+                case ContactValidationResult.InvalidPhone:
                     Console.WriteLine("Invalid Phone Number (Can only be numbers without spaces)");
                     break;
-                case "GUID NOT FOUND":
+
+                case ContactValidationResult.GuidNotFound:
                     Console.WriteLine("Guid Not Found");
                     break;
-                default:
+
+                case ContactValidationResult.InvalidGuid:
+                    Console.WriteLine("Invalid GUID");
+                    break;
+
+                case ContactValidationResult.InvalidEmail:
                     Console.WriteLine("Invalid Email");
+                    break;
+                case ContactValidationResult.ListEmpty:
+                    Console.WriteLine("Contacts are empty!!");
+                    break;
+                default:
+                    Console.WriteLine("Unrecognized result: " + res);
                     break;
             }
         }

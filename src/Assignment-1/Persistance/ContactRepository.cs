@@ -31,22 +31,29 @@ namespace Assignment1.Persistance
         /// <summary>
         /// Edits an existing contact.
         /// </summary>
-        /// <param name="name">name</param>
-        /// <param name="phone">phone</param>
-        /// <param name="email">email</param>
-        /// <param name="notes">notes</param>
+        /// <param name="stringToBeReplaced">name</param>
         /// <param name="id">id</param>
+        /// <param name="editOption">field to be edited</param>
         /// < returns>bool</returns>
-        public bool Edit(string? name, string? phone, string? email, string? notes, Guid id)
+        public bool Edit(string? stringToBeReplaced, Guid id, OptionForEdit editOption)
         {
-            foreach (var x in this._contactInfoList)
+            foreach (var contact in this._contactInfoList)
             {
-                if (x.Id == id)
+                if (contact.Id == id)
                 {
-                    x.Name = name;
-                    x.Phone = phone;
-                    x.Email = email;
-                    x.Notes = notes;
+                    switch (editOption)
+                    {
+                        case OptionForEdit.Name:
+                            contact.Name = stringToBeReplaced;
+                            break;
+                        case OptionForEdit.PhoneNumber:
+                            contact.Phone = stringToBeReplaced;
+                            break;
+                        case OptionForEdit.Email:
+                            contact.Email = stringToBeReplaced;
+                            break;
+                    }
+
                     return true;
                 }
             }

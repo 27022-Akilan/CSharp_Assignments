@@ -1,4 +1,6 @@
-﻿namespace Assignment1
+﻿using Assignment1.Models;
+
+namespace Assignment1
 {
     /// <summary>
     /// hjjh
@@ -28,20 +30,106 @@
         }
 
         /// <summary>
+        /// Read name and validate
+        /// </summary>
+        /// <param name="name">name</param>
+        /// <returns>Enum result</returns>
+        public static ContactValidationResult ReadNameAndValidate(out string? name)
+        {
+            int trys = 3;
+            do
+            {
+                trys--;
+                Console.WriteLine("Enter name");
+                name = Console.ReadLine();
+                if (Helper.IsValidName(name) == ContactValidationResult.ValidName)
+                {
+                    return ContactValidationResult.ValidName;
+                }
+
+                Console.WriteLine($"{ContactValidationResult.InvalidName} {trys} Trys Left");
+            }
+            while (trys > 0);
+            return ContactValidationResult.TrysCompleted;
+        }
+
+        /// <summary>
+        /// Read and Validate Phone number
+        /// </summary>
+        /// <param name="phone">string phone number</param>
+        /// <returns>Enum result</returns>
+        public static ContactValidationResult ReadPhoneAndValidate(out string? phone)
+        {
+            int trys = 3;
+            do
+            {
+                trys--;
+                Console.WriteLine("Enter Phone number");
+                phone = Console.ReadLine();
+                ContactValidationResult result = Helper.IsValidPhone(phone);
+                if (result == ContactValidationResult.ValidPhone)
+                {
+                    return ContactValidationResult.ValidPhone;
+                }
+
+                Console.WriteLine($"{result} {trys} Trys Left");
+            }
+            while (trys > 0);
+            return ContactValidationResult.TrysCompleted;
+        }
+
+        /// <summary>
+        /// Read and validate email
+        /// </summary>
+        /// <param name="email">Email</param>
+        /// <returns>Enum result</returns>
+        public static ContactValidationResult ReadEmailAndValidate(out string? email)
+        {
+            int trys = 3;
+            do
+            {
+                trys--;
+                Console.WriteLine("Enter Email ");
+                email = Console.ReadLine();
+                ContactValidationResult result = Helper.IsValidEmail(email);
+                if (result == ContactValidationResult.ValidEmail)
+                {
+                    return ContactValidationResult.ValidEmail;
+                }
+
+                Console.WriteLine($"{result} {trys} Trys Left");
+            }
+            while (trys > 0);
+            return ContactValidationResult.TrysCompleted;
+        }
+
+        /// <summary>
+        /// Read notes and validate
+        /// </summary>
+        /// <param name="notes">notes</param>
+        /// <returns>Enum result</returns>
+        public static ContactValidationResult ReadNotesAndValidate(out string? notes)
+        {
+            Console.WriteLine("Enter notes");
+            notes = Console.ReadLine();
+            return ContactValidationResult.ValidNotes;
+        }
+
+        /// <summary>
         /// Check name is valid
         /// </summary>
         /// <param name="name">name</param>
-        /// <returns>bool</returns>
-        public static string IsValidName(string? name)
+        /// <returns>Enum result</returns>
+        public static ContactValidationResult IsValidName(string? name)
         {
             if (string.IsNullOrWhiteSpace(name))
             {
-                // Invalid Name
-                return "INVALID NAME";
+                // Name Empty
+                return ContactValidationResult.InvalidName;
             }
 
             // Valid Name
-            return "VALID NAME";
+            return ContactValidationResult.ValidName;
         }
 
         /// <summary>
@@ -49,27 +137,28 @@
         /// </summary>
         /// <param name="phone">phone</param>
         /// <returns>bool</returns>
-        public static string IsValidPhone(string? phone)
+        public static ContactValidationResult IsValidPhone(string? phone)
         {
+            if (string.IsNullOrWhiteSpace(phone))
+            {
+                // Phone Empty
+                return ContactValidationResult.InvalidPhone;
+            }
+
             if (long.TryParse(phone, out _))
             {
                 if (phone.Length != 10)
                 {
                     // Invalid Phone Number Length
-                    return "INVALID PHONE LENGTH";
+                    return ContactValidationResult.InvalidPhoneLength;
                 }
 
                 // Valid Phone
-                return "VALID PHONE";
-            }
-
-            if (phone == null)
-            {
-                phone = string.Empty;
+                return ContactValidationResult.ValidPhone;
             }
 
             // Invalid Phone
-            return "INVALID PHONE";
+            return ContactValidationResult.InvalidPhone;
         }
 
         /// <summary>
@@ -77,20 +166,20 @@
         /// </summary>
         /// <param name="email">email</param>
         /// <returns>string</returns>
-        public static string IsValidEmail(string? email)
+        public static ContactValidationResult IsValidEmail(string? email)
         {
             if (string.IsNullOrWhiteSpace(email) || email.Length == 0)
             {
                 // Valid Email
-                return "VALID EMAIL";
+                return ContactValidationResult.ValidEmail;
             }
 
-            if (email.Contains("@"))
+            if (email.Contains("@") && email.Contains("."))
             {
-                return "VALID EMAIL";
+                return ContactValidationResult.ValidEmail;
             }
 
-            return "INVALID EMAIL";
+            return ContactValidationResult.InvalidEmail;
         }
 
         /// <summary>

@@ -14,19 +14,13 @@ namespace Assignment1.Service
         /// Add the contact into list
         /// </summary>
         /// <param name="contact">Contact</param>
-        /// <returns>String</returns>
-        public string AddContact(ContactInfo contact)
+        /// <returns>ContactValidationResult</returns>
+        public ContactValidationResult AddContact(ContactInfo contact)
         {
-            string res = this.IsValidNamePhoneEmail(contact.Name, contact.Phone, contact.Email, contact.Notes, contact.Id);
-            if (res == string.Empty)
-            {
-                Guid idToBeAdded = Guid.NewGuid();
-                ContactInfo contactToBeAdded = new ContactInfo(contact.Name, contact.Phone, contact.Email, contact.Notes, contact.Id);
-                this._contactRepository.Add(contactToBeAdded, idToBeAdded);
-                return string.Empty;
-            }
-
-            return res;
+            Guid idToBeAdded = Guid.NewGuid();
+            ContactInfo contactToBeAdded = new ContactInfo(contact.Name, contact.Phone, contact.Email, contact.Notes, contact.Id);
+            this._contactRepository.Add(contactToBeAdded, idToBeAdded);
+            return ContactValidationResult.Success;
         }
 
         /// <summary>
@@ -41,53 +35,45 @@ namespace Assignment1.Service
         /// <summary>
         /// Updates the contact
         /// </summary>
-        /// <param name="name">name</param>
-        /// <param name="phone">phone</param>
-        /// <param name="email">email</param>
-        /// <param name="notes">notes</param>
+        /// <param name="stringValueToreplace">name</param>
         /// <param name="editContactGuid">user Input Guid</param>
-        /// <returns>string</returns>
-        public string UpdateContact(string? name, string? phone, string? email, string? notes, string? editContactGuid)
+        /// <param name="editOption">option for which field to be edited</param>
+        /// <returns>ContactValidationResult</returns>
+        public ContactValidationResult UpdateContact(string? stringValueToreplace, Guid editContactGuid, OptionForEdit editOption)
         {
-            Guid validGuid;
-            if (Helper.IsValidGId(editContactGuid, out validGuid))
+            if (!this.IsGuidExists(editContactGuid))
             {
-                string result = this.IsValidNamePhoneEmail(name, phone, email, notes, validGuid);
-                if (result == string.Empty)
-                {
-                    if (this._contactRepository.Edit(name, phone, email, notes, validGuid))
-                    {
-                        return string.Empty;
-                    }
-                    else
-                    {
-                        // Guid Not Found
-                        return "GUID NOT FOUND";
-                    }
-                }
-
-                return result;
+                return ContactValidationResult.GuidNotFound;
             }
 
-            // InValid Guid
-            return "INVALID GUID";
+            if (this._contactRepository.Edit(stringValueToreplace, editContactGuid, editOption))
+            {
+                return ContactValidationResult.Success;
+            }
+
+            return ContactValidationResult.GuidNotFound;
         }
 
         /// <summary>
         /// Deletes the contact
         /// </summary>
         /// <param name="guidofContactToBeDeleted">Guid to delete</param>
-        /// <returns>string</returns>
-        public string DeleteContact(string? guidofContactToBeDeleted)
+        /// <returns>ContactContactValidationResult</returns>
+        public ContactValidationResult DeleteContact(string? guidofContactToBeDeleted)
         {
             Guid validatedGuid;
             if (Helper.IsValidGId(guidofContactToBeDeleted, out validatedGuid))
             {
-                return this._contactRepository.Delete(validatedGuid);
+                if (!this.IsGuidExists(validatedGuid))
+                {
+                    return ContactValidationResult.GuidNotFound;
+                }
+
+                this._contactRepository.Delete(validatedGuid);
+                return ContactValidationResult.Success;
             }
 
-            // Invalid Guid
-            return "INVALID GUID";
+            return ContactValidationResult.InvalidGuid;
         }
 
         /// <summary>
@@ -122,37 +108,39 @@ namespace Assignment1.Service
         /// <param name="email">email</param>
         /// <param name="notes">notes</param>
         /// <param name="id">Guid</param>
-        /// <returns>string</returns>
-        private string IsValidNamePhoneEmail(string? name, string? phone, string? email, string? notes, Guid id)
+        /// <returns>ContactValidationResult</returns>
+        private ContactValidationResult IsValidNamePhoneEmail(string? name, string? phone, string? email, string? notes, Guid id)
         {
-            if (Helper.IsValidName(name) == "VALID NAME")
+            if (Helper.IsValidName(name) == ContactValidationResult.ValidName)
             {
-                string phoneRes = Helper.IsValidPhone(phone);
-                if (phoneRes == "VALID PHONE")
+                ContactValidationResult phoneRes = Helper.IsValidPhone(phone);
+                if (phoneRes == ContactValidationResult.ValidPhone)
                 {
                     bool flag = this.IsPhoneExists(phone, id);
                     if (flag == true)
                     {
                         // PhoneNumber already exists
-                        return "PHONE NUMBER ALREADY EXISTS";
+                        return ContactValidationResult.PhoneAlreadyExists;
                     }
 
-                    if (Helper.IsValidEmail(email) == "VALID EMAIL")
+                    if (Helper.IsValidEmail(email) == ContactValidationResult.ValidEmail)
                     {
-                        return string.Empty;
+                        return ContactValidationResult.Success;
                     }
 
                     // Invalid Email
-                    return "INVALID EMAIL";
+                    return ContactValidationResult.InvalidEmail;
                 }
                 else
                 {
-                    return phoneRes;
+                    return phoneRes == ContactValidationResult.InvalidPhoneLength
+                        ? ContactValidationResult.InvalidPhoneLength
+                        : ContactValidationResult.InvalidPhone;
                 }
             }
 
-            // INvalid Name
-            return "INVALID NAME";
+            // Invalid Name
+            return ContactValidationResult.InvalidName;
         }
 
         /// <summary>
