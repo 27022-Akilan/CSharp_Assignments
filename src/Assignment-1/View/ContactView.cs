@@ -6,7 +6,7 @@ namespace Assignment1.View
     /// <summary>
     /// View Contact class
     /// </summary>
-    internal class ViewContact
+    internal class ContactView
     {
         private ContactService _contactService = new ContactService();
 
