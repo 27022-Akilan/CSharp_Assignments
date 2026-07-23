@@ -18,7 +18,7 @@ namespace AssignmentTwo.View
             int choice;
             do
             {
-                Console.WriteLine("1.Create and view Circle \n2.Create and View Rectangle \n3.Exit \nEnter Your Choice ");
+                Console.WriteLine("1.Create and view Circle Details \n2.Create and View Rectangle Deatails \n3.Exit \nEnter Your Choice ");
                 string input = Console.ReadLine() ?? string.Empty;
                 if (int.TryParse(input, out choice))
                 {

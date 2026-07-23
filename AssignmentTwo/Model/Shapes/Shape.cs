@@ -17,7 +17,7 @@
         }
 
         /// <summary>
-        /// Gets or sets color
+        /// Gets or sets color  
         /// </summary>
         /// <value>
         /// A <see cref="string"/> containing the color of the shape.

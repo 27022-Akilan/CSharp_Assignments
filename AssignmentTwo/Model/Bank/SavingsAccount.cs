@@ -11,7 +11,7 @@
         /// <param name="name">name</param>
         /// <param name="accountNumber">account number</param>
         /// <param name="initialDeposit">initial deposit</param>
-        public SavingsAccount(string name, Guid accountNumber, decimal initialDeposit)
+        public SavingsAccount(string name, long accountNumber, decimal initialDeposit)
             : base(name, accountNumber, "Savings", initialDeposit)
         {
         }

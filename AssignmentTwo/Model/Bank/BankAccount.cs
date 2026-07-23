@@ -12,7 +12,7 @@
         /// <param name="accountNuber">account number</param>
         /// <param name="accountType">account type</param>
         /// <param name="initialDeposit">initial deposit</param>
-        public BankAccount(string name, Guid accountNuber, string accountType, decimal initialDeposit)
+        public BankAccount(string name, long accountNuber, string accountType, decimal initialDeposit)
         {
             this.Name = name;
             this.AccountNuber = accountNuber;
@@ -30,7 +30,7 @@
         /// Gets or sets Account Number
         /// </summary>
         /// <value><see cref="AccountNumber"/>containing the AccountNumber of the Account</value>
-        public Guid AccountNuber { get; set; }
+        public long AccountNuber { get; set; }
 
         /// <summary>
         /// Gets or sets Account Type

@@ -11,7 +11,7 @@
         /// <param name="name">name</param>
         /// <param name="accountNuber">account number</param>
         /// <param name="initialDeposit">initial deposit</param>
-        public CheckingAccount(string name, Guid accountNuber, decimal initialDeposit)
+        public CheckingAccount(string name, long accountNuber, decimal initialDeposit)
             : base(name, accountNuber, "Checking", initialDeposit)
         {
         }
@@ -23,7 +23,7 @@
         /// <returns>Status of withdrawal</returns>
         public override string WithdrawFromAccount(decimal amount)
         {
-            if (this.Balance - amount < 0)
+            if (this.Balance - amount >= 0)
             {
                 this.Balance -= amount;
                 return "Witdrawed Successfully.";

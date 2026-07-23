@@ -41,52 +41,104 @@
         /// getting name and initial deposit
         /// </summary>
         /// <param name="name">name</param>
-        /// <param name="initialDeposit">initial deposit</param>
-        public static void GetNameAndInitialDeposit(out string name, out decimal initialDeposit)
+        /// <returns>bool which tells true for succes and false for attained max no.of trys</returns>
+        public static bool GetName(out string name)
         {
+            int trys = 3;
             do
             {
+                trys--;
                 Console.WriteLine("Enter Your Name: ");
                 name = Console.ReadLine() ?? string.Empty;
                 if (name != string.Empty && !string.IsNullOrWhiteSpace(name) && IsValidWord(name))
                 {
-                    break;
+                    return false;
                 }
 
-                Console.WriteLine("Invalid name!");
+                Helper.WriteFailed($"Invalid name! Number of Trys Left is:{trys}\n");
             }
-            while (true);
-            initialDeposit = GetAmount();
-        }
-
-        /// <summary>
-        /// to create guid
-        /// </summary>
-        /// <returns>guid</returns>
-        public static Guid CreateGuid()
-        {
-            return Guid.NewGuid();
+            while (trys > 0);
+            return true;
         }
 
         /// <summary>
         /// To get the amount
         /// </summary>
-        /// <returns>decimal</returns>
-        public static decimal GetAmount()
+        /// <param name="amount">name</param>
+        /// <param name="accountType">Account Type</param>
+        /// <returns>If correct ammount is entered returns true else after 3 trys returns false</returns>
+        public static bool GetAmount(out decimal amount, int accountType)
         {
-            Console.WriteLine("inside get method");
+            int trys = 3;
             do
             {
+                trys--;
+                string res = string.Empty;
                 Console.WriteLine("Enter the Amount: ");
-                string initialDepositString = Console.ReadLine() ?? string.Empty;
-                if (IsNumber(initialDepositString, out decimal initialDeposit))
+                string stringAmount = Console.ReadLine() ?? string.Empty;
+                if (IsNumber(stringAmount, out amount))
                 {
-                    return initialDeposit;
+                    if (IsAmountIsGreaterThanInitalDeposit(amount, accountType))
+                    {
+                        // as it gets the input and valid so the outOfTrys == false
+                        return false;
+                    }
+
+                    if (accountType == 1)
+                    {
+                        res = "Your Deposit is Lesser Than 2000";
+                    }
+                    else
+                    {
+                        res = "Your Deposit is Lesser Than 1000";
+                    }
+                }
+                else
+                {
+                    res = "Your Deposit Should be Number";
                 }
 
-                Console.WriteLine("Invalid name!");
+                Helper.WriteFailed($"Invalid amount!\n{res} \nNumber of Trys Left is:{trys}\n ");
             }
-            while (true);
+            while (trys > 0);
+            return true;
+        }
+
+        /// <summary>
+        /// To Check is its a valid minimum Deposit
+        /// </summary>
+        /// <param name="amount">Amount</param>
+        /// <param name="accountType">Account TYpe</param>
+        /// <returns>bool</returns>
+        public static bool IsAmountIsGreaterThanInitalDeposit(decimal amount, int accountType)
+        {
+            if (accountType == 1)
+            {
+                if (amount >= 2000)
+                {
+                    return true;
+                }
+
+                return false;
+            }
+
+            if (amount >= 1000)
+            {
+                return true;
+            }
+
+            return false;
+        }
+
+        /// <summary>
+        /// Failiure message
+        /// </summary>
+        /// <param name="s">Input for failure message</param>
+        public static void WriteFailed(string s)
+        {
+            Console.ForegroundColor = ConsoleColor.Red;
+            Console.WriteLine(s);
+            Console.ResetColor();
         }
     }
 }
