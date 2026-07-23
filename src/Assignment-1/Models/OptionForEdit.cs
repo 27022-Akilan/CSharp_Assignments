@@ -1,4 +1,4 @@
-﻿namespace Assignment1
+﻿namespace Assignment1.Models
 {
     /// <summary>
     /// Edit option's enum
