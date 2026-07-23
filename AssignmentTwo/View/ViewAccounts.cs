@@ -9,6 +9,7 @@ namespace AssignmentTwo.View
     internal class ViewAccounts
     {
         private BankServices _bankServices = new BankServices();
+
         /// <summary>
         /// Menu for accessing accounts
         /// </summary>

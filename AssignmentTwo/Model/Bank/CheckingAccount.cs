@@ -12,7 +12,7 @@
         /// <param name="accountNuber">account number</param>
         /// <param name="initialDeposit">initial deposit</param>
         public CheckingAccount(string name, Guid accountNuber, decimal initialDeposit)
-            : base(name, accountNuber, "Savings", initialDeposit)
+            : base(name, accountNuber, "Checking", initialDeposit)
         {
         }
 
