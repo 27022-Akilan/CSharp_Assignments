@@ -6,7 +6,7 @@ namespace AssignmentTwo.View
     /// <summary>
     /// this is the view page
     /// </summary>
-    internal class ViewShape
+    internal class ShapeView
     {
         private ShapeService _sserve = new ShapeService();
 
@@ -27,9 +27,30 @@ namespace AssignmentTwo.View
                         // Circle
                         case 1:
                             string? color = GetColor();
-                            Console.WriteLine("Enter the radius");
-                            string? r = Console.ReadLine() ?? string.Empty;
-                            if (Helper.IsNumber(r, out decimal number))
+                            int trys = 3;
+                            bool negativeFlag = false;
+                            do
+                            {
+                                trys--;
+                                Console.WriteLine("Enter the radius");
+                                string? r = Console.ReadLine() ?? string.Empty;
+                                if (Helper.IsNumber(r, out decimal number))
+                                {
+                                    if (number > 0)
+                                    {
+                                        break;
+                                    }
+
+                                    Console.WriteLine($"Enter the valid radius greater than 0.No of Trys left {trys}");
+                                }
+                            }
+                            while (trys > 0);
+                            if (trys == 0)
+                            {
+
+                            }
+
+                            if ()
                             {
                                 Console.WriteLine(this._sserve.GetDetails(new Circle("circle", color, number)));
                             }

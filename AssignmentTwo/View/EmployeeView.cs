@@ -6,7 +6,7 @@ namespace AssignmentTwo.View
     /// <summary>
     /// to view the employees
     /// </summary>
-    public class ViewEmployee
+    public class EmployeeView
     {
         private EmployeeService _employeeService = new EmployeeService();
 

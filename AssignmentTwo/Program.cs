@@ -22,15 +22,15 @@ namespace Assignments
                 switch (choice)
                 {
                     case 1:
-                        ViewShape viewShape = new ViewShape();
+                        ShapeView viewShape = new ShapeView();
                         viewShape.Menu();
                         break;
                     case 2:
-                        ViewEmployee viewEmployee = new ViewEmployee();
+                        EmployeeView viewEmployee = new EmployeeView();
                         viewEmployee.Menu();
                         break;
                     case 3:
-                        ViewAccounts viewAccount = new ViewAccounts();
+                        AccountView viewAccount = new AccountView();
                         viewAccount.Menu();
                         break;
                     case 4:
