@@ -55,7 +55,7 @@
                     return false;
                 }
 
-                Helper.WriteFailed($"Invalid name! Number of Trys Left is:{trys}\n");
+                Helper.WriteWarning($"Invalid name! Number of Trys Left is:{trys}\n");
             }
             while (trys > 0);
             return true;
@@ -98,7 +98,7 @@
                     res = "Your Deposit Should be Number";
                 }
 
-                Helper.WriteFailed($"Invalid amount!\n{res} \nNumber of Trys Left is:{trys}\n ");
+                Helper.WriteWarning($"Invalid amount!\n{res} \nNumber of Trys Left is:{trys}\n ");
             }
             while (trys > 0);
             return true;
@@ -131,12 +131,69 @@
         }
 
         /// <summary>
-        /// Failiure message
+        ///  Gets and validate the valid Quantity like length,breadth, and radius
+        /// </summary>
+        /// <param name="s">Parameter to identifyu whether its to get length , breadth..</param>
+        /// <returns>-1 for out of trys(invalid) , number returns the actual radius</returns>
+        public static decimal GetValidQuantity(string s)
+        {
+            int trys = 3;
+            decimal number;
+            do
+            {
+                trys--;
+                Console.WriteLine($"Enter the {s}");
+                string? num = Console.ReadLine() ?? string.Empty;
+                if (Helper.IsNumber(num, out number))
+                {
+                    if (number > 0)
+                    {
+                        return number;
+                    }
+                    else
+                    {
+                        Helper.WriteWarning($"Enter the valid {s} greater than 0. No of Trys left {trys}");
+                    }
+                }
+                else
+                {
+                    Helper.WriteWarning($"Invalid number , Your input should only be a number. No of Trys left {trys}");
+                }
+            }
+            while (trys > 0);
+
+            return -1;
+        }
+
+        /// <summary>
+        ///  Displays Failiure message in Red color
         /// </summary>
         /// <param name="s">Input for failure message</param>
         public static void WriteFailed(string s)
         {
             Console.ForegroundColor = ConsoleColor.Red;
+            Console.WriteLine(s);
+            Console.ResetColor();
+        }
+
+        /// <summary>
+        ///  Displays Warning message in Yellow color
+        /// </summary>
+        /// <param name="s">Input for the Warning message</param>
+        public static void WriteWarning(string s)
+        {
+            Console.ForegroundColor = ConsoleColor.Yellow;
+            Console.WriteLine(s);
+            Console.ResetColor();
+        }
+
+        /// <summary>
+        /// Displays Success meaasage in Green color
+        /// </summary>
+        /// <param name="s">Input for the success message</param>
+        public static void WriteSuccess(string s)
+        {
+            Console.ForegroundColor = ConsoleColor.Green;
             Console.WriteLine(s);
             Console.ResetColor();
         }

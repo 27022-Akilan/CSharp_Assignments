@@ -8,7 +8,7 @@ namespace AssignmentTwo.View
     /// </summary>
     internal class ShapeView
     {
-        private ShapeService _sserve = new ShapeService();
+        private ShapeService _service = new ShapeService();
 
         /// <summary>
         /// Entry point into service
@@ -18,7 +18,13 @@ namespace AssignmentTwo.View
             int choice;
             do
             {
-                Console.WriteLine("1.Create and view Circle Details \n2.Create and View Rectangle Deatails \n3.Exit \nEnter Your Choice ");
+                Console.WriteLine("\n----------------------------------------------------" +
+                    "\n1.Create and view Circle Details " +
+                    "\n2.Create and View Rectangle Deatails " +
+                    "\n3.Exit " +
+                    "\n----------------------------------------------------" +
+                    "\nEnter Your Choice ");
+
                 string input = Console.ReadLine() ?? string.Empty;
                 if (int.TryParse(input, out choice))
                 {
@@ -27,74 +33,74 @@ namespace AssignmentTwo.View
                         // Circle
                         case 1:
                             string? color = GetColor();
-                            int trys = 3;
-                            bool negativeFlag = false;
-                            do
+                            if (color == "-1")
                             {
-                                trys--;
-                                Console.WriteLine("Enter the radius");
-                                string? r = Console.ReadLine() ?? string.Empty;
-                                if (Helper.IsNumber(r, out decimal number))
-                                {
-                                    if (number > 0)
-                                    {
-                                        break;
-                                    }
-
-                                    Console.WriteLine($"Enter the valid radius greater than 0.No of Trys left {trys}");
-                                }
-                            }
-                            while (trys > 0);
-                            if (trys == 0)
-                            {
-
+                                break;
                             }
 
-                            if ()
+                            decimal radius = Helper.GetValidQuantity("Radius");
+                            if (radius == -1)
                             {
-                                Console.WriteLine(this._sserve.GetDetails(new Circle("circle", color, number)));
-                            }
-                            else
-                            {
-                                Console.WriteLine("Enter valid number");
+                                Helper.WriteFailed("Exiting");
+                                break;
                             }
 
+                            Shape shape = new Circle("Circle", color, radius);
+                            Helper.WriteSuccess(this._service.GetDetails(shape));
                             break;
 
                         // Rectangle
                         case 2:
                             color = GetColor();
-                            Console.WriteLine("Enter the Length");
-                            string? length = Console.ReadLine() ?? string.Empty;
-                            Console.WriteLine("Enter the Breadth");
-                            string? breadth = Console.ReadLine() ?? string.Empty;
-                            if (Helper.IsNumber(length, out decimal resultLength) && Helper.IsNumber(breadth, out decimal resultBreadth))
+                            if (color == "-1")
                             {
-                                Console.WriteLine(this._sserve.GetDetails(new Rectangle("Rectangle", color, resultLength, resultBreadth)));
-                            }
-                            else
-                            {
-                                Console.WriteLine("Enter valid  Length and Breadth");
+                                break;
                             }
 
+                            decimal isValidLength = Helper.GetValidQuantity("Length");
+                            if (isValidLength == -1)
+                            {
+                                Helper.WriteFailed("Due to Out Of Trys , Exiting!");
+                                break;
+                            }
+
+                            decimal isValidBreadth = Helper.GetValidQuantity("Breadth");
+                            if (isValidBreadth == -1)
+                            {
+                                Helper.WriteFailed("Due to Out Of Trys , Exiting!");
+                                break;
+                            }
+
+                            shape = new Rectangle("Rectangle", color, isValidLength, isValidBreadth);
+                            Console.WriteLine(this._service.GetDetails(shape));
                             break;
                         case 3:
-                            Console.WriteLine("Exiting!!!!");
+                            Helper.WriteSuccess("Exiting!!!!");
                             break;
                         default:
-                            Console.WriteLine("Invalid Choice");
+                            Helper.WriteFailed("Invalid Choice");
                             break;
                     }
+                }
+                else
+                {
+                    Helper.WriteFailed("Invalid Choice , You must enter a number only");
                 }
             }
             while (choice != 3);
         }
 
+        /// <summary>
+        /// To get the Color
+        /// </summary>
+        /// <returns>returns valid color else -1 for out of trys</returns>
         private static string GetColor()
         {
+            int trys = 3;
             string color;
             do
             {
+                trys--;
                 Console.WriteLine("Enter the color");
                 color = Console.ReadLine() ?? string.Empty;
                 if (Helper.IsValidWord(color))
@@ -102,9 +108,10 @@ namespace AssignmentTwo.View
                     return color;
                 }
 
-                Console.WriteLine("Invalid Color");
+                Helper.WriteWarning($"Invalid Color. No.Of trys left is {trys}");
             }
-            while (true);
+            while (trys != 0);
+            return "-1";
         }
     }
 }

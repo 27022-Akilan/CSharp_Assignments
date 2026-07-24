@@ -38,7 +38,7 @@
         /// <returns>string</returns>
         public string PrintDetails()
         {
-            return $"Shape : {this.Name} , color : {this.Color} and the area : {this.GetArea()}";
+            return $"Shape : {this.Name} , color : {this.Color} , area : {this.GetArea()}";
         }
 
         /// <summary>
