@@ -6,7 +6,7 @@ namespace AssignmentTwo.View
     /// <summary>
     /// To view Account
     /// </summary>
-    internal class AccountView
+    internal class BankView
     {
         private BankServices _bankServices = new BankServices();
 
@@ -71,7 +71,7 @@ namespace AssignmentTwo.View
                             break;
 
                         case 3:
-                            Console.WriteLine("Exited!!");
+                            Helper.WriteSuccess("Exited!!");
                             break;
                         default:
                             Helper.WriteFailed("Enter Correct Value between 1 to 3");
@@ -80,7 +80,6 @@ namespace AssignmentTwo.View
 
                     if (ch == 3)
                     {
-                        Console.WriteLine("Application Closed");
                         break;
                     }
                 }
@@ -121,10 +120,10 @@ namespace AssignmentTwo.View
                             outOfTrys = this.GetOrPutMoney(account, numberForDepositOrWithdrawal);
                             break;
                         case 30:
-                            Console.WriteLine(this._bankServices.GetDetails(account));
+                            Helper.WriteSuccess(this._bankServices.GetDetails(account));
                             break;
                         case 40:
-                            Console.WriteLine("Exiting!!!");
+                            Helper.WriteSuccess("Exited!!");
                             break;
                         default:
                             Helper.WriteFailed("Invalid Choice");
@@ -145,9 +144,9 @@ namespace AssignmentTwo.View
         }
 
         /// <summary>
-        /// To print tyhe initial amount that should be deposited for creation
+        /// To print the initial amount that should be deposited for creation
         /// </summary>
-        /// <param name="accountType">account Type</param>
+        /// <param name="accountType">Type of the account (savings or checking)</param>
         public void PrintInitialDepositValue(int accountType)
         {
             if (accountType == 1)
@@ -174,11 +173,11 @@ namespace AssignmentTwo.View
             {
                 if (depositOrWithdrawChoice == 10)
                 {
-                    Console.WriteLine(this._bankServices.DepositAmount(account, amount));
+                    Helper.WriteSuccess(this._bankServices.DepositAmount(account, amount));
                     return true;
                 }
 
-                Console.WriteLine(this._bankServices.WithdrawAmount(account, amount));
+                Helper.WriteSuccess(this._bankServices.WithdrawAmount(account, amount));
                 return true;
             }
 
@@ -196,14 +195,14 @@ namespace AssignmentTwo.View
             do
             {
                 trys -= 1;
-                Console.WriteLine("Enter the Amount: ");
+                Console.WriteLine("Enter the Amount :");
                 string stringAmount = Console.ReadLine() ?? string.Empty;
-                if (Helper.IsNumber(stringAmount, out amount))
+                if (Helper.IsNumber(stringAmount, out amount) && (amount > 0))
                 {
                     return false;
                 }
 
-                Helper.WriteFailed($"Invalid Amount! Number of Trys Left is:{trys}\n");
+                Helper.WriteFailed($"Invalid Amount! Number of Tries Left : {trys}\n");
             }
             while (trys > 0);
             return true;

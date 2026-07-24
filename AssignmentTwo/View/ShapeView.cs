@@ -1,10 +1,11 @@
-﻿using AssignmentTwo.Model.Shapes;
+﻿using AssignmentTwo.Model;
+using AssignmentTwo.Model.Shapes;
 using AssignmentTwo.Service;
 
 namespace AssignmentTwo.View
 {
     /// <summary>
-    /// this is the view page
+    /// Entry point to the view
     /// </summary>
     internal class ShapeView
     {
@@ -15,6 +16,7 @@ namespace AssignmentTwo.View
         /// </summary>
         public void Menu()
         {
+            OptionForShape shapeOption;
             int choice;
             do
             {
@@ -28,17 +30,18 @@ namespace AssignmentTwo.View
                 string input = Console.ReadLine() ?? string.Empty;
                 if (int.TryParse(input, out choice))
                 {
-                    switch (choice)
+                    shapeOption = (OptionForShape)choice;
+                    switch (shapeOption)
                     {
                         // Circle
-                        case 1:
+                        case OptionForShape.CreateAndViewCircle:
                             string? color = GetColor();
                             if (color == "-1")
                             {
                                 break;
                             }
 
-                            decimal radius = Helper.GetValidQuantity("Radius");
+                            decimal radius = Helper.GetValidQuantity("Radius", "m");
                             if (radius == -1)
                             {
                                 Helper.WriteFailed("Exiting");
@@ -50,31 +53,31 @@ namespace AssignmentTwo.View
                             break;
 
                         // Rectangle
-                        case 2:
+                        case OptionForShape.CreateAndViewRectangle:
                             color = GetColor();
                             if (color == "-1")
                             {
                                 break;
                             }
 
-                            decimal isValidLength = Helper.GetValidQuantity("Length");
+                            decimal isValidLength = Helper.GetValidQuantity("Length", "m");
                             if (isValidLength == -1)
                             {
-                                Helper.WriteFailed("Due to Out Of Trys , Exiting!");
+                                Helper.WriteFailed("Due to Out Of Tries , Exiting!");
                                 break;
                             }
 
-                            decimal isValidBreadth = Helper.GetValidQuantity("Breadth");
+                            decimal isValidBreadth = Helper.GetValidQuantity("Breadth", "m");
                             if (isValidBreadth == -1)
                             {
-                                Helper.WriteFailed("Due to Out Of Trys , Exiting!");
+                                Helper.WriteFailed("Due to Out Of Tries , Exiting!");
                                 break;
                             }
 
                             shape = new Rectangle("Rectangle", color, isValidLength, isValidBreadth);
-                            Console.WriteLine(this._service.GetDetails(shape));
+                            Helper.WriteSuccess(this._service.GetDetails(shape));
                             break;
-                        case 3:
+                        case OptionForShape.Exit:
                             Helper.WriteSuccess("Exiting!!!!");
                             break;
                         default:
@@ -108,7 +111,7 @@ namespace AssignmentTwo.View
                     return color;
                 }
 
-                Helper.WriteWarning($"Invalid Color. No.Of trys left is {trys}");
+                Helper.WriteWarning($"Invalid Color. No.Of tries left is {trys}");
             }
             while (trys != 0);
             return "-1";

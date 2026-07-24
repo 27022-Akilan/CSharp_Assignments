@@ -1,4 +1,5 @@
-﻿using AssignmentTwo.Model.Employees;
+﻿using AssignmentTwo.Model;
+using AssignmentTwo.Model.Employees;
 using AssignmentTwo.Service;
 
 namespace AssignmentTwo.View
@@ -11,77 +12,82 @@ namespace AssignmentTwo.View
         private EmployeeService _employeeService = new EmployeeService();
 
         /// <summary>
-        /// Entry point into service
+        /// Entry point to service
         /// </summary>
         public void Menu()
         {
+            OptionForEmployee employeeOption;
             int choice;
             do
             {
-                Console.WriteLine("1.Create and view Manager \n2.Create and View Developer \n3.Exit \nEnter Your Choice ");
+                Console.WriteLine("--------------------------------------" +
+                    "\n1.Create and view Manager " +
+                    "\n2.Create and View Developer " +
+                    "\n3.Exit " +
+                    "\n--------------------------------------" +
+                    "\nEnter Your Choice ");
                 string input = Console.ReadLine() ?? string.Empty;
                 if (int.TryParse(input, out choice))
                 {
-                    switch (choice)
+                    employeeOption = (OptionForEmployee)choice;
+                    switch (employeeOption)
                     {
                         // Manager
-                        case 1:
-                            string name;
-                            decimal salary;
-                            GetNameAndSalary(out name, out salary);
-                            Console.WriteLine(this._employeeService.GetDetails(new Manager(name, salary)));
+                        case OptionForEmployee.CreateAndViewManager:
+                            if (!GetNameAndSalary(out string employeeName, out decimal employeeSalary))
+                            {
+                                break;
+                            }
+
+                            Helper.WriteSuccess(this._employeeService.GetDetails(new Manager(employeeName, employeeSalary)));
                             break;
 
                         // Developer
-                        case 2:
-                            GetNameAndSalary(out name, out salary);
-                            Console.WriteLine(this._employeeService.GetDetails(new Developer(name, salary)));
+                        case OptionForEmployee.CreateAndViewDeveloper:
+
+                            if (!GetNameAndSalary(out employeeName, out employeeSalary))
+                            {
+                                break;
+                            }
+
+                            Helper.WriteSuccess(this._employeeService.GetDetails(new Developer(employeeName, employeeSalary)));
                             break;
-                        case 3:
-                            Console.WriteLine("Exiting!!!!");
+
+                        // Exit
+                        case OptionForEmployee.Exit:
+                            Helper.WriteSuccess("Exiting!!");
                             break;
                         default:
-                            Console.WriteLine("Invalid Choice");
+                            Helper.WriteFailed("Invalid Choice , You must only between 1 to 3");
                             break;
                     }
                 }
                 else
                 {
-                    Console.WriteLine("Not a Number!!");
+                    Helper.WriteFailed("Invalid choice , You must enter a number only");
                 }
             }
             while (choice != 3);
         }
 
-        private static void GetNameAndSalary(out string employeeName, out decimal employeeSalary)
+        private static bool GetNameAndSalary(out string employeeName, out decimal salary)
         {
-            do
+            salary = 0;
+            bool getNameOutOfTrys = Helper.GetName(out employeeName);
+            if (getNameOutOfTrys)
             {
-                Console.WriteLine("Enter the Name");
-                string? name = Console.ReadLine() ?? string.Empty;
-                if (Helper.IsValidWord(name))
-                {
-                    employeeName = name;
-                    break;
-                }
-
-                Console.WriteLine("Invalid Name!");
+                Helper.WriteFailed("Due to Out Of Tries, Exiting!");
+                return false;
             }
-            while (true);
 
-            do
+            salary = Helper.GetValidQuantity("Salary", "rs");
+            if (salary == -1)
             {
-                Console.WriteLine("Enter the Salary");
-                string? salary = Console.ReadLine() ?? string.Empty;
-                if (Helper.IsNumber(salary, out decimal resSalary))
-                {
-                    employeeSalary = resSalary;
-                    break;
-                }
-
-                Console.WriteLine("Invalid salary!");
+                Helper.WriteFailed("Due to Out Of Tries, Exiting!");
+                return false;
             }
-            while (true);
+
+            return true;
         }
     }
 }

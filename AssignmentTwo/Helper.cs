@@ -26,7 +26,7 @@
         /// Check Valid color or not
         /// </summary>
         /// <param name="word">color</param>
-        /// <returns> bool </returns>
+        /// <returns>True - Valid ; False - Invalid word</returns>
         public static bool IsValidWord(string word)
         {
             if (string.IsNullOrWhiteSpace(word))
@@ -38,10 +38,10 @@
         }
 
         /// <summary>
-        /// getting name and initial deposit
+        /// Getting name and initial deposit
         /// </summary>
         /// <param name="name">name</param>
-        /// <returns>bool which tells true for succes and false for attained max no.of trys</returns>
+        /// <returns>True - Success, False - Out Of Trys </returns>
         public static bool GetName(out string name)
         {
             int trys = 3;
@@ -55,7 +55,7 @@
                     return false;
                 }
 
-                Helper.WriteWarning($"Invalid name! Number of Trys Left is:{trys}\n");
+                Helper.WriteWarning($"Invalid name! Number of Tries Left is:{trys}\n");
             }
             while (trys > 0);
             return true;
@@ -66,7 +66,7 @@
         /// </summary>
         /// <param name="amount">name</param>
         /// <param name="accountType">Account Type</param>
-        /// <returns>If correct ammount is entered returns true else after 3 trys returns false</returns>
+        /// <returns>True - Valid Amount False - Invalid Amount</returns>
         public static bool GetAmount(out decimal amount, int accountType)
         {
             int trys = 3;
@@ -74,7 +74,7 @@
             {
                 trys--;
                 string res = string.Empty;
-                Console.WriteLine("Enter the Amount: ");
+                Console.WriteLine("Enter the Amount :");
                 string stringAmount = Console.ReadLine() ?? string.Empty;
                 if (IsNumber(stringAmount, out amount))
                 {
@@ -98,7 +98,7 @@
                     res = "Your Deposit Should be Number";
                 }
 
-                Helper.WriteWarning($"Invalid amount!\n{res} \nNumber of Trys Left is:{trys}\n ");
+                Helper.WriteWarning($"Invalid amount!\n{res} \nNumber of Tries Left is:{trys}\n ");
             }
             while (trys > 0);
             return true;
@@ -109,7 +109,7 @@
         /// </summary>
         /// <param name="amount">Amount</param>
         /// <param name="accountType">Account TYpe</param>
-        /// <returns>bool</returns>
+        /// <returns>True - Valid Intial Deposit ; False - Invalid Initial Deposit</returns>
         public static bool IsAmountIsGreaterThanInitalDeposit(decimal amount, int accountType)
         {
             if (accountType == 1)
@@ -134,8 +134,9 @@
         ///  Gets and validate the valid Quantity like length,breadth, and radius
         /// </summary>
         /// <param name="s">Parameter to identifyu whether its to get length , breadth..</param>
-        /// <returns>-1 for out of trys(invalid) , number returns the actual radius</returns>
-        public static decimal GetValidQuantity(string s)
+        /// <param name="symbool">Has the value like m(meters) , rs(rupees)</param>
+        /// <returns> Decimal number -  Success Quantity ; -1 - Invalid Quantity (Out of Trys)</returns>
+        public static decimal GetValidQuantity(string s, string symbool)
         {
             int trys = 3;
             decimal number;
@@ -152,12 +153,12 @@
                     }
                     else
                     {
-                        Helper.WriteWarning($"Enter the valid {s} greater than 0. No of Trys left {trys}");
+                        Helper.WriteWarning($"Enter the valid {s} greater than 0. No of Tries left {trys}");
                     }
                 }
                 else
                 {
-                    Helper.WriteWarning($"Invalid number , Your input should only be a number. No of Trys left {trys}");
+                    Helper.WriteWarning($"Invalid number , Your input should only be a number. No of Tries left {trys}");
                 }
             }
             while (trys > 0);

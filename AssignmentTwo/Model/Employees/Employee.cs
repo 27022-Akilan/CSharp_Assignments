@@ -48,7 +48,7 @@
         /// <returns>string</returns>
         public string PrintDetails()
         {
-            return $"Name : {this.Name} , Designation: {this.Designation} , Salary : {this.Salary} and the Bonus : {this.CalculateBonus()}";
+            return $"Name : {this.Name} , Designation: {this.Designation} , Salary : {this.Salary} , Salary(+Bonus) : {this.CalculateBonus()}";
         }
 
         /// <summary>

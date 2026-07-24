@@ -29,7 +29,8 @@
                 return "Witdrawed Successfully.";
             }
 
-            return $"Cant Withdraw Minimum Your Account Should Have 2000 \n Your Current Balance Is{this.Balance}";
+            return $"Cant Withdraw from your Account because after withdrawing your account should have minimum amount of 2000" +
+                $"\nCurrent Balance :{this.Balance}";
         }
     }
 }
