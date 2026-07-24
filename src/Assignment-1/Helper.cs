@@ -208,5 +208,49 @@ namespace Assignment1
         {
             return string.Equals(a, b, StringComparison.OrdinalIgnoreCase);
         }
+
+        /// <summary>
+        /// Simplification method
+        /// </summary>
+        /// <param name="res">The result</param>
+        public static void ReturnResultSimplification(ContactValidationResult res)
+        {
+            switch (res)
+            {
+                case ContactValidationResult.InvalidName:
+                    Console.WriteLine("Invalid Name!!");
+                    break;
+
+                case ContactValidationResult.PhoneAlreadyExists:
+                    Console.WriteLine("The Phone Number Already Exists!!");
+                    break;
+
+                case ContactValidationResult.InvalidPhoneLength:
+                    Console.WriteLine("Invalid Phone Number Length (Should be 10)");
+                    break;
+
+                case ContactValidationResult.InvalidPhone:
+                    Console.WriteLine("Invalid Phone Number (Can only be numbers without spaces)");
+                    break;
+
+                case ContactValidationResult.GuidNotFound:
+                    Console.WriteLine("Guid Not Found!!");
+                    break;
+
+                case ContactValidationResult.InvalidGuid:
+                    Console.WriteLine("Invalid index!!");
+                    break;
+
+                case ContactValidationResult.InvalidEmail:
+                    Console.WriteLine("Invalid Email!!");
+                    break;
+                case ContactValidationResult.ListEmpty:
+                    Console.WriteLine("Contacts are empty!!");
+                    break;
+                default:
+                    Console.WriteLine("Unrecognized result: " + res);
+                    break;
+            }
+        }
     }
 }

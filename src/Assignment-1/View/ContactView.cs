@@ -57,7 +57,7 @@ namespace Assignment1.View
                             else
                             {
                                 Console.WriteLine("Cant be Added");
-                                this.ReturnResultSimplification(res);
+                                Helper.ReturnResultSimplification(res);
                             }
 
                             break;
@@ -67,7 +67,7 @@ namespace Assignment1.View
                             List<ContactInfo> contactList = this._contactService.GetContacts();
                             if (contactList.Count == 0)
                             {
-                                this.ReturnResultSimplification(ContactValidationResult.ListEmpty);
+                                Helper.ReturnResultSimplification(ContactValidationResult.ListEmpty);
                                 break;
                             }
 
@@ -83,7 +83,7 @@ namespace Assignment1.View
                             contactList = this._contactService.GetContacts();
                             if (contactList.Count == 0)
                             {
-                                this.ReturnResultSimplification(ContactValidationResult.ListEmpty);
+                                Helper.ReturnResultSimplification(ContactValidationResult.ListEmpty);
                                 break;
                             }
 
@@ -98,7 +98,7 @@ namespace Assignment1.View
                             contactList = this._contactService.GetContacts();
                             if (contactList.Count == 0)
                             {
-                                this.ReturnResultSimplification(ContactValidationResult.ListEmpty);
+                                Helper.ReturnResultSimplification(ContactValidationResult.ListEmpty);
                             }
                             else
                             {
@@ -123,7 +123,7 @@ namespace Assignment1.View
                                 else
                                 {
                                     Console.WriteLine("Cant Delete contact");
-                                    this.ReturnResultSimplification(result);
+                                    Helper.ReturnResultSimplification(result);
                                 }
                             }
 
@@ -134,7 +134,7 @@ namespace Assignment1.View
                             List<ContactInfo> sortedContact = this._contactService.SortContact();
                             if (sortedContact.Count == 0)
                             {
-                                this.ReturnResultSimplification(ContactValidationResult.ListEmpty);
+                                Helper.ReturnResultSimplification(ContactValidationResult.ListEmpty);
                                 break;
                             }
 
@@ -153,7 +153,7 @@ namespace Assignment1.View
 
                             if (searchedlist.Count == 0)
                             {
-                                this.ReturnResultSimplification(ContactValidationResult.ListEmpty);
+                                Helper.ReturnResultSimplification(ContactValidationResult.ListEmpty);
                                 break;
                             }
                             else
@@ -182,50 +182,6 @@ namespace Assignment1.View
                 }
             }
             while (choice != 7);
-        }
-
-        /// <summary>
-        /// Simplification method
-        /// </summary>
-        /// <param name="res">The result</param>
-        public void ReturnResultSimplification(ContactValidationResult res)
-        {
-            switch (res)
-            {
-                case ContactValidationResult.InvalidName:
-                    Console.WriteLine("Invalid Name!!");
-                    break;
-
-                case ContactValidationResult.PhoneAlreadyExists:
-                    Console.WriteLine("The Phone Number Already Exists!!");
-                    break;
-
-                case ContactValidationResult.InvalidPhoneLength:
-                    Console.WriteLine("Invalid Phone Number Length (Should be 10)");
-                    break;
-
-                case ContactValidationResult.InvalidPhone:
-                    Console.WriteLine("Invalid Phone Number (Can only be numbers without spaces)");
-                    break;
-
-                case ContactValidationResult.GuidNotFound:
-                    Console.WriteLine("Guid Not Found!!");
-                    break;
-
-                case ContactValidationResult.InvalidGuid:
-                    Console.WriteLine("Invalid index!!");
-                    break;
-
-                case ContactValidationResult.InvalidEmail:
-                    Console.WriteLine("Invalid Email!!");
-                    break;
-                case ContactValidationResult.ListEmpty:
-                    Console.WriteLine("Contacts are empty!!");
-                    break;
-                default:
-                    Console.WriteLine("Unrecognized result: " + res);
-                    break;
-            }
         }
 
         /// <summary>
@@ -312,7 +268,7 @@ namespace Assignment1.View
             }
             else
             {
-                this.ReturnResultSimplification(ContactValidationResult.InvalidGuid);
+                Helper.ReturnResultSimplification(ContactValidationResult.InvalidGuid);
             }
         }
 
