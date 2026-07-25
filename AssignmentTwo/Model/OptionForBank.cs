@@ -24,7 +24,7 @@
     /// <summary>
     /// Operation for the 
     /// </summary>
-    public enum OpearationOnBank
+    public enum BankOperation
     {
         /// <summary>
         /// Option for deposit

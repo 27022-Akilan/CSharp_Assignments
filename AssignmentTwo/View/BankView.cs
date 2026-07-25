@@ -1,4 +1,5 @@
-﻿using AssignmentTwo.Model.Bank;
+﻿using AssignmentTwo.Model;
+using AssignmentTwo.Model.Bank;
 using AssignmentTwo.Service;
 
 namespace AssignmentTwo.View
@@ -15,6 +16,7 @@ namespace AssignmentTwo.View
         /// </summary>
         public void Menu()
         {
+            OptionForBank optionForBank;
             long accountNumber = 0;
             BankAccount account;
             do
@@ -28,9 +30,10 @@ namespace AssignmentTwo.View
                 string choice = Console.ReadLine() ?? string.Empty;
                 if (int.TryParse(choice, out int ch))
                 {
-                    switch (ch)
+                    optionForBank = (OptionForBank)ch;
+                    switch (optionForBank)
                     {
-                        case 1:
+                        case OptionForBank.CreateAndViewSavingsAccount:
                             bool getNameTrysOut = Helper.GetName(out string name);
                             if (getNameTrysOut)
                             {
@@ -50,7 +53,7 @@ namespace AssignmentTwo.View
                             this.SubMenu(account);
                             break;
 
-                        case 2:
+                        case OptionForBank.CreateAndViewCheckingAccount:
                             getNameTrysOut = Helper.GetName(out name);
                             if (getNameTrysOut)
                             {
@@ -70,7 +73,7 @@ namespace AssignmentTwo.View
                             this.SubMenu(account);
                             break;
 
-                        case 3:
+                        case OptionForBank.Exit:
                             Helper.WriteSuccess("Exited!!");
                             break;
                         default:
@@ -97,32 +100,34 @@ namespace AssignmentTwo.View
         /// <param name="account">account object</param>
         public void SubMenu(BankAccount account)
         {
+            BankOperation bankOperation;
             do
             {
                 Console.WriteLine("\nIf you need any more services " +
-                    "\n10.Deposit " +
-                    "\n20.Withdraw " +
-                    "\n30.Print Details " +
-                    "\n40.Exit " +
+                    "\n1.Deposit " +
+                    "\n2.Withdraw " +
+                    "\n3.Print Details " +
+                    "\n4.Exit " +
                     "\nEnter your Choice : ");
                 string choiceForDepositOrWithdrawalOrGetDetails = Console.ReadLine() ?? string.Empty;
                 if (int.TryParse(choiceForDepositOrWithdrawalOrGetDetails, out int numberForDepositOrWithdrawal))
                 {
                     bool outOfTrys = true;
-                    switch (numberForDepositOrWithdrawal)
+                    bankOperation = (BankOperation)numberForDepositOrWithdrawal;
+                    switch (bankOperation)
                     {
-                        case 10:
+                        case BankOperation.Deposit:
                             Console.WriteLine("Deposit choosed");
-                            outOfTrys = this.GetOrPutMoney(account, numberForDepositOrWithdrawal);
+                            outOfTrys = this.GetOrPutMoney(account, BankOperation.Deposit);
                             break;
-                        case 20:
+                        case BankOperation.Withdraw:
                             Console.WriteLine("Withdraw choosed");
-                            outOfTrys = this.GetOrPutMoney(account, numberForDepositOrWithdrawal);
+                            outOfTrys = this.GetOrPutMoney(account, BankOperation.Withdraw);
                             break;
-                        case 30:
+                        case BankOperation.PrintDetails:
                             Helper.WriteSuccess(this._bankServices.GetDetails(account));
                             break;
-                        case 40:
+                        case BankOperation.Exit:
                             Helper.WriteSuccess("Exited!!");
                             break;
                         default:
@@ -137,7 +142,7 @@ namespace AssignmentTwo.View
                 }
                 else
                 {
-                    Helper.WriteFailed("Enter valid number can be only (10,20,30,40,50)");
+                    Helper.WriteFailed("Enter valid number can be only (1 to 4)");
                 }
             }
             while (true);
@@ -163,15 +168,15 @@ namespace AssignmentTwo.View
         /// to withdraw and deposit amount
         /// </summary>
         /// <param name="account">account onject</param>
-        /// <param name="depositOrWithdrawChoice">choice for deposit or withdraw</param>
+        /// <param name="bankOperation">choice for deposit or withdraw</param>
         /// <returns>bool</returns>
-        public bool GetOrPutMoney(BankAccount account, int depositOrWithdrawChoice)
+        public bool GetOrPutMoney(BankAccount account, BankOperation bankOperation)
         {
             decimal amount;
             bool getorPutAmount = this.GetAmountForDepositOrWithdraw(out amount);
             if (getorPutAmount == false)
             {
-                if (depositOrWithdrawChoice == 10)
+                if (bankOperation == BankOperation.Deposit)
                 {
                     Helper.WriteSuccess(this._bankServices.DepositAmount(account, amount));
                     return true;
