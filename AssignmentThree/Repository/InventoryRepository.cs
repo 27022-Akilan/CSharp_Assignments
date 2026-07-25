@@ -11,5 +11,10 @@ namespace AssignmentThree.Repository
         /// List to store the Inventory 
         /// </summary>
         private List<InventoryModel> _inventory = new List<InventoryModel>();
+
+        public AddProduct()
+        {
+
+        }
     }
 }
