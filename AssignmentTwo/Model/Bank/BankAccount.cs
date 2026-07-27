@@ -9,13 +9,13 @@
         /// Initializes a new instance of the <see cref="BankAccount"/> class.
         /// </summary>
         /// <param name="name">name</param>
-        /// <param name="accountNumber">account number</param>
+        /// <param name="accountNuber">account number</param>
         /// <param name="accountType">account type</param>
         /// <param name="initialDeposit">initial deposit</param>
-        public BankAccount(string name, long accountNumber, string accountType, decimal initialDeposit)
+        public BankAccount(string name, long accountNuber, string accountType, decimal initialDeposit)
         {
             this.Name = name;
-            this.AccountNumber = accountNumber;
+            this.AccountNuber = accountNuber;
             this.AccountType = accountType;
             this.Balance = initialDeposit;
         }
@@ -30,7 +30,7 @@
         /// Gets or sets Account Number
         /// </summary>
         /// <value><see cref="AccountNumber"/>containing the AccountNumber of the Account</value>
-        public long AccountNumber { get; set; }
+        public long AccountNuber { get; set; }
 
         /// <summary>
         /// Gets or sets Account Type
@@ -61,7 +61,7 @@
         /// <returns>string</returns>
         public string PrintDetails()
         {
-            return $"Name : {this.Name} , Account Number: {this.AccountNumber} , AccountType : {this.AccountType} , Balance : {this.Balance}";
+            return $"Name : {this.Name} , Account Number: {this.AccountNuber} , AccountType : {this.AccountType} , Balance : {this.Balance}";
         }
 
         /// <summary>

@@ -17,7 +17,7 @@
         }
 
         /// <summary>
-        /// To whitdraw and its overrided
+        /// To withdraw and it is overridden
         /// </summary>
         /// <param name="amount">amount</param>
         /// <returns>Status of withdrawal</returns>

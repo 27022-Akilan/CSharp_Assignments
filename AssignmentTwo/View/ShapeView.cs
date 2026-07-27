@@ -96,7 +96,7 @@ namespace AssignmentTwo.View
         /// <summary>
         /// To get the Color
         /// </summary>
-        /// <returns>returns valid color else -1 for out of trys</returns>
+        /// <returns>returns valid color else -1 for out of tries</returns>
         private static string GetColor()
         {
             int trys = 3;

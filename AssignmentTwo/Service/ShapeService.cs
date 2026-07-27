@@ -3,7 +3,7 @@
 namespace AssignmentTwo.Service
 {
     /// <summary>
-    /// THis is a shape service
+    /// This is a shape service
     /// </summary>
     public class ShapeService
     {

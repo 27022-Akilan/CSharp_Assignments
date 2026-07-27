@@ -26,7 +26,7 @@
         public decimal Radius { get; set; }
 
         /// <summary>
-        /// THis is for calculating area
+        /// This is for calculating area
         /// </summary>
         /// <returns>decimal</returns>
         public override decimal GetArea()

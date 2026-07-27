@@ -167,7 +167,7 @@ namespace AssignmentTwo.View
         /// <summary>
         /// to withdraw and deposit amount
         /// </summary>
-        /// <param name="account">account onject</param>
+        /// <param name="account">account object</param>
         /// <param name="bankOperation">choice for deposit or withdraw</param>
         /// <returns>bool</returns>
         public bool GetOrPutMoney(BankAccount account, BankOperation bankOperation)

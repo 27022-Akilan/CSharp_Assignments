@@ -5,12 +5,12 @@ using AssignmentTwo.View;
 namespace Assignments
 {
     /// <summary>
-    /// THis is the basse prgrm entry point
+    /// This is the base program's entry point.
     /// </summary>
     internal class Program
     {
         /// <summary>
-        /// THis is the entry point
+        /// Its the main method to start the application.
         /// </summary>
         /// <param name="args">Default args</param>
         public static void Main(string[] args)

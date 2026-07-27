@@ -64,7 +64,7 @@
         /// <summary>
         /// To get the amount
         /// </summary>
-        /// <param name="amount">name</param>
+        /// <param name="amount">amount</param>
         /// <param name="accountType">Account Type</param>
         /// <returns>True - Valid Amount False - Invalid Amount</returns>
         public static bool GetAmount(out decimal amount, int accountType)
@@ -78,13 +78,17 @@
                 string stringAmount = Console.ReadLine() ?? string.Empty;
                 if (IsNumber(stringAmount, out amount))
                 {
-                    if (IsAmountIsGreaterThanInitalDeposit(amount, accountType))
+                    if (IsAmountIsGreaterThanInitalDeposit(amount, accountType) && amount > 0)
                     {
-                        // as it gets the input and valid so the outOfTrys == false
+                        // as it gets valid input so the outOfTrys == false
                         return false;
                     }
 
-                    if (accountType == 1)
+                    if (amount <= 0)
+                    {
+                        res = "Your Deposit should be a positive number";
+                    }
+                    else if (accountType == 1)
                     {
                         res = "Your Deposit is Lesser Than 2000";
                     }
@@ -108,8 +112,8 @@
         /// To Check is its a valid minimum Deposit
         /// </summary>
         /// <param name="amount">Amount</param>
-        /// <param name="accountType">Account TYpe</param>
-        /// <returns>True - Valid Intial Deposit ; False - Invalid Initial Deposit</returns>
+        /// <param name="accountType">Account Type</param>
+        /// <returns>True - Valid Initial Deposit ; False - Invalid Initial Deposit</returns>
         public static bool IsAmountIsGreaterThanInitalDeposit(decimal amount, int accountType)
         {
             if (accountType == 1)
@@ -131,10 +135,10 @@
         }
 
         /// <summary>
-        ///  Gets and validate the valid Quantity like length,breadth, and radius
+        ///  Gets and validate the valid Quantity like length, breadth, and radius
         /// </summary>
-        /// <param name="s">Parameter to identifyu whether its to get length , breadth..</param>
-        /// <param name="symbool">Has the value like m(meters) , rs(rupees)</param>
+        /// <param name="s">Parameter to identify whether its to get length, breadth..</param>
+        /// <param name="symbool">Has the value like m(meters), rs(rupees)</param>
         /// <returns> Decimal number -  Success Quantity ; -1 - Invalid Quantity (Out of Trys)</returns>
         public static decimal GetValidQuantity(string s, string symbool)
         {
@@ -167,7 +171,7 @@
         }
 
         /// <summary>
-        ///  Displays Failiure message in Red color
+        ///  Displays Failure message in Red color
         /// </summary>
         /// <param name="s">Input for failure message</param>
         public static void WriteFailed(string s)
@@ -189,7 +193,7 @@
         }
 
         /// <summary>
-        /// Displays Success meaasage in Green color
+        /// Displays Success message in Green color
         /// </summary>
         /// <param name="s">Input for the success message</param>
         public static void WriteSuccess(string s)

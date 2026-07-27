@@ -52,9 +52,9 @@
         }
 
         /// <summary>
-        /// this is a abstract method for calculate area
+        /// this is an abstract method for calculating bonus
         /// </summary>
-        /// <returns>long</returns>
+        /// <returns>decimal</returns>
         public abstract decimal CalculateBonus();
     }
 }

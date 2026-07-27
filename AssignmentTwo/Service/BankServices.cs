@@ -10,7 +10,7 @@ namespace AssignmentTwo.Service
         /// <summary>
         /// To deposit
         /// </summary>
-        /// <param name="account">Acocunt onject</param>
+        /// <param name="account">Account object</param>
         /// <param name="depositMoney">deposit amount</param>
         /// <returns>string</returns>
         public string DepositAmount(BankAccount account, decimal depositMoney)
@@ -22,7 +22,7 @@ namespace AssignmentTwo.Service
         /// To withdraw
         /// </summary>
         /// <param name="account">Account object</param>
-        /// <param name="withdrawMoney">withdraw amonut</param>
+        /// <param name="withdrawMoney">withdraw amount</param>
         /// <returns>string</returns>
         public string WithdrawAmount(BankAccount account, decimal withdrawMoney)
         {
