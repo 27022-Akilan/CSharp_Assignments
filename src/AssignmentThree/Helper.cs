@@ -256,6 +256,17 @@ namespace AssignmentThree
         }
 
         /// <summary>
+        /// Displays the text in the gray color
+        /// </summary>
+        /// <param name="s">Input for the Grey color message</param>
+        public static void WriteLight(string s)
+        {
+            Console.ForegroundColor = ConsoleColor.DarkGray;
+            Console.WriteLine(s);
+            Console.ResetColor();
+        }
+
+        /// <summary>
         /// This prints the Product details in a table format.
         /// </summary>
         /// <param name="list">Contains the List of the products, whereas list cant be changed</param>

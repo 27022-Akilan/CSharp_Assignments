@@ -28,6 +28,7 @@ namespace AssignmentThree.View
             bool exitFlag = true;
             do
             {
+                Console.Clear();
                 Console.WriteLine("======================================================" +
                "\n1.Add Product" +
                "\n2.Edit Product" +
@@ -92,6 +93,7 @@ namespace AssignmentThree.View
                                 break;
                             }
 
+                            Helper.PrintTable(list);
                             Console.WriteLine("Enter the Id to be deleted");
                             Helper.GetId(out string id);
                             if (this._productService.Delete(id))
@@ -125,8 +127,7 @@ namespace AssignmentThree.View
                                 break;
                             }
 
-                            Console.WriteLine("You can search by Name or Id or by Both");
-                            Console.WriteLine("Enter 1 for yes and 0 for No to search by :");
+                            Console.WriteLine("You can search by Name or Id or by Both \nEnter 1 for yes and 0 for No to search by:");
                             Helper.GetZeroOrOne(out int nameOption, "Search by Name:");
                             string searchName = string.Empty, searchId = string.Empty;
                             if (nameOption == 1)
@@ -169,6 +170,9 @@ namespace AssignmentThree.View
                             Helper.WriteFailed("Enter a valid number between 1-6");
                             break;
                     }
+
+                    Helper.WriteLight("Press Any key To Continue");
+                    Console.ReadKey();
                 }
                 else
                 {
