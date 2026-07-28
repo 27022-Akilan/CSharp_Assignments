@@ -1,7 +1,7 @@
 ﻿using AssignmentThree.Model;
 using ConsoleTables;
 
-namespace AssignmentTwo
+namespace AssignmentThree
 {
     /// <summary>
     /// Helper class
@@ -209,14 +209,13 @@ namespace AssignmentTwo
                     {
                         return true;
                     }
-                }
 
-                if (!validNumber)
-                {
                     Helper.WriteWarning($"The entered value needs to be 1 or 0 , Tries left {tries}");
                 }
-
-                Helper.WriteWarning($"The entered value needs to be a number , Tries left {tries}");
+                else
+                {
+                    Helper.WriteWarning($"The entered value needs to be a number , Tries left {tries}");
+                }
             }
             while (tries > 0);
 

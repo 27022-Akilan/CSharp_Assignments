@@ -1,6 +1,5 @@
 ﻿using AssignmentThree.Model;
 using AssignmentThree.Service;
-using AssignmentTwo;
 
 namespace AssignmentThree.View
 {
@@ -35,6 +34,7 @@ namespace AssignmentThree.View
                "\n3.Delete Product" +
                "\n4.Search Product" +
                "\n5.Display Produt" +
+               "\n6.Exit" +
                "\n======================================================");
                 int choice;
                 if (Helper.GetNumber(out choice))
@@ -43,6 +43,7 @@ namespace AssignmentThree.View
 
                     switch (option)
                     {
+                        // Add Product
                         case MenuOption.AddProduct:
                             string productName, productId;
                             double productPrice;
@@ -58,68 +59,35 @@ namespace AssignmentThree.View
                             Helper.WriteSuccess(this.GetMessage(message));
                             break;
 
+                        // Edit Product
                         case MenuOption.EditProduct:
 
                             IEnumerable<ProductInfo> list = this._productService.Get();
                             if (list.Count() == 0)
                             {
-                                Helper.WriteFailed("Products are Empty!!!");
+                                Helper.WriteFailed("Products are Empty , Can't be edited");
                                 break;
                             }
 
                             if (Helper.GetId(out productId))
                             {
                                 ProductInfo? product = this._productService.GetProduct(productId);
-                                if (product != null)
-                                {
-                                    Console.WriteLine("========================================================" +
-                                        "\nPress 1 to edit and 0 to skip editing of the filed" +
-                                        "\n========================================================");
-                                    Console.WriteLine("Product name (1 / 0) :");
-                                    Helper.GetZeroOrOne(out int yesOrNo, "Product Name");
-                                    if (yesOrNo == 1 && Helper.GetName(out string editName, "product name to be edited"))
-                                    {
-                                        product.Name = editName;
-                                    }
-
-                                    Console.WriteLine("Product Price (1 / 0) :");
-                                    Helper.GetZeroOrOne(out yesOrNo, "Product Price");
-                                    if (yesOrNo == 1 && Helper.GetPrice(out double editPrice))
-                                    {
-                                        product.Price = editPrice;
-                                    }
-
-                                    Console.WriteLine("Product Quantity (1 / 0) :");
-                                    Helper.GetZeroOrOne(out yesOrNo, "Product Quantity");
-                                    if (yesOrNo == 1 && Helper.GetQuantity(out long editQuantity))
-                                    {
-                                        product.Quantity = editQuantity;
-                                    }
-
-                                    bool edited = this._productService.Edit(product);
-                                    if (edited)
-                                    {
-                                        Helper.WriteSuccess("Edited Successfully");
-                                    }
-                                    else
-                                    {
-                                        Helper.WriteFailed("Edit Failed");
-                                    }
-                                }
-                                else
-                                {
-                                    Helper.WriteFailed("There is no product corresponding to the Product ID");
-                                }
+                                this.EditField(product);
+                            }
+                            else
+                            {
+                                Helper.WriteFailed("The Type of Product Id is Invalid!");
                             }
 
                             break;
 
+                        // Delete Product
                         case MenuOption.DeleteProduct:
 
                             list = this._productService.Get();
                             if (list.Count() == 0)
                             {
-                                Helper.WriteFailed("Products are Empty!!!");
+                                Helper.WriteFailed("Products are Empty , Cant be Deleted");
                                 break;
                             }
 
@@ -131,26 +99,28 @@ namespace AssignmentThree.View
                             }
                             else
                             {
-                                Helper.WriteFailed("Cant Delete the Account Id doesnt Exists");
+                                Helper.WriteFailed("Cant Delete the Product , Id doesnt Exists");
                             }
 
                             break;
 
+                        // Display Product
                         case MenuOption.DisplayProduct:
                             list = this._productService.Get();
                             if (list.Count() == 0)
                             {
-                                Helper.WriteFailed("Products are Empty!!!");
+                                Helper.WriteFailed("Products are Empty , Can't Display");
                                 break;
                             }
 
                             Helper.PrintTable(list);
                             break;
 
+                        // Search Product
                         case MenuOption.SearchProduct:
                             if (this._productService.IsEmptyRepository())
                             {
-                                Helper.WriteFailed("Theres No Product to be searched , Respository is Empty");
+                                Helper.WriteFailed("Products are Empty , Cant Search the Product");
                                 break;
                             }
 
@@ -166,10 +136,14 @@ namespace AssignmentThree.View
 
                             Helper.WriteFailed("No Matching Contact Found!!");
                             break;
+
+                        // Exit
                         case MenuOption.Exit:
                             exitFlag = false;
                             Helper.WriteSuccess("Exiting the Application");
                             break;
+
+                        // Default Method
                         default:
                             Helper.WriteFailed("Enter a valid number between 1-6");
                             break;
@@ -198,6 +172,54 @@ namespace AssignmentThree.View
                 OperationMessage.ProductDoesNotexists => "Product Does Not Found",
                 _ => "Unehandeledessacdgfthd",
             };
+        }
+
+        /// <summary>
+        /// To Edit a the user Required field
+        /// </summary>
+        /// <param name="product">Product Info of the Prodcut to be edited</param>
+        public void EditField(ProductInfo? product)
+        {
+            if (product != null)
+            {
+                Console.WriteLine("========================================================" +
+                    "\nPress 1 to edit and 0 to skip editing of the filed" +
+                    "\n========================================================");
+                Console.WriteLine("Product name (1 / 0) :");
+                Helper.GetZeroOrOne(out int yesOrNo, "Product Name");
+                if (yesOrNo == 1 && Helper.GetName(out string editName, "product name to be edited"))
+                {
+                    product.Name = editName;
+                }
+
+                Console.WriteLine("Product Price (1 / 0) :");
+                Helper.GetZeroOrOne(out yesOrNo, "Product Price");
+                if (yesOrNo == 1 && Helper.GetPrice(out double editPrice))
+                {
+                    product.Price = editPrice;
+                }
+
+                Console.WriteLine("Product Quantity (1 / 0) :");
+                Helper.GetZeroOrOne(out yesOrNo, "Product Quantity");
+                if (yesOrNo == 1 && Helper.GetQuantity(out long editQuantity))
+                {
+                    product.Quantity = editQuantity;
+                }
+
+                bool edited = this._productService.Edit(product);
+                if (edited)
+                {
+                    Helper.WriteSuccess("Edited Successfully");
+                }
+                else
+                {
+                    Helper.WriteFailed("Edit Failed");
+                }
+            }
+            else
+            {
+                Helper.WriteFailed("There is no product corresponding to the Product ID");
+            }
         }
     }
 }
