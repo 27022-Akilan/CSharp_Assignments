@@ -69,6 +69,7 @@ namespace AssignmentThree.View
                                 break;
                             }
 
+                            Helper.PrintTable(list);
                             if (Helper.GetId(out productId))
                             {
                                 ProductInfo? product = this._productService.GetProduct(productId);
@@ -124,6 +125,7 @@ namespace AssignmentThree.View
                                 break;
                             }
 
+                            Console.WriteLine("You can search by Name or Id or by Both ,\n Just Press Enter to skip the field");
                             Helper.GetName(out string searchName, "Product Name to be searched");
                             Helper.GetId(out string searchId);
 

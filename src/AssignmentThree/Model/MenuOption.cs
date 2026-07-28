@@ -31,7 +31,7 @@
         DisplayProduct,
 
         /// <summary>
-        /// To Exit te menu.
+        /// To Exit the menu.
         /// </summary>
         Exit,
     }

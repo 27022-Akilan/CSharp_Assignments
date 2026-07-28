@@ -39,7 +39,7 @@ namespace AssignmentThree.Repository
         /// Checks whether the product exists or not.
         /// </summary>
         /// <param name="id">Id of the product to be searched</param>
-        /// <returns>True - If Product exists || False - Product does not exists</returns>
+        /// <returns>Product object - If Product exists || Null - Product does not exists</returns>
         public ProductInfo? ShowProduct(string id)
         {
             foreach (ProductInfo product in this._product)
@@ -56,7 +56,7 @@ namespace AssignmentThree.Repository
         /// <summary>
         /// Updates the Product Information
         /// </summary>
-        /// <param name="editedProduct">Holds the entiure information of the Edited Product </param>
+        /// <param name="editedProduct">Holds the entire information of the Edited Product </param>
         /// <returns>True - If Product Upadated  || False - If Product is not Updated</returns>
         public bool Update(ProductInfo editedProduct)
         {
@@ -75,9 +75,9 @@ namespace AssignmentThree.Repository
         }
 
         /// <summary>
-        ///  Returns a List which cannot be modified
+        ///  To show all the products
         /// </summary>
-        /// <returns>Dupliucate List</returns>
+        /// <returns>IEnumerable List which cannot be modified</returns>
         public IEnumerable<ProductInfo> Show()
         {
             return this._product.Select(p => new ProductInfo(p.Id, p.Name, p.Price, p.Quantity));

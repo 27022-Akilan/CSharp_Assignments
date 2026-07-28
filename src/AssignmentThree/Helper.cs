@@ -52,7 +52,7 @@ namespace AssignmentThree
             do
             {
                 tries--;
-                Console.WriteLine($"Enter the {field}");
+                Console.WriteLine($"\nEnter the {field}");
                 name = Console.ReadLine() ?? string.Empty;
                 if (name != string.Empty && !string.IsNullOrWhiteSpace(name) && IsValidWord(name))
                 {
@@ -76,7 +76,7 @@ namespace AssignmentThree
             do
             {
                 tries--;
-                Console.WriteLine("Enter the ID:");
+                Console.WriteLine("\nEnter the ID:");
                 productId = Console.ReadLine() ?? string.Empty;
                 if (productId != string.Empty && !string.IsNullOrWhiteSpace(productId))
                 {
@@ -101,7 +101,7 @@ namespace AssignmentThree
             {
                 bool validPrice = true;
                 tries--;
-                Console.WriteLine("Enter the price:");
+                Console.WriteLine("\nEnter the price:");
                 string productPriceAsString = Console.ReadLine() ?? string.Empty;
                 if (double.TryParse(productPriceAsString, out productPrice))
                 {
@@ -136,7 +136,7 @@ namespace AssignmentThree
             do
             {
                 tries--;
-                Console.WriteLine("Enter the Choice Number:");
+                Console.WriteLine("\nEnter the Choice Number:");
                 string? numberASString = Console.ReadLine();
                 if (int.TryParse(numberASString, out number))
                 {
@@ -162,7 +162,7 @@ namespace AssignmentThree
             {
                 bool validQuantity = true;
                 tries--;
-                Console.WriteLine("Enter the Quantity:");
+                Console.WriteLine("\nEnter the Quantity:");
                 string? productQuantityAsString = Console.ReadLine();
                 if (long.TryParse(productQuantityAsString, out productQuantity))
                 {
@@ -200,7 +200,7 @@ namespace AssignmentThree
             {
                 bool validNumber = false;
                 tries--;
-                Console.WriteLine($"Enter 0 or 1 for {field}");
+                Console.WriteLine($"\nEnter 0 or 1 for {field}");
                 string? numberASString = Console.ReadLine();
                 if (int.TryParse(numberASString, out number))
                 {
@@ -267,6 +267,10 @@ namespace AssignmentThree
                 table.AddRow(products.Id, products.Name, products.Price, products.Quantity);
             }
 
+            table.Configure(options =>
+            {
+                options.EnableCount = false;
+            });
             table.Write();
         }
     }

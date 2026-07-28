@@ -72,7 +72,7 @@ namespace AssignmentThree.Service
         }
 
         /// <summary>
-        /// Chcks whether there are products or not
+        /// Checks whether there are products or not
         /// </summary>
         /// <returns>True - If its Empty || False - If Products are not empty</returns>
         public bool IsEmptyRepository()
