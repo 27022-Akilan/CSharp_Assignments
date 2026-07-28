@@ -33,7 +33,7 @@ namespace AssignmentThree.View
                "\n2.Edit Product" +
                "\n3.Delete Product" +
                "\n4.Search Product" +
-               "\n5.Display Produt" +
+               "\n5.Display Product" +
                "\n6.Exit" +
                "\n======================================================");
                 int choice;
