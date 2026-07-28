@@ -3,15 +3,30 @@
     /// <summary>
     /// Model for the Inventory
     /// </summary>
-    public class InventoryModel
+    public class ProductInfo
     {
+        /// <summary>
+        /// Initializes a new instance of the <see cref="ProductInfo"/> class
+        /// </summary>
+        /// <param name="id">Id of the product</param>
+        /// <param name="name">Name of the product</param>
+        /// <param name="price">Price of the product</param>
+        /// <param name="quantity">Quantity of the product</param>
+        public ProductInfo(string id, string? name, double price, long quantity)
+        {
+            this.Id = id;
+            this.Name = name;
+            this.Price = price;
+            this.Quantity = quantity;
+        }
+
         /// <summary>
         /// Gets or Sets the Id of the product
         /// </summary>
         /// <value>
         /// A string containing the Id of the Product.
         /// </value>
-        public int Id { get; set; }
+        public string Id { get; set; }
 
         /// <summary>
         ///  Gets or sets the Name of the Product
@@ -27,7 +42,7 @@
         /// <value>
         /// Conatins the Price of the product.
         /// </value>
-        public long Price { get; set; }
+        public double Price { get; set; }
 
         /// <summary>
         /// Gets or sets the Product Quantity.

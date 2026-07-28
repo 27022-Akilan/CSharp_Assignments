@@ -11,7 +11,7 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "unit", "unit", "{C778E127-C
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "acceptance", "acceptance", "{93EBAE55-A8BA-40FF-93AA-7D9E4359B6B9}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "AssignmentThree", "AssignmentThree\AssignmentThree.csproj", "{AC4AE5F0-A466-487A-AB3E-314C4D2A4EA9}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "AssignmentThree", "src\AssignmentThree\AssignmentThree.csproj", "{9D5F5800-EAC4-0494-2788-BD3D3EBF6463}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -19,10 +19,10 @@ Global
 		Release|Any CPU = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(ProjectConfigurationPlatforms) = postSolution
-		{AC4AE5F0-A466-487A-AB3E-314C4D2A4EA9}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{AC4AE5F0-A466-487A-AB3E-314C4D2A4EA9}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{AC4AE5F0-A466-487A-AB3E-314C4D2A4EA9}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{AC4AE5F0-A466-487A-AB3E-314C4D2A4EA9}.Release|Any CPU.Build.0 = Release|Any CPU
+		{9D5F5800-EAC4-0494-2788-BD3D3EBF6463}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{9D5F5800-EAC4-0494-2788-BD3D3EBF6463}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{9D5F5800-EAC4-0494-2788-BD3D3EBF6463}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{9D5F5800-EAC4-0494-2788-BD3D3EBF6463}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
@@ -30,7 +30,7 @@ Global
 	GlobalSection(NestedProjects) = preSolution
 		{C778E127-C02C-4A37-8E85-3D86DCC063DC} = {06861454-9561-492A-9F93-A33B6F7AE3AB}
 		{93EBAE55-A8BA-40FF-93AA-7D9E4359B6B9} = {06861454-9561-492A-9F93-A33B6F7AE3AB}
-		{AC4AE5F0-A466-487A-AB3E-314C4D2A4EA9} = {DCAA095E-2796-41FA-A1D0-1134E29309E7}
+		{9D5F5800-EAC4-0494-2788-BD3D3EBF6463} = {DCAA095E-2796-41FA-A1D0-1134E29309E7}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {D4CECB66-8E11-49D9-AA1E-464EE0231450}
