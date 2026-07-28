@@ -125,18 +125,37 @@ namespace AssignmentThree.View
                                 break;
                             }
 
-                            Console.WriteLine("You can search by Name or Id or by Both ,\n Just Press Enter to skip the field");
-                            Helper.GetName(out string searchName, "Product Name to be searched");
-                            Helper.GetId(out string searchId);
-
-                            IEnumerable<ProductInfo> productList = this._productService.GetIfExists(searchName, searchId);
-                            if (productList != null && productList.Count() != 0)
+                            Console.WriteLine("You can search by Name or Id or by Both");
+                            Console.WriteLine("Enter 1 for yes and 0 for No to search by :");
+                            Helper.GetZeroOrOne(out int nameOption, "Search by Name:");
+                            string searchName = string.Empty, searchId = string.Empty;
+                            if (nameOption == 1)
                             {
-                                Helper.PrintTable(productList);
-                                break;
+                                Helper.GetName(out searchName, "Product Name to be searched");
                             }
 
-                            Helper.WriteFailed("No Matching Contact Found!!");
+                            Helper.GetZeroOrOne(out int idOption, "Search by Id:");
+                            if (idOption == 1)
+                            {
+                                Helper.GetId(out searchId);
+                            }
+
+                            if (nameOption == 1 || idOption == 1)
+                            {
+                                IEnumerable<ProductInfo> productList = this._productService.GetIfExists(searchName, searchId);
+                                if (productList != null && productList.Count() != 0)
+                                {
+                                    Helper.PrintTable(productList);
+                                    break;
+                                }
+
+                                Helper.WriteFailed("No Matching Contact Found!!");
+                            }
+                            else
+                            {
+                                Helper.WriteFailed("Searching Aborted Due Both Entries are 0 ");
+                            }
+
                             break;
 
                         // Exit

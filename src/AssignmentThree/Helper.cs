@@ -200,7 +200,7 @@ namespace AssignmentThree
             {
                 bool validNumber = false;
                 tries--;
-                Console.WriteLine($"\nEnter 0 or 1 for {field}");
+                Console.WriteLine($"\nEnter 0 or 1 to {field}");
                 string? numberASString = Console.ReadLine();
                 if (int.TryParse(numberASString, out number))
                 {
