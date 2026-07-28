@@ -56,7 +56,7 @@ namespace AssignmentThree.View
                             }
 
                             OperationMessage message = this._productService.Put(productId, productName, productPrice, productQuantity);
-                            Helper.WriteSuccess(this.GetMessage(message));
+                            this.GetMessage(message);
                             break;
 
                         // Edit Product
@@ -162,16 +162,18 @@ namespace AssignmentThree.View
         /// To Get The Meaasage for the particular Enum
         /// </summary>
         /// <param name="message">Its the Enum</param>
-        /// <returns>Returns the Message for the particular enum</returns>
-        public string GetMessage(OperationMessage message)
+        public void GetMessage(OperationMessage message)
         {
-            return message switch
+            switch (message)
             {
-                OperationMessage.AddedSuccessFull => "Product Added Successfully",
-                OperationMessage.ProductIdAlreadyExists => "Product Already Exists \nCant Add!",
-                OperationMessage.ProductDoesNotexists => "Product Does Not Found",
-                _ => "Unehandeledessacdgfthd",
-            };
+                case OperationMessage.AddedSuccessFull:
+                    Helper.WriteSuccess("Product Added Successfully");
+                    break;
+
+                case OperationMessage.ProductIdAlreadyExists:
+                    Helper.WriteFailed("Product ID Already Exists \nCant Add!");
+                    break;
+            }
         }
 
         /// <summary>
