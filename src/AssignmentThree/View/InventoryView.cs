@@ -129,45 +129,7 @@ namespace AssignmentThree.View
                             break;
                         }
 
-                        Console.WriteLine("You can search by Name or Id or by Both \nEnter 1 for yes and 0 for No to search by:");
-                        Helper.GetZeroOrOne(out int nameOption, "Search by Name:");
-                        string searchName = string.Empty, searchId = string.Empty;
-                        if (nameOption == 1)
-                        {
-                            Helper.GetName(out searchName, "Product Name to be searched");
-                        }
-
-                        Helper.GetZeroOrOne(out int idOption, "Search by Id:");
-                        if (idOption == 1)
-                        {
-                            Helper.GetId(out searchId);
-                        }
-
-                        if (nameOption == 1 || idOption == 1)
-                        {
-                            IEnumerable<ProductInfo> productList = Enumerable.Empty<ProductInfo>();
-                            try
-                            {
-                                productList = this._productService.GetIfExists(searchName, searchId);
-                            }
-                            catch (Exception ex)
-                            {
-                                Helper.WriteFailed($"Unexpected Error : {ex}");
-                            }
-
-                            if (productList != null && productList.Count() != 0)
-                            {
-                                Helper.PrintTable(productList);
-                                break;
-                            }
-
-                            Helper.WriteFailed("No Matching Contact Found!!");
-                        }
-                        else
-                        {
-                            Helper.WriteFailed("Searching Aborted Due Both Entries are 0 ");
-                        }
-
+                        this.SearchProduct();
                         break;
 
                     // Exit
@@ -189,24 +151,6 @@ namespace AssignmentThree.View
         }
 
         /// <summary>
-        /// To Get The Meaasage for the particular Enum
-        /// </summary>
-        /// <param name="message">Its the Enum</param>
-        public void GetMessage(OperationMessage message)
-        {
-            switch (message)
-            {
-                case OperationMessage.AddedSuccessFull:
-                    Helper.WriteSuccess("Product Added Successfully");
-                    break;
-
-                case OperationMessage.ProductIdAlreadyExists:
-                    Helper.WriteFailed("Product ID Already Exists \nCant Add!");
-                    break;
-            }
-        }
-
-        /// <summary>
         /// To Edit a the user Required field
         /// </summary>
         /// <param name="product">Product Info of the Prodcut to be edited</param>
@@ -215,7 +159,7 @@ namespace AssignmentThree.View
             if (product != null)
             {
                 Console.WriteLine("========================================================" +
-                    "\nPress 1 to edit and 0 to skip editing of the filed" +
+                    "\nPress 1 to edit and 0 to skip editing of the field" +
                     "\n========================================================");
                 Console.WriteLine("Product name (1 / 0) :");
                 Helper.GetZeroOrOne(out int yesOrNo, "Product Name");
@@ -253,5 +197,68 @@ namespace AssignmentThree.View
                 Helper.WriteFailed("There is no product corresponding to the Product ID");
             }
         }
+
+        /// <summary>
+        /// To search the product based on name or id or both.
+        /// </summary>
+        public void SearchProduct()
+        {
+            Console.WriteLine("You can search by Name or Id or by Both \nEnter 1 for yes and 0 for No to search by:");
+            Helper.GetZeroOrOne(out int nameOption, "Search by Name:");
+            string searchName = string.Empty, searchId = string.Empty;
+            if (nameOption == 1)
+            {
+                Helper.GetName(out searchName, "Product Name to be searched");
+            }
+
+            Helper.GetZeroOrOne(out int idOption, "Search by Id:");
+            if (idOption == 1)
+            {
+                Helper.GetId(out searchId);
+            }
+
+            if (nameOption == 0 || idOption == 0)
+            {
+                Helper.WriteFailed("Searching Aborted Due Both Entries are 0 ");
+                return;
+            }
+
+            IEnumerable<ProductInfo> productList = Enumerable.Empty<ProductInfo>();
+            try
+            {
+                productList = this._productService.GetIfExists(searchName, searchId);
+            }
+            catch (Exception ex)
+            {
+                Helper.WriteFailed($"Unexpected Error : {ex}");
+            }
+
+            if (productList != null && productList.Count() != 0)
+            {
+                Helper.PrintTable(productList);
+                return;
+            }
+
+            Helper.WriteFailed("No Matching Contact Found!!");
+        }
+
+        /// <summary>
+        /// To Get The Meaasage for the particular Enum
+        /// </summary>
+        /// <param name="message">Its the Enum</param>
+        public void GetMessage(OperationMessage message)
+        {
+            switch (message)
+            {
+                case OperationMessage.AddedSuccessFull:
+                    Helper.WriteSuccess("Product Added Successfully");
+                    break;
+
+                case OperationMessage.ProductIdAlreadyExists:
+                    Helper.WriteFailed("Product ID Already Exists \nCant Add!");
+                    break;
+            }
+        }
+
     }
 }

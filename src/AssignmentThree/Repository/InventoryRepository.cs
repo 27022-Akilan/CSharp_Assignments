@@ -113,5 +113,14 @@ namespace AssignmentThree.Repository
             return this._product.Where(p => (p.Name != string.Empty && p.Name!.Contains(searchName, StringComparison.OrdinalIgnoreCase)) || p.Id.Equals(searchId))
         .Select(p => new ProductInfo(p.Id, p.Name, p.Price, p.Quantity));
         }
+
+        /// <summary>
+        ///  To chcek whether the Product List is Empty or not
+        /// </summary>
+        /// <returns>True - If Products are Empty || False - If There products exists</returns>
+        public bool IsEmpty()
+        {
+            return this._product.Count() == 0 ? true : false;
+        }
     }
 }

@@ -77,13 +77,7 @@ namespace AssignmentThree.Service
         /// <returns>True - If its Empty || False - If Products are not empty</returns>
         public bool IsEmptyRepository()
         {
-            IEnumerable<ProductInfo> list = this._productRepo.Show();
-            if (list == null)
-            {
-                return true;
-            }
-
-            return list.Count() > 0 ? false : true;
+            return this._productRepo.IsEmpty();
         }
 
         /// <summary>
