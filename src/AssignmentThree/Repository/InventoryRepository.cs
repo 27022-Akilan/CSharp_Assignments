@@ -110,15 +110,8 @@ namespace AssignmentThree.Repository
         /// <returns>Enumerable list of serched products</returns>
         public IEnumerable<ProductInfo> Search(string searchName, string searchId)
         {
-            try
-            {
-                return this._product.Where(p => (p.Name != string.Empty && p.Name!.Contains(searchName, StringComparison.OrdinalIgnoreCase)) || p.Id.Equals(searchId))
-            .Select(p => new ProductInfo(p.Id, p.Name, p.Price, p.Quantity));
-            }
-            catch (NullReferenceException)
-            {
-                return Enumerable.Empty<ProductInfo>();
-            }
+            return this._product.Where(p => (p.Name != string.Empty && p.Name!.Contains(searchName, StringComparison.OrdinalIgnoreCase)) || p.Id.Equals(searchId))
+        .Select(p => new ProductInfo(p.Id, p.Name, p.Price, p.Quantity));
         }
     }
 }

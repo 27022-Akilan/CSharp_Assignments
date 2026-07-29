@@ -38,147 +38,152 @@ namespace AssignmentThree.View
                "\n6.Exit" +
                "\n======================================================");
                 int choice;
-                if (Helper.GetNumber(out choice))
-                {
-                    MenuOption option = (MenuOption)choice;
-
-                    switch (option)
-                    {
-                        // Add Product
-                        case MenuOption.AddProduct:
-                            string productName, productId;
-                            double productPrice;
-                            long productQuantity;
-                            if (!Helper.GetName(out productName, "Product Name") || !Helper.GetId(out productId)
-                                || !Helper.GetPrice(out productPrice) || !Helper.GetQuantity(out productQuantity))
-                            {
-                                Helper.WriteFailed("Aborting due to invalid tries!!");
-                                break;
-                            }
-
-                            OperationMessage message = this._productService.Put(productId, productName, productPrice, productQuantity);
-                            this.GetMessage(message);
-                            break;
-
-                        // Edit Product
-                        case MenuOption.EditProduct:
-
-                            IEnumerable<ProductInfo> list = this._productService.Get();
-                            if (list.Count() == 0)
-                            {
-                                Helper.WriteFailed("Products are Empty , Can't be edited");
-                                break;
-                            }
-
-                            Helper.PrintTable(list);
-                            if (Helper.GetId(out productId))
-                            {
-                                ProductInfo? product = this._productService.GetProduct(productId);
-                                this.EditField(product);
-                            }
-                            else
-                            {
-                                Helper.WriteFailed("The Type of Product Id is Invalid!");
-                            }
-
-                            break;
-
-                        // Delete Product
-                        case MenuOption.DeleteProduct:
-
-                            list = this._productService.Get();
-                            if (list.Count() == 0)
-                            {
-                                Helper.WriteFailed("Products are Empty , Cant be Deleted");
-                                break;
-                            }
-
-                            Helper.PrintTable(list);
-                            Console.WriteLine("Enter the Id to be deleted");
-                            Helper.GetId(out string id);
-                            if (this._productService.Delete(id))
-                            {
-                                Helper.WriteSuccess("Deleted the product Successfully.");
-                            }
-                            else
-                            {
-                                Helper.WriteFailed("Cant Delete the Product , Id doesnt Exists");
-                            }
-
-                            break;
-
-                        // Display Product
-                        case MenuOption.DisplayProduct:
-                            list = this._productService.Get();
-                            if (list.Count() == 0)
-                            {
-                                Helper.WriteFailed("Products are Empty , Can't Display");
-                                break;
-                            }
-
-                            Helper.PrintTable(list);
-                            break;
-
-                        // Search Product
-                        case MenuOption.SearchProduct:
-                            if (this._productService.IsEmptyRepository())
-                            {
-                                Helper.WriteFailed("Products are Empty , Cant Search the Product");
-                                break;
-                            }
-
-                            Console.WriteLine("You can search by Name or Id or by Both \nEnter 1 for yes and 0 for No to search by:");
-                            Helper.GetZeroOrOne(out int nameOption, "Search by Name:");
-                            string searchName = string.Empty, searchId = string.Empty;
-                            if (nameOption == 1)
-                            {
-                                Helper.GetName(out searchName, "Product Name to be searched");
-                            }
-
-                            Helper.GetZeroOrOne(out int idOption, "Search by Id:");
-                            if (idOption == 1)
-                            {
-                                Helper.GetId(out searchId);
-                            }
-
-                            if (nameOption == 1 || idOption == 1)
-                            {
-                                IEnumerable<ProductInfo> productList = this._productService.GetIfExists(searchName, searchId);
-                                if (productList != null && productList.Count() != 0)
-                                {
-                                    Helper.PrintTable(productList);
-                                    break;
-                                }
-
-                                Helper.WriteFailed("No Matching Contact Found!!");
-                            }
-                            else
-                            {
-                                Helper.WriteFailed("Searching Aborted Due Both Entries are 0 ");
-                            }
-
-                            break;
-
-                        // Exit
-                        case MenuOption.Exit:
-                            exitFlag = false;
-                            Helper.WriteSuccess("Exiting the Application");
-                            break;
-
-                        // Default Method
-                        default:
-                            Helper.WriteFailed("Enter a valid number between 1-6");
-                            break;
-                    }
-
-                    Helper.WriteLight("Press Any key To Continue");
-                    Console.ReadKey();
-                }
-                else
+                if (!Helper.GetNumber(out choice))
                 {
                     Helper.WriteFailed("Invalid Choice so application aborting");
                     break;
                 }
+
+                MenuOption option = (MenuOption)choice;
+
+                switch (option)
+                {
+                    // Add Product
+                    case MenuOption.AddProduct:
+                        string productName, productId;
+                        double productPrice;
+                        long productQuantity;
+                        if (!Helper.GetName(out productName, "Product Name") || !Helper.GetId(out productId)
+                            || !Helper.GetPrice(out productPrice) || !Helper.GetQuantity(out productQuantity))
+                        {
+                            Helper.WriteFailed("Aborting due to invalid tries!!");
+                            break;
+                        }
+
+                        OperationMessage message = this._productService.Put(productId, productName, productPrice, productQuantity);
+                        this.GetMessage(message);
+                        break;
+
+                    // Edit Product
+                    case MenuOption.EditProduct:
+
+                        IEnumerable<ProductInfo> list = this._productService.Get();
+                        if (list.Count() == 0)
+                        {
+                            Helper.WriteFailed("Products are Empty , Can't be edited");
+                            break;
+                        }
+
+                        Helper.PrintTable(list);
+                        if (Helper.GetId(out productId))
+                        {
+                            ProductInfo? product = this._productService.GetProduct(productId);
+                            this.EditField(product);
+                            break;
+                        }
+
+                        Helper.WriteFailed("The Type of Product Id is Invalid!");
+                        break;
+
+                    // Delete Product
+                    case MenuOption.DeleteProduct:
+
+                        list = this._productService.Get();
+                        if (list.Count() == 0)
+                        {
+                            Helper.WriteFailed("Products are Empty , Cant be Deleted");
+                            break;
+                        }
+
+                        Helper.PrintTable(list);
+                        Console.WriteLine("Enter the Id to be deleted");
+                        Helper.GetId(out string id);
+                        if (this._productService.Delete(id))
+                        {
+                            Helper.WriteSuccess("Deleted the product Successfully.");
+                        }
+                        else
+                        {
+                            Helper.WriteFailed("Cant Delete the Product , Id doesnt Exists");
+                        }
+
+                        break;
+
+                    // Display Product
+                    case MenuOption.DisplayProduct:
+                        list = this._productService.Get();
+                        if (list.Count() == 0)
+                        {
+                            Helper.WriteFailed("Products are Empty , Can't Display");
+                            break;
+                        }
+
+                        Helper.PrintTable(list);
+                        break;
+
+                    // Search Product
+                    case MenuOption.SearchProduct:
+                        if (this._productService.IsEmptyRepository())
+                        {
+                            Helper.WriteFailed("Products are Empty , Cant Search the Product");
+                            break;
+                        }
+
+                        Console.WriteLine("You can search by Name or Id or by Both \nEnter 1 for yes and 0 for No to search by:");
+                        Helper.GetZeroOrOne(out int nameOption, "Search by Name:");
+                        string searchName = string.Empty, searchId = string.Empty;
+                        if (nameOption == 1)
+                        {
+                            Helper.GetName(out searchName, "Product Name to be searched");
+                        }
+
+                        Helper.GetZeroOrOne(out int idOption, "Search by Id:");
+                        if (idOption == 1)
+                        {
+                            Helper.GetId(out searchId);
+                        }
+
+                        if (nameOption == 1 || idOption == 1)
+                        {
+                            IEnumerable<ProductInfo> productList = Enumerable.Empty<ProductInfo>();
+                            try
+                            {
+                                productList = this._productService.GetIfExists(searchName, searchId);
+                            }
+                            catch (Exception ex)
+                            {
+                                Helper.WriteFailed($"Unexpected Error : {ex}");
+                            }
+
+                            if (productList != null && productList.Count() != 0)
+                            {
+                                Helper.PrintTable(productList);
+                                break;
+                            }
+
+                            Helper.WriteFailed("No Matching Contact Found!!");
+                        }
+                        else
+                        {
+                            Helper.WriteFailed("Searching Aborted Due Both Entries are 0 ");
+                        }
+
+                        break;
+
+                    // Exit
+                    case MenuOption.Exit:
+                        exitFlag = false;
+                        Helper.WriteSuccess("Exiting the Application");
+                        break;
+
+                    // Default Method
+                    default:
+                        Helper.WriteFailed("Enter a valid number between 1-6");
+                        break;
+                }
+
+                Helper.WriteLight("Press Any key To Continue");
+                Console.ReadKey();
             }
             while (exitFlag);
         }
