@@ -259,6 +259,5 @@ namespace AssignmentThree.View
                     break;
             }
         }
-
     }
 }
