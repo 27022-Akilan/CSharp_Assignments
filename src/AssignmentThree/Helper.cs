@@ -12,7 +12,7 @@ namespace AssignmentThree
         /// To get the name of the product from the user.
         /// </summary>
         /// <param name="name">Contains the name and returned using out parameter</param>
-        /// <param name="field">Contains the field to be disp[layed to the user.</param>
+        /// <param name="field">Contains the field to be displayed to the user.</param>
         /// <returns>True - Successfully got the Name || False - Cant get the name , out of tries </returns>
         public static bool GetName(out string name, string field)
         {
