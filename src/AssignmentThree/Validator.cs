@@ -154,22 +154,14 @@ namespace AssignmentThree
         /// <returns>True - If the input is alphanumeric || False - If the input is not AlphaNUmeric</returns>
         public static bool IsAlphanumeric(string input)
         {
-            foreach (var i in input)
-            {
-                if (!char.IsLetterOrDigit(i))
-                {
-                    return false;
-                }
-            }
-
-            return true;
+            return input.All(c => char.IsLetterOrDigit(c) || char.IsWhiteSpace(c));
         }
 
         /// <summary>
         /// Checks whether the input has control character(^A,^B, etc)
         /// </summary>
         /// <param name="input">Holds the string to check for control characters</param>
-        /// <returns>True - If has any control Characters || False - If it doesnt has any control characters.</returns>
+        /// <returns>True - If has any control Characters || False - If it doesn't has any control characters.</returns>
         public static bool HasControlCharacter(string input)
         {
             if (input.Any(char.IsControl))
@@ -177,7 +169,7 @@ namespace AssignmentThree
                 return true;
             }
 
-            return true;
+            return false;
         }
     }
 }

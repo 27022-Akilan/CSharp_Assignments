@@ -43,6 +43,7 @@ namespace AssignmentThree
         /// <returns>True - Got the valid product Id || False - Cant get a valid product Id (out of tries)</returns>
         public static bool GetId(out string productId, string prompt)
         {
+            Console.WriteLine("1 inside helper");
             int tries = 3;
             do
             {
@@ -116,7 +117,7 @@ namespace AssignmentThree
         /// <summary>
         /// To get the product Quantity.
         /// </summary>
-        /// <param name="productQuantity">Stores Product quantity and returns through as out parmeter</param>
+        /// <param name="productQuantity">Stores Product quantity and returns through as out parameter</param>
         /// <returns>True - Got the valid Quantity || False - Invalid Quantity and out of tries</returns>
         public static bool GetQuantity(out long productQuantity)
         {
@@ -197,7 +198,7 @@ namespace AssignmentThree
         }
 
         /// <summary>
-        /// Displays Success meaasage in Green color
+        /// Displays Success message in Green color
         /// </summary>
         /// <param name="s">Input for the success message</param>
         public static void DisplaySuccess(string s)
