@@ -40,7 +40,7 @@ namespace AssignmentThree.View
                 int choice;
                 if (!Helper.GetNumber(out choice))
                 {
-                    Helper.DiplayError("Invalid Choice so application aborting");
+                    Helper.DisplayError("Invalid Choice so application aborting");
                     break;
                 }
 
@@ -56,7 +56,7 @@ namespace AssignmentThree.View
                         if (!Helper.GetId(out productId, "of the product") || !Helper.GetName(out productName, "Product Name")
                             || !Helper.GetPrice(out productPrice) || !Helper.GetQuantity(out productQuantity))
                         {
-                            Helper.DiplayError("Aborting due to invalid tries!!");
+                            Helper.DisplayError("Aborting due to invalid tries!!");
                             break;
                         }
 
@@ -70,7 +70,7 @@ namespace AssignmentThree.View
                         IEnumerable<ProductInfo> list = this._productService.GetAll();
                         if (list.Count() == 0)
                         {
-                            Helper.DiplayError("Products are Empty , Can't be edited");
+                            Helper.DisplayError("No products found");
                             break;
                         }
 
@@ -82,7 +82,7 @@ namespace AssignmentThree.View
                             break;
                         }
 
-                        Helper.DiplayError("The Type of Product Id is Invalid!");
+                        Helper.DisplayError("The Type of Product Id is Invalid!");
                         break;
 
                     // Delete Product
@@ -91,7 +91,7 @@ namespace AssignmentThree.View
                         list = this._productService.GetAll();
                         if (list.Count() == 0)
                         {
-                            Helper.DiplayError("Products are Empty , Cant be Deleted");
+                            Helper.DisplayError("No Products found");
                             break;
                         }
 
@@ -104,7 +104,7 @@ namespace AssignmentThree.View
                         }
                         else
                         {
-                            Helper.DiplayError("Cant Delete the Product , Id doesnt Exists");
+                            Helper.DisplayError("Cant Delete the Product , Id doesn't Exists");
                         }
 
                         break;
@@ -114,7 +114,7 @@ namespace AssignmentThree.View
                         list = this._productService.GetAll();
                         if (list.Count() == 0)
                         {
-                            Helper.DiplayError("Products are Empty , Can't Display");
+                            Helper.DisplayError("No products found");
                             break;
                         }
 
@@ -125,7 +125,7 @@ namespace AssignmentThree.View
                     case MenuOption.SearchProduct:
                         if (this._productService.IsEmptyRepository())
                         {
-                            Helper.DiplayError("Products are Empty , Cant Search the Product");
+                            Helper.DisplayError("No products found");
                             break;
                         }
 
@@ -140,7 +140,7 @@ namespace AssignmentThree.View
 
                     // Default Method
                     default:
-                        Helper.DiplayError("Enter a valid number between 1-6");
+                        Helper.DisplayError("Enter a valid number between 1-6");
                         break;
                 }
 
@@ -158,7 +158,7 @@ namespace AssignmentThree.View
         {
             if (product == null)
             {
-                Helper.DiplayError("Product not found!");
+                Helper.DisplayError("No products found");
                 return;
             }
 
@@ -194,7 +194,7 @@ namespace AssignmentThree.View
             }
             else
             {
-                Helper.DiplayError("Failed to update product.");
+                Helper.DisplayError("Failed to update product.");
             }
         }
 
@@ -217,7 +217,7 @@ namespace AssignmentThree.View
 
             if (!byName && !byId)
             {
-                Helper.DiplayError("Search cancelled (no search criteria selected).");
+                Helper.DisplayError("Search cancelled (no search criteria selected).");
                 return;
             }
 
@@ -228,7 +228,7 @@ namespace AssignmentThree.View
             }
             catch (Exception ex)
             {
-                Helper.DiplayError($"Unexpected Error : {ex}");
+                Helper.DisplayError($"Unexpected Error : {ex}");
             }
 
             if (productList != null && productList.Any())
@@ -237,7 +237,7 @@ namespace AssignmentThree.View
                 return;
             }
 
-            Helper.DiplayError("No matching products found!");
+            Helper.DisplayError("No matching products found!");
         }
 
         /// <summary>
@@ -253,7 +253,7 @@ namespace AssignmentThree.View
                     break;
 
                 case OperationMessage.ProductIdAlreadyExists:
-                    Helper.DiplayError("Product ID Already Exists \nCant Add!");
+                    Helper.DisplayError("Product ID Already Exists \nCant Add!");
                     break;
             }
         }

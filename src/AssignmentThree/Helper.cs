@@ -91,7 +91,7 @@ namespace AssignmentThree
         /// <summary>
         /// To get a number.
         /// </summary>
-        /// <param name="number">Number (as out) stores the numbert</param>
+        /// <param name="number">Number (as out) stores the number</param>
         /// <returns>True - Got the valid number || False - Invalid Number and out of tries</returns>
         public static bool GetNumber(out int number)
         {
@@ -175,10 +175,10 @@ namespace AssignmentThree
         }
 
         /// <summary>
-        ///  Displays Failiure message in Red color
+        ///  Displays Failure message in Red color
         /// </summary>
         /// <param name="s">Input for failure message</param>
-        public static void DiplayError(string s)
+        public static void DisplayError(string s)
         {
             Console.ForegroundColor = ConsoleColor.Red;
             Console.WriteLine(s);
