@@ -43,7 +43,6 @@ namespace AssignmentThree
         /// <returns>True - Got the valid product Id || False - Cant get a valid product Id (out of tries)</returns>
         public static bool GetId(out string productId, string prompt)
         {
-            Console.WriteLine("1 inside helper");
             int tries = 3;
             do
             {
