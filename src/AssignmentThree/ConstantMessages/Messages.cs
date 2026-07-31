@@ -1,63 +1,74 @@
 ﻿namespace AssignmentThree.ConstantMessages
 {
     /// <summary>
-    ///  Hold the const Messages for the errors and success
+    /// Contains constant messages used for validation, errors, and success notifications.
     /// </summary>
-    public class Messages
+    public static class Messages
     {
         /// <summary>
-        /// Name of the product Can be empty message
+        /// Displayed when the product name is empty or contains only whitespace.
         /// </summary>
-        public const string NameCantBeEmpty = "Name of the product cant be empty or whitespace";
+        public const string NameCantBeEmpty =
+            "Product name cannot be empty or consist only of whitespace.";
 
         /// <summary>
-        /// Name of the product Can be empty message
+        /// Displayed when the product name contains only numeric characters.
         /// </summary>
-        public const string NameCannotBeOnlyNumbers = "Name of the Product Should Atleast Contain One Character";
+        public const string NameCannotBeOnlyNumbers =
+            "Product name must contain at least one alphabetic character.";
 
         /// <summary>
-        /// Name of the product Can be empty message
+        /// Displayed when the product name contains invalid characters.
         /// </summary>
-        public const string NameShouldBeAlphaNumeric = "Name of the Product Should Contain only Letters and numbers";
+        public const string NameShouldBeAlphaNumeric =
+            "Product name can contain only letters and numbers.";
 
         /// <summary>
-        /// Name of the product Can be empty message
+        /// Displayed when the product ID is empty or contains only whitespace.
         /// </summary>
-        public const string IdCantBeEmpty = "Id of the Product cant be empty or whitespace";
+        public const string IdCantBeEmpty =
+            "Product ID cannot be empty or consist only of whitespace.";
 
         /// <summary>
-        /// Name of the product Can be empty message
+        /// Displayed when the entered price is invalid.
         /// </summary>
-        public const string PriceCantBeLessThanZero = "Price cant be Less Than Zero";
+        public const string NotAPrice =
+            "Price must be a valid numeric value.";
 
         /// <summary>
-        /// Name of the product Can be empty message
+        /// Displayed when the price is less than or equal to zero.
         /// </summary>
-        public const string NotAPrice = "Price Should Only be a number";
+        public const string PriceCantBeLessThanZero =
+            "Price must be greater than zero.";
 
         /// <summary>
-        /// Name of the product Can be empty message
+        /// Displayed when the entered quantity is invalid.
         /// </summary>
-        public const string NotAQuantity = "Quantity Should Only be a number";
+        public const string NotAQuantity =
+            "Quantity must be a valid whole number.";
 
         /// <summary>
-        /// Name of the product Can be empty message
+        /// Displayed when the quantity is negative.
         /// </summary>
-        public const string QuantityCantBeLessThanZero = "Quantity Should Only be a number";
+        public const string QuantityCantBeLessThanZero =
+            "Quantity cannot be negative.";
 
         /// <summary>
-        /// Name of the product Can be empty message
+        /// Displayed when the input must be either 0 or 1.
         /// </summary>
-        public const string OnlyBeOneOrZero = "Input Should be only 1 or 0";
+        public const string OnlyBeOneOrZero =
+            "Please enter either 0 or 1.";
 
         /// <summary>
-        /// Name of the product Can be empty message
+        /// Displayed when a numeric input contains alphabetic characters.
         /// </summary>
-        public const string CantBeLetters = "Input Should be only Numbers(0 or 1)";
+        public const string CantBeLetters =
+            "Please enter numbers only.";
 
         /// <summary>
-        /// Name of the product Can be empty message
+        /// Displayed when the input contains non-printable control characters.
         /// </summary>
-        public const string CantHaveControlCharaters = "Please dont use Keyboard Shortcuts and (^)Symbol, Enter valid text only.";
+        public const string CantHaveControlCharacters =
+            "Input contains invalid control characters. Please enter valid text.";
     }
 }

@@ -3,7 +3,7 @@
 namespace AssignmentThree.Repository
 {
     /// <summary>
-    /// Its used to store and retrive data (In-Memory)
+    /// Used to store and retrive data (In-Memory)
     /// </summary>
     public class InventoryRepository : IInventoryRepository
     {
@@ -87,7 +87,7 @@ namespace AssignmentThree.Repository
         /// It Deletes the particular product.
         /// </summary>
         /// <param name="id">Id of the product to be deleted.</param>
-        /// <returns>True - Deleted Product || False - Cant Delete product</returns>
+        /// <returns>True - Product Deleted || False - Cant Delete product</returns>
         public bool DeleteById(string id)
         {
             foreach (var product in this._product)

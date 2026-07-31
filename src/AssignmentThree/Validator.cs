@@ -8,10 +8,10 @@ namespace AssignmentThree
     public class Validator
     {
         /// <summary>
-        /// To validate name and Print If there is a Mistake
+        /// To validate name and return the validation result as string.
         /// </summary>
         /// <param name="name">Name of the product</param>
-        /// <returns>Empty string for success || Else result message</returns>
+        /// <returns>Empty string - for success || Else result message</returns>
         public static string ValidateName(string name)
         {
             if (name == string.Empty || string.IsNullOrWhiteSpace(name))
@@ -46,7 +46,7 @@ namespace AssignmentThree
 
             if (HasControlCharacter(productId))
             {
-                return Messages.CantHaveControlCharaters;
+                return Messages.CantHaveControlCharacters;
             }
 
             return string.Empty;
@@ -62,7 +62,7 @@ namespace AssignmentThree
         {
             if (double.TryParse(productPriceAsString, out productPrice))
             {
-                if (productPrice < 0)
+                if (productPrice <= 0)
                 {
                     return Messages.PriceCantBeLessThanZero;
                 }
@@ -95,7 +95,7 @@ namespace AssignmentThree
         }
 
         /// <summary>
-        ///  To Validate Zero or One 
+        ///  To Validate Zero or One.
         /// </summary>
         /// <param name="numberAsString">Contains the input</param>
         /// <param name="number">out parameter to return the number</param>
@@ -118,9 +118,9 @@ namespace AssignmentThree
         /// <summary>
         /// To check if its a number
         /// </summary>
-        /// <param name="number">string num</param>
-        /// <param name="res">res to be outed</param>
-        /// <returns>bool</returns>
+        /// <param name="number">Input string to be checked for a number</param>
+        /// <param name="res">Validated Decimal number to be returned as out Parameter</param>
+        /// <returns>True - If its a valid decimal number || False - Not a Valid decimal Number</returns>
         public static bool IsNumber(string number, out decimal res)
         {
             res = 0;

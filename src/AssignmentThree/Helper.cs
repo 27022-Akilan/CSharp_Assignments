@@ -11,9 +11,9 @@ namespace AssignmentThree
         /// <summary>
         /// To get the name of the product from the user.
         /// </summary>
-        /// <param name="name">contains the name and returned</param>
-        /// <param name="field">Contains the field name</param>
-        /// <returns>True - Successfully got the Name, False - Cant get the name , out of tries </returns>
+        /// <param name="name">Contains the name and returned using out parameter</param>
+        /// <param name="field">Contains the field to be disp[layed to the user.</param>
+        /// <returns>True - Successfully got the Name || False - Cant get the name , out of tries </returns>
         public static bool GetName(out string name, string field)
         {
             int tries = 3;
@@ -40,7 +40,7 @@ namespace AssignmentThree
         /// </summary>
         /// <param name="productId">It stores the Id of the product and returns as out parameter</param>
         /// <param name="prompt">It stores the Prompt to be displayed.</param>
-        /// <returns>True - Got the valid product Id , False - Cant get a valid product Id (out of tries)</returns>
+        /// <returns>True - Got the valid product Id || False - Cant get a valid product Id (out of tries)</returns>
         public static bool GetId(out string productId, string prompt)
         {
             int tries = 3;
@@ -66,7 +66,7 @@ namespace AssignmentThree
         /// To get the Price in the double.
         /// </summary>
         /// <param name="productPrice">Gets and returns a price (out paarmeter)</param>
-        /// <returns>True - Got the valid product price , False - Cant get a valid product price (out of tries)</returns>
+        /// <returns>True - Got the valid product price || False - Cant get a valid product price (out of tries)</returns>
         public static bool GetPrice(out double productPrice)
         {
             int tries = 3;
@@ -92,7 +92,7 @@ namespace AssignmentThree
         /// To get a number.
         /// </summary>
         /// <param name="number">Number (as out) stores the numbert</param>
-        /// <returns>True - Got the valid number , False - Invalid Number and out of tries</returns>
+        /// <returns>True - Got the valid number || False - Invalid Number and out of tries</returns>
         public static bool GetNumber(out int number)
         {
             int tries = 3;
@@ -117,7 +117,7 @@ namespace AssignmentThree
         /// To get the product Quantity.
         /// </summary>
         /// <param name="productQuantity">Stores Product quantity and returns through as out parmeter</param>
-        /// <returns>True - Got the valid Quantity , False - Invalid Quantity and out of tries</returns>
+        /// <returns>True - Got the valid Quantity || False - Invalid Quantity and out of tries</returns>
         public static bool GetQuantity(out long productQuantity)
         {
             int tries = 3;
@@ -238,7 +238,7 @@ namespace AssignmentThree
         }
 
         /// <summary>
-        /// Reads a line from the console and strips all control characters like (^A, ^B)
+        /// Reads a line from the console and strips all control characters like (^A, ^B, ^c...)
         /// </summary>
         /// <returns>Input string without control characters.</returns>
         private static string ReadInput()

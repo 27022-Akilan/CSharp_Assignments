@@ -65,7 +65,7 @@ namespace AssignmentThree.Service
         /// This service deletes the product.
         /// </summary>
         /// <param name="id">Id of the propduct to be deleted</param>
-        /// <returns>True - Deleted Product || False - Cant Delete product</returns>
+        /// <returns>True - Product Deleted || False - Cant Delete product</returns>
         public bool Delete(string id)
         {
             return this._productRepo.DeleteById(id);
