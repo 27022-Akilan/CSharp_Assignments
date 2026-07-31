@@ -27,7 +27,7 @@ namespace AssignmentThree.Service
         /// <param name="price">Price of the product</param>
         /// <param name="quantity">Quantity of the product</param>
         /// <returns>True - Successfull Add | False - Cant Add</returns>
-        public OperationMessage Put(string id, string name, double price, long quantity)
+        public OperationMessage Add(string id, string name, double price, long quantity)
         {
             return this._productRepo.Add(id, name, price, quantity);
         }
@@ -56,9 +56,9 @@ namespace AssignmentThree.Service
         /// This service gets and returns the duplicated Product List
         /// </summary>
         /// <returns>A List of Products</returns>
-        public IEnumerable<ProductInfo> Get()
+        public IEnumerable<ProductInfo> GetAll()
         {
-            return this._productRepo.Show();
+            return this._productRepo.ShowAll();
         }
 
         /// <summary>
@@ -68,7 +68,7 @@ namespace AssignmentThree.Service
         /// <returns>True - Deleted Product || False - Cant Delete product</returns>
         public bool Delete(string id)
         {
-            return this._productRepo.DeleteProduct(id);
+            return this._productRepo.DeleteById(id);
         }
 
         /// <summary>

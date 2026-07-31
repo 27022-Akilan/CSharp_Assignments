@@ -78,7 +78,7 @@ namespace AssignmentThree.Repository
         ///  To show all the products
         /// </summary>
         /// <returns>IEnumerable List which cannot be modified</returns>
-        public IEnumerable<ProductInfo> Show()
+        public IEnumerable<ProductInfo> ShowAll()
         {
             return this._product.Select(p => new ProductInfo(p.Id, p.Name, p.Price, p.Quantity));
         }
@@ -88,7 +88,7 @@ namespace AssignmentThree.Repository
         /// </summary>
         /// <param name="id">Id of the product to be deleted.</param>
         /// <returns>True - Deleted Product || False - Cant Delete product</returns>
-        public bool DeleteProduct(string id)
+        public bool DeleteById(string id)
         {
             foreach (var product in this._product)
             {

@@ -22,7 +22,7 @@ namespace AssignmentThree.View
         /// <summary>
         /// Displays the menu and allows the user to navigate
         /// </summary>
-        public void Menu()
+        public void DisplayMenu()
         {
             Console.WriteLine("Inventoy App");
             bool exitFlag = true;
@@ -40,7 +40,7 @@ namespace AssignmentThree.View
                 int choice;
                 if (!Helper.GetNumber(out choice))
                 {
-                    Helper.WriteFailed("Invalid Choice so application aborting");
+                    Helper.DiplayError("Invalid Choice so application aborting");
                     break;
                 }
 
@@ -53,79 +53,79 @@ namespace AssignmentThree.View
                         string productName, productId;
                         double productPrice;
                         long productQuantity;
-                        if (!Helper.GetName(out productName, "Product Name") || !Helper.GetId(out productId)
+                        if (!Helper.GetId(out productId, "of the product") || !Helper.GetName(out productName, "Product Name")
                             || !Helper.GetPrice(out productPrice) || !Helper.GetQuantity(out productQuantity))
                         {
-                            Helper.WriteFailed("Aborting due to invalid tries!!");
+                            Helper.DiplayError("Aborting due to invalid tries!!");
                             break;
                         }
 
-                        OperationMessage message = this._productService.Put(productId, productName, productPrice, productQuantity);
+                        OperationMessage message = this._productService.Add(productId, productName, productPrice, productQuantity);
                         this.GetMessage(message);
                         break;
 
                     // Edit Product
                     case MenuOption.EditProduct:
 
-                        IEnumerable<ProductInfo> list = this._productService.Get();
+                        IEnumerable<ProductInfo> list = this._productService.GetAll();
                         if (list.Count() == 0)
                         {
-                            Helper.WriteFailed("Products are Empty , Can't be edited");
+                            Helper.DiplayError("Products are Empty , Can't be edited");
                             break;
                         }
 
-                        Helper.PrintTable(list);
-                        if (Helper.GetId(out productId))
+                        Helper.DisplayTable(list);
+                        if (Helper.GetId(out productId, "of the product to be Edited"))
                         {
                             ProductInfo? product = this._productService.GetProduct(productId);
                             this.EditField(product);
                             break;
                         }
 
-                        Helper.WriteFailed("The Type of Product Id is Invalid!");
+                        Helper.DiplayError("The Type of Product Id is Invalid!");
                         break;
 
                     // Delete Product
                     case MenuOption.DeleteProduct:
 
-                        list = this._productService.Get();
+                        list = this._productService.GetAll();
                         if (list.Count() == 0)
                         {
-                            Helper.WriteFailed("Products are Empty , Cant be Deleted");
+                            Helper.DiplayError("Products are Empty , Cant be Deleted");
                             break;
                         }
 
-                        Helper.PrintTable(list);
+                        Helper.DisplayTable(list);
                         Console.WriteLine("Enter the Id to be deleted");
-                        Helper.GetId(out string id);
+                        Helper.GetId(out string id, "of the product to be deleted");
                         if (this._productService.Delete(id))
                         {
-                            Helper.WriteSuccess("Deleted the product Successfully.");
+                            Helper.DisplaySuccess("Deleted the product Successfully.");
                         }
                         else
                         {
-                            Helper.WriteFailed("Cant Delete the Product , Id doesnt Exists");
+                            Helper.DiplayError("Cant Delete the Product , Id doesnt Exists");
                         }
 
                         break;
 
                     // Display Product
                     case MenuOption.DisplayProduct:
-                        list = this._productService.Get();
+                        list = this._productService.GetAll();
                         if (list.Count() == 0)
                         {
-                            Helper.WriteFailed("Products are Empty , Can't Display");
+                            Helper.DiplayError("Products are Empty , Can't Display");
                             break;
                         }
 
-                        Helper.PrintTable(list);
+                        Helper.DisplayTable(list);
                         break;
 
                     // Search Product
                     case MenuOption.SearchProduct:
                         if (this._productService.IsEmptyRepository())
                         {
-                            Helper.WriteFailed("Products are Empty , Cant Search the Product");
+                            Helper.DiplayError("Products are Empty , Cant Search the Product");
                             break;
                         }
 
@@ -135,12 +135,12 @@ namespace AssignmentThree.View
                     // Exit
                     case MenuOption.Exit:
                         exitFlag = false;
-                        Helper.WriteSuccess("Exiting the Application");
+                        Helper.DisplaySuccess("Exiting the Application");
                         break;
 
                     // Default Method
                     default:
-                        Helper.WriteFailed("Enter a valid number between 1-6");
+                        Helper.DiplayError("Enter a valid number between 1-6");
                         break;
                 }
 
@@ -151,50 +151,50 @@ namespace AssignmentThree.View
         }
 
         /// <summary>
-        /// To Edit a the user Required field
+        /// To Edit the user required field
         /// </summary>
-        /// <param name="product">Product Info of the Prodcut to be edited</param>
+        /// <param name="product">Product Info of the Product to be edited</param>
         public void EditField(ProductInfo? product)
         {
-            if (product != null)
+            if (product == null)
             {
-                Console.WriteLine("========================================================" +
-                    "\nPress 1 to edit and 0 to skip editing of the field" +
-                    "\n========================================================");
-                Console.WriteLine("Product name (1 / 0) :");
-                Helper.GetZeroOrOne(out int yesOrNo, "Product Name");
-                if (yesOrNo == 1 && Helper.GetName(out string editName, "product name to be edited"))
-                {
-                    product.Name = editName;
-                }
+                Helper.DiplayError("Product not found!");
+                return;
+            }
 
-                Console.WriteLine("Product Price (1 / 0) :");
-                Helper.GetZeroOrOne(out yesOrNo, "Product Price");
-                if (yesOrNo == 1 && Helper.GetPrice(out double editPrice))
-                {
-                    product.Price = editPrice;
-                }
+            Console.WriteLine($"\n--- Editing Product: {product.Name} (ID: {product.Id}) ---");
 
-                Console.WriteLine("Product Quantity (1 / 0) :");
-                Helper.GetZeroOrOne(out yesOrNo, "Product Quantity");
-                if (yesOrNo == 1 && Helper.GetQuantity(out long editQuantity))
+            if (Helper.GetYesOrNo(out bool editName, "Edit Name?") && editName)
+            {
+                if (Helper.GetName(out string newName, "New Name"))
                 {
-                    product.Quantity = editQuantity;
+                    product.Name = newName;
                 }
+            }
 
-                bool edited = this._productService.Edit(product);
-                if (edited)
+            if (Helper.GetYesOrNo(out bool editPrice, "Edit Price?") && editPrice)
+            {
+                if (Helper.GetPrice(out double newPrice))
                 {
-                    Helper.WriteSuccess("Edited Successfully");
+                    product.Price = newPrice;
                 }
-                else
+            }
+
+            if (Helper.GetYesOrNo(out bool editQuantity, "Edit Quantity?") && editQuantity)
+            {
+                if (Helper.GetQuantity(out long newQuantity))
                 {
-                    Helper.WriteFailed("Edit Failed");
+                    product.Quantity = newQuantity;
                 }
+            }
+
+            if (this._productService.Edit(product))
+            {
+                Helper.DisplaySuccess("Product updated successfully!");
             }
             else
             {
-                Helper.WriteFailed("There is no product corresponding to the Product ID");
+                Helper.DiplayError("Failed to update product.");
             }
         }
 
@@ -203,23 +203,21 @@ namespace AssignmentThree.View
         /// </summary>
         public void SearchProduct()
         {
-            Console.WriteLine("You can search by Name or Id or by Both \nEnter 1 for yes and 0 for No to search by:");
-            Helper.GetZeroOrOne(out int nameOption, "Search by Name:");
             string searchName = string.Empty, searchId = string.Empty;
-            if (nameOption == 1)
+
+            if (Helper.GetYesOrNo(out bool byName, "Search by Name?") && byName)
             {
-                Helper.GetName(out searchName, "Product Name to be searched");
+                Helper.GetName(out searchName, "Product Name");
             }
 
-            Helper.GetZeroOrOne(out int idOption, "Search by Id:");
-            if (idOption == 1)
+            if (Helper.GetYesOrNo(out bool byId, "Search by ID?") && byId)
             {
-                Helper.GetId(out searchId);
+                Helper.GetId(out searchId, "of the Product to be Searched");
             }
 
-            if (nameOption == 0 || idOption == 0)
+            if (!byName && !byId)
             {
-                Helper.WriteFailed("Searching Aborted Due Both Entries are 0 ");
+                Helper.DiplayError("Search cancelled (no search criteria selected).");
                 return;
             }
 
@@ -230,16 +228,16 @@ namespace AssignmentThree.View
             }
             catch (Exception ex)
             {
-                Helper.WriteFailed($"Unexpected Error : {ex}");
+                Helper.DiplayError($"Unexpected Error : {ex}");
             }
 
-            if (productList != null && productList.Count() != 0)
+            if (productList != null && productList.Any())
             {
-                Helper.PrintTable(productList);
+                Helper.DisplayTable(productList);
                 return;
             }
 
-            Helper.WriteFailed("No Matching Contact Found!!");
+            Helper.DiplayError("No matching products found!");
         }
 
         /// <summary>
@@ -251,11 +249,11 @@ namespace AssignmentThree.View
             switch (message)
             {
                 case OperationMessage.AddedSuccessFull:
-                    Helper.WriteSuccess("Product Added Successfully");
+                    Helper.DisplaySuccess("Product Added Successfully");
                     break;
 
                 case OperationMessage.ProductIdAlreadyExists:
-                    Helper.WriteFailed("Product ID Already Exists \nCant Add!");
+                    Helper.DiplayError("Product ID Already Exists \nCant Add!");
                     break;
             }
         }

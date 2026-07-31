@@ -19,7 +19,7 @@ namespace Assignments
             InventoryService service = new InventoryService(repository);
             InventoryView inventoryView = new InventoryView(service);
 
-            inventoryView.Menu();
+            inventoryView.DisplayMenu();
         }
     }
 }

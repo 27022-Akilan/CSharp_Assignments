@@ -9,38 +9,6 @@ namespace AssignmentThree
     internal class Helper
     {
         /// <summary>
-        /// To check if its a number
-        /// </summary>
-        /// <param name="number">string num</param>
-        /// <param name="res">res to be outed</param>
-        /// <returns>bool</returns>
-        public static bool IsNumber(string number, out decimal res)
-        {
-            res = 0;
-            if (number != string.Empty && !string.IsNullOrWhiteSpace(number) && decimal.TryParse(number, out res))
-            {
-                return true;
-            }
-
-            return false;
-        }
-
-        /// <summary>
-        /// Check Valid color or not
-        /// </summary>
-        /// <param name="word">color</param>
-        /// <returns>True - Valid ; False - Invalid word</returns>
-        public static bool IsValidWord(string word)
-        {
-            if (string.IsNullOrWhiteSpace(word))
-            {
-                return false;
-            }
-
-            return !word.All(char.IsDigit);
-        }
-
-        /// <summary>
         /// To get the name of the product from the user.
         /// </summary>
         /// <param name="name">contains the name and returned</param>
@@ -54,12 +22,14 @@ namespace AssignmentThree
                 tries--;
                 Console.WriteLine($"\nEnter the {field}");
                 name = Console.ReadLine() ?? string.Empty;
-                if (name != string.Empty && !string.IsNullOrWhiteSpace(name) && IsValidWord(name))
+                string result = Validator.ValidateName(name.Trim());
+                if (result == string.Empty)
                 {
                     return true;
                 }
 
-                Helper.WriteWarning($"Invalid name! Number of Tries Left is:{tries}\n");
+                DisplayWarning(result);
+                DisplayWarning($"Number of Tries Left is:{tries}\n");
             }
             while (tries > 0);
             return false;
@@ -69,21 +39,24 @@ namespace AssignmentThree
         /// To get the product Id from the user.
         /// </summary>
         /// <param name="productId">It stores the Id of the product and returns as out parameter</param>
+        /// <param name="prompt">It stores the Prompt to be displayed.</param>
         /// <returns>True - Got the valid product Id , False - Cant get a valid product Id (out of tries)</returns>
-        public static bool GetId(out string productId)
+        public static bool GetId(out string productId, string prompt)
         {
             int tries = 3;
             do
             {
                 tries--;
-                Console.WriteLine("\nEnter the ID:");
+                Console.WriteLine($"\nEnter the ID {prompt}");
                 productId = Console.ReadLine() ?? string.Empty;
-                if (productId != string.Empty && !string.IsNullOrWhiteSpace(productId))
+                string result = Validator.ValidateId(productId);
+                if (result == string.Empty)
                 {
                     return true;
                 }
 
-                Helper.WriteWarning($"Invalid Id! Number of Tries Left is:{tries}\n");
+                DisplayWarning(result);
+                DisplayWarning($"Number of Tries Left is:{tries}\n");
             }
             while (tries > 0);
             return false;
@@ -99,27 +72,17 @@ namespace AssignmentThree
             int tries = 3;
             do
             {
-                bool validPrice = true;
                 tries--;
                 Console.WriteLine("\nEnter the price:");
-                string productPriceAsString = Console.ReadLine() ?? string.Empty;
-                if (double.TryParse(productPriceAsString, out productPrice))
+                string productPriceAsString = ReadInput();
+                string result = Validator.ValidatePrice(productPriceAsString, out productPrice);
+                if (result == string.Empty)
                 {
-                    validPrice = productPrice > 0;
-                    if (validPrice)
-                    {
-                        return true;
-                    }
+                    return true;
                 }
 
-                if (!validPrice)
-                {
-                    Helper.WriteWarning($"Invalid Price cant be less than 0! Number of Tries Left is:{tries}\n");
-                }
-                else
-                {
-                    Helper.WriteWarning($"Invalid Price! Number of Tries Left is:{tries}\n");
-                }
+                DisplayWarning(result);
+                DisplayWarning($"Number of Tries Left is:{tries}\n");
             }
             while (tries > 0);
             return false;
@@ -137,13 +100,13 @@ namespace AssignmentThree
             {
                 tries--;
                 Console.WriteLine("\nEnter the Choice Number:");
-                string? numberASString = Console.ReadLine();
+                string numberASString = ReadInput();
                 if (int.TryParse(numberASString, out number))
                 {
                     return true;
                 }
 
-                Helper.WriteWarning($"The entered value needs to be a number , Tries left {tries}");
+                Helper.DisplayWarning($"The entered value needs to be a number , Tries left {tries}");
             }
             while (tries > 0);
 
@@ -160,27 +123,17 @@ namespace AssignmentThree
             int tries = 3;
             do
             {
-                bool validQuantity = true;
                 tries--;
                 Console.WriteLine("\nEnter the Quantity:");
-                string? productQuantityAsString = Console.ReadLine();
-                if (long.TryParse(productQuantityAsString, out productQuantity))
+                string productQuantityAsString = ReadInput();
+                string result = Validator.ValidateQuantity(productQuantityAsString, out productQuantity);
+                if (result == string.Empty)
                 {
-                    validQuantity = productQuantity >= 0;
-                    if (validQuantity)
-                    {
-                        return true;
-                    }
+                    return true;
                 }
 
-                if (!validQuantity)
-                {
-                    Helper.WriteWarning($"Quantity cant be less than 0 , Tries left {tries}");
-                }
-                else
-                {
-                    Helper.WriteWarning($"Invalid Quantity , Tries left {tries}");
-                }
+                DisplayWarning(result);
+                DisplayWarning($"Number of Tries Left is:{tries}\n");
             }
             while (tries > 0);
 
@@ -188,34 +141,33 @@ namespace AssignmentThree
         }
 
         /// <summary>
-        /// Method to get the 0 or 1 for editing
+        /// Prompt for Yes (Y/y) or No (N/n) response.
         /// </summary>
-        /// <param name="number">Holds 0(Dont edit) or 1(Edit) </param>
-        /// <param name="field">Field Which is to be edited</param>
-        /// <returns>True - Got the valid input , False - Invalid input and out of tries</returns>
-        public static bool GetZeroOrOne(out int number, string field)
+        /// <param name="shouldProceed">Outputs true if Y/y, false if N/n.</param>
+        /// <param name="promptMessage">Message to display to the user.</param>
+        /// <returns>True if valid response was given, false if out of tries.</returns>
+        public static bool GetYesOrNo(out bool shouldProceed, string promptMessage)
         {
+            shouldProceed = false;
             int tries = 3;
             do
             {
-                bool validNumber = false;
                 tries--;
-                Console.WriteLine($"\nEnter 0 or 1 to {field}");
-                string? numberASString = Console.ReadLine();
-                if (int.TryParse(numberASString, out number))
+                Console.Write($"{promptMessage} (y/n): ");
+                string input = ReadInput().ToLower();
+                if (input == "y" || input == "yes")
                 {
-                    validNumber = number == 1 || number == 0;
-                    if (validNumber)
-                    {
-                        return true;
-                    }
+                    shouldProceed = true;
+                    return true;
+                }
 
-                    Helper.WriteWarning($"The entered value needs to be 1 or 0 , Tries left {tries}");
-                }
-                else
+                if (input == "n" || input == "no")
                 {
-                    Helper.WriteWarning($"The entered value needs to be a number , Tries left {tries}");
+                    shouldProceed = false;
+                    return true;
                 }
+
+                DisplayWarning($"Invalid input! Enter 'y' or 'n'. Tries left: {tries}");
             }
             while (tries > 0);
 
@@ -226,7 +178,7 @@ namespace AssignmentThree
         ///  Displays Failiure message in Red color
         /// </summary>
         /// <param name="s">Input for failure message</param>
-        public static void WriteFailed(string s)
+        public static void DiplayError(string s)
         {
             Console.ForegroundColor = ConsoleColor.Red;
             Console.WriteLine(s);
@@ -237,7 +189,7 @@ namespace AssignmentThree
         ///  Displays Warning message in Yellow color
         /// </summary>
         /// <param name="s">Input for the Warning message</param>
-        public static void WriteWarning(string s)
+        public static void DisplayWarning(string s)
         {
             Console.ForegroundColor = ConsoleColor.Yellow;
             Console.WriteLine(s);
@@ -248,7 +200,7 @@ namespace AssignmentThree
         /// Displays Success meaasage in Green color
         /// </summary>
         /// <param name="s">Input for the success message</param>
-        public static void WriteSuccess(string s)
+        public static void DisplaySuccess(string s)
         {
             Console.ForegroundColor = ConsoleColor.Green;
             Console.WriteLine(s);
@@ -270,7 +222,7 @@ namespace AssignmentThree
         /// This prints the Product details in a table format.
         /// </summary>
         /// <param name="list">Contains the List of the products, whereas list cant be changed</param>
-        public static void PrintTable(IEnumerable<ProductInfo> list)
+        public static void DisplayTable(IEnumerable<ProductInfo> list)
         {
             var table = new ConsoleTable("Id", "Name", "Price", "Quantity");
             foreach (var products in list)
@@ -283,6 +235,18 @@ namespace AssignmentThree
                 options.EnableCount = false;
             });
             table.Write();
+        }
+
+        /// <summary>
+        /// Reads a line from the console and strips all control characters like (^A, ^B)
+        /// </summary>
+        /// <returns>Input string without control characters.</returns>
+        private static string ReadInput()
+        {
+            string input = Console.ReadLine() ?? string.Empty;
+
+            // return input.Trim();
+            return new string(input.Where(c => !char.IsControl(c)).ToArray()).Trim();
         }
     }
 }

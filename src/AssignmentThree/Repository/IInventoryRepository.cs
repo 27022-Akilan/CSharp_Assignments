@@ -35,14 +35,14 @@ namespace AssignmentThree.Repository
         /// Must be implemeneted inside the Derived class.
         /// </summary>
         /// <returns>An IEnumerable List of Products which cant be modified</returns>
-        IEnumerable<ProductInfo> Show();
+        IEnumerable<ProductInfo> ShowAll();
 
         /// <summary>
         /// Must be implemented inside the Derived class
         /// </summary>
         /// <param name="id">Id of the product to be deleted</param>
         /// <returns>True - If Deleted || False - Cant be deleted</returns>
-        bool DeleteProduct(string id);
+        bool DeleteById(string id);
 
         /// <summary>
         /// Must be implemented inside the Derived class
