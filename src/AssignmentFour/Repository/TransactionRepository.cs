@@ -7,53 +7,30 @@ namespace AssignmentFour.Repository
     /// <summary>
     /// Repository for storing the Transaction Details.
     /// </summary>
-    public class TransactionRepository : IRepository
+    public class TransactionRepository
     {
         // private Transaction? _transaction;
-        private List<Transaction> _transactionList = new List<Transaction>();
+        private List<Transaction> _transactions = new List<Transaction>();
 
         /// <summary>
-        /// Adds the transaction to the repository.
+        /// Adds the transaction to the repository
         /// </summary>
         /// <param name="transaction">Transaction object</param>
-        /// <returns>A message that tells about the result of Adding the Transaction</returns>
-        public string AddTransaction(Transaction transaction)
+        /// <returns>A message that tells about the </returns>
+        public string Add(Transaction transaction)
         {
-            this._transactionList.Add(transaction);
+            this._transactions.Add(transaction);
 
             return Messages.AddSuccess;
         }
 
         /// <summary>
-        /// To update the existing Transaction.
+        /// To update the existing Transaction
         /// </summary>
-        /// <param name="transaction">Edited details of the Income</param>
-        /// <returns>True - Updated Successfully | False - Cannot Update</returns>
-        public bool UpdateIncome(Income transaction)
+        /// <param name="transaction">Edited details of the Transaction</param>
+        public void Update(Transaction transaction)
         {
-            foreach (Income field in this._transactionList)
-            {
-                if (field.TransactionId == transaction.TransactionId)
-                {
-                    field.Amount = transaction.Amount;
-                    field.Date = transaction.Date;
-                    field.Description = transaction.Description;
-                    field.Source = transaction.Source;
-                    return true;
-                }
-            }
-
-            return false;
-        }
-
-        /// <summary>
-        /// To update the existing Transaction.
-        /// </summary>
-        /// <param name="transaction">Edited details of the Expense</param>
-        /// <returns>True - Updated Successfully | False - Cannot Update</returns>
-        public bool UpdateExpense(Expense transaction)
-        {
-            foreach (Expense field in this._transactionList)
+            foreach (var field in this._transactions)
             {
                 if (field.TransactionId == transaction.TransactionId)
                 {
@@ -81,40 +58,17 @@ namespace AssignmentFour.Repository
                 return false;
             }
 
-            this._transactionList.Remove(transaction);
-            return true;
-        }
+                    if (transaction.TransactionType == Model.Type.Income)
+                    {
+                        ((Income)field).Source = ((Income)transaction).Source;
+                    }
+                    else
+                    {
+                        ((Expense)field).Category = ((Expense)transaction).Category;
+                    }
 
-        /// <summary>
-        /// Shows the entire transactions
-        /// </summary>
-        /// <returns>A cloned copy of all all transactions </returns>
-        public IEnumerable<Transaction> GetAllTransactions()
-        {
-            return this._transactionList.Select(t => t.CloneTransaction());
-        }
-
-        /// <summary>
-        /// Shows the transactions of the desired type.
-        /// </summary>
-        /// <param name="type">Type of transactions to retrieve</param>
-        /// <returns>IEnumerable list of Transactions of the specified type</returns>
-        public IEnumerable<Transaction> GetTransactionsByType(TransactionType type)
-        {
-            return this._transactionList.Where(t => t.TransactionType == type)
-                                        .Select(t => t.CloneTransaction());
-        }
-
-        /// <summary>
-        /// Shows the transactions of the desired amount
-        /// </summary>
-        /// <param name="amount">Amount of transactions to retrieve</param>
-        /// <returns>IEnumerable list of Transactions of the specified amount</returns>
-        public IEnumerable<Transaction> GetTransactionsByAmount(decimal amount)
-        {
-            return this._transactionList.Where(t => t.Amount == amount)
-                                        .Select(t => t.CloneTransaction());
-        }
+                    break;
+                }
 
         /// <summary>
         /// Shows the transactions of the desired description
@@ -125,7 +79,7 @@ namespace AssignmentFour.Repository
         {
             return this._transactionList.Where(t => t.Description.Contains(description))
                                         .Select(t => t.CloneTransaction());
-        }
+            }
 
         /// <summary>
         /// Shows the transactions of the desired date
