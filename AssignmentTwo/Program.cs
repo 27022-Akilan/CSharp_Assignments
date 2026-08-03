@@ -20,9 +20,9 @@ namespace Assignments
             do
             {
                 Console.WriteLine("----------------------------------" +
-                    "\n1.Shape " +
-                    "\n2.Employee " +
-                    "\n3.Account " +
+                    "\n1.Shape    - Task 1" +
+                    "\n2.Employee - Task 2 " +
+                    "\n3.Account  - Task 3" +
                     "\n4.Exit" +
                     "\n----------------------------------" +
                     "\nEnter Your Choice");
