@@ -7,7 +7,7 @@ namespace Assignments
     /// <summary>
     /// This is the base program's entry point.
     /// </summary>
-    internal class Program
+    public class Program
     {
         /// <summary>
         /// Its the main method to start the application.
