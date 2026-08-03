@@ -14,7 +14,7 @@ namespace AssignmentTwo.View
         /// <summary>
         /// Menu for accessing accounts
         /// </summary>
-        public void Menu()
+        public void DisplayMenu()
         {
             OptionForBank optionForBank;
             long accountNumber = 0;
@@ -34,50 +34,52 @@ namespace AssignmentTwo.View
                     switch (optionForBank)
                     {
                         case OptionForBank.CreateAndViewSavingsAccount:
-                            bool getNameTrysOut = Helper.GetName(out string name);
-                            if (getNameTrysOut)
+                            bool getNameTriesOut = Helper.GetName(out string name);
+                            if (getNameTriesOut)
                             {
-                                Helper.WriteFailed("Aborting the creation account due to maximum trys of invalid name");
+                                Helper.DisplayFailedMessage("Aborting the creation account due to maximum tries of invalid name");
                                 break;
                             }
 
                             this.PrintInitialDepositValue(ch);
-                            bool getAmountTrysOut = Helper.GetAmount(out decimal amount, ch);
-                            if (getAmountTrysOut)
+                            bool getAmountTriesOut = this.GetAmount(out decimal amount, ch);
+                            if (getAmountTriesOut)
                             {
-                                Helper.WriteFailed("Aborting the creation of the account due to maximum trys of invalid Initial Deposit");
+                                Helper.DisplayFailedMessage("Aborting the creation of the account due to maximum tries of invalid Initial Deposit");
                                 break;
                             }
 
                             account = new SavingsAccount(name, ++accountNumber, amount);
-                            this.SubMenu(account);
+                            Helper.DisplaySuccessMessage("Savings Account created Successfully");
+                            this.DisplaySubMenu(account);
                             break;
 
                         case OptionForBank.CreateAndViewCheckingAccount:
-                            getNameTrysOut = Helper.GetName(out name);
-                            if (getNameTrysOut)
+                            getNameTriesOut = Helper.GetName(out name);
+                            if (getNameTriesOut)
                             {
-                                Helper.WriteFailed("Aborting the creation of the account due to maximum trys of invalid name");
+                                Helper.DisplayFailedMessage("Aborting the creation of the account due to maximum tries of invalid name");
                                 break;
                             }
 
                             this.PrintInitialDepositValue(ch);
-                            getAmountTrysOut = Helper.GetAmount(out amount, ch);
-                            if (getAmountTrysOut)
+                            getAmountTriesOut = this.GetAmount(out amount, ch);
+                            if (getAmountTriesOut)
                             {
-                                Helper.WriteFailed("Aborting the creation account due to maximum trys of invalid Initial deposit");
+                                Helper.DisplayFailedMessage("Aborting the creation account due to maximum tries of invalid Initial deposit");
                                 break;
                             }
 
                             account = new CheckingAccount(name, ++accountNumber, amount);
-                            this.SubMenu(account);
+                            Helper.DisplaySuccessMessage("Checking Account created Successfully");
+                            this.DisplaySubMenu(account);
                             break;
 
                         case OptionForBank.Exit:
-                            Helper.WriteSuccess("Exited!!");
+                            Helper.DisplaySuccessMessage("Exited!!");
                             break;
                         default:
-                            Helper.WriteFailed("Enter Correct Value between 1 to 3");
+                            Helper.DisplayFailedMessage("Enter Correct Value between 1 to 3");
                             break;
                     }
 
@@ -88,7 +90,7 @@ namespace AssignmentTwo.View
                 }
                 else
                 {
-                    Helper.WriteFailed("Enter valid number and can be only between (1-5)");
+                    Helper.DisplayFailedMessage("Enter valid number and can be only between (1-5)");
                 }
             }
             while (true);
@@ -98,7 +100,7 @@ namespace AssignmentTwo.View
         /// Operations Deposit,Withdraw,print
         /// </summary>
         /// <param name="account">account object</param>
-        public void SubMenu(BankAccount account)
+        public void DisplaySubMenu(BankAccount account)
         {
             BankOperation bankOperation;
             do
@@ -112,37 +114,37 @@ namespace AssignmentTwo.View
                 string choiceForDepositOrWithdrawalOrGetDetails = Console.ReadLine() ?? string.Empty;
                 if (int.TryParse(choiceForDepositOrWithdrawalOrGetDetails, out int numberForDepositOrWithdrawal))
                 {
-                    bool outOfTrys = true;
+                    bool outOfTries = true;
                     bankOperation = (BankOperation)numberForDepositOrWithdrawal;
                     switch (bankOperation)
                     {
                         case BankOperation.Deposit:
-                            Console.WriteLine("Deposit choosed");
-                            outOfTrys = this.GetOrPutMoney(account, BankOperation.Deposit);
+                            Console.WriteLine("Deposit chose");
+                            outOfTries = this.GetOrPutMoney(account, BankOperation.Deposit);
                             break;
                         case BankOperation.Withdraw:
-                            Console.WriteLine("Withdraw choosed");
-                            outOfTrys = this.GetOrPutMoney(account, BankOperation.Withdraw);
+                            Console.WriteLine("Withdraw chose");
+                            outOfTries = this.GetOrPutMoney(account, BankOperation.Withdraw);
                             break;
                         case BankOperation.PrintDetails:
-                            Helper.WriteSuccess(this._bankServices.GetDetails(account));
+                            Helper.DisplaySuccessMessage(this._bankServices.GetDetails(account));
                             break;
                         case BankOperation.Exit:
-                            Helper.WriteSuccess("Exited!!");
+                            Helper.DisplaySuccessMessage("Exited!!");
                             break;
                         default:
-                            Helper.WriteFailed("Invalid Choice");
+                            Helper.DisplayFailedMessage("Invalid Choice");
                             break;
                     }
 
-                    if (!outOfTrys || numberForDepositOrWithdrawal == 40)
+                    if (!outOfTries || bankOperation == BankOperation.Exit)
                     {
                         break;
                     }
                 }
                 else
                 {
-                    Helper.WriteFailed("Enter valid number can be only (1 to 4)");
+                    Helper.DisplayFailedMessage("Enter valid number can be only (1 to 4)");
                 }
             }
             while (true);
@@ -173,16 +175,16 @@ namespace AssignmentTwo.View
         public bool GetOrPutMoney(BankAccount account, BankOperation bankOperation)
         {
             decimal amount;
-            bool getorPutAmount = this.GetAmountForDepositOrWithdraw(out amount);
-            if (getorPutAmount == false)
+            bool getOrPutAmount = this.GetAmountForDepositOrWithdraw(out amount);
+            if (getOrPutAmount == false)
             {
                 if (bankOperation == BankOperation.Deposit)
                 {
-                    Helper.WriteSuccess(this._bankServices.DepositAmount(account, amount));
+                    Helper.DisplaySuccessMessage(this._bankServices.DepositAmount(account, amount));
                     return true;
                 }
 
-                Helper.WriteSuccess(this._bankServices.WithdrawAmount(account, amount));
+                Helper.DisplaySuccessMessage(this._bankServices.WithdrawAmount(account, amount));
                 return true;
             }
 
@@ -196,10 +198,10 @@ namespace AssignmentTwo.View
         /// <returns>bool</returns>
         public bool GetAmountForDepositOrWithdraw(out decimal amount)
         {
-            int trys = 3;
+            int tries = 3;
             do
             {
-                trys -= 1;
+                tries -= 1;
                 Console.WriteLine("Enter the Amount :");
                 string stringAmount = Console.ReadLine() ?? string.Empty;
                 if (Helper.IsNumber(stringAmount, out amount) && (amount > 0))
@@ -207,9 +209,44 @@ namespace AssignmentTwo.View
                     return false;
                 }
 
-                Helper.WriteFailed($"Invalid Amount! Number of Tries Left : {trys}\n");
+                Helper.DisplayFailedMessage($"Invalid Amount! Number of Tries Left : {tries}\n");
             }
-            while (trys > 0);
+            while (tries > 0);
+            return true;
+        }
+
+        /// <summary>
+        /// To get the amount
+        /// </summary>
+        /// <param name="amount">amount</param>
+        /// <param name="accountType">Account Type</param>
+        /// <returns>True - Valid Amount False - Invalid Amount</returns>
+        public bool GetAmount(out decimal amount, int accountType)
+        {
+            int tries = 3;
+            do
+            {
+                tries--;
+                string result = string.Empty;
+                Console.WriteLine("Enter the Amount :");
+                string stringAmount = Console.ReadLine() ?? string.Empty;
+                if (Helper.IsNumber(stringAmount, out amount))
+                {
+                    result = BankServices.IsAmountIsGreaterThanInitialDeposit(amount, accountType);
+                    if (result == string.Empty)
+                    {
+                        // as it gets valid input so the outOfTries == false
+                        return false;
+                    }
+                }
+                else
+                {
+                    result = "You must enter only a number";
+                }
+
+                Helper.DisplayWarningMessage($"Invalid amount!\n{result} \nNumber of Tries Left is:{tries}\n ");
+            }
+            while (tries > 0);
             return true;
         }
     }

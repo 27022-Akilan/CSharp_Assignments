@@ -44,12 +44,12 @@ namespace AssignmentTwo.View
                             decimal radius = Helper.GetValidQuantity("Radius", "m");
                             if (radius == -1)
                             {
-                                Helper.WriteFailed("Exiting");
+                                Helper.DisplayFailedMessage("Exiting");
                                 break;
                             }
 
                             Shape shape = new Circle("Circle", color, radius);
-                            Helper.WriteSuccess(this._service.GetDetails(shape));
+                            Helper.DisplaySuccessMessage(this._service.GetDetails(shape));
                             break;
 
                         // Rectangle
@@ -63,31 +63,31 @@ namespace AssignmentTwo.View
                             decimal isValidLength = Helper.GetValidQuantity("Length", "m");
                             if (isValidLength == -1)
                             {
-                                Helper.WriteFailed("Due to Out Of Tries , Exiting!");
+                                Helper.DisplayFailedMessage("Due to Out Of Tries , Exiting!");
                                 break;
                             }
 
                             decimal isValidBreadth = Helper.GetValidQuantity("Breadth", "m");
                             if (isValidBreadth == -1)
                             {
-                                Helper.WriteFailed("Due to Out Of Tries , Exiting!");
+                                Helper.DisplayFailedMessage("Due to Out Of Tries , Exiting!");
                                 break;
                             }
 
                             shape = new Rectangle("Rectangle", color, isValidLength, isValidBreadth);
-                            Helper.WriteSuccess(this._service.GetDetails(shape));
+                            Helper.DisplaySuccessMessage(this._service.GetDetails(shape));
                             break;
                         case OptionForShape.Exit:
-                            Helper.WriteSuccess("Exiting!!!!");
+                            Helper.DisplaySuccessMessage("Exiting!!!!");
                             break;
                         default:
-                            Helper.WriteFailed("Invalid Choice");
+                            Helper.DisplayFailedMessage("Invalid Choice");
                             break;
                     }
                 }
                 else
                 {
-                    Helper.WriteFailed("Invalid Choice , You must enter a number only");
+                    Helper.DisplayFailedMessage("Invalid Choice , You must enter a number only");
                 }
             }
             while (choice != 3);
@@ -111,7 +111,7 @@ namespace AssignmentTwo.View
                     return color;
                 }
 
-                Helper.WriteWarning($"Invalid Color. No.Of tries left is {trys}");
+                Helper.DisplayWarningMessage($"Invalid Color. No.Of tries left is {trys}");
             }
             while (trys != 0);
             return "-1";

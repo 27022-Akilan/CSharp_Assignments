@@ -43,19 +43,19 @@ namespace Assignments
                             break;
                         case Option.CreateAndViewAccount:
                             BankView viewAccount = new BankView();
-                            viewAccount.Menu();
+                            viewAccount.DisplayMenu();
                             break;
                         case Option.Exit:
-                            Console.WriteLine("Exiting!!");
+                            Helper.DisplaySuccessMessage("Exiting!!");
                             break;
                         default:
-                            Helper.WriteFailed("Enter valid number between 1 to 4");
+                            Helper.DisplayFailedMessage("Enter valid number between 1 to 4");
                             break;
                     }
                 }
                 else
                 {
-                    Helper.WriteFailed("Enter a valid number , you didnt enter a number");
+                    Helper.DisplayFailedMessage("Enter a valid number , you didn't enter a number");
                 }
             }
             while (choice != 4);
