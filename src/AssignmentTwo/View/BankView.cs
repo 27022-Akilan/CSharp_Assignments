@@ -7,7 +7,7 @@ namespace AssignmentTwo.View
     /// <summary>
     /// To view Account
     /// </summary>
-    internal class BankView
+    public class BankView
     {
         private BankServices _bankServices = new BankServices();
 

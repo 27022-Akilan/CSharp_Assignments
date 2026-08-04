@@ -3,7 +3,7 @@
     /// <summary>
     /// Derived from BankAccount
     /// </summary>
-    internal class CheckingAccount : BankAccount
+    public class CheckingAccount : BankAccount
     {
         /// <summary>
         /// Stores the minimum balance that should be maintained.
