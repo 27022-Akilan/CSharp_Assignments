@@ -34,7 +34,7 @@
         public override string WithdrawFromAccount(decimal amount)
         {
             this.Balance -= amount;
-            return "Withdrawn Successfully.";
+            return string.Empty;
         }
     }
 }
