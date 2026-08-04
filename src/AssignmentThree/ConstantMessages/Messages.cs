@@ -69,6 +69,6 @@
         /// Displayed when the input contains non-printable control characters.
         /// </summary>
         public const string CantHaveControlCharacters =
-            "Input contains invalid control characters. Please enter valid text.";
+            "Input contains invalid control characters such as ^A (Think so you pressed the key along with ctrl key). Please enter valid text.";
     }
 }

@@ -6,7 +6,7 @@
     public enum OperationMessage
     {
         /// <summary>
-        ///  Added Successfull message
+        ///  Added Success full message
         /// </summary>
         AddedSuccessFull = 1,
 
@@ -18,7 +18,7 @@
         /// <summary>
         ///  Product is not in the Inventory.
         /// </summary>
-        ProductDoesNotexists,
+        ProductDoesNotExists,
 
         /// <summary>
         /// To Exit te menu.

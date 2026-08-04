@@ -26,7 +26,7 @@
         SearchProduct,
 
         /// <summary>
-        /// To Deisplay products
+        /// To Display products
         /// </summary>
         DisplayProduct,
 

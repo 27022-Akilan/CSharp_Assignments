@@ -15,7 +15,7 @@ namespace Assignments
         /// <param name="args"> Default arguments</param>
         public static void Main(string[] args)
         {
-            InventoryRepository repository = new InventoryRepository();
+            IInventoryRepository repository = new InventoryRepository();
             InventoryService service = new InventoryService(repository);
             InventoryView inventoryView = new InventoryView(service);
 

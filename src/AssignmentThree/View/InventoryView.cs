@@ -24,7 +24,7 @@ namespace AssignmentThree.View
         /// </summary>
         public void DisplayMenu()
         {
-            Console.WriteLine("Inventoy App");
+            Console.WriteLine("Inventory App");
             bool exitFlag = true;
             do
             {

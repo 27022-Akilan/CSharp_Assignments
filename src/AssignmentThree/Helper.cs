@@ -4,9 +4,9 @@ using ConsoleTables;
 namespace AssignmentThree
 {
     /// <summary>
-    /// Helper class
+    ///  A helper class to Get and  validate the input
     /// </summary>
-    internal class Helper
+    public class Helper
     {
         /// <summary>
         /// To get the name of the product from the user.
@@ -65,7 +65,7 @@ namespace AssignmentThree
         /// <summary>
         /// To get the Price in the double.
         /// </summary>
-        /// <param name="productPrice">Gets and returns a price (out paarmeter)</param>
+        /// <param name="productPrice">Gets and returns a price (out parameter)</param>
         /// <returns>True - Got the valid product price || False - Cant get a valid product price (out of tries)</returns>
         public static bool GetPrice(out double productPrice)
         {

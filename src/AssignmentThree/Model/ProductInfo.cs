@@ -40,7 +40,7 @@
         /// Gets or sets the Product Price.
         /// </summary>
         /// <value>
-        /// Conatins the Price of the product.
+        /// Contains the Price of the product.
         /// </value>
         public double Price { get; set; }
 
@@ -48,7 +48,7 @@
         /// Gets or sets the Product Quantity.
         /// </summary>
         /// <value>
-        /// Conatins the Quantity of the product.
+        /// Contains the Quantity of the product.
         /// </value>
         public long Quantity { get; set; }
     }

@@ -8,13 +8,13 @@ namespace AssignmentThree.Service
     /// </summary>
     public class InventoryService
     {
-        private InventoryRepository _productRepo;
+        private IInventoryRepository _productRepo;
 
         /// <summary>
         /// Initializes a new instance of the <see cref="InventoryService"/> class
         /// </summary>
         /// <param name="productRepo">Object of the repository (for DI)</param>
-        public InventoryService(InventoryRepository productRepo)
+        public InventoryService(IInventoryRepository productRepo)
         {
             this._productRepo = productRepo;
         }
