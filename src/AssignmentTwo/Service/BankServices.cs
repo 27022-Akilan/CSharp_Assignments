@@ -45,7 +45,7 @@ namespace AssignmentTwo.Service
                 return $"Your Initial deposit should be greater than {MinimumInitialDepositForServiceAccount}";
             }
 
-            if (amount >= MinimumInitialDepositForCheckingAccount)
+            if (amount > MinimumInitialDepositForCheckingAccount)
             {
                 return string.Empty;
             }
