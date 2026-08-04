@@ -23,7 +23,7 @@
         /// Gets or sets Length
         /// </summary>
         /// <value>
-        /// A <see cref="decimal"/> containing the radius of the circle.
+        /// A <see cref="decimal"/> containing the length of the rectangle.
         /// </value>
         public decimal Length { get; set; }
 
@@ -31,12 +31,12 @@
         /// Gets or sets Breadth
         /// </summary>
         /// <value>
-        /// A <see cref="decimal"/> containing the radius of the circle.
+        /// A <see cref="decimal"/> containing the breadth of the rectangle.
         /// </value>
         public decimal Breadth { get; set; }
 
         /// <summary>
-        /// THis is for calculating area
+        /// This is for calculating area
         /// </summary>
         /// <returns>decimal</returns>
         public override decimal GetArea()

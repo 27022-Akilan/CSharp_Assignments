@@ -8,7 +8,7 @@ namespace AssignmentTwo.Service
     public class EmployeeService
     {
         /// <summary>
-        /// to get the details
+        ///  To Get the details
         /// </summary>
         /// <param name="employee">Employee object</param>
         /// <returns>string</returns>
