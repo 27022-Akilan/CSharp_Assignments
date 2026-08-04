@@ -209,7 +209,14 @@ namespace AssignmentTwo.View
                     return false;
                 }
 
-                Helper.DisplayFailedMessage($"Invalid Amount! Number of Tries Left : {tries}\n");
+                if (amount <= 0)
+                {
+                    Helper.DisplayFailedMessage($"Your amount should be greater than 0! Number of Tries Left : {tries}\n");
+                }
+                else
+                {
+                    Helper.DisplayFailedMessage($"Your input should only contains number! Number of Tries Left : {tries}\n");
+                }
             }
             while (tries > 0);
             return true;

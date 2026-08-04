@@ -22,7 +22,7 @@ namespace AssignmentTwo.View
             {
                 Console.WriteLine("\n----------------------------------------------------" +
                     "\n1.Create and view Circle Details " +
-                    "\n2.Create and View Rectangle Deatails " +
+                    "\n2.Create and View Rectangle Details " +
                     "\n3.Exit " +
                     "\n----------------------------------------------------" +
                     "\nEnter Your Choice ");
