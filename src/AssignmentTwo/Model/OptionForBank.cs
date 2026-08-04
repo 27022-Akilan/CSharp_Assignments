@@ -22,7 +22,7 @@
     }
 
     /// <summary>
-    /// Operation for the 
+    /// Operation for the bank operation
     /// </summary>
     public enum BankOperation
     {
