@@ -1,4 +1,4 @@
-﻿namespace AssignmentTwo.Model
+﻿namespace AssignmentTwo.Model.EnumModels
 {
     /// <summary>
     /// For the main option navigation

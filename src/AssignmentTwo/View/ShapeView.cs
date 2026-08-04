@@ -1,4 +1,4 @@
-﻿using AssignmentTwo.Model;
+﻿using AssignmentTwo.Model.EnumModels;
 using AssignmentTwo.Model.Shapes;
 using AssignmentTwo.Service;
 

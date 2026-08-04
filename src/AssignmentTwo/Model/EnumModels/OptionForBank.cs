@@ -1,4 +1,4 @@
-﻿namespace AssignmentTwo.Model
+﻿namespace AssignmentTwo.Model.EnumModels
 {
     /// <summary>
     /// Options for the Bank

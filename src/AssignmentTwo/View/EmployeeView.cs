@@ -1,5 +1,5 @@
-﻿using AssignmentTwo.Model;
-using AssignmentTwo.Model.Employees;
+﻿using AssignmentTwo.Model.Employees;
+using AssignmentTwo.Model.EnumModels;
 using AssignmentTwo.Service;
 
 namespace AssignmentTwo.View

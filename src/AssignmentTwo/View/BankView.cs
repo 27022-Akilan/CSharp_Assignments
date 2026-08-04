@@ -1,5 +1,5 @@
-﻿using AssignmentTwo.Model;
-using AssignmentTwo.Model.Bank;
+﻿using AssignmentTwo.Model.Bank;
+using AssignmentTwo.Model.EnumModels;
 using AssignmentTwo.Service;
 
 namespace AssignmentTwo.View
