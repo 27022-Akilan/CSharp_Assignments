@@ -61,7 +61,7 @@ namespace AssignmentThree.View
                         }
 
                         OperationMessage message = this._productService.Add(productId, productName, productPrice, productQuantity);
-                        this.GetMessage(message);
+                        this.DisplayMessage(message);
                         break;
 
                     // Edit Product
@@ -241,10 +241,10 @@ namespace AssignmentThree.View
         }
 
         /// <summary>
-        /// To Get The Meaasage for the particular Enum
+        /// To Get The Message for the particular Enum
         /// </summary>
         /// <param name="message">Its the Enum</param>
-        public void GetMessage(OperationMessage message)
+        public void DisplayMessage(OperationMessage message)
         {
             switch (message)
             {

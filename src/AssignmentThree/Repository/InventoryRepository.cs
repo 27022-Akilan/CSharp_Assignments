@@ -19,7 +19,7 @@ namespace AssignmentThree.Repository
         /// <param name="name">Name of the product</param>
         /// <param name="price">Price of the product</param>
         /// <param name="quantity">Quantity of the product</param>
-        /// <returns>Success or Error Specific Meaasage</returns>
+        /// <returns>Success or Error Specific Message</returns>
         public OperationMessage Add(string id, string name, double price, long quantity)
         {
             foreach (ProductInfo product in this._product)
@@ -57,7 +57,7 @@ namespace AssignmentThree.Repository
         /// Updates the Product Information
         /// </summary>
         /// <param name="editedProduct">Holds the entire information of the Edited Product </param>
-        /// <returns>True - If Product Upadated  || False - If Product is not Updated</returns>
+        /// <returns>True - If Product Updated  || False - If Product is not Updated</returns>
         public bool Update(ProductInfo editedProduct)
         {
             foreach (var product in this._product)
@@ -107,7 +107,7 @@ namespace AssignmentThree.Repository
         /// </summary>
         /// <param name="searchName">Product Name to be searched</param>
         /// <param name="searchId">Product Id to be searched</param>
-        /// <returns>Enumerable list of serched products</returns>
+        /// <returns>Enumerable list of searched products</returns>
         public IEnumerable<ProductInfo> Search(string searchName, string searchId)
         {
             return this._product.Where(p => (p.Name != string.Empty && p.Name!.Contains(searchName, StringComparison.OrdinalIgnoreCase)) || p.Id.Equals(searchId))
@@ -115,7 +115,7 @@ namespace AssignmentThree.Repository
         }
 
         /// <summary>
-        ///  To chcek whether the Product List is Empty or not
+        ///  To check whether the Product List is Empty or not
         /// </summary>
         /// <returns>True - If Products are Empty || False - If There products exists</returns>
         public bool IsEmpty()

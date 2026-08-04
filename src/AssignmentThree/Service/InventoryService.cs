@@ -26,7 +26,7 @@ namespace AssignmentThree.Service
         /// <param name="name">Name of the product</param>
         /// <param name="price">Price of the product</param>
         /// <param name="quantity">Quantity of the product</param>
-        /// <returns>True - Successfull Add | False - Cant Add</returns>
+        /// <returns>True - Success full Add | False - Cant Add</returns>
         public OperationMessage Add(string id, string name, double price, long quantity)
         {
             return this._productRepo.Add(id, name, price, quantity);
@@ -36,7 +36,7 @@ namespace AssignmentThree.Service
         /// Checks whether the product exists or not.
         /// </summary>
         /// <param name="id">Id of the product to be searched</param>
-        /// <returns>Product object - If Product Exists || Null - Product deosn't exists</returns>
+        /// <returns>Product object - If Product Exists || Null - Product does not exists</returns>
         public ProductInfo? GetProduct(string id)
         {
             return this._productRepo.ShowProduct(id);
@@ -64,7 +64,7 @@ namespace AssignmentThree.Service
         /// <summary>
         /// This service deletes the product.
         /// </summary>
-        /// <param name="id">Id of the propduct to be deleted</param>
+        /// <param name="id">Id of the product to be deleted</param>
         /// <returns>True - Product Deleted || False - Cant Delete product</returns>
         public bool Delete(string id)
         {
@@ -74,7 +74,7 @@ namespace AssignmentThree.Service
         /// <summary>
         /// Checks whether there are products or not
         /// </summary>
-        /// <returns>True - If its Empty || False - If Products are not empty</returns>
+        /// <returns>True - If Products are Empty || False - If Products are not empty</returns>
         public bool IsEmptyRepository()
         {
             return this._productRepo.IsEmpty();
@@ -85,7 +85,7 @@ namespace AssignmentThree.Service
         /// </summary>
         /// <param name="searchName">Product Name to be searched</param>
         /// <param name="searchId">Product Id to be searched</param>
-        /// <returns>Enumerable list of serched products</returns>
+        /// <returns>Enumerable list of searched products</returns>
         public IEnumerable<ProductInfo> GetIfExists(string searchName, string searchId)
         {
             return this._productRepo.Search(searchName, searchId);
