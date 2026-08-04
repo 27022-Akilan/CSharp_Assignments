@@ -158,11 +158,11 @@ namespace AssignmentTwo.View
         {
             if (accountType == 1)
             {
-                Console.WriteLine("The Initial Deposit should be Greater than 2000");
+                Console.WriteLine($"The Initial Deposit should be Greater than {BankServices.MinimumInitialDepositForServiceAccount}");
             }
             else
             {
-                Console.WriteLine("The Initial Deposit should be Greater than 1000");
+                Console.WriteLine($"The Initial Deposit should be Greater than {BankServices.MinimumInitialDepositForCheckingAccount}");
             }
         }
 
