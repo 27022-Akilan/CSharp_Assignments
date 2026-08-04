@@ -3,7 +3,7 @@
     /// <summary>
     /// Helper class
     /// </summary>
-    internal class Helper
+    public class Helper
     {
         /// <summary>
         /// To check if its a number

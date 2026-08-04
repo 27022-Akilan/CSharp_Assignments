@@ -7,7 +7,7 @@ namespace AssignmentTwo.View
     /// <summary>
     /// Entry point to the view
     /// </summary>
-    internal class ShapeView
+    public class ShapeView
     {
         private ShapeService _service = new ShapeService();
 
