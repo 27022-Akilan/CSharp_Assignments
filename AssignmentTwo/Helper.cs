@@ -62,10 +62,53 @@
         }
 
         /// <summary>
+        /// To get the amount
+        /// </summary>
+        /// <param name="amount">name</param>
+        /// <param name="accountType">Account Type</param>
+        /// <returns>True - Valid Amount False - Invalid Amount</returns>
+        public static bool GetAmount(out decimal amount, int accountType)
+        {
+            int tries = 3;
+            do
+            {
+                tries--;
+                string res = string.Empty;
+                Console.WriteLine("Enter the Amount :");
+                string stringAmount = Console.ReadLine() ?? string.Empty;
+                if (IsNumber(stringAmount, out amount))
+                {
+                    if (IsAmountIsGreaterThanInitialDeposit(amount, accountType))
+                    {
+                        // as it gets the input and valid so the out Of Tries == false
+                        return false;
+                    }
+
+                    if (accountType == 1)
+                    {
+                        res = "Your Deposit is Lesser Than 2000";
+                    }
+                    else
+                    {
+                        res = "Your Deposit is Lesser Than 1000";
+                    }
+                }
+                else
+                {
+                    res = "Your Deposit Should be Number";
+                }
+
+                Helper.DisplayWarningMessage($"Invalid amount!\n{res} \nNumber of Tries Left is:{tries}\n ");
+            }
+            while (tries > 0);
+            return true;
+        }
+
+        /// <summary>
         /// To Check is its a valid minimum Deposit
         /// </summary>
         /// <param name="amount">Amount</param>
-        /// <param name="accountType">Account Type</param>
+        /// <param name="accountType">Account TYpe</param>
         /// <returns>True - Valid Initial Deposit ; False - Invalid Initial Deposit</returns>
         public static bool IsAmountIsGreaterThanInitialDeposit(decimal amount, int accountType)
         {
@@ -88,11 +131,11 @@
         }
 
         /// <summary>
-        ///  Gets and validate the valid Quantity like length, breadth, and radius
+        /// Gets and validates quantity parameters such as length, breadth, and radius.
         /// </summary>
-        /// <param name="s">Parameter to identify whether its to get length, breadth..</param>
-        /// <param name="symbol">Has the value like m(meters), rs(rupees)</param>
-        /// <returns> Decimal number -  Success Quantity ; -1 - Invalid Quantity (Out of tries)</returns>
+        /// <param name="s">Parameter to identify whether it is to get length, breadth, etc.</param>
+        /// <param name="symbol">Has the unit label like m (meters), rs (rupees).</param>
+        /// <returns>Decimal number representing valid quantity; -1 if invalid (out of tries).</returns>
         public static decimal GetValidQuantity(string s, string symbol)
         {
             int tries = 3;
@@ -124,7 +167,7 @@
         }
 
         /// <summary>
-        ///  Displays Failure message in Red color
+        /// Displays Failure message in Red color.
         /// </summary>
         /// <param name="s">Input for failure message</param>
         public static void DisplayFailedMessage(string s)
@@ -135,7 +178,7 @@
         }
 
         /// <summary>
-        ///  Displays Warning message in Yellow color
+        /// Displays Warning message in Yellow color.
         /// </summary>
         /// <param name="s">Input for the Warning message</param>
         public static void DisplayWarningMessage(string s)
@@ -146,7 +189,7 @@
         }
 
         /// <summary>
-        /// Displays Success message in Green color
+        /// Displays Success message in Green color.
         /// </summary>
         /// <param name="s">Input for the success message</param>
         public static void DisplaySuccessMessage(string s)

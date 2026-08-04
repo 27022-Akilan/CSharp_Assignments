@@ -1,7 +1,7 @@
 ﻿namespace AssignmentTwo.Model
 {
     /// <summary>
-    /// Options for the Bank 
+    /// Options for the Bank
     /// </summary>
     public enum OptionForBank
     {
