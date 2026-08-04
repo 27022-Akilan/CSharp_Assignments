@@ -1,7 +1,7 @@
 ﻿namespace AssignmentTwo.Model
 {
     /// <summary>
-    /// Options for the employee 
+    /// Options for the employee
     /// </summary>
     public enum OptionForEmployee
     {
