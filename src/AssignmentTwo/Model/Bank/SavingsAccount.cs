@@ -3,8 +3,18 @@
     /// <summary>
     /// Derived from BankAccount
     /// </summary>
-    internal class SavingsAccount : BankAccount
+    public class SavingsAccount : BankAccount
     {
+        /// <summary>
+        /// Stores the minimum balance that should be maintained.
+        /// </summary>
+        public const decimal MinimumBalance = 2000;
+
+        /// <summary>
+        /// Stores thr minimum deposit that should be deposited while creating an account.
+        /// </summary>
+        public const decimal MinimumInitialDeposit = 2000;
+
         /// <summary>
         /// Initializes a new instance of the <see cref="SavingsAccount"/> class.
         /// </summary>
@@ -17,20 +27,14 @@
         }
 
         /// <summary>
-        /// To whitdraw and its overrided
+        /// To withdraw and this method is overridden method
         /// </summary>
         /// <param name="amount">amount</param>
         /// <returns>Status of withdrawal</returns>
         public override string WithdrawFromAccount(decimal amount)
         {
-            if (this.Balance - amount >= 2000)
-            {
-                this.Balance -= amount;
-                return "Witdrawed Successfully.";
-            }
-
-            return $"Cant Withdraw from your Account because after withdrawing your account should have minimum amount of 2000" +
-                $"\nCurrent Balance :{this.Balance}";
+            this.Balance -= amount;
+            return "Withdrawn Successfully.";
         }
     }
 }

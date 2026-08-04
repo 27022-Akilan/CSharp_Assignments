@@ -16,7 +16,7 @@
         }
 
         /// <summary>
-        /// THis is for calculating Bonus
+        /// This is for calculating Bonus
         /// </summary>
         /// <returns>decimal</returns>
         public override decimal CalculateBonus()

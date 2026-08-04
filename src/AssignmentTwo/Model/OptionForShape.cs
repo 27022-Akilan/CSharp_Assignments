@@ -16,7 +16,7 @@
         CreateAndViewRectangle = 2,
 
         /// <summary>
-        /// Option for Exiting the shpaes menu
+        /// Option for Exiting the shapes menu
         /// </summary>
         Exit = 3,
     }

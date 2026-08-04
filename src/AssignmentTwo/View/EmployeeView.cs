@@ -39,7 +39,7 @@ namespace AssignmentTwo.View
                                 break;
                             }
 
-                            Helper.WriteSuccess(this._employeeService.GetDetails(new Manager(employeeName, employeeSalary)));
+                            Helper.DisplaySuccessMessage(this._employeeService.GetDetails(new Manager(employeeName, employeeSalary)));
                             break;
 
                         // Developer
@@ -50,21 +50,21 @@ namespace AssignmentTwo.View
                                 break;
                             }
 
-                            Helper.WriteSuccess(this._employeeService.GetDetails(new Developer(employeeName, employeeSalary)));
+                            Helper.DisplaySuccessMessage(this._employeeService.GetDetails(new Developer(employeeName, employeeSalary)));
                             break;
 
                         // Exit
                         case OptionForEmployee.Exit:
-                            Helper.WriteSuccess("Exiting!!");
+                            Helper.DisplaySuccessMessage("Exiting!!");
                             break;
                         default:
-                            Helper.WriteFailed("Invalid Choice , You must only between 1 to 3");
+                            Helper.DisplayFailedMessage("Invalid Choice , You must only between 1 to 3");
                             break;
                     }
                 }
                 else
                 {
-                    Helper.WriteFailed("Invalid choice , You must enter a number only");
+                    Helper.DisplayFailedMessage("Invalid choice , You must enter a number only");
                 }
             }
             while (choice != 3);
@@ -76,14 +76,14 @@ namespace AssignmentTwo.View
             bool getNameOutOfTrys = Helper.GetName(out employeeName);
             if (getNameOutOfTrys)
             {
-                Helper.WriteFailed("Due to Out Of Tries, Exiting!");
+                Helper.DisplayFailedMessage("Due to Out Of Tries, Exiting!");
                 return false;
             }
 
             salary = Helper.GetValidQuantity("Salary", "rs");
             if (salary == -1)
             {
-                Helper.WriteFailed("Due to Out Of Tries, Exiting!");
+                Helper.DisplayFailedMessage("Due to Out Of Tries, Exiting!");
                 return false;
             }
 

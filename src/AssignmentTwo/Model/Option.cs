@@ -6,7 +6,7 @@
     public enum Option
     {
         /// <summary>
-        /// option to create and view shape
+        /// Create and view shape
         /// </summary>
         CreateAndViewShape = 1,
 

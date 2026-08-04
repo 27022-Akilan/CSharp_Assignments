@@ -9,7 +9,7 @@
         /// Initializes a new instance of the <see cref="Shape"/> class
         /// </summary>
         /// <param name="color">color</param>
-        /// <param name="name">naem</param>
+        /// <param name="name">name</param>
         public Shape(string name, string color)
         {
             this.Color = color;
@@ -42,7 +42,7 @@
         }
 
         /// <summary>
-        /// this is a abstract method for calculate area
+        /// this is a abstract method for calculating area
         /// </summary>
         /// <returns>long</returns>
         public abstract decimal GetArea();

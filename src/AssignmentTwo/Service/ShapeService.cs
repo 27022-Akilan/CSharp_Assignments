@@ -3,14 +3,14 @@
 namespace AssignmentTwo.Service
 {
     /// <summary>
-    /// THis is a shape service
+    /// This is a shape service
     /// </summary>
     public class ShapeService
     {
         /// <summary>
-        /// this is the method to add the shapes
+        /// To add the shapes
         /// </summary>
-        /// <param name="shape">shape obj</param>
+        /// <param name="shape">Shape object</param>
         /// <returns>string</returns>
         public string GetDetails(Shape shape)
         {

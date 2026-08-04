@@ -5,12 +5,12 @@ using AssignmentTwo.View;
 namespace Assignments
 {
     /// <summary>
-    /// THis is the basse prgrm entry point
+    /// This is the base program's entry point.
     /// </summary>
-    internal class Program
+    public class Program
     {
         /// <summary>
-        /// THis is the entry point
+        /// Its the main method to start the application.
         /// </summary>
         /// <param name="args">Default args</param>
         public static void Main(string[] args)
@@ -20,9 +20,9 @@ namespace Assignments
             do
             {
                 Console.WriteLine("----------------------------------" +
-                    "\n1.Shape " +
-                    "\n2.Employee " +
-                    "\n3.Account " +
+                    "\n1.Shape    - Task 1" +
+                    "\n2.Employee - Task 2 " +
+                    "\n3.Account  - Task 3" +
                     "\n4.Exit" +
                     "\n----------------------------------" +
                     "\nEnter Your Choice");
@@ -43,19 +43,19 @@ namespace Assignments
                             break;
                         case Option.CreateAndViewAccount:
                             BankView viewAccount = new BankView();
-                            viewAccount.Menu();
+                            viewAccount.DisplayMenu();
                             break;
                         case Option.Exit:
-                            Console.WriteLine("Exiting!!");
+                            Helper.DisplaySuccessMessage("Exiting!!");
                             break;
                         default:
-                            Helper.WriteFailed("Enter valid number between 1 to 4");
+                            Helper.DisplayFailedMessage("Enter valid number between 1 to 4");
                             break;
                     }
                 }
                 else
                 {
-                    Helper.WriteFailed("Enter a valid number , you didnt enter a number");
+                    Helper.DisplayFailedMessage("Enter a valid number , you didn't enter a number");
                 }
             }
             while (choice != 4);
