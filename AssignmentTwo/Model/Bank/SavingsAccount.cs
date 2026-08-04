@@ -27,7 +27,7 @@
         }
 
         /// <summary>
-        /// To withdraw and it is overridden
+        /// To withdraw and this method is overridden method
         /// </summary>
         /// <param name="amount">amount</param>
         /// <returns>Status of withdrawal</returns>

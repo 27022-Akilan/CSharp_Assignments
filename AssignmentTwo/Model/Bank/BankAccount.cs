@@ -8,7 +8,7 @@
         /// <summary>
         /// Initializes a new instance of the <see cref="BankAccount"/> class.
         /// </summary>
-        /// <param name="name">THe account holders name</param>
+        /// <param name="name">The account holders name</param>
         /// <param name="accountNumber">The account holder number</param>
         /// <param name="accountType">Type of the account</param>
         /// <param name="initialDeposit">The initial deposit should be put in to create an account</param>
