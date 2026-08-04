@@ -1,5 +1,5 @@
 ﻿using AssignmentTwo;
-using AssignmentTwo.Model;
+using AssignmentTwo.Model.EnumModels;
 using AssignmentTwo.View;
 
 namespace Assignments
