@@ -211,7 +211,7 @@ namespace AssignmentTwo.View
 
                 if (amount <= 0)
                 {
-                    Helper.DisplayFailedMessage($"Your amount should be greater than 0! Number of Tries Left : {tries}\n");
+                    Helper.DisplayFailedMessage($"Your input should be greater than 0! Number of Tries Left : {tries}\n");
                 }
                 else
                 {
