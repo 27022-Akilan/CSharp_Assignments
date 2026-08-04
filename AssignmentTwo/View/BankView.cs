@@ -175,8 +175,8 @@ namespace AssignmentTwo.View
         public bool GetOrPutMoney(BankAccount account, BankOperation bankOperation)
         {
             decimal amount;
-            bool getOrPutAmount = this.GetAmountForDepositOrWithdraw(out amount);
-            if (getOrPutAmount == false)
+            bool getOrPutAmountTriesOut = this.GetAmountForDepositOrWithdraw(out amount, bankOperation);
+            if (getOrPutAmountTriesOut == false)
             {
                 if (bankOperation == BankOperation.Deposit)
                 {
@@ -184,7 +184,16 @@ namespace AssignmentTwo.View
                     return true;
                 }
 
-                Helper.DisplaySuccessMessage(this._bankServices.WithdrawAmount(account, amount));
+                string result = this._bankServices.WithdrawAmount(account, amount);
+                if (result == string.Empty)
+                {
+                    Helper.DisplaySuccessMessage("Withdrawn Successfully");
+                }
+                else
+                {
+                    Helper.DisplayWarningMessage(result);
+                }
+
                 return true;
             }
 
@@ -195,8 +204,9 @@ namespace AssignmentTwo.View
         /// to get amount for deposit and withdraw
         /// </summary>
         /// <param name="amount">to out the amount using</param>
+        /// <param name="bankOperation">Holds Either withdraw or deposit</param>
         /// <returns>bool</returns>
-        public bool GetAmountForDepositOrWithdraw(out decimal amount)
+        public bool GetAmountForDepositOrWithdraw(out decimal amount, BankOperation bankOperation)
         {
             int tries = 3;
             do
@@ -204,7 +214,14 @@ namespace AssignmentTwo.View
                 tries -= 1;
                 Console.WriteLine("Enter the Amount :");
                 string stringAmount = Console.ReadLine() ?? string.Empty;
-                if (Helper.IsNumber(stringAmount, out amount) && (amount > 0))
+                bool isNumber = Helper.IsNumber(stringAmount, out amount);
+                if (!isNumber)
+                {
+                    Helper.DisplayFailedMessage($"Your input should only contains number! Number of Tries Left : {tries}\n");
+                    continue;
+                }
+
+                if (isNumber && amount > 0)
                 {
                     return false;
                 }
@@ -212,10 +229,6 @@ namespace AssignmentTwo.View
                 if (amount <= 0)
                 {
                     Helper.DisplayFailedMessage($"Your amount should be greater than 0! Number of Tries Left : {tries}\n");
-                }
-                else
-                {
-                    Helper.DisplayFailedMessage($"Your input should only contains number! Number of Tries Left : {tries}\n");
                 }
             }
             while (tries > 0);
