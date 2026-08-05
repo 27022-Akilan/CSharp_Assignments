@@ -5,7 +5,7 @@ using AssignmentTwo.View;
 namespace Assignments
 {
     /// <summary>
-    /// This is the base program's entry point.
+    /// This is the applications entry point.
     /// </summary>
     public class Program
     {
@@ -15,11 +15,16 @@ namespace Assignments
         /// <param name="args">Default args</param>
         public static void Main(string[] args)
         {
+            ShapeView viewShape = new ShapeView();
+            EmployeeView viewEmployee = new EmployeeView();
+            BankView viewAccount = new BankView();
+
             Option option;
             int choice;
             do
             {
-                Console.WriteLine("----------------------------------" +
+                Console.WriteLine(
+                    "----------------------------------" +
                     "\n1.Shape    - Task 1" +
                     "\n2.Employee - Task 2 " +
                     "\n3.Account  - Task 3" +
@@ -34,15 +39,12 @@ namespace Assignments
                     switch (option)
                     {
                         case Option.CreateAndViewShape:
-                            ShapeView viewShape = new ShapeView();
-                            viewShape.Menu();
+                            viewShape.DisplayMenu();
                             break;
                         case Option.CreateAndViewEmployee:
-                            EmployeeView viewEmployee = new EmployeeView();
-                            viewEmployee.Menu();
+                            viewEmployee.DisplayMenu();
                             break;
                         case Option.CreateAndViewAccount:
-                            BankView viewAccount = new BankView();
                             viewAccount.DisplayMenu();
                             break;
                         case Option.Exit:

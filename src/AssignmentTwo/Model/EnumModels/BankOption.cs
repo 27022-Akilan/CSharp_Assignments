@@ -3,7 +3,7 @@
     /// <summary>
     /// Options for the Bank
     /// </summary>
-    public enum OptionForBank
+    public enum BankOption
     {
         /// <summary>
         /// Option to create and view Savings account.

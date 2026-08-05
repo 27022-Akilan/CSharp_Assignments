@@ -3,7 +3,7 @@
     /// <summary>
     /// Option for different shapes
     /// </summary>
-    public enum OptionForShape
+    public enum ShapeOption
     {
         /// <summary>
         /// Option for creating viewing circle

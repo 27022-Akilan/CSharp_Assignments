@@ -14,13 +14,14 @@ namespace AssignmentTwo.View
         /// <summary>
         /// Entry point to service
         /// </summary>
-        public void Menu()
+        public void DisplayMenu()
         {
-            OptionForEmployee employeeOption;
+            EmployeeOption employeeOption;
             int choice;
             do
             {
-                Console.WriteLine("--------------------------------------" +
+                Console.WriteLine(
+                    "--------------------------------------" +
                     "\n1.Create and view Manager " +
                     "\n2.Create and View Developer " +
                     "\n3.Exit " +
@@ -29,11 +30,11 @@ namespace AssignmentTwo.View
                 string input = Console.ReadLine() ?? string.Empty;
                 if (int.TryParse(input, out choice))
                 {
-                    employeeOption = (OptionForEmployee)choice;
+                    employeeOption = (EmployeeOption)choice;
                     switch (employeeOption)
                     {
                         // Manager
-                        case OptionForEmployee.CreateAndViewManager:
+                        case EmployeeOption.CreateAndViewManager:
                             if (!GetNameAndSalary(out string employeeName, out decimal employeeSalary))
                             {
                                 break;
@@ -43,7 +44,7 @@ namespace AssignmentTwo.View
                             break;
 
                         // Developer
-                        case OptionForEmployee.CreateAndViewDeveloper:
+                        case EmployeeOption.CreateAndViewDeveloper:
 
                             if (!GetNameAndSalary(out employeeName, out employeeSalary))
                             {
@@ -54,7 +55,7 @@ namespace AssignmentTwo.View
                             break;
 
                         // Exit
-                        case OptionForEmployee.Exit:
+                        case EmployeeOption.Exit:
                             Helper.DisplaySuccessMessage("Exiting!!");
                             break;
                         default:
@@ -73,8 +74,8 @@ namespace AssignmentTwo.View
         private static bool GetNameAndSalary(out string employeeName, out decimal salary)
         {
             salary = 0;
-            bool getNameOutOfTrys = Helper.GetName(out employeeName);
-            if (getNameOutOfTrys)
+            bool getName = Helper.GetName(out employeeName);
+            if (!getName)
             {
                 Helper.DisplayFailedMessage("Due to Out Of Tries, Exiting!");
                 return false;

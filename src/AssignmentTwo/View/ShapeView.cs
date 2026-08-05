@@ -12,15 +12,16 @@ namespace AssignmentTwo.View
         private ShapeService _service = new ShapeService();
 
         /// <summary>
-        /// Entry point into service
+        ///  To display the menu
         /// </summary>
-        public void Menu()
+        public void DisplayMenu()
         {
-            OptionForShape shapeOption;
+            ShapeOption shapeOption;
             int choice;
             do
             {
-                Console.WriteLine("\n----------------------------------------------------" +
+                Console.WriteLine(
+                    "\n----------------------------------------------------" +
                     "\n1.Create and view Circle Details " +
                     "\n2.Create and View Rectangle Details " +
                     "\n3.Exit " +
@@ -30,11 +31,11 @@ namespace AssignmentTwo.View
                 string input = Console.ReadLine() ?? string.Empty;
                 if (int.TryParse(input, out choice))
                 {
-                    shapeOption = (OptionForShape)choice;
+                    shapeOption = (ShapeOption)choice;
                     switch (shapeOption)
                     {
                         // Circle
-                        case OptionForShape.CreateAndViewCircle:
+                        case ShapeOption.CreateAndViewCircle:
                             string? color = GetColor();
                             if (color == "-1")
                             {
@@ -53,7 +54,7 @@ namespace AssignmentTwo.View
                             break;
 
                         // Rectangle
-                        case OptionForShape.CreateAndViewRectangle:
+                        case ShapeOption.CreateAndViewRectangle:
                             color = GetColor();
                             if (color == "-1")
                             {
@@ -77,7 +78,7 @@ namespace AssignmentTwo.View
                             shape = new Rectangle("Rectangle", color, isValidLength, isValidBreadth);
                             Helper.DisplaySuccessMessage(this._service.GetDetails(shape));
                             break;
-                        case OptionForShape.Exit:
+                        case ShapeOption.Exit:
                             Helper.DisplaySuccessMessage("Exiting!!!!");
                             break;
                         default:
@@ -99,11 +100,11 @@ namespace AssignmentTwo.View
         /// <returns>returns valid color else -1 for out of tries</returns>
         private static string GetColor()
         {
-            int trys = 3;
+            int tries = 3;
             string color;
             do
             {
-                trys--;
+                tries--;
                 Console.WriteLine("Enter the color");
                 color = Console.ReadLine() ?? string.Empty;
                 if (Helper.IsValidWord(color))
@@ -111,9 +112,9 @@ namespace AssignmentTwo.View
                     return color;
                 }
 
-                Helper.DisplayWarningMessage($"Invalid Color. No.Of tries left is {trys}");
+                Helper.DisplayWarningMessage($"Invalid Color. No.Of tries left is {tries}");
             }
-            while (trys != 0);
+            while (tries != 0);
             return "-1";
         }
     }
