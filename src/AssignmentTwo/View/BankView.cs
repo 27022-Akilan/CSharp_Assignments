@@ -5,14 +5,14 @@ using AssignmentTwo.Service;
 namespace AssignmentTwo.View
 {
     /// <summary>
-    /// To view Account
+    /// To view Account and Account operations
     /// </summary>
     public class BankView
     {
         private BankServices _bankServices = new BankServices();
 
         /// <summary>
-        /// Menu for accessing accounts
+        /// Displays menu for accessing accounts
         /// </summary>
         public void DisplayMenu()
         {
@@ -98,9 +98,9 @@ namespace AssignmentTwo.View
         }
 
         /// <summary>
-        /// Operations Deposit,Withdraw,print
+        /// Displays menu for operations on the account
         /// </summary>
-        /// <param name="account">account object</param>
+        /// <param name="account">Account object</param>
         public void DisplaySubMenu(BankAccount account)
         {
             BankOperation bankOperation;
@@ -155,7 +155,7 @@ namespace AssignmentTwo.View
         }
 
         /// <summary>
-        /// To print the initial amount that should be deposited for creation
+        /// To print the initial amount that should be deposited for creating the particular account
         /// </summary>
         /// <param name="accountType">Type of the account (savings or checking)</param>
         public void PrintInitialDepositValue(int accountType)
@@ -171,11 +171,11 @@ namespace AssignmentTwo.View
         }
 
         /// <summary>
-        /// to withdraw and deposit amount
+        /// To withdraw and deposit amount into account
         /// </summary>
-        /// <param name="account">account object</param>
-        /// <param name="bankOperation">choice for deposit or withdraw</param>
-        /// <returns>bool</returns>
+        /// <param name="account">Account object</param>
+        /// <param name="bankOperation">Choice for deposit or withdraw</param>
+        /// <returns>Bool - true if transaction succeeds | false - if transaction fails</returns>
         public bool GetOrPutMoney(BankAccount account, BankOperation bankOperation)
         {
             decimal amount;
@@ -204,10 +204,10 @@ namespace AssignmentTwo.View
         }
 
         /// <summary>
-        /// to get amount for deposit and withdraw
+        /// To read amount for deposit and withdraw from the user and validate
         /// </summary>
         /// <param name="amount">To return the amount using out parameter</param>
-        /// <returns>bool</returns>
+        /// <returns>Bool - true if valid amount | false if invalid amount</returns>
         public bool GetAmountForDepositOrWithdraw(out decimal amount)
         {
             int tries = 3;
@@ -235,11 +235,11 @@ namespace AssignmentTwo.View
         }
 
         /// <summary>
-        /// To get the amount
+        /// To get the amount from the user 
         /// </summary>
-        /// <param name="amount">amount</param>
+        /// <param name="amount">To get, validate and return Amount through out parameter</param>
         /// <param name="accountType">Account Type</param>
-        /// <returns>True - Valid Amount False - Invalid Amount</returns>
+        /// <returns>True - Valid Amount | False - Invalid Amount</returns>
         public bool GetAmount(out decimal amount, int accountType)
         {
             int tries = 3;

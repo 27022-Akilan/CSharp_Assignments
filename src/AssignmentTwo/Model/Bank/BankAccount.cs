@@ -65,7 +65,7 @@
         }
 
         /// <summary>
-        ///  A method which should be implemented in the derived class 
+        ///  A withdraw method which should be implemented in the derived class
         /// </summary>
         /// <param name="amount">Amount to be withdrawn</param>
         /// <returns>String that holds the result of the withdrawal</returns>

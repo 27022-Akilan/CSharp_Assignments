@@ -1,16 +1,16 @@
 ﻿namespace AssignmentTwo.Model.Employees
 {
     /// <summary>
-    /// Abstract class for Employee
+    /// Represents a generic Employee with basic properties and methods.
     /// </summary>
     public abstract class Employee
     {
         /// <summary>
         /// Initializes a new instance of the <see cref="Employee"/> class
         /// </summary>
-        /// <param name="name">name</param>
-        /// <param name="salary">salary</param>
-        /// <param name="designation">designation</param>
+        /// <param name="name">Name of the Employee</param>
+        /// <param name="salary">Salary of the Employee</param>
+        /// <param name="designation">Designation of the Employee</param>
         public Employee(string name, decimal salary, string designation)
         {
             this.Name = name;
@@ -43,7 +43,7 @@
         public string Designation { get; set; }
 
         /// <summary>
-        /// Prints the details of the class
+        ///  To print the details of the Employee
         /// </summary>
         /// <returns>string</returns>
         public string PrintDetails()
@@ -52,9 +52,9 @@
         }
 
         /// <summary>
-        /// this is an abstract method for calculating bonus
+        ///  An abstract method for calculating bonus
         /// </summary>
-        /// <returns>decimal</returns>
+        /// <returns>Decimal - Returns the Bonus of the Employee</returns>
         public abstract decimal CalculateBonus();
     }
 }
