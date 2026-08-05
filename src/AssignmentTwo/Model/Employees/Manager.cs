@@ -16,7 +16,7 @@
         }
 
         /// <summary>
-        /// TTo calculate bonus of the Manager
+        /// To calculate bonus of the Manager
         /// </summary>
         /// <returns>Decimal - Returns the Bonus of the Manager</returns>
         public override decimal CalculateBonus()
