@@ -6,16 +6,6 @@
     public class SavingsAccount : BankAccount
     {
         /// <summary>
-        /// Stores the minimum balance that should be maintained.
-        /// </summary>
-        public const decimal MinimumBalance = 2000;
-
-        /// <summary>
-        /// Stores thr minimum deposit that should be deposited while creating an account.
-        /// </summary>
-        public const decimal MinimumInitialDeposit = 2000;
-
-        /// <summary>
         /// Initializes a new instance of the <see cref="SavingsAccount"/> class.
         /// </summary>
         /// <param name="name">name</param>
@@ -34,7 +24,7 @@
         public override string WithdrawFromAccount(decimal amount)
         {
             this.Balance -= amount;
-            return "Withdrawn Successfully.";
+            return string.Empty;
         }
     }
 }

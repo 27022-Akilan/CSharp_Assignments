@@ -3,7 +3,7 @@
     /// <summary>
     /// Options for the employee
     /// </summary>
-    public enum OptionForEmployee
+    public enum EmployeeOption
     {
         /// <summary>
         /// Create and view manager

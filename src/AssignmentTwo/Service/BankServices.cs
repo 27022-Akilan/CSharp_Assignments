@@ -10,7 +10,7 @@ namespace AssignmentTwo.Service
         /// <summary>
         /// Minimum Initial deposit for the Savings account
         /// </summary>
-        public const decimal MinimumInitialDepositForServiceAccount = 2000;
+        public const decimal MinimumInitialDepositForSavingsAccount = 2000;
 
         /// <summary>
         /// Minimum Initial deposit for the checking account
@@ -20,7 +20,7 @@ namespace AssignmentTwo.Service
         /// <summary>
         /// Minimum balance for the Savings account
         /// </summary>
-        public const decimal MinimumBalanceForServiceAccount = 2000;
+        public const decimal MinimumBalanceForSavingsAccount = 2000;
 
         /// <summary>
         /// Minimum balance for the Checking account
@@ -33,16 +33,16 @@ namespace AssignmentTwo.Service
         /// <param name="amount">Initial deposit amount</param>
         /// <param name="accountType">1- Refers to Savings Account | 2- Refers to Checking Account</param>
         /// <returns>Empty string - If the validation succeeds | Validation error message - If Validation fails</returns>
-        public static string IsAmountIsGreaterThanInitialDeposit(decimal amount, int accountType)
+        public static string IsValidInitialDeposit(decimal amount, int accountType)
         {
             if (accountType == 1)
             {
-                if (amount >= MinimumInitialDepositForServiceAccount)
+                if (amount >= MinimumInitialDepositForSavingsAccount)
                 {
                     return string.Empty;
                 }
 
-                return $"Your Initial deposit should be greater than {MinimumInitialDepositForServiceAccount}";
+                return $"Your Initial deposit should be greater than {MinimumInitialDepositForSavingsAccount}";
             }
 
             if (amount > MinimumInitialDepositForCheckingAccount)
@@ -74,12 +74,22 @@ namespace AssignmentTwo.Service
         {
             if (account.Balance - withdrawMoney < 0)
             {
-                return $"Insufficient Balance {account.Balance}";
+                return $"Insufficient Balance Your balance is {account.Balance}";
             }
 
-            if (account.Balance - withdrawMoney < MinimumBalanceForServiceAccount)
+            if (account is SavingsAccount)
             {
-                return $"Insufficient balance , Your account should always have a minimum balance of {MinimumBalanceForServiceAccount}";
+                if (account.Balance - withdrawMoney < MinimumBalanceForSavingsAccount)
+                {
+                    return $"Insufficient balance , Your account should always have a minimum balance of {MinimumBalanceForSavingsAccount}";
+                }
+            }
+            else
+            {
+                if (account.Balance - withdrawMoney < MinimumBalanceForCheckingAccount)
+                {
+                    return $"Insufficient balance , Your account should always have a minimum balance of {MinimumBalanceForCheckingAccount}";
+                }
             }
 
             return account.WithdrawFromAccount(withdrawMoney);

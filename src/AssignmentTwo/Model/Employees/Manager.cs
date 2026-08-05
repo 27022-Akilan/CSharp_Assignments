@@ -21,8 +21,8 @@
         /// <returns>decimal</returns>
         public override decimal CalculateBonus()
         {
-            double rate = 0.1;
-            return (this.Salary * (decimal)rate) + this.Salary;
+            decimal rate = 0.1m;
+            return (this.Salary * rate) + this.Salary;
         }
     }
 }

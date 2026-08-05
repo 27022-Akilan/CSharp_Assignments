@@ -52,13 +52,13 @@
                 name = Console.ReadLine() ?? string.Empty;
                 if (name != string.Empty && !string.IsNullOrWhiteSpace(name) && IsValidWord(name))
                 {
-                    return false;
+                    return true;
                 }
 
                 Helper.DisplayWarningMessage($"Invalid name! Number of Tries Left is:{tries}\n");
             }
             while (tries > 0);
-            return true;
+            return false;
         }
 
         /// <summary>
