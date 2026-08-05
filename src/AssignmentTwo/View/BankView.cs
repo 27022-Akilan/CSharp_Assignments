@@ -235,7 +235,7 @@ namespace AssignmentTwo.View
         }
 
         /// <summary>
-        /// To get the amount from the user 
+        /// To get the amount from the user
         /// </summary>
         /// <param name="amount">To get, validate and return Amount through out parameter</param>
         /// <param name="accountType">Account Type</param>
