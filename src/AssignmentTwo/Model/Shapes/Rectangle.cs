@@ -1,17 +1,17 @@
 ﻿namespace AssignmentTwo.Model.Shapes
 {
     /// <summary>
-    /// This is a Rectangle class inherits Shape
+    /// Represents Rectangle with additional properties and methods and also derived from the Shape
     /// </summary>
     public class Rectangle : Shape
     {
         /// <summary>
         /// Initializes a new instance of the <see cref="Rectangle"/> class.
         /// </summary>
-        /// <param name="color">color</param>
-        /// <param name="l">len</param>
-        /// <param name="b">breadth</param>
-        /// <param name="name">name</param>
+        /// <param name="color">Color of the Rectangle</param>
+        /// <param name="l">Length of the rectangle</param>
+        /// <param name="b">Breadth of the rectangle</param>
+        /// <param name="name">Name of the shape</param>
         public Rectangle(string name, string color, decimal l, decimal b)
             : base(name, color)
         {
@@ -36,9 +36,9 @@
         public decimal Breadth { get; set; }
 
         /// <summary>
-        /// This is for calculating area
+        /// To calculate area of the Rectangle
         /// </summary>
-        /// <returns>decimal</returns>
+        /// <returns>Decimal - Returns the area of the Rectangle</returns>
         public override decimal GetArea()
         {
             return this.Length * this.Breadth;

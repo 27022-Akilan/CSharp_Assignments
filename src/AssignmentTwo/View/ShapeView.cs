@@ -5,14 +5,14 @@ using AssignmentTwo.Service;
 namespace AssignmentTwo.View
 {
     /// <summary>
-    /// Entry point to the view
+    /// To view and access Shapes
     /// </summary>
     public class ShapeView
     {
         private ShapeService _service = new ShapeService();
 
         /// <summary>
-        ///  To display the menu
+        ///  Displays the Menu for the Shapes and their operations
         /// </summary>
         public void DisplayMenu()
         {
@@ -95,9 +95,9 @@ namespace AssignmentTwo.View
         }
 
         /// <summary>
-        /// To get the Color
+        /// Gets Color for the shape
         /// </summary>
-        /// <returns>returns valid color else -1 for out of tries</returns>
+        /// <returns>String - "valid_Color" if the color is valid | "-1" if the color is invalid</returns>
         private static string GetColor()
         {
             int tries = 3;

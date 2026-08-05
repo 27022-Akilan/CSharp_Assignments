@@ -1,27 +1,27 @@
 ﻿namespace AssignmentTwo.Model.EnumModels
 {
     /// <summary>
-    /// For the main option navigation
+    /// Option for navigating in main menu
     /// </summary>
     public enum Option
     {
         /// <summary>
-        /// Create and view shape
+        /// Option to Create and view shape
         /// </summary>
         CreateAndViewShape = 1,
 
         /// <summary>
-        /// Create and view Employee
+        /// Option to Create and view Employee
         /// </summary>
         CreateAndViewEmployee = 2,
 
         /// <summary>
-        /// create and view Account
+        /// Option to create and view Account
         /// </summary>
         CreateAndViewAccount = 3,
 
         /// <summary>
-        /// To get exit of the menu
+        /// Option to Exit
         /// </summary>
         Exit = 4,
     }

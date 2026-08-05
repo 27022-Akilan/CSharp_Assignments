@@ -1,7 +1,7 @@
 ﻿namespace AssignmentTwo.Model.Bank
 {
     /// <summary>
-    /// Derived from BankAccount
+    /// Represents Checking account with additional properties and methods and also derived from the BankAccount
     /// </summary>
     public class CheckingAccount : BankAccount
     {

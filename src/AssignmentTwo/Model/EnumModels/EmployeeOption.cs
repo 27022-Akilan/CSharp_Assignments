@@ -1,22 +1,22 @@
 ﻿namespace AssignmentTwo.Model.EnumModels
 {
     /// <summary>
-    /// Options for the employee
+    /// Option for the employee selection
     /// </summary>
     public enum EmployeeOption
     {
         /// <summary>
-        /// Create and view manager
+        /// Option to Create and view manager
         /// </summary>
         CreateAndViewManager = 1,
 
         /// <summary>
-        /// create and view developer
+        /// Option to create and view developer
         /// </summary>
         CreateAndViewDeveloper = 2,
 
         /// <summary>
-        /// exit from employee
+        /// Option to exit
         /// </summary>
         Exit = 3,
     }

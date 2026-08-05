@@ -8,10 +8,10 @@ namespace AssignmentTwo.Service
     public class ShapeService
     {
         /// <summary>
-        /// To add the shapes
+        /// To Get the entire details of the Shape
         /// </summary>
         /// <param name="shape">Shape object</param>
-        /// <returns>string</returns>
+        /// <returns>String - Holds the entire information about the Shape</returns>
         public string GetDetails(Shape shape)
         {
             return shape.PrintDetails();

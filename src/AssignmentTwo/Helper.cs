@@ -8,13 +8,13 @@
         /// <summary>
         /// To check if its a number
         /// </summary>
-        /// <param name="number">string num</param>
-        /// <param name="res">res to be outed</param>
-        /// <returns>bool</returns>
-        public static bool IsNumber(string number, out decimal res)
+        /// <param name="number">sNumber as string</param>
+        /// <param name="result">Validated Number returned through out parameter</param>
+        /// <returns>bool - true if valid | false if invalid</returns>
+        public static bool IsNumber(string number, out decimal result)
         {
-            res = 0;
-            if (number != string.Empty && !string.IsNullOrWhiteSpace(number) && decimal.TryParse(number, out res))
+            result = 0;
+            if (number != string.Empty && !string.IsNullOrWhiteSpace(number) && decimal.TryParse(number, out result))
             {
                 return true;
             }
@@ -23,10 +23,10 @@
         }
 
         /// <summary>
-        /// Check Valid color or not
+        /// Checks whether the color is valid or not
         /// </summary>
-        /// <param name="word">color</param>
-        /// <returns>True - Valid ; False - Invalid word</returns>
+        /// <param name="word">Color for the shape</param>
+        /// <returns>True - Valid color ; False - Invalid color</returns>
         public static bool IsValidWord(string word)
         {
             if (string.IsNullOrWhiteSpace(word))
@@ -38,10 +38,10 @@
         }
 
         /// <summary>
-        /// Getting name and initial deposit
+        /// Gets name
         /// </summary>
-        /// <param name="name">name</param>
-        /// <returns>True - Success, False - Out Of tries </returns>
+        /// <param name="name">Name and returned through out parameter </param>
+        /// <returns>bool True - Success | False - Out Of tries </returns>
         public static bool GetName(out string name)
         {
             int tries = 3;

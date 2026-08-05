@@ -5,14 +5,14 @@ using AssignmentTwo.Service;
 namespace AssignmentTwo.View
 {
     /// <summary>
-    /// to view the employees
+    /// To view the employees
     /// </summary>
     public class EmployeeView
     {
         private EmployeeService _employeeService = new EmployeeService();
 
         /// <summary>
-        /// Entry point to service
+        /// Displays the Menu for accessing Employee operations
         /// </summary>
         public void DisplayMenu()
         {

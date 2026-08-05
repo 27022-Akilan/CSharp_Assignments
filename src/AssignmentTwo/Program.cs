@@ -5,14 +5,14 @@ using AssignmentTwo.View;
 namespace Assignments
 {
     /// <summary>
-    /// This is the applications entry point.
+    /// Applications entry point.
     /// </summary>
     public class Program
     {
         /// <summary>
-        /// Its the main method to start the application.
+        /// Entry method where application starts
         /// </summary>
-        /// <param name="args">Default args</param>
+        /// <param name="args">Default arguments</param>
         public static void Main(string[] args)
         {
             ShapeView viewShape = new ShapeView();

@@ -1,16 +1,16 @@
 ﻿namespace AssignmentTwo.Model.Shapes
 {
     /// <summary>
-    /// This is a circle class inherits Shape
+    /// Represents Circle with additional properties and methods and also derived from the Shape
     /// </summary>
     public class Circle : Shape
     {
         /// <summary>
         /// Initializes a new instance of the <see cref="Circle"/> class.
         /// </summary>
-        /// <param name="color">color</param>
-        /// <param name="radius">radius</param>
-        /// <param name="name">shape</param>
+        /// <param name="color">Color of the circle</param>
+        /// <param name="radius">Radius of the Circle</param>
+        /// <param name="name">Name of the Shape</param>
         public Circle(string name, string color, decimal radius)
             : base(name, color)
         {
@@ -26,9 +26,9 @@
         public decimal Radius { get; set; }
 
         /// <summary>
-        /// This is for calculating area
+        /// To calculate area of the circle
         /// </summary>
-        /// <returns>decimal</returns>
+        /// <returns>Decimal - Returns the area of the circle</returns>
         public override decimal GetArea()
         {
             return (decimal)Math.PI * this.Radius * this.Radius;
