@@ -39,7 +39,7 @@
         public string? Name { get; set; }
 
         /// <summary>
-        /// Gets or sets phonr
+        /// Gets or sets Phonr
         /// </summary>
         /// <value>
         /// A <see cref="string"/> containing the name of the product.
