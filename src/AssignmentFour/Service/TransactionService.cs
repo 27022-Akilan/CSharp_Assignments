@@ -1,9 +1,10 @@
-﻿using AssignmentFour.Repository;
+﻿using System.Transactions;
+using AssignmentFour.Repository;
 
 namespace AssignmentFour.Service
 {
     /// <summary>
-    /// To provide services to the Expense tracker application
+    /// Provides services to the Expense tracker application
     /// </summary>
     public class TransactionService
     {
@@ -16,6 +17,11 @@ namespace AssignmentFour.Service
         public TransactionService(IRepository repository)
         {
             this._repository = repository;
+        }
+
+        public string AddTransaction(Transaction transaction)
+        {
+            
         }
     }
 }
