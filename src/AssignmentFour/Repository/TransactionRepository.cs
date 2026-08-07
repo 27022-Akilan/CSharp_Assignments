@@ -49,5 +49,56 @@ namespace AssignmentFour.Repository
                 }
             }
         }
+
+        /// <summary>
+        /// To delete the Transaction using Id
+        /// </summary>
+        /// <param name="transactionId">Id of the transaction to be deleted</param>
+        /// <returns>bool - True if the transaction found and deleted | False if the transaction cant be deleted</returns>
+        public bool DeleteById(Guid transactionId)
+        {
+            foreach (var transaction in this._transactions)
+            {
+                if (transaction.TransactionId == transactionId)
+                {
+                    this._transactions.Remove(transaction);
+                    return true;
+                }
+            }
+
+            return false;
+        }
+
+        /// <summary>
+        ///  Shows the entire transactions
+        /// </summary>
+        /// <returns>A clone </returns>
+        public IEnumerable<Transaction> GetAll()
+        {
+            List<Transaction> transactionList = new List<Transaction>();
+            foreach (var transaction in this._transactions)
+            {
+                if (transaction is Income)
+                {
+                    transactionList.Add(new Income(
+                                                transaction.TransactionId,
+                                                transaction.Amount,
+                                                transaction.Description,
+                                                transaction.Date,
+                                                ((Income)transaction).Source));
+                }
+                else
+                {
+                    transactionList.Add(new Income(
+                                                transaction.TransactionId,
+                                                transaction.Amount,
+                                                transaction.Description,
+                                                transaction.Date,
+                                                ((Expense)transaction).Category));
+                }
+            }
+
+            return transactionList;
+        }
     }
 }
