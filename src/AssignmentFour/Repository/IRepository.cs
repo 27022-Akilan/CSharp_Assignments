@@ -19,7 +19,7 @@ namespace AssignmentFour.Repository
         /// </summary>
         /// <param name="transaction">Transaction object</param>
         /// <returns>bool True - Updated successfully | False - Cannot Update</returns>
-        public bool Update(Transaction transaction);
+        public bool UpdateTransaction(Transaction transaction);
 
         /// <summary>
         /// Deletes a transaction by the ID
@@ -33,5 +33,12 @@ namespace AssignmentFour.Repository
         /// </summary>
         /// <returns>Enumerable List of transactions which cant be modified</returns>
         public IEnumerable<Transaction> ShowAll();
+
+        /// <summary>
+        /// Gets the transaction object using the Transaction Id
+        /// </summary>
+        /// <param name="id">Id of the transaction</param>
+        /// <returns>Transaction Object</returns>
+        public Transaction? GetOne(Guid id);
     }
 }

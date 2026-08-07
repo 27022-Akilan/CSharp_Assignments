@@ -8,7 +8,7 @@ namespace AssignmentFour.Repository
     public class TransactionRepository : IRepository
     {
         // private Transaction? _transaction;
-        private List<Transaction> _transactions = new List<Transaction>();
+        private List<Transaction> _transactionList = new List<Transaction>();
 
         /// <summary>
         /// Adds the transaction to the repository
@@ -17,7 +17,7 @@ namespace AssignmentFour.Repository
         /// <returns>A message that tells about the </returns>
         public string Add(Transaction transaction)
         {
-            this._transactions.Add(transaction);
+            this._transactionList.Add(transaction);
 
             return Messages.AddSuccess;
         }
@@ -26,10 +26,10 @@ namespace AssignmentFour.Repository
         /// To update the existing Transaction
         /// </summary>
         /// <param name="transaction">Edited details of the Transaction</param>
-        /// <returns>boo True - Updated Successfully | False - Cannot Update</returns>
-        public bool Update(Transaction transaction)
+        /// <returns>bool True - Updated Successfully | False - Cannot Update</returns>
+        public bool UpdateTransaction(Transaction transaction)
         {
-            foreach (var field in this._transactions)
+            foreach (var field in this._transactionList)
             {
                 if (field.TransactionId == transaction.TransactionId)
                 {
@@ -60,16 +60,43 @@ namespace AssignmentFour.Repository
         /// <returns>bool - True if the transaction found and deleted | False if the transaction cant be deleted</returns>
         public bool DeleteById(Guid transactionId)
         {
-            foreach (var transaction in this._transactions)
+            foreach (var transaction in this._transactionList)
             {
                 if (transaction.TransactionId == transactionId)
                 {
-                    this._transactions.Remove(transaction);
+                    this._transactionList.Remove(transaction);
                     return true;
                 }
             }
 
             return false;
+        }
+
+        /// <summary>
+        ///  Shows the Transaction of the desired transaction Id
+        /// </summary>
+        /// <param name="transactionId">Id of the Transaction to be shown</param>
+        /// <returns>A Transaction if the Id exists or else null</returns>
+        public Transaction? GetOne(Guid transactionId)
+        {
+            Transaction? match = this._transactionList.Where(t => t.TransactionId == transactionId).FirstOrDefault();
+
+            if (match == null)
+            {
+                return null;
+            }
+
+            if (match is Income)
+            {
+                return new Income(match.TransactionId, match.Amount, match.Description, match.Date, ((Income)match).Source);
+            }
+
+            if (match is Expense)
+            {
+                return new Expense(match.TransactionId, match.Amount, match.Description, match.Date, ((Expense)match).Category);
+            }
+
+            return null;
         }
 
         /// <summary>
@@ -79,7 +106,7 @@ namespace AssignmentFour.Repository
         public IEnumerable<Transaction> ShowAll()
         {
             List<Transaction> transactionList = new List<Transaction>();
-            foreach (var transaction in this._transactions)
+            foreach (var transaction in this._transactionList)
             {
                 if (transaction is Income)
                 {
@@ -102,6 +129,16 @@ namespace AssignmentFour.Repository
             }
 
             return transactionList;
+        }
+
+        /// <summary>
+        /// Returns the Guid of the transaction by the index
+        /// </summary>
+        /// <param name="index">Holds the index where the Transaction resides in List</param>
+        /// <returns>Guid of that serial number</returns>
+        public Guid GetGuid(int index)
+        {
+            return this._transactionList[index].TransactionId;
         }
     }
 }
