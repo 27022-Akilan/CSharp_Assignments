@@ -7,7 +7,7 @@ using AssignmentFour.Repository;
 namespace AssignmentFour.Service
 {
     /// <summary>
-    /// Provides services to the Expense tracker application
+    /// To provide services to the Expense tracker application
     /// </summary>
     public class TransactionService
     {

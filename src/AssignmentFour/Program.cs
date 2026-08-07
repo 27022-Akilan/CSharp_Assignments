@@ -1,14 +1,20 @@
 ﻿using AssignmentFour.Repository;
-using AssignmentFour.Service;
-using AssignmentFour.View;
 
 namespace Assignments
 {
-    internal class Program
+    /// <summary>
+    /// To start the application
+    /// </summary>
+    public class Program
     {
-        static void Main(string[] args)
+        /// <summary>
+        /// Entry point for the Application.
+        /// </summary>
+        /// <param name="args">Default arguments</param>
+        public static void Main(string[] args)
         {
-            Console.WriteLine("Hello, World!");
+            IRepository repository = new TransactionRepository();
+
         }
     }
 }
