@@ -54,13 +54,13 @@ namespace AssignmentFour.Model
         /// <value>
         /// Hold the description
         /// </value>
-        public string? Description { get; set; }
+        public string Description { get; set; }
 
         /// <summary>
         /// Gets or sets the date
         /// </summary>
         /// <value>
-        /// Holds the Date 
+        /// Holds the Date
         /// </value>
         public DateTime Date { get; set; }
     }
