@@ -21,6 +21,7 @@ namespace Assignments
 
             Option option;
             int choice;
+            bool exit = false;
             do
             {
                 Console.WriteLine(
@@ -49,6 +50,7 @@ namespace Assignments
                             break;
                         case Option.Exit:
                             Helper.DisplaySuccessMessage("Exiting!!");
+                            exit = true;
                             break;
                         default:
                             Helper.DisplayFailedMessage("Enter valid number between 1 to 4");
@@ -60,7 +62,7 @@ namespace Assignments
                     Helper.DisplayFailedMessage("Enter a valid number , you didn't enter a number");
                 }
             }
-            while (choice != 4);
+            while (!exit);
         }
     }
 }
