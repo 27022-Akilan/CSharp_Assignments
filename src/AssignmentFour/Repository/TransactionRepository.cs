@@ -1,11 +1,10 @@
 ﻿using AssignmentFour.Model;
-
 namespace AssignmentFour.Repository
 {
     /// <summary>
     /// Repository for storing the Transaction Details.
     /// </summary>
-    public class TransactionRepository
+    public class TransactionRepository : IRepository
     {
         // private Transaction? _transaction;
         private List<Transaction> _transactions = new List<Transaction>();
@@ -26,7 +25,8 @@ namespace AssignmentFour.Repository
         /// To update the existing Transaction
         /// </summary>
         /// <param name="transaction">Edited details of the Transaction</param>
-        public void Update(Transaction transaction)
+        /// <returns>boo True - Updated Successfully | False - Cannot Update</returns>
+        public bool Update(Transaction transaction)
         {
             foreach (var field in this._transactions)
             {
@@ -40,14 +40,16 @@ namespace AssignmentFour.Repository
                     {
                         ((Income)field).Source = ((Income)transaction).Source;
                     }
-                    else
+                    else if (transaction.TransactionType == Model.Type.Expense)
                     {
                         ((Expense)field).Category = ((Expense)transaction).Category;
                     }
 
-                    break;
+                    return true;
                 }
             }
+
+            return false;
         }
 
         /// <summary>
@@ -70,10 +72,10 @@ namespace AssignmentFour.Repository
         }
 
         /// <summary>
-        ///  Shows the entire transactions
+        /// Shows the entire transactions
         /// </summary>
         /// <returns>A clone </returns>
-        public IEnumerable<Transaction> GetAll()
+        public IEnumerable<Transaction> ShowAll()
         {
             List<Transaction> transactionList = new List<Transaction>();
             foreach (var transaction in this._transactions)
@@ -89,7 +91,7 @@ namespace AssignmentFour.Repository
                 }
                 else
                 {
-                    transactionList.Add(new Income(
+                    transactionList.Add(new Expense(
                                                 transaction.TransactionId,
                                                 transaction.Amount,
                                                 transaction.Description,
