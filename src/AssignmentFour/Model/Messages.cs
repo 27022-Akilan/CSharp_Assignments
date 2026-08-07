@@ -14,5 +14,10 @@
         /// Adding the transaction failed
         /// /// </summary>
         public const string AddFailed = "Transaction cant be added.";
+
+        /// <summary>
+        /// Adding the transaction failed due to Null
+        /// </summary>
+        public const string AddFailedDueToNull = "Transaction cant be added , because of Empty values";
     }
 }
