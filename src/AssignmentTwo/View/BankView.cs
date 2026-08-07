@@ -19,6 +19,7 @@ namespace AssignmentTwo.View
             BankOption optionForBank;
             long accountNumber = 0;
             BankAccount account;
+            bool exit = false;
             do
             {
                 Console.WriteLine(
@@ -78,15 +79,11 @@ namespace AssignmentTwo.View
 
                         case BankOption.Exit:
                             Helper.DisplaySuccessMessage("Exited!!");
+                            exit = true;
                             break;
                         default:
                             Helper.DisplayFailedMessage("Enter Correct Value between 1 to 3");
                             break;
-                    }
-
-                    if (choice == 3)
-                    {
-                        break;
                     }
                 }
                 else
@@ -94,7 +91,7 @@ namespace AssignmentTwo.View
                     Helper.DisplayFailedMessage("Enter valid number and can be only between (1-3)");
                 }
             }
-            while (true);
+            while (!exit);
         }
 
         /// <summary>
@@ -104,7 +101,7 @@ namespace AssignmentTwo.View
         public void DisplaySubMenu(BankAccount account)
         {
             BankOperation bankOperation;
-            bool result = true;
+            bool exit = true;
             do
             {
                 Console.WriteLine(
@@ -137,12 +134,10 @@ namespace AssignmentTwo.View
                             break;
                         case BankOperation.Exit:
                             Helper.DisplaySuccessMessage("Exited!!");
-                            result = false;
+                            exit = false;
                             break;
                         default:
                             Helper.DisplayFailedMessage("Invalid Choice");
-
-                            // result = true;
                             break;
                     }
                 }
@@ -151,7 +146,7 @@ namespace AssignmentTwo.View
                     Helper.DisplayFailedMessage("Enter valid number can be only (1 to 4)");
                 }
             }
-            while (result);
+            while (!exit);
         }
 
         /// <summary>

@@ -18,6 +18,7 @@ namespace AssignmentTwo.View
         {
             ShapeOption shapeOption;
             int choice;
+            bool exit = false;
             do
             {
                 Console.WriteLine(
@@ -80,6 +81,7 @@ namespace AssignmentTwo.View
                             break;
                         case ShapeOption.Exit:
                             Helper.DisplaySuccessMessage("Exiting!!!!");
+                            exit = true;
                             break;
                         default:
                             Helper.DisplayFailedMessage("Invalid Choice");
@@ -91,7 +93,7 @@ namespace AssignmentTwo.View
                     Helper.DisplayFailedMessage("Invalid Choice , You must enter a number only");
                 }
             }
-            while (choice != 3);
+            while (!exit);
         }
 
         /// <summary>

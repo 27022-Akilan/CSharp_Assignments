@@ -18,6 +18,7 @@ namespace AssignmentTwo.View
         {
             EmployeeOption employeeOption;
             int choice;
+            bool exit = false;
             do
             {
                 Console.WriteLine(
@@ -57,6 +58,7 @@ namespace AssignmentTwo.View
                         // Exit
                         case EmployeeOption.Exit:
                             Helper.DisplaySuccessMessage("Exiting!!");
+                            exit = true;
                             break;
                         default:
                             Helper.DisplayFailedMessage("Invalid Choice , You must only between 1 to 3");
@@ -68,7 +70,7 @@ namespace AssignmentTwo.View
                     Helper.DisplayFailedMessage("Invalid choice , You must enter a number only");
                 }
             }
-            while (choice != 3);
+            while (!exit);
         }
 
         private static bool GetNameAndSalary(out string employeeName, out decimal salary)
