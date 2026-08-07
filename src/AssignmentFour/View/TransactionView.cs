@@ -8,6 +8,8 @@ namespace AssignmentFour.View
     /// </summary>
     public class TransactionView
     {
+        private const int MaxTries = 3;
+
         private readonly TransactionService _service;
 
         /// <summary>
@@ -20,20 +22,11 @@ namespace AssignmentFour.View
         }
 
         /// <summary>
-        /// Displays the Menu to the User
+        /// Starts to run the view
         /// </summary>
-        public void DisplayMenu()
+        public void Run()
         {
-            Console.WriteLine(
-                "Track Every Rupee and Grow Every Dream" +
-                "\n===============================================" +
-                "\n1.Add Transaction" +
-                "\n2.Edit Transaction" +
-                "\n3.Delete Transaction" +
-                "\n4.Display All Transactions" +
-                "\n===============================================" +
-                "\nEnter Your Choice:");
-
+            this.DisplayMenu();
             string choiceAsString = Console.ReadLine() ?? string.Empty;
             int choice;
             if (int.TryParse(choiceAsString, out choice))
@@ -41,12 +34,214 @@ namespace AssignmentFour.View
                 MenuOption option = (MenuOption)choice;
                 switch (option)
                 {
-                    case MenuOption.AddTransaction:
-                        Console.WriteLine("Enter E for Expense and I for Income");
-                        string transactionType = Console.ReadLine() ?? string.Empty;
+                    case MenuOption.AddIncome:
+                        this.HandleIncome();
+                        break;
+                    case MenuOption.AddExpense:
+                        this.HandleExpense();
+                        break;
+                    case MenuOption.UpdateTransaction:
+                        this.UpdateIncome();
+                        break;
+                    case MenuOption.DeleteTransaction:
+                        this.DeleteTransaction();
+                        break;
+                    case MenuOption.ShowTransaction:
+                        this.ShowTransaction();
+                        break;
+                    default:
+                        Console.WriteLine("Invalid Choice");
+                        this.DisplayMenu();
                         break;
                 }
             }
+        }
+
+        /// <summary>
+        /// To display the main menu
+        /// </summary>
+        public void DisplayMenu()
+        {
+            Console.WriteLine(
+                "Track Every Rupee and Grow Every Dream" +
+                "\n===============================================" +
+                "\n1.Add Income" +
+                "\n2.Add Expense" +
+                "\n3.Edit Transaction" +
+                "\n4.Delete Transaction" +
+                "\n5.Display All Transactions" +
+                "\n===============================================" +
+                "\nEnter Your Choice:");
+        }
+
+        /// <summary>
+        /// Handles adding the Income
+        /// </summary>
+        public void HandleIncome()
+        {
+            decimal amount;
+            if (!this.TryReadDecimal("Enter the Amount for Income:", out amount))
+            {
+                this.DisplayWarningMessage("Aborting due to maximum invalid tries attempted");
+                return;
+            }
+
+            string description;
+            if (!this.TryReadDescription("Enter the description for the Income:", out description))
+            {
+                this.DisplayWarningMessage("Aborting due to maximum invalid tries attempted");
+                return;
+            }
+
+            DateTime date;
+            if (!this.TryReadDate("Enter the Date(DD/MM/YYYY)", out date))
+            {
+                this.DisplayWarningMessage("Aborting due to maximum invalid tries attempted");
+                return;
+            }
+
+            string source;
+            if (!this.TryReadSource("Enter the source of the income :", out source))
+            {
+                this.DisplayWarningMessage("Aborting due to maximum invalid tries attempted");
+                return;
+            }
+        }
+
+        //public void HandleExpense()
+        //{
+        //    decimal amount;
+        //    if (!TryReadDecimal(out amount))
+        //    {
+        //        this.DisplayWarningMessage("Aborting due to maximum invalid tries attempted");
+        //        return;
+        //    }
+
+        //    string description;
+        //    if (!TryReadDescription(out description))
+        //    {
+        //        this.DisplayWarningMessage("Aborting due to maximum invalid tries attempted");
+        //        return;
+        //    }
+
+        //    DateTime date;
+        //    if (!TryReadDate(out date))
+        //    {
+        //        this.DisplayWarningMessage("Aborting due to maximum invalid tries attempted");
+        //        return;
+        //    }
+
+        //    string source;
+        //    if (!TryReadCategory(out source))
+        //    {
+        //        this.DisplayWarningMessage("Aborting due to maximum invalid tries attempted");
+        //        return;
+        //    }
+        // }
+
+        /// <summary>
+        /// Try's to read a valid Amount
+        /// </summary>
+        /// <param name="prompt">Prompt that should be Displayed to user</param>
+        /// <param name="amount">validated amount</param>
+        /// <returns>True - Got Valid Amount | False - Cannot get a valid Amount</returns>
+        public bool TryReadDecimal(string prompt, out decimal amount)
+        {
+            for (int i = 1; i < MaxTries; i++)
+            {
+                Console.WriteLine(prompt);
+                if (decimal.TryParse(Console.ReadLine(), out amount))
+                {
+                    string validationResult = this._service.IsValidAmount(amount);
+                    if (validationResult == string.Empty)
+                    {
+                        return true;
+                    }
+
+                    this.DisplayWarningMessage($"{validationResult}\nTries Left : {MaxTries - i}");
+                }
+                else
+                {
+                    this.DisplayWarningMessage($"Your input Should contains number only! \nTries Left : {MaxTries - i}");
+                }
+            }
+
+            amount = default;
+            return false;
+        }
+
+        /// <summary>
+        /// Try's to read a valid Description
+        /// </summary>
+        /// <param name="prompt">Prompt that should be Displayed to user</param>
+        /// <param name="description">validated description</param>
+        /// <returns>True - Got Valid description | False - Cannot get a valid description</returns>
+        public bool TryReadDescription(string prompt, out string description)
+        {
+            for (int i = 1; i < MaxTries; i++)
+            {
+                Console.WriteLine(prompt);
+                description = Console.ReadLine() ?? string.Empty;
+                if (!string.IsNullOrEmpty(description) && !string.IsNullOrWhiteSpace(description))
+                {
+                    return true;
+                }
+
+                Console.WriteLine("The description cant be Empty or Whitespace");
+            }
+
+            description = string.Empty;
+            return false;
+        }
+
+        /// <summary>
+        /// Try's to read a valid date
+        /// </summary>
+        /// <param name="prompt">Prompt that should be Displayed to user</param>
+        /// <param name="date">validated date</param>
+        /// <returns>True - Got Valid date | False - Cannot get a valid date</returns>
+        public bool TryReadDate(string prompt, out DateTime date)
+        {
+            for (int i = 1; i < MaxTries; i++)
+            {
+                Console.WriteLine(prompt);
+                string dateString = Console.ReadLine() ?? string.Empty;
+                if (DateTime.TryParse(dateString, out date))
+                {
+                    return true;
+                }
+
+                Console.WriteLine("");
+            }
+
+            date = default;
+            return false;
+        }
+
+        public bool TryReadSource(string prompt, out string source)
+        {
+            for (int i = 1; i < MaxTries; i++)
+            {
+                Console.WriteLine(prompt);
+                string dateString = Console.ReadLine() ?? string.Empty;
+
+
+                Console.WriteLine("");
+            }
+
+            date = default;
+            return false;
+        }
+
+        /// <summary>
+        /// Displays the warning message in yellow color
+        /// </summary>
+        /// <param name="message">Message to be displayed</param>
+        public void DisplayWarningMessage(string message)
+        {
+            Console.ForegroundColor = ConsoleColor.Yellow;
+            Console.WriteLine(message);
+            Console.ResetColor();
         }
     }
 }
