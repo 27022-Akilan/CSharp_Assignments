@@ -6,9 +6,14 @@
     public enum MenuOption
     {
         /// <summary>
-        /// Option for Adding a new transaction
+        /// Option for Adding a new Income
         /// </summary>
-        AddTransaction = 1,
+        AddIncome = 1,
+
+        /// <summary>
+        /// Option for Adding a new Expense
+        /// </summary>
+        AddExpense = 1,
 
         /// <summary>
         /// Option for Updating a transaction

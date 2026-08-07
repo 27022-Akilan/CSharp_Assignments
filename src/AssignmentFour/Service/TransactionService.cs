@@ -31,12 +31,13 @@ namespace AssignmentFour.Service
                 return Messages.AddFailedDueToNull;
             }
 
-            if (transaction.Amount <= 0)
+            string validationResult = this.IsValidAmount(transaction.Amount);
+            if (validationResult == string.Empty)
             {
-                return "amount cant be less than zero";
+                return this._repository.Add(transaction);
             }
 
-            return this._repository.Add(transaction);
+            return validationResult;
         }
 
         /// <summary>
@@ -86,6 +87,21 @@ namespace AssignmentFour.Service
         public IEnumerable<Transaction> GetAllTransactions()
         {
             return this._repository.ShowAll();
+        }
+
+        /// <summary>
+        /// To check whether the amount is Valid
+        /// </summary>
+        /// <param name="amount">Amount to be validated</param>
+        /// <returns>Validation Result message</returns>
+        public string IsValidAmount(decimal amount)
+        {
+            if (amount > 0)
+            {
+                return string.Empty;
+            }
+
+            return " less than 0";
         }
     }
 }
