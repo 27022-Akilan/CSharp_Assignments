@@ -31,13 +31,14 @@ namespace AssignmentFour.Service
                 return Messages.AddFailedDueToNull;
             }
 
-            string validationResult = this.IsValidAmount(transaction.Amount);
-            if (validationResult == string.Empty)
+            bool validationResult = this.IsValidAmount(transaction.Amount);
+            if (validationResult)
             {
-                return this._repository.Add(transaction);
+                Transaction transactionWithId = transaction.WithId(Guid.NewGuid());
+                return this._repository.Add(transactionWithId);
             }
 
-            return validationResult;
+            return "Amount cannot be Less than or equal to zero";
         }
 
         /// <summary>
@@ -93,15 +94,20 @@ namespace AssignmentFour.Service
         /// To check whether the amount is Valid
         /// </summary>
         /// <param name="amount">Amount to be validated</param>
-        /// <returns>Validation Result message</returns>
-        public string IsValidAmount(decimal amount)
+        /// <returns>True - If validation success | False - Validation Failed</returns>
+        public bool IsValidAmount(decimal amount)
         {
-            if (amount > 0)
-            {
-                return string.Empty;
-            }
+            return amount > 0;
+        }
 
-            return " less than 0";
+        /// <summary>
+        /// Validates Date if its less than the current date
+        /// </summary>
+        /// <param name="date">Date to be validated</param>
+        /// <returns>True - If validation success | False - Validation Failed</returns>
+        public bool IsValidDate(DateOnly date)
+        {
+            return date <= DateOnly.FromDateTime(DateTime.Now);
         }
     }
 }

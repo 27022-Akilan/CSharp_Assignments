@@ -1,5 +1,6 @@
 ﻿using AssignmentFour.Model;
 using AssignmentFour.Service;
+using ConsoleTables;
 
 namespace AssignmentFour.View
 {
@@ -10,15 +11,19 @@ namespace AssignmentFour.View
     {
         private const int MaxTries = 3;
 
+        private readonly InputView _getValidInput;
+
         private readonly TransactionService _service;
 
         /// <summary>
         /// Initializes a new instance of the <see cref="TransactionView"/> class
         /// </summary>
         /// <param name="service">Instance of the Service Layer</param>
-        public TransactionView(TransactionService service)
+        /// <param name="getValidInput">Instance of the Input view Layer</param>
+        public TransactionView(TransactionService service, InputView getValidInput)
         {
             this._service = service;
+            this._getValidInput = getValidInput;
         }
 
         /// <summary>
@@ -26,39 +31,54 @@ namespace AssignmentFour.View
         /// </summary>
         public void Run()
         {
-            this.DisplayMenu();
-            string choiceAsString = Console.ReadLine() ?? string.Empty;
-            int choice;
-            if (int.TryParse(choiceAsString, out choice))
+            bool exit = false;
+            while (!exit)
             {
-                MenuOption option = (MenuOption)choice;
-                switch (option)
+                Console.Clear();
+                this.DisplayMenu();
+                string choiceAsString = Console.ReadLine() ?? string.Empty;
+                if (int.TryParse(choiceAsString, out int choice))
                 {
-                    case MenuOption.AddIncome:
-                        this.HandleIncome();
-                        break;
-                    case MenuOption.AddExpense:
-                        this.HandleExpense();
-                        break;
-                    case MenuOption.UpdateTransaction:
-                        this.UpdateIncome();
-                        break;
-                    case MenuOption.DeleteTransaction:
-                        this.DeleteTransaction();
-                        break;
-                    case MenuOption.ShowTransaction:
-                        this.ShowTransaction();
-                        break;
-                    default:
-                        Console.WriteLine("Invalid Choice");
-                        this.DisplayMenu();
-                        break;
+                    MenuOption option = (MenuOption)choice;
+                    switch (option)
+                    {
+                        case MenuOption.AddIncome:
+                            this.HandleIncome();
+                            Helper.PressKeyToContinue();
+                            break;
+                        case MenuOption.AddExpense:
+                            this.HandleExpense();
+                            Helper.PressKeyToContinue();
+                            break;
+                        case MenuOption.UpdateTransaction:
+                            this.UpdateTransaction();
+                            Helper.PressKeyToContinue();
+                            break;
+                        case MenuOption.DeleteTransaction:
+                            this.DeleteTransaction();
+                            Helper.PressKeyToContinue();
+                            break;
+                        case MenuOption.ShowTransaction:
+                            this.ShowTransaction();
+                            Helper.PressKeyToContinue();
+                            break;
+                        case MenuOption.Exit:
+                            exit = true;
+                            break;
+                        default:
+                            Helper.DisplayWarningMessage("Invalid Choice. Please enter a number between 1 and 6.");
+                            break;
+                    }
+                }
+                else
+                {
+                    Helper.DisplayWarningMessage("Invalid input. Please enter a number between 1 and 6.");
                 }
             }
         }
 
         /// <summary>
-        /// To display the main menu
+        /// Displays the main menu
         /// </summary>
         public void DisplayMenu()
         {
@@ -70,178 +90,318 @@ namespace AssignmentFour.View
                 "\n3.Edit Transaction" +
                 "\n4.Delete Transaction" +
                 "\n5.Display All Transactions" +
+                "\n6.Exit" +
                 "\n===============================================" +
                 "\nEnter Your Choice:");
         }
 
         /// <summary>
-        /// Handles adding the Income
+        /// Handles adding an Income transaction
         /// </summary>
         public void HandleIncome()
         {
-            decimal amount;
-            if (!this.TryReadDecimal("Enter the Amount for Income:", out amount))
+            if (!this.TryReadCommonFields(
+                "Enter the Amount for Income:",
+                "Enter the description for the Income:",
+                "Enter the Date(DD/MM/YYYY)",
+                out decimal amount,
+                out string description,
+                out DateOnly date))
             {
-                this.DisplayWarningMessage("Aborting due to maximum invalid tries attempted");
                 return;
             }
 
-            string description;
-            if (!this.TryReadDescription("Enter the description for the Income:", out description))
+            Source source;
+            if (!this._getValidInput.TryReadSource("Enter the source of the income :", out source))
             {
-                this.DisplayWarningMessage("Aborting due to maximum invalid tries attempted");
+                Helper.DisplayErrorMessage("Aborting due to maximum invalid tries attempted");
                 return;
             }
 
-            DateTime date;
-            if (!this.TryReadDate("Enter the Date(DD/MM/YYYY)", out date))
-            {
-                this.DisplayWarningMessage("Aborting due to maximum invalid tries attempted");
-                return;
-            }
+            Income income = new Income(Guid.Empty, amount, description, date, source);
+            string result = this._service.AddTransaction(income);
 
-            string source;
-            if (!this.TryReadSource("Enter the source of the income :", out source))
+            if (result == Messages.AddSuccess)
             {
-                this.DisplayWarningMessage("Aborting due to maximum invalid tries attempted");
-                return;
+                Helper.DisplaySuccessMessage(result);
+            }
+            else
+            {
+                Helper.DisplayErrorMessage(result);
             }
         }
 
-        //public void HandleExpense()
-        //{
-        //    decimal amount;
-        //    if (!TryReadDecimal(out amount))
-        //    {
-        //        this.DisplayWarningMessage("Aborting due to maximum invalid tries attempted");
-        //        return;
-        //    }
+        /// <summary>
+        /// Handles adding an Expense transaction
+        /// </summary>
+        public void HandleExpense()
+        {
+            if (!this.TryReadCommonFields(
+                "Enter the Amount for Expense:",
+                "Enter the description for the Expense:",
+                "Enter the Date(DD/MM/YYYY)",
+                out decimal amount,
+                out string description,
+                out DateOnly date))
+            {
+                return;
+            }
 
-        //    string description;
-        //    if (!TryReadDescription(out description))
-        //    {
-        //        this.DisplayWarningMessage("Aborting due to maximum invalid tries attempted");
-        //        return;
-        //    }
+            Category category;
+            if (!this._getValidInput.TryReadCategory("Enter the category of the Expense :", out category))
+            {
+                Helper.DisplayErrorMessage("Aborting due to maximum invalid tries attempted");
+                return;
+            }
 
-        //    DateTime date;
-        //    if (!TryReadDate(out date))
-        //    {
-        //        this.DisplayWarningMessage("Aborting due to maximum invalid tries attempted");
-        //        return;
-        //    }
+            Expense expense = new Expense(Guid.Empty, amount, description, date, category);
+            string result = this._service.AddTransaction(expense);
 
-        //    string source;
-        //    if (!TryReadCategory(out source))
-        //    {
-        //        this.DisplayWarningMessage("Aborting due to maximum invalid tries attempted");
-        //        return;
-        //    }
-        // }
+            if (result == Messages.AddSuccess)
+            {
+                Helper.DisplaySuccessMessage(result);
+            }
+            else
+            {
+                Helper.DisplayErrorMessage(result);
+            }
+        }
 
         /// <summary>
-        /// Try's to read a valid Amount
+        /// Updates an existing transaction. Asks Y/N per field so only the
+        /// desired fields are changed; all others keep their current values.
         /// </summary>
-        /// <param name="prompt">Prompt that should be Displayed to user</param>
-        /// <param name="amount">validated amount</param>
-        /// <returns>True - Got Valid Amount | False - Cannot get a valid Amount</returns>
-        public bool TryReadDecimal(string prompt, out decimal amount)
+        public void UpdateTransaction()
         {
-            for (int i = 1; i < MaxTries; i++)
+            List<Transaction> transactions = this._service.GetAllTransactions().ToList();
+            if (transactions.Count == 0)
             {
-                Console.WriteLine(prompt);
-                if (decimal.TryParse(Console.ReadLine(), out amount))
+                Helper.DisplayInfoMessage("No transactions available to update.");
+                return;
+            }
+
+            this.DisplayTransaction(transactions);
+
+            int index;
+            if (!this._getValidInput.TryReadSerialNumber("Enter the Serial number of the Transaction to Update:", transactions.Count, out index))
+            {
+                Helper.DisplayErrorMessage("Aborting due to maximum invalid tries attempted");
+                return;
+            }
+
+            Transaction target = transactions[index - 1];
+            Guid id = target.TransactionId;
+
+            // Amount
+            decimal amount = target.Amount;
+            if (this.AskToUpdate("Amount", target.Amount.ToString()))
+            {
+                if (!this._getValidInput.TryReadDecimal("Enter the new Amount:", out amount))
                 {
-                    string validationResult = this._service.IsValidAmount(amount);
-                    if (validationResult == string.Empty)
+                    Helper.DisplayErrorMessage("Aborting due to maximum invalid tries attempted");
+                    return;
+                }
+            }
+
+            // Description
+            string description = target.Description;
+            if (this.AskToUpdate("Description", target.Description))
+            {
+                if (!this._getValidInput.TryReadDescription("Enter the new description:", out description))
+                {
+                    Helper.DisplayErrorMessage("Aborting due to maximum invalid tries attempted");
+                    return;
+                }
+            }
+
+            // Date
+            DateOnly date = target.Date;
+            if (this.AskToUpdate("Date", target.Date.ToString("dd/MM/yyyy")))
+            {
+                if (!this._getValidInput.TryReadDate("Enter the new Date(DD/MM/YYYY):", out date))
+                {
+                    Helper.DisplayErrorMessage("Aborting due to maximum invalid tries attempted");
+                    return;
+                }
+            }
+
+            // Source | Category
+            Transaction updatedTransaction;
+            if (target is Income income)
+            {
+                Source source = income.Source;
+                if (this.AskToUpdate("Source", income.Source.ToString()))
+                {
+                    if (!this._getValidInput.TryReadSource("Enter the new source of the income:", out source))
                     {
-                        return true;
+                        Helper.DisplayErrorMessage("Aborting due to maximum invalid tries attempted");
+                        return;
                     }
+                }
 
-                    this.DisplayWarningMessage($"{validationResult}\nTries Left : {MaxTries - i}");
-                }
-                else
+                updatedTransaction = new Income(id, amount, description, date, source);
+            }
+            else if (target is Expense expense)
+            {
+                Category category = expense.Category;
+                if (this.AskToUpdate("Category", expense.Category.ToString()))
                 {
-                    this.DisplayWarningMessage($"Your input Should contains number only! \nTries Left : {MaxTries - i}");
+                    if (!this._getValidInput.TryReadCategory("Enter the new category of the Expense:", out category))
+                    {
+                        Helper.DisplayErrorMessage("Aborting due to maximum invalid tries attempted");
+                        return;
+                    }
                 }
+
+                updatedTransaction = new Expense(id, amount, description, date, category);
+            }
+            else
+            {
+                Helper.DisplayErrorMessage("Unknown transaction type. Cannot update.");
+                return;
             }
 
-            amount = default;
-            return false;
+            bool success = this._service.Update(updatedTransaction);
+            if (success)
+            {
+                Helper.DisplaySuccessMessage("Transaction updated successfully.");
+            }
+            else
+            {
+                Helper.DisplayErrorMessage("Failed to update transaction.");
+            }
         }
 
         /// <summary>
-        /// Try's to read a valid Description
+        /// Deletes an existing transaction selected by index
         /// </summary>
-        /// <param name="prompt">Prompt that should be Displayed to user</param>
-        /// <param name="description">validated description</param>
-        /// <returns>True - Got Valid description | False - Cannot get a valid description</returns>
-        public bool TryReadDescription(string prompt, out string description)
+        public void DeleteTransaction()
         {
-            for (int i = 1; i < MaxTries; i++)
+            List<Transaction> transactions = this._service.GetAllTransactions().ToList();
+            if (transactions.Count == 0)
             {
-                Console.WriteLine(prompt);
-                description = Console.ReadLine() ?? string.Empty;
-                if (!string.IsNullOrEmpty(description) && !string.IsNullOrWhiteSpace(description))
-                {
-                    return true;
-                }
-
-                Console.WriteLine("The description cant be Empty or Whitespace");
+                Helper.DisplayInfoMessage("No transactions available to delete.");
+                return;
             }
 
+            this.DisplayTransaction(transactions);
+
+            int index;
+            if (!this._getValidInput.TryReadSerialNumber("Enter the Serial Number of the Transaction to Delete:", transactions.Count, out index))
+            {
+                Helper.DisplayErrorMessage("Aborting due to maximum invalid tries attempted");
+                return;
+            }
+
+            Transaction target = transactions[index - 1];
+            bool success = this._service.DeleteTransactionById(target.TransactionId);
+            if (success)
+            {
+                Helper.DisplaySuccessMessage("Transaction deleted successfully.");
+            }
+            else
+            {
+                Helper.DisplayErrorMessage("Failed to delete transaction.");
+            }
+        }
+
+        /// <summary>
+        /// Shows the all the transaction.
+        /// </summary>
+        public void ShowTransaction()
+        {
+            IEnumerable<Transaction> transactions = this._service.GetAllTransactions();
+            if (transactions.Count() == 0)
+            {
+                Helper.DisplayInfoMessage("No Transactions available to show");
+                return;
+            }
+
+            this.DisplayTransaction(transactions);
+        }
+
+        /// <summary>
+        /// To display the transaction in table format
+        /// </summary>
+        /// <param name="resultTransaction">Immutable List of Objects</param>
+        public void DisplayTransaction(IEnumerable<Transaction> resultTransaction)
+        {
+            ConsoleTable table = new ConsoleTable("S.No", "Amount", "Description", "Date", "Type", "Source/Category");
+            int serialNumber = 1;
+            foreach (Transaction transaction in resultTransaction)
+            {
+                if (transaction is Income)
+                {
+                    table.AddRow(serialNumber++, transaction.Amount, transaction.Description, transaction.Date, transaction.TransactionType, ((Income)transaction).Source);
+                }
+                else if (transaction is Expense)
+                {
+                    table.AddRow(serialNumber++, transaction.Amount, transaction.Description, transaction.Date, transaction.TransactionType, ((Expense)transaction).Category);
+                }
+            }
+
+            table.Write();
+        }
+
+        /// <summary>
+        /// Reads the three fields common to every transaction: Amount, Description, and Date.
+        /// </summary>
+        /// <param name="amountPrompt">Prompt to display when asking for the amount.</param>
+        /// <param name="descriptionPrompt">Prompt to display when asking for the description.</param>
+        /// <param name="datePrompt">Prompt to display when asking for the date.</param>
+        /// <param name="amount">Validated amount output.</param>
+        /// <param name="description">Validated description output.</param>
+        /// <param name="date">Validated date output.</param>
+        /// <returns>True if all three fields were collected successfully; otherwise false.</returns>
+        public bool TryReadCommonFields(string amountPrompt, string descriptionPrompt, string datePrompt, out decimal amount, out string description, out DateOnly date)
+        {
             description = string.Empty;
-            return false;
+            date = default;
+
+            if (!this._getValidInput.TryReadDecimal(amountPrompt, out amount))
+            {
+                Helper.DisplayErrorMessage("Aborting due to maximum invalid tries attempted");
+                return false;
+            }
+
+            if (!this._getValidInput.TryReadDescription(descriptionPrompt, out description))
+            {
+                Helper.DisplayErrorMessage("Aborting due to maximum invalid tries attempted");
+                return false;
+            }
+
+            if (!this._getValidInput.TryReadDate(datePrompt, out date))
+            {
+                Helper.DisplayErrorMessage("Aborting due to maximum invalid tries attempted");
+                return false;
+            }
+
+            return true;
         }
 
         /// <summary>
-        /// Try's to read a valid date
+        /// Asks the user whether they want to update a specific field.
         /// </summary>
-        /// <param name="prompt">Prompt that should be Displayed to user</param>
-        /// <param name="date">validated date</param>
-        /// <returns>True - Got Valid date | False - Cannot get a valid date</returns>
-        public bool TryReadDate(string prompt, out DateTime date)
+        /// <param name="fieldName">Name of the field shown to the user.</param>
+        /// <param name="currentValue">The current value of the field shown alongside the prompt.</param>
+        /// <returns>True if the user enters Y or y; false otherwise (field is kept as-is).</returns>
+        private bool AskToUpdate(string fieldName, string currentValue)
         {
-            for (int i = 1; i < MaxTries; i++)
+            Console.WriteLine($"Update {fieldName}? (Current: {currentValue}) [Y/N]:");
+            string input = Console.ReadLine() ?? string.Empty;
+            if (input.Trim().Equals("Y", StringComparison.OrdinalIgnoreCase))
             {
-                Console.WriteLine(prompt);
-                string dateString = Console.ReadLine() ?? string.Empty;
-                if (DateTime.TryParse(dateString, out date))
-                {
-                    return true;
-                }
-
-                Console.WriteLine("");
+                return true;
             }
-
-            date = default;
-            return false;
-        }
-
-        public bool TryReadSource(string prompt, out string source)
-        {
-            for (int i = 1; i < MaxTries; i++)
+            else if (input.Trim().Equals("N", StringComparison.OrdinalIgnoreCase))
             {
-                Console.WriteLine(prompt);
-                string dateString = Console.ReadLine() ?? string.Empty;
-
-
-                Console.WriteLine("");
+                return false;
             }
-
-            date = default;
-            return false;
-        }
-
-        /// <summary>
-        /// Displays the warning message in yellow color
-        /// </summary>
-        /// <param name="message">Message to be displayed</param>
-        public void DisplayWarningMessage(string message)
-        {
-            Console.ForegroundColor = ConsoleColor.Yellow;
-            Console.WriteLine(message);
-            Console.ResetColor();
+            else
+            {
+                Helper.DisplayErrorMessage("Invalid choice cant edit the current field");
+                return false;
+            }
         }
     }
 }

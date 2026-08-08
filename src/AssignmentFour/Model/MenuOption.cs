@@ -13,7 +13,7 @@
         /// <summary>
         /// Option for Adding a new Expense
         /// </summary>
-        AddExpense = 1,
+        AddExpense,
 
         /// <summary>
         /// Option for Updating a transaction
