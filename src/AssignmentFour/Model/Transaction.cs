@@ -12,14 +12,14 @@
         /// <param name="amount">Contains the Amount</param>
         /// <param name="type">Type of the account (Income / Expense)</param>
         /// <param name="description">Contains the Description</param>
-        /// <param name="dateTime">Contains the date and Time</param>
-        public Transaction(Guid id, decimal amount, Type type, string description, DateTime dateTime)
+        /// <param name="date">Contains the date and Time</param>
+        public Transaction(Guid id, decimal amount, Type type, string description, DateOnly date)
         {
             this.TransactionId = id;
             this.Amount = amount;
             this.TransactionType = type;
             this.Description = description;
-            this.Date = dateTime;
+            this.Date = date;
         }
 
         /// <summary>
@@ -60,6 +60,13 @@
         /// <value>
         /// Holds the Date
         /// </value>
-        public DateTime Date { get; set; }
+        public DateOnly Date { get; set; }
+
+        /// <summary>
+        /// To create the object with ID created on the service layer
+        /// </summary>
+        /// <param name="id">Id of the transaction</param>
+        /// <returns>A transaction object</returns>
+        public abstract Transaction WithId(Guid id);
     }
 }

@@ -11,10 +11,10 @@
         /// <param name="id">Contains the Id of the Transaction</param>
         /// <param name="amount">Contains the Amount</param>
         /// <param name="description">Contains the Description</param>
-        /// <param name="dateTime">Contains the date and Time</param>
+        /// <param name="date">Contains the date and Time</param>
         /// <param name="source">Contains the source of the Income</param>
-        public Income(Guid id, decimal amount, string description, DateTime dateTime, string source)
-            : base(id, amount, Type.Income, description, dateTime)
+        public Income(Guid id, decimal amount, string description, DateOnly date, Source source)
+            : base(id, amount, Type.Income, description, date)
         {
             this.Source = source;
         }
@@ -24,6 +24,16 @@
         /// </summary>
         /// <value>
         /// Contains the Source for the Income</value>
-        public string Source { get; set; }
+        public Source Source { get; set; }
+
+        /// <summary>
+        /// Overrides the base method to create the Income object with correct ID.
+        /// </summary>
+        /// <param name="id">Id of the transaction</param>
+        /// <returns>A Income object</returns>
+        public override Transaction WithId(Guid id)
+        {
+            return new Income(id, this.Amount, this.Description, this.Date, this.Source);
+        }
     }
 }
