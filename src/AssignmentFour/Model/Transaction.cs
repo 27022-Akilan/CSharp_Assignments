@@ -69,6 +69,6 @@ namespace AssignmentFour.Model
         /// </summary>
         /// <param name="id">Id of the transaction</param>
         /// <returns>A transaction object</returns>
-        public abstract Transaction WithId(Guid id);
+        public abstract Transaction CreateTransactionWithId(Guid id);
     }
 }
