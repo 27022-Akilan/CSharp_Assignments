@@ -185,8 +185,8 @@ namespace AssignmentFour.View
         /// </summary>
         public void UpdateTransaction()
         {
-            List<Transaction> transactions = this._service.GetAllTransactions().ToList();
-            if (transactions.Count == 0)
+            IEnumerable<Transaction> transactions = this._service.GetAllTransactions().ToList();
+            if (transactions.Count() == 0)
             {
                 Helper.DisplayInfoMessage("No transactions available to update.");
                 return;
@@ -195,13 +195,13 @@ namespace AssignmentFour.View
             this.DisplayTransaction(transactions);
 
             int index;
-            if (!this._getValidInput.TryReadSerialNumber("Enter the Serial number of the Transaction to Update:", transactions.Count, out index))
+            if (!this._getValidInput.TryReadSerialNumber("Enter the Serial number of the Transaction to Update:", transactions.Count(), out index))
             {
                 Helper.DisplayAbortMessage();
                 return;
             }
 
-            Transaction target = transactions[index - 1];
+            Transaction target = transactions.ElementAt(index - 1);
             Guid id = target.TransactionId;
 
             // Amount
