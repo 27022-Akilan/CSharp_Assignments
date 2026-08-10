@@ -28,16 +28,6 @@ namespace AssignmentFour.Model
         public Source Source { get; set; }
 
         /// <summary>
-        /// Overrides the base method to create the Income object with correct ID.
-        /// </summary>
-        /// <param name="id">Id of the transaction</param>
-        /// <returns>A Income object</returns>
-        public override Transaction CreateTransactionWithId(Guid id)
-        {
-            return new Income(id, this.Amount, this.Description, this.Date, this.Source);
-        }
-
-        /// <summary>
         ///  To return a cloned copy of the Income.
         /// </summary>
         /// <returns>Cloned copy of Income</returns>

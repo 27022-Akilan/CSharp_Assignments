@@ -29,16 +29,6 @@ namespace AssignmentFour.Model
         public Category Category { get; set; }
 
         /// <summary>
-        /// Overrides the base method to create the Expense object with correct ID.
-        /// </summary>
-        /// <param name="id">Id of the transaction</param>
-        /// <returns>A Expense object</returns>
-        public override Transaction CreateTransactionWithId(Guid id)
-        {
-            return new Expense(id, this.Amount, this.Description, this.Date, this.Category);
-        }
-
-        /// <summary>
         ///  To return a cloned copy of the Expense.
         /// </summary>
         /// <returns>Cloned copy of Expense</returns>
