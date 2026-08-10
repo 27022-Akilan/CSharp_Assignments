@@ -1,4 +1,5 @@
 ﻿using AssignmentFour.Model;
+using AssignmentFour.Model.Enums;
 using AssignmentFour.Service;
 using ConsoleTables;
 
@@ -58,15 +59,23 @@ namespace AssignmentFour.View
                             this.DeleteTransaction();
                             Helper.PressKeyToContinue();
                             break;
+                        case MenuOption.SearchTransaction:
+                            this.SearchTransaction();
+                            Helper.PressKeyToContinue();
+                            break;
                         case MenuOption.ShowTransaction:
                             this.ShowTransaction();
+                            Helper.PressKeyToContinue();
+                            break;
+                        case MenuOption.ShowSummary:
+                            this.ShowSummary();
                             Helper.PressKeyToContinue();
                             break;
                         case MenuOption.Exit:
                             exit = true;
                             break;
                         default:
-                            Helper.DisplayWarningMessage("Invalid Choice. Please enter a number between 1 and 6.");
+                            Helper.DisplayWarningMessage("Invalid Choice. Please enter a number between 1 and 8.");
                             break;
                     }
                 }
@@ -82,15 +91,17 @@ namespace AssignmentFour.View
         /// </summary>
         public void DisplayMenu()
         {
+            Helper.DisplayInfoMessage("\t\t\t\t\tTrack Every Rupee and Grow Every Dream");
             Console.WriteLine(
-                "Track Every Rupee and Grow Every Dream" +
                 "\n===============================================" +
                 "\n1.Add Income" +
                 "\n2.Add Expense" +
                 "\n3.Edit Transaction" +
                 "\n4.Delete Transaction" +
-                "\n5.Display All Transactions" +
-                "\n6.Exit" +
+                "\n5.Search Transaction" +
+                "\n6.Display All Transactions" +
+                "\n7.Display Summary" +
+                "\n8.Exit" +
                 "\n===============================================" +
                 "\nEnter Your Choice:");
         }
@@ -114,7 +125,7 @@ namespace AssignmentFour.View
             Source source;
             if (!this._getValidInput.TryReadSource("Enter the source of the income :", out source))
             {
-                Helper.DisplayErrorMessage("Aborting due to maximum invalid tries attempted");
+                Helper.DisplayAbortMessage();
                 return;
             }
 
@@ -150,7 +161,7 @@ namespace AssignmentFour.View
             Category category;
             if (!this._getValidInput.TryReadCategory("Enter the category of the Expense :", out category))
             {
-                Helper.DisplayErrorMessage("Aborting due to maximum invalid tries attempted");
+                Helper.DisplayAbortMessage();
                 return;
             }
 
@@ -168,8 +179,7 @@ namespace AssignmentFour.View
         }
 
         /// <summary>
-        /// Updates an existing transaction. Asks Y/N per field so only the
-        /// desired fields are changed; all others keep their current values.
+        /// Updates an existing transaction. Asks Y/N per field for editing.
         /// </summary>
         public void UpdateTransaction()
         {
@@ -185,7 +195,7 @@ namespace AssignmentFour.View
             int index;
             if (!this._getValidInput.TryReadSerialNumber("Enter the Serial number of the Transaction to Update:", transactions.Count, out index))
             {
-                Helper.DisplayErrorMessage("Aborting due to maximum invalid tries attempted");
+                Helper.DisplayAbortMessage();
                 return;
             }
 
@@ -198,7 +208,7 @@ namespace AssignmentFour.View
             {
                 if (!this._getValidInput.TryReadDecimal("Enter the new Amount:", out amount))
                 {
-                    Helper.DisplayErrorMessage("Aborting due to maximum invalid tries attempted");
+                    Helper.DisplayAbortMessage();
                     return;
                 }
             }
@@ -209,7 +219,7 @@ namespace AssignmentFour.View
             {
                 if (!this._getValidInput.TryReadDescription("Enter the new description:", out description))
                 {
-                    Helper.DisplayErrorMessage("Aborting due to maximum invalid tries attempted");
+                    Helper.DisplayAbortMessage();
                     return;
                 }
             }
@@ -220,7 +230,7 @@ namespace AssignmentFour.View
             {
                 if (!this._getValidInput.TryReadDate("Enter the new Date(DD/MM/YYYY):", out date))
                 {
-                    Helper.DisplayErrorMessage("Aborting due to maximum invalid tries attempted");
+                    Helper.DisplayAbortMessage();
                     return;
                 }
             }
@@ -234,7 +244,7 @@ namespace AssignmentFour.View
                 {
                     if (!this._getValidInput.TryReadSource("Enter the new source of the income:", out source))
                     {
-                        Helper.DisplayErrorMessage("Aborting due to maximum invalid tries attempted");
+                        Helper.DisplayAbortMessage();
                         return;
                     }
                 }
@@ -248,7 +258,7 @@ namespace AssignmentFour.View
                 {
                     if (!this._getValidInput.TryReadCategory("Enter the new category of the Expense:", out category))
                     {
-                        Helper.DisplayErrorMessage("Aborting due to maximum invalid tries attempted");
+                        Helper.DisplayAbortMessage();
                         return;
                     }
                 }
@@ -273,6 +283,125 @@ namespace AssignmentFour.View
         }
 
         /// <summary>
+        /// Displays the search options for transactions
+        /// </summary>
+        public void SearchTransaction()
+        {
+            Console.WriteLine("Search By:" +
+                              "\n1. Type (Income/Expense)" +
+                              "\n2. Amount" +
+                              "\n3. Description" +
+                              "\n4. Date" +
+                              "\n5.Exit" +
+                              "\nEnter your choice (1-5):");
+
+            string input = Console.ReadLine() ?? string.Empty;
+            if (int.TryParse(input, out int choice))
+            {
+                TransactionSearchOption searchOption = (TransactionSearchOption)choice;
+
+                switch (searchOption)
+                {
+                    case TransactionSearchOption.ByType:
+                        this.SearchByType();
+                        break;
+                    case TransactionSearchOption.ByAmount:
+                        this.SearchByAmount();
+                        break;
+                    case TransactionSearchOption.ByDescription:
+                        this.SearchByDescription();
+                        break;
+                    case TransactionSearchOption.ByDate:
+                        this.SearchByDate();
+                        break;
+                    case TransactionSearchOption.Exit:
+                        return;
+                    default:
+                        Helper.DisplayWarningMessage("Invalid choice. Please enter a number between 1 and 5.");
+                        break;
+                }
+            }
+        }
+
+        /// <summary>
+        /// Searches transactions by their type (Income or Expense) and displays the results.
+        /// </summary>
+        public void SearchByType()
+        {
+            if (!this._getValidInput.TryReadType("Enter the type of transaction to search (Income/Expense):", out TransactionType type))
+            {
+                Helper.DisplayAbortMessage();
+                return;
+            }
+
+            IEnumerable<Transaction> result = this._service.GetTransactionsByType(type);
+            if (!result.Any())
+            {
+                Helper.DisplayInfoMessage($"No transactions found for type: {type}");
+                return;
+            }
+
+            this.DisplayTransaction(result);
+        }
+
+        /// <summary>
+        /// Searches transactions by their amount and displays the results.
+        /// </summary>
+        public void SearchByAmount()
+        {
+            if (!this._getValidInput.TryReadDecimal("Enter the amount for transaction to search:", out decimal amount))
+            {
+                Helper.DisplayAbortMessage();
+                return;
+            }
+
+            IEnumerable<Transaction> result = this._service.GetTransactionsByAmount(amount);
+            if (!result.Any())
+            {
+                Helper.DisplayInfoMessage($"No transactions found for amount: {amount}");
+                return;
+            }
+
+            this.DisplayTransaction(result);
+        }
+
+        /// <summary>
+        /// Searches transactions by their date and displays the results.
+        /// </summary>
+        public void SearchByDescription()
+        {
+            if (!this._getValidInput.TryReadDescription("Enter the Description of the Transaction to be search:", out string description))
+            {
+                Helper.DisplayErrorMessage("Abotying due to maximum invalid tries attempted");
+                return;
+            }
+
+            IEnumerable<Transaction> transaction = this._service.GetTransactionsByDescription(description);
+            if (!transaction.Any())
+            {
+                Helper.DisplayInfoMessage($"No transactions found for description: {description}");
+                return;
+            }
+
+            this.DisplayTransaction(transaction);
+        }
+
+        /// <summary>
+        /// Searches transactions by their date and displays the results.
+        /// </summary>
+        public void SearchByDate()
+        {
+            if (!this._getValidInput.TryReadDate("Enter the date for transaction to search:", out DateOnly date))
+            {
+                Helper.DisplayAbortMessage();
+                return;
+            }
+
+            IEnumerable<Transaction> result = this._service.GetTransactionByDate(date);
+            this.DisplayTransaction(result);
+        }
+
+        /// <summary>
         /// Deletes an existing transaction selected by index
         /// </summary>
         public void DeleteTransaction()
@@ -289,7 +418,7 @@ namespace AssignmentFour.View
             int index;
             if (!this._getValidInput.TryReadSerialNumber("Enter the Serial Number of the Transaction to Delete:", transactions.Count, out index))
             {
-                Helper.DisplayErrorMessage("Aborting due to maximum invalid tries attempted");
+                Helper.DisplayAbortMessage();
                 return;
             }
 
@@ -318,6 +447,21 @@ namespace AssignmentFour.View
             }
 
             this.DisplayTransaction(transactions);
+        }
+
+        /// <summary>
+        /// Shows the summary of all the transaction.
+        /// </summary>
+        public void ShowSummary()
+        {
+            var summary = this._service.GetSummary();
+
+            Console.WriteLine("================= Summary =================" +
+                              $"\nTotal Income: {summary.TotalIncome}" +
+                              $"\nTotal Expense: {summary.TotalExpense}" +
+                              $"\nNet Balance: {summary.NetBalance}" +
+                              $"\nTotal Transactions: {summary.TotalTransactions}" +
+                              $"\nAverage Transaction Value: {summary.AverageTransactionValue:F2}");
         }
 
         /// <summary>
@@ -360,19 +504,19 @@ namespace AssignmentFour.View
 
             if (!this._getValidInput.TryReadDecimal(amountPrompt, out amount))
             {
-                Helper.DisplayErrorMessage("Aborting due to maximum invalid tries attempted");
+                Helper.DisplayAbortMessage();
                 return false;
             }
 
             if (!this._getValidInput.TryReadDescription(descriptionPrompt, out description))
             {
-                Helper.DisplayErrorMessage("Aborting due to maximum invalid tries attempted");
+                Helper.DisplayAbortMessage();
                 return false;
             }
 
             if (!this._getValidInput.TryReadDate(datePrompt, out date))
             {
-                Helper.DisplayErrorMessage("Aborting due to maximum invalid tries attempted");
+                Helper.DisplayAbortMessage();
                 return false;
             }
 

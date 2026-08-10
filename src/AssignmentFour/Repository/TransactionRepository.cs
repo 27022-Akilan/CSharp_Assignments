@@ -1,4 +1,5 @@
 ﻿using AssignmentFour.Model;
+using AssignmentFour.Model.Enums;
 
 namespace AssignmentFour.Repository
 {
@@ -37,11 +38,11 @@ namespace AssignmentFour.Repository
                     field.Date = transaction.Date;
                     field.Description = transaction.Description;
 
-                    if (transaction.TransactionType == Model.Type.Income)
+                    if (transaction.TransactionType == TransactionType.Income)
                     {
                         ((Income)field).Source = ((Income)transaction).Source;
                     }
-                    else if (transaction.TransactionType == Model.Type.Expense)
+                    else if (transaction.TransactionType == TransactionType.Expense)
                     {
                         ((Expense)field).Category = ((Expense)transaction).Category;
                     }
@@ -129,6 +130,46 @@ namespace AssignmentFour.Repository
             }
 
             return transactionList;
+        }
+
+        /// <summary>
+        /// Shows the transactions of the desired type
+        /// </summary>
+        /// <param name="type">Type of transactions to retrieve</param>
+        /// <returns>IEnumerable list of Transactions of the specified type</returns>
+        public IEnumerable<Transaction> ShowTransactionsByType(TransactionType type)
+        {
+            return this._transactionList.Where((Func<Transaction, bool>)(t => t.TransactionType == type));
+        }
+
+        /// <summary>
+        /// Shows the transactions of the desired amount
+        /// </summary>
+        /// <param name="amount">Amount of transactions to retrieve</param>
+        /// <returns>IEnumerable list of Transactions of the specified amount</returns>
+        public IEnumerable<Transaction> ShowTransactionByAmount(decimal amount)
+        {
+            return this._transactionList.Where(t => t.Amount == amount);
+        }
+
+        /// <summary>
+        /// Shows the transactions of the desired description
+        /// </summary>
+        /// <param name="description">Description of transactions to retrieve</param>
+        /// <returns>IEnumerable list of Transactions of the specified description</returns>
+        public IEnumerable<Transaction> ShowTransactionsByDescription(string description)
+        {
+            return this._transactionList.Where(t => t.Description.Contains(description));
+        }
+
+        /// <summary>
+        /// Shows the transactions of the desired date
+        /// </summary>
+        /// <param name="date">Date of the transactions to retrieve</param>
+        /// <returns>IEnumerable list of Transactions of the specified date</returns>
+        public IEnumerable<Transaction> ShowTransactionsByDate(DateOnly date)
+        {
+            return this._transactionList.Where(t => t.Date == date);
         }
 
         /// <summary>

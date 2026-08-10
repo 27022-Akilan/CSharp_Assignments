@@ -16,7 +16,7 @@ namespace AssignmentFour.Model
         /// <param name="date">Contains the date and Time</param>
         /// <param name="category">Contains the category of the expense</param>
         public Expense(Guid id, decimal amount, string description, DateOnly date, Category category)
-            : base(id, amount, Type.Expense, description, date)
+            : base(id, amount, TransactionType.Expense, description, date)
         {
             this.Category = category;
         }

@@ -16,7 +16,7 @@ namespace AssignmentFour.Model
         /// <param name="date">Contains the date and Time</param>
         /// <param name="source">Contains the source of the Income</param>
         public Income(Guid id, decimal amount, string description, DateOnly date, Source source)
-            : base(id, amount, Type.Income, description, date)
+            : base(id, amount, TransactionType.Income, description, date)
         {
             this.Source = source;
         }

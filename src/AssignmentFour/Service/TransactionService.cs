@@ -1,4 +1,5 @@
 ﻿using AssignmentFour.Model;
+using AssignmentFour.Model.Enums;
 using AssignmentFour.Repository;
 
 namespace AssignmentFour.Service
@@ -88,6 +89,111 @@ namespace AssignmentFour.Service
         public IEnumerable<Transaction> GetAllTransactions()
         {
             return this._repository.ShowAll();
+        }
+
+        /// <summary>
+        /// Gets the List of transactions by type which cannot be modified.
+        /// </summary>
+        /// <param name="type">Type of transactions to retrieve</param>
+        /// <returns>IEnumerable list of Transactions of the specified type</returns>
+        public IEnumerable<Transaction> GetTransactionsByType(TransactionType type)
+        {
+            return this._repository.ShowTransactionsByType(type);
+        }
+
+        /// <summary>
+        /// Gets the List of transactions by amount which cannot be modified.
+        /// </summary>
+        /// <param name="amount">Amount of transactions to retrieve</param>
+        /// <returns>IEnumerable list of Transactions of the specified amount</returns>
+        public IEnumerable<Transaction> GetTransactionsByAmount(decimal amount)
+        {
+            return this._repository.ShowTransactionByAmount(amount);
+        }
+
+        /// <summary>
+        /// Gets the List of transactions by description which cannot be modified.
+        /// </summary>
+        /// <param name="description">Description of transactions to retrieve</param>
+        /// <returns>IEnumerable list of Transactions of the specified description</returns>
+        public IEnumerable<Transaction> GetTransactionsByDescription(string description)
+        {
+            if (string.IsNullOrWhiteSpace(description))
+            {
+                return Enumerable.Empty<Transaction>();
+            }
+
+            return this._repository.ShowTransactionsByDescription(description);
+        }
+
+        /// <summary>
+        /// Gets the List of transactions by date which cannot be modified.
+        /// </summary>
+        /// <param name="date">Date of the transactions to retrieve</param>
+        /// <returns>IEnumerable list of Transactions of the specified date</returns>
+        public IEnumerable<Transaction> GetTransactionByDate(DateOnly date)
+        {
+            return this._repository.ShowTransactionsByDate(date);
+        }
+
+        /// <summary>
+        /// Gets the summary of all transactions
+        /// </summary>
+        /// <returns>Summary object</returns>
+        public Summary GetSummary()
+        {
+            decimal income = this.GetIncome();
+            decimal expense = this.GetExpense();
+            decimal netBalance = income - expense;
+            var transactions = this.GetAllTransactions();
+            int totalTransactions = transactions.Count();
+            decimal averageTransactionValue = totalTransactions > 0 ? transactions.Average(t => t.Amount) : 0;
+            return new Summary(income, expense, netBalance, totalTransactions, averageTransactionValue);
+        }
+
+        /// <summary>
+        /// Gets the total income
+        /// </summary>
+        /// <returns>Decimal value representing total income</returns>
+        public decimal GetTotalIncome()
+        {
+            return this.GetIncome();
+        }
+
+        /// <summary>
+        /// Gets the total expense
+        /// </summary>
+        /// <returns>Decimal value representing total expense</returns>
+        public decimal GetTotalExpense()
+        {
+            return this.GetExpense();
+        }
+
+        /// <summary>
+        /// Gets the net balance
+        /// </summary>
+        /// <returns>Decimal value representing net balance</returns>
+        public decimal GetNetBalance()
+        {
+            return this.GetIncome() - this.GetExpense();
+        }
+
+        /// <summary>
+        /// Gets the total income from all transactions
+        /// </summary>
+        /// <returns>Decimal value representing the total income</returns>
+        public decimal GetIncome()
+        {
+            return this._repository.ShowTransactionsByType(TransactionType.Income).Sum(t => t.Amount);
+        }
+
+        /// <summary>
+        /// Gets the total expense from all transactions
+        /// </summary>
+        /// <returns>Decimal value representing the total expense</returns>
+        public decimal GetExpense()
+        {
+            return this._repository.ShowTransactionsByType(TransactionType.Expense).Sum(t => t.Amount);
         }
 
         /// <summary>
