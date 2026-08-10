@@ -1,4 +1,6 @@
-﻿namespace AssignmentFour.Model
+﻿using AssignmentFour.Model.Enums;
+
+namespace AssignmentFour.Model
 {
     /// <summary>
     /// A base class for the Expense and Income
@@ -13,7 +15,7 @@
         /// <param name="type">Type of the account (Income / Expense)</param>
         /// <param name="description">Contains the Description</param>
         /// <param name="date">Contains the date and Time</param>
-        public Transaction(Guid id, decimal amount, Type type, string description, DateOnly date)
+        public Transaction(Guid id, decimal amount, TransactionType type, string description, DateOnly date)
         {
             this.TransactionId = id;
             this.Amount = amount;
@@ -44,7 +46,7 @@
         /// /// <value>
         /// It holds the Type of the Transaction.
         /// </value>
-        public Type TransactionType { get; set; }
+        public TransactionType TransactionType { get; set; }
 
         /// <summary>
         /// Gets or sets Description

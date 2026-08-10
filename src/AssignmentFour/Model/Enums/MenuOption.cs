@@ -1,4 +1,4 @@
-﻿namespace AssignmentFour.Model
+﻿namespace AssignmentFour.Model.Enums
 {
     /// <summary>
     /// Provides enums for the MenuOption
@@ -26,9 +26,19 @@
         DeleteTransaction,
 
         /// <summary>
+        /// Option for searching a transaction
+        /// </summary>
+        SearchTransaction,
+
+        /// <summary>
         /// Option for Show all transaction
         /// </summary>
         ShowTransaction,
+
+        /// <summary>
+        /// Option for Show summary of all transaction
+        /// </summary>
+        ShowSummary,
 
         /// <summary>
         /// Option for exiting the menu

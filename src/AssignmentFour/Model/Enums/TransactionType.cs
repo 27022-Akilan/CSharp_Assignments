@@ -1,9 +1,9 @@
-﻿namespace AssignmentFour.Model;
+﻿namespace AssignmentFour.Model.Enums;
 
 /// <summary>
 /// Enum for the type (Income / expense)
 /// </summary>
-public enum Type
+public enum TransactionType
 {
     /// <summary>
     /// Income Type

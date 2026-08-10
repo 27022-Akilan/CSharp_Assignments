@@ -1,4 +1,5 @@
 ﻿using AssignmentFour.Model;
+using AssignmentFour.Model.Enums;
 
 namespace AssignmentFour.Repository
 {
@@ -33,6 +34,34 @@ namespace AssignmentFour.Repository
         /// </summary>
         /// <returns>Enumerable List of transactions which cant be modified</returns>
         public IEnumerable<Transaction> ShowAll();
+
+        /// <summary>
+        /// To show the transactions by type (Income , Expense)
+        /// </summary>
+        /// <param name="type">Type of transactions to retrieve</param>
+        /// <returns>IEnumerable list of Transactions of the specified type</returns>
+        public IEnumerable<Transaction> ShowTransactionsByType(TransactionType type);
+
+        /// <summary>
+        /// Gets the list of transactions based on the amount
+        /// </summary>
+        /// <param name="amount">Amount of transactions to retrieve</param>
+        /// <returns>IEnumerable list of Transactions of the specified amount</returns>
+        public IEnumerable<Transaction> ShowTransactionByAmount(decimal amount);
+
+        /// <summary>
+        /// Gets the list of transactions based on the description
+        /// </summary>
+        /// <param name="description">Description of transactions to retrieve</param>
+        /// <returns>IEnumerable list of Transactions of the specified description</returns>
+        public IEnumerable<Transaction> ShowTransactionsByDescription(string description);
+
+        /// <summary>
+        /// Gets the list of transactions based on the date
+        /// </summary>
+        /// <param name="date">Date of the transactions to retrieve</param>
+        /// <returns>IEnumerable list of Transactions of the specified date</returns>
+        public IEnumerable<Transaction> ShowTransactionsByDate(DateOnly date);
 
         /// <summary>
         /// Gets the transaction object using the Transaction Id

@@ -1,4 +1,4 @@
-﻿namespace AssignmentFour.Model
+﻿namespace AssignmentFour.Model.Enums
 {
     /// <summary>
     /// Represents the source of a income

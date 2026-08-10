@@ -1,4 +1,4 @@
-﻿using AssignmentFour.Model;
+﻿using AssignmentFour.Model.Enums;
 using AssignmentFour.Service;
 
 namespace AssignmentFour.View
@@ -197,6 +197,35 @@ namespace AssignmentFour.View
             }
 
             category = default;
+            return false;
+        }
+
+        /// <summary>
+        /// Try's to read a valid Type.
+        /// </summary>
+        /// <param name="prompt">Prompt that should be Displayed to user.</param>
+        /// <param name="type">Validated type.</param>
+        /// <returns>True - Got Valid type | False - Cannot get a valid type.</returns>
+        public bool TryReadType(string prompt, out TransactionType type)
+        {
+            for (int i = 1; i <= MaxTries; i++)
+            {
+                Console.WriteLine(
+                    prompt +
+                    "\n1. Income" +
+                    "\n2. Expense");
+                Console.Write("Enter choice: ");
+                string choiceString = Console.ReadLine() ?? string.Empty;
+                if (int.TryParse(choiceString, out int choice) && Enum.IsDefined(typeof(TransactionType), choice))
+                {
+                    type = (TransactionType)choice;
+                    return true;
+                }
+
+                Helper.DisplayWarningMessage($"Your input should be a valid type number!\nTries Left : {MaxTries - i}");
+            }
+
+            type = default;
             return false;
         }
     }

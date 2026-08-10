@@ -68,5 +68,15 @@
             Console.WriteLine(message);
             Console.ResetColor();
         }
+
+        /// <summary>
+        /// Displays a message indicating that the program is aborting due to maximum invalid tries attempted.
+        /// </summary>
+        public static void DisplayAbortMessage()
+        {
+            Console.ForegroundColor = ConsoleColor.Red;
+            Console.WriteLine("Aborting due to Maximum Invalid Tries Attempted");
+            Console.ResetColor();
+        }
     }
 }
