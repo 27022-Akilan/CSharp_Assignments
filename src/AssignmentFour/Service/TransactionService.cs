@@ -25,7 +25,7 @@ namespace AssignmentFour.Service
         /// </summary>
         /// <param name="transaction">Transaction object</param>
         /// <returns>String - Empty string for success or else a message for the failing</returns>
-        public string AddTransaction(Model.Transaction transaction)
+        public string AddTransaction(Transaction transaction)
         {
             if (transaction == null)
             {
@@ -66,7 +66,7 @@ namespace AssignmentFour.Service
         /// </summary>
         /// <param name="transaction">Transaction object</param>
         /// <returns>Bool </returns>
-        public bool Update(Model.Transaction transaction)
+        public bool Update(Transaction transaction)
         {
             if (transaction == null)
             {
@@ -151,8 +151,8 @@ namespace AssignmentFour.Service
         /// <returns>Summary object</returns>
         public Summary GetSummary()
         {
-            decimal income = this.GetIncome();
-            decimal expense = this.GetExpense();
+            decimal income = this.GetTotalIncome();
+            decimal expense = this.GetTotalExpense();
             decimal netBalance = income - expense;
             var transactions = this.GetAllTransactions();
             int totalTransactions = transactions.Count();
@@ -166,7 +166,7 @@ namespace AssignmentFour.Service
         /// <returns>Decimal value representing total income</returns>
         public decimal GetTotalIncome()
         {
-            return this.GetIncome();
+            return this._repository.ShowTransactionsByType(TransactionType.Income).Sum(t => t.Amount);
         }
 
         /// <summary>
@@ -175,7 +175,7 @@ namespace AssignmentFour.Service
         /// <returns>Decimal value representing total expense</returns>
         public decimal GetTotalExpense()
         {
-            return this.GetExpense();
+            return this._repository.ShowTransactionsByType(TransactionType.Expense).Sum(t => t.Amount);
         }
 
         /// <summary>
@@ -184,25 +184,7 @@ namespace AssignmentFour.Service
         /// <returns>Decimal value representing net balance</returns>
         public decimal GetNetBalance()
         {
-            return this.GetIncome() - this.GetExpense();
-        }
-
-        /// <summary>
-        /// Gets the total income from all transactions
-        /// </summary>
-        /// <returns>Decimal value representing the total income</returns>
-        public decimal GetIncome()
-        {
-            return this._repository.ShowTransactionsByType(TransactionType.Income).Sum(t => t.Amount);
-        }
-
-        /// <summary>
-        /// Gets the total expense from all transactions
-        /// </summary>
-        /// <returns>Decimal value representing the total expense</returns>
-        public decimal GetExpense()
-        {
-            return this._repository.ShowTransactionsByType(TransactionType.Expense).Sum(t => t.Amount);
+            return this.GetTotalIncome() - this.GetTotalExpense();
         }
 
         /// <summary>

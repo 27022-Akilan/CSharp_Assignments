@@ -30,7 +30,7 @@ namespace AssignmentFour.View
         /// <summary>
         /// Starts to run the view
         /// </summary>
-        public void Run()
+        public void StartApplication()
         {
             bool exit = false;
             while (!exit)
@@ -44,11 +44,11 @@ namespace AssignmentFour.View
                     switch (option)
                     {
                         case MenuOption.AddIncome:
-                            this.HandleIncome();
+                            this.AddIncome();
                             Helper.PressKeyToContinue();
                             break;
                         case MenuOption.AddExpense:
-                            this.HandleExpense();
+                            this.AddExpense();
                             Helper.PressKeyToContinue();
                             break;
                         case MenuOption.UpdateTransaction:
@@ -111,7 +111,7 @@ namespace AssignmentFour.View
         /// <summary>
         /// Handles adding an Income transaction
         /// </summary>
-        public void HandleIncome()
+        public void AddIncome()
         {
             if (!this.TryReadCommonFields(
                 "Enter the Amount for Income:",
@@ -147,7 +147,7 @@ namespace AssignmentFour.View
         /// <summary>
         /// Handles adding an Expense transaction
         /// </summary>
-        public void HandleExpense()
+        public void AddExpense()
         {
             if (!this.TryReadCommonFields(
                 "Enter the Amount for Expense:",
@@ -374,7 +374,7 @@ namespace AssignmentFour.View
         {
             if (!this._getValidInput.TryReadDescription("Enter the Description of the Transaction to be search:", out string description))
             {
-                Helper.DisplayErrorMessage("Abotying due to maximum invalid tries attempted");
+                Helper.DisplayErrorMessage("Aborting due to maximum invalid tries attempted");
                 return;
             }
 
