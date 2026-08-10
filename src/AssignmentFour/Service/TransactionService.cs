@@ -35,11 +35,30 @@ namespace AssignmentFour.Service
             bool validationResult = this.IsValidAmount(transaction.Amount);
             if (validationResult)
             {
-                Transaction transactionWithId = transaction.CreateTransactionWithId(Guid.NewGuid());
+                Transaction transactionWithId;
+                if (transaction is Income)
+                {
+                    transactionWithId = new Income(
+                        Guid.NewGuid(),
+                        transaction.Amount,
+                        transaction.Description,
+                        transaction.Date,
+                        ((Income)transaction).Source);
+                }
+                else
+                {
+                    transactionWithId = new Expense(
+                        Guid.NewGuid(),
+                        transaction.Amount,
+                        transaction.Description,
+                        transaction.Date,
+                        ((Expense)transaction).Category);
+                }
+
                 return this._repository.Add(transactionWithId);
             }
 
-            return "Amount cannot be Less than or equal to zero";
+            return Messages.AddFailedDueToAmountLessThanZero;
         }
 
         /// <summary>
@@ -60,16 +79,6 @@ namespace AssignmentFour.Service
             }
 
             return this._repository.UpdateTransaction(transaction);
-        }
-
-        /// <summary>
-        /// Gets the transaction using the ID of the transaction
-        /// </summary>
-        /// <param name="transactionId">Id of the transaction to get</param>
-        /// <returns>Transaction object</returns>
-        public Transaction? GetOneTransaction(Guid transactionId)
-        {
-            return this._repository.GetOne(transactionId);
         }
 
         /// <summary>

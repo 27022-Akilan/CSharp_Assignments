@@ -8,7 +8,7 @@ namespace AssignmentFour.Model
     public class Expense : Transaction
     {
         /// <summary>
-        /// Initializes a new instance of the <see cref="Expense"/> class
+        /// Initializes a new instance of the <see cref="Expense"/> class.
         /// </summary>
         /// <param name="id">Contains the Id of the Transaction</param>
         /// <param name="amount">Contains the Amount</param>
@@ -32,10 +32,19 @@ namespace AssignmentFour.Model
         /// Overrides the base method to create the Expense object with correct ID.
         /// </summary>
         /// <param name="id">Id of the transaction</param>
-        /// <returns>A Income object</returns>
+        /// <returns>A Expense object</returns>
         public override Transaction CreateTransactionWithId(Guid id)
         {
             return new Expense(id, this.Amount, this.Description, this.Date, this.Category);
+        }
+
+        /// <summary>
+        ///  To return a cloned copy of the Expense.
+        /// </summary>
+        /// <returns>Cloned copy of Expense</returns>
+        public override Transaction CloneTransaction()
+        {
+            return new Expense(this.TransactionId, this.Amount, this.Description, this.Date, this.Category);
         }
     }
 }
