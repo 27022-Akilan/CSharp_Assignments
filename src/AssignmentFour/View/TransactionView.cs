@@ -456,7 +456,7 @@ namespace AssignmentFour.View
         /// </summary>
         public void ShowSummary()
         {
-            var summary = this._service.GetSummary();
+            Summary summary = this._service.GetSummary();
 
             Console.WriteLine("================= Summary =================" +
                               $"\nTotal Income: {summary.TotalIncome}" +

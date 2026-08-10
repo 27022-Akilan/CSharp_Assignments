@@ -29,6 +29,7 @@ namespace AssignmentFour.View
         /// <returns>True - Got Valid Amount | False - Cannot get a valid Amount.</returns>
         public bool TryReadDecimal(string prompt, out decimal amount)
         {
+            amount = default;
             for (int i = 1; i <= MaxTries; i++)
             {
                 Console.WriteLine(prompt);
@@ -48,7 +49,6 @@ namespace AssignmentFour.View
                 }
             }
 
-            amount = default;
             return false;
         }
 
@@ -60,6 +60,7 @@ namespace AssignmentFour.View
         /// <returns>True - Got Valid description | False - Cannot get a valid description.</returns>
         public bool TryReadDescription(string prompt, out string description)
         {
+            description = string.Empty;
             for (int i = 1; i <= MaxTries; i++)
             {
                 Console.WriteLine(prompt);
@@ -72,7 +73,6 @@ namespace AssignmentFour.View
                 Helper.DisplayWarningMessage($"The description can't be Empty or Whitespace\nTries Left : {MaxTries - i}");
             }
 
-            description = string.Empty;
             return false;
         }
 
@@ -84,6 +84,7 @@ namespace AssignmentFour.View
         /// <returns>True - Got Valid date | False - Cannot get a valid date.</returns>
         public bool TryReadDate(string prompt, out DateOnly date)
         {
+            date = default;
             for (int i = 1; i <= MaxTries; i++)
             {
                 Console.WriteLine(prompt);
@@ -105,7 +106,6 @@ namespace AssignmentFour.View
                 }
             }
 
-            date = default;
             return false;
         }
 
@@ -118,6 +118,7 @@ namespace AssignmentFour.View
         /// <returns>True - Got Valid index | False - Cannot get a valid index.</returns>
         public bool TryReadSerialNumber(string prompt, int max, out int index)
         {
+            index = default;
             for (int i = 1; i <= MaxTries; i++)
             {
                 Console.WriteLine(prompt);
@@ -130,7 +131,6 @@ namespace AssignmentFour.View
                 Helper.DisplayWarningMessage($"Invalid Serial Number. Please enter a number between 1 and {max}.\nTries Left : {MaxTries - i}");
             }
 
-            index = default;
             return false;
         }
 
@@ -142,6 +142,7 @@ namespace AssignmentFour.View
         /// <returns>True - Got Valid source | False - Cannot get a valid source.</returns>
         public bool TryReadSource(string prompt, out Source source)
         {
+            source = default;
             for (int i = 1; i <= MaxTries; i++)
             {
                 Console.WriteLine(
@@ -164,7 +165,6 @@ namespace AssignmentFour.View
                 Helper.DisplayWarningMessage($"Your input should be a valid source number!\nTries Left : {MaxTries - i}");
             }
 
-            source = default;
             return false;
         }
 
@@ -176,6 +176,7 @@ namespace AssignmentFour.View
         /// <returns>True - Got Valid category | False - Cannot get a valid category.</returns>
         public bool TryReadCategory(string prompt, out Category category)
         {
+            category = default;
             for (int i = 1; i <= MaxTries; i++)
             {
                 Console.WriteLine(
@@ -196,7 +197,6 @@ namespace AssignmentFour.View
                 Helper.DisplayWarningMessage($"Your input should be a valid category number!\nTries Left : {MaxTries - i}");
             }
 
-            category = default;
             return false;
         }
 
@@ -208,6 +208,7 @@ namespace AssignmentFour.View
         /// <returns>True - Got Valid type | False - Cannot get a valid type.</returns>
         public bool TryReadType(string prompt, out TransactionType type)
         {
+            type = default;
             for (int i = 1; i <= MaxTries; i++)
             {
                 Console.WriteLine(
@@ -225,7 +226,6 @@ namespace AssignmentFour.View
                 Helper.DisplayWarningMessage($"Your input should be a valid type number!\nTries Left : {MaxTries - i}");
             }
 
-            type = default;
             return false;
         }
     }
