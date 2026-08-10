@@ -63,8 +63,8 @@ namespace AssignmentFour.View
                             this.SearchTransaction();
                             Helper.PressKeyToContinue();
                             break;
-                        case MenuOption.ShowTransaction:
-                            this.ShowTransaction();
+                        case MenuOption.ShowTransactions:
+                            this.ShowTransactions();
                             Helper.PressKeyToContinue();
                             break;
                         case MenuOption.ShowSummary:
@@ -437,7 +437,7 @@ namespace AssignmentFour.View
         /// <summary>
         /// Shows the all the transaction.
         /// </summary>
-        public void ShowTransaction()
+        public void ShowTransactions()
         {
             IEnumerable<Transaction> transactions = this._service.GetAllTransactions();
             if (transactions.Count() == 0)

@@ -1,12 +1,12 @@
 ﻿namespace AssignmentFour.Model
 {
     /// <summary>
-    /// Represents the summary of all transactions
+    /// Represents the summary of all transactions.
     /// </summary>
     public class Summary
     {
         /// <summary>
-        /// Initializes a new instance of the <see cref="Summary"/> class
+        /// Initializes a new instance of the <see cref="Summary"/> class.
         /// </summary>
         /// <param name="totalIncome">The total income</param>
         /// <param name="totalExpense">The total expense</param>
@@ -23,7 +23,7 @@
         }
 
         /// <summary>
-        /// Gets the total income
+        /// Gets the total income.
         /// </summary>
         /// <value>
         /// It holds the Total Income.
@@ -31,7 +31,7 @@
         public decimal TotalIncome { get; }
 
         /// <summary>
-        /// Gets the total expense
+        /// Gets the total expense.
         /// </summary>
         /// /// <value>
         /// It holds the Total Expense.
@@ -39,7 +39,7 @@
         public decimal TotalExpense { get; }
 
         /// <summary>
-        /// Gets the net balance
+        /// Gets the net balance.
         /// </summary>
         /// <value>
         /// It holds the Net Balance.
@@ -47,7 +47,7 @@
         public decimal NetBalance { get; }
 
         /// <summary>
-        /// Gets the total transactions count
+        /// Gets the total transactions count.
         /// </summary>
         /// <value>
         /// It holds the Total Transactions Count.
@@ -55,7 +55,7 @@
         public int TotalTransactions { get; }
 
         /// <summary>
-        /// Gets the average transaction value
+        /// Gets the average transaction value.
         /// </summary>
         /// <value>
         /// It holds the Average Transaction Value.

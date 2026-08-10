@@ -3,12 +3,12 @@
 namespace AssignmentFour.Model
 {
     /// <summary>
-    /// A base class for the Expense and Income
+    /// A base class for the Expense and Income.
     /// </summary>
     public abstract class Transaction
     {
         /// <summary>
-        /// Initializes a new instance of the <see cref="Transaction"/> class
+        /// Initializes a new instance of the <see cref="Transaction"/> class.
         /// </summary>
         /// <param name="id">Contains the Id of the Transaction</param>
         /// <param name="amount">Contains the Amount</param>
@@ -25,7 +25,7 @@ namespace AssignmentFour.Model
         }
 
         /// <summary>
-        /// Gets TransactionId
+        /// Gets TransactionId.
         /// </summary>
         /// <value>
         /// It holds the Transaction Id.
@@ -33,7 +33,7 @@ namespace AssignmentFour.Model
         public Guid TransactionId { get; }
 
         /// <summary>
-        /// Gets or sets Amount
+        /// Gets or sets Amount.
         /// </summary>
         /// <value>
         /// It holds the Amount.
@@ -41,34 +41,40 @@ namespace AssignmentFour.Model
         public decimal Amount { get; set; }
 
         /// <summary>
-        /// Gets or sets Type
+        /// Gets or sets Type of the Transaction.
         /// </summary>
         /// /// <value>
-        /// It holds the Type of the Transaction.
+        /// Holds the Type of the Transaction.
         /// </value>
         public TransactionType TransactionType { get; set; }
 
         /// <summary>
-        /// Gets or sets Description
+        /// Gets or sets Description.
         /// </summary>
         /// <value>
-        /// Hold the description
+        /// Hold the description.
         /// </value>
         public string Description { get; set; }
 
         /// <summary>
-        /// Gets or sets the date
+        /// Gets or sets the date.
         /// </summary>
         /// <value>
-        /// Holds the Date
+        /// Holds the Date.
         /// </value>
         public DateOnly Date { get; set; }
 
         /// <summary>
-        /// To create the object with ID created on the service layer
+        /// To create the object with ID created on the service layer.
         /// </summary>
         /// <param name="id">Id of the transaction</param>
         /// <returns>A transaction object</returns>
         public abstract Transaction CreateTransactionWithId(Guid id);
+
+        /// <summary>
+        ///  To return a cloned copy of the Transaction.
+        /// </summary>
+        /// <returns>Cloned copy of transaction</returns>
+        public abstract Transaction CloneTransaction();
     }
 }

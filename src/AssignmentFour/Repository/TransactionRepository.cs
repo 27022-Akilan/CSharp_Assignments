@@ -12,7 +12,7 @@ namespace AssignmentFour.Repository
         private List<Transaction> _transactionList = new List<Transaction>();
 
         /// <summary>
-        /// Adds the transaction to the repository
+        /// Adds the transaction to the repository.
         /// </summary>
         /// <param name="transaction">Transaction object</param>
         /// <returns>A message that tells about the </returns>
@@ -24,10 +24,10 @@ namespace AssignmentFour.Repository
         }
 
         /// <summary>
-        /// To update the existing Transaction
+        /// To update the existing Transaction.
         /// </summary>
         /// <param name="transaction">Edited details of the Transaction</param>
-        /// <returns>bool True - Updated Successfully | False - Cannot Update</returns>
+        /// <returns>True - Updated Successfully | False - Cannot Update</returns>
         public bool UpdateTransaction(Transaction transaction)
         {
             foreach (var field in this._transactionList)
@@ -58,7 +58,7 @@ namespace AssignmentFour.Repository
         /// To delete the Transaction using Id
         /// </summary>
         /// <param name="transactionId">Id of the transaction to be deleted</param>
-        /// <returns>bool - True if the transaction found and deleted | False if the transaction cant be deleted</returns>
+        /// <returns>True if the transaction found and deleted | False if the transaction cant be deleted</returns>
         public bool DeleteById(Guid transactionId)
         {
             foreach (var transaction in this._transactionList)
@@ -74,72 +74,23 @@ namespace AssignmentFour.Repository
         }
 
         /// <summary>
-        ///  Shows the Transaction of the desired transaction Id
-        /// </summary>
-        /// <param name="transactionId">Id of the Transaction to be shown</param>
-        /// <returns>A Transaction if the Id exists or else null</returns>
-        public Transaction? GetOne(Guid transactionId)
-        {
-            Transaction? match = this._transactionList.Where(t => t.TransactionId == transactionId).FirstOrDefault();
-
-            if (match == null)
-            {
-                return null;
-            }
-
-            if (match is Income)
-            {
-                return new Income(match.TransactionId, match.Amount, match.Description, match.Date, ((Income)match).Source);
-            }
-
-            if (match is Expense)
-            {
-                return new Expense(match.TransactionId, match.Amount, match.Description, match.Date, ((Expense)match).Category);
-            }
-
-            return null;
-        }
-
-        /// <summary>
         /// Shows the entire transactions
         /// </summary>
-        /// <returns>A clone </returns>
+        /// <returns>A cloned copy of all all transactions </returns>
         public IEnumerable<Transaction> ShowAll()
         {
-            List<Transaction> transactionList = new List<Transaction>();
-            foreach (var transaction in this._transactionList)
-            {
-                if (transaction is Income)
-                {
-                    transactionList.Add(new Income(
-                                                transaction.TransactionId,
-                                                transaction.Amount,
-                                                transaction.Description,
-                                                transaction.Date,
-                                                ((Income)transaction).Source));
-                }
-                else
-                {
-                    transactionList.Add(new Expense(
-                                                transaction.TransactionId,
-                                                transaction.Amount,
-                                                transaction.Description,
-                                                transaction.Date,
-                                                ((Expense)transaction).Category));
-                }
-            }
-
-            return transactionList;
+            return this._transactionList.Select(t => t.CloneTransaction());
         }
 
         /// <summary>
-        /// Shows the transactions of the desired type
+        /// Shows the transactions of the desired type.
         /// </summary>
         /// <param name="type">Type of transactions to retrieve</param>
         /// <returns>IEnumerable list of Transactions of the specified type</returns>
         public IEnumerable<Transaction> ShowTransactionsByType(TransactionType type)
         {
-            return this._transactionList.Where((Func<Transaction, bool>)(t => t.TransactionType == type));
+            return this._transactionList.Where(t => t.TransactionType == type)
+                                        .Select(t => t.CloneTransaction());
         }
 
         /// <summary>
@@ -149,7 +100,8 @@ namespace AssignmentFour.Repository
         /// <returns>IEnumerable list of Transactions of the specified amount</returns>
         public IEnumerable<Transaction> ShowTransactionByAmount(decimal amount)
         {
-            return this._transactionList.Where(t => t.Amount == amount);
+            return this._transactionList.Where(t => t.Amount == amount)
+                                        .Select(t => t.CloneTransaction());
         }
 
         /// <summary>
@@ -159,7 +111,8 @@ namespace AssignmentFour.Repository
         /// <returns>IEnumerable list of Transactions of the specified description</returns>
         public IEnumerable<Transaction> ShowTransactionsByDescription(string description)
         {
-            return this._transactionList.Where(t => t.Description.Contains(description));
+            return this._transactionList.Where(t => t.Description.Contains(description))
+                                        .Select(t => t.CloneTransaction());
         }
 
         /// <summary>
@@ -169,7 +122,8 @@ namespace AssignmentFour.Repository
         /// <returns>IEnumerable list of Transactions of the specified date</returns>
         public IEnumerable<Transaction> ShowTransactionsByDate(DateOnly date)
         {
-            return this._transactionList.Where(t => t.Date == date);
+            return this._transactionList.Where(t => t.Date == date)
+                                        .Select(t => t.CloneTransaction());
         }
 
         /// <summary>
