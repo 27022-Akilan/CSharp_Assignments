@@ -35,7 +35,7 @@ namespace AssignmentFour.Service
             bool validationResult = this.IsValidAmount(transaction.Amount);
             if (validationResult)
             {
-                Transaction transactionWithId = transaction.WithId(Guid.NewGuid());
+                Transaction transactionWithId = transaction.CreateTransactionWithId(Guid.NewGuid());
                 return this._repository.Add(transactionWithId);
             }
 

@@ -33,7 +33,7 @@ namespace AssignmentFour.Model
         /// </summary>
         /// <param name="id">Id of the transaction</param>
         /// <returns>A Income object</returns>
-        public override Transaction WithId(Guid id)
+        public override Transaction CreateTransactionWithId(Guid id)
         {
             return new Expense(id, this.Amount, this.Description, this.Date, this.Category);
         }
