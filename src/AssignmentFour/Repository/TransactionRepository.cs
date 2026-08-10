@@ -30,7 +30,7 @@ namespace AssignmentFour.Repository
         /// <returns>True - Updated Successfully | False - Cannot Update</returns>
         public bool UpdateTransaction(Transaction transaction)
         {
-            foreach (var field in this._transactionList)
+            foreach (Transaction field in this._transactionList)
             {
                 if (field.TransactionId == transaction.TransactionId)
                 {
@@ -61,7 +61,7 @@ namespace AssignmentFour.Repository
         /// <returns>True if the transaction found and deleted | False if the transaction cant be deleted</returns>
         public bool DeleteById(Guid transactionId)
         {
-            foreach (var transaction in this._transactionList)
+            foreach (Transaction transaction in this._transactionList)
             {
                 if (transaction.TransactionId == transactionId)
                 {
