@@ -76,12 +76,14 @@ namespace AssignmentFour.View
                             break;
                         default:
                             Helper.DisplayWarningMessage("Invalid Choice. Please enter a number between 1 and 8.");
+                            Helper.PressKeyToContinue();
                             break;
                     }
                 }
                 else
                 {
-                    Helper.DisplayWarningMessage("Invalid input. Please enter a number between 1 and 6.");
+                    Helper.DisplayWarningMessage("Invalid input. Please enter a number between 1 and 8.");
+                    Helper.PressKeyToContinue();
                 }
             }
         }
