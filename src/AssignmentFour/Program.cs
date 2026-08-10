@@ -20,7 +20,7 @@ namespace Assignments
             InputView inputView = new InputView(service);
             TransactionView view = new TransactionView(service, inputView);
 
-            view.Run();
+            view.StartApplication();
         }
     }
 }

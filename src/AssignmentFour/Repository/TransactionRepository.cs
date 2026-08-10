@@ -15,7 +15,7 @@ namespace AssignmentFour.Repository
         /// Adds the transaction to the repository.
         /// </summary>
         /// <param name="transaction">Transaction object</param>
-        /// <returns>A message that tells about the </returns>
+        /// <returns>A message that tells about the result of Adding the Transaction</returns>
         public string Add(Transaction transaction)
         {
             this._transactionList.Add(transaction);
@@ -124,16 +124,6 @@ namespace AssignmentFour.Repository
         {
             return this._transactionList.Where(t => t.Date == date)
                                         .Select(t => t.CloneTransaction());
-        }
-
-        /// <summary>
-        /// Returns the Guid of the transaction by the index
-        /// </summary>
-        /// <param name="index">Holds the index where the Transaction resides in List</param>
-        /// <returns>Guid of that serial number</returns>
-        public Guid GetGuid(int index)
-        {
-            return this._transactionList[index].TransactionId;
         }
     }
 }

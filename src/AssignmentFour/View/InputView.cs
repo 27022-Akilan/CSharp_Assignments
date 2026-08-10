@@ -3,7 +3,7 @@ using AssignmentFour.Service;
 
 namespace AssignmentFour.View
 {
-    /// <summary>
+    /// <summary>Gui
     /// Gets the User input and Validate
     /// </summary>
     public class InputView
