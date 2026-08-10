@@ -65,13 +65,6 @@ namespace AssignmentFour.Model
         public DateOnly Date { get; set; }
 
         /// <summary>
-        /// To create the object with ID created on the service layer.
-        /// </summary>
-        /// <param name="id">Id of the transaction</param>
-        /// <returns>A transaction object</returns>
-        public abstract Transaction CreateTransactionWithId(Guid id);
-
-        /// <summary>
         ///  To return a cloned copy of the Transaction.
         /// </summary>
         /// <returns>Cloned copy of transaction</returns>
