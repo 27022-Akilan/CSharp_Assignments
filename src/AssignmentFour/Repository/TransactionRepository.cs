@@ -77,7 +77,7 @@ namespace AssignmentFour.Repository
         /// Shows the entire transactions
         /// </summary>
         /// <returns>A cloned copy of all all transactions </returns>
-        public IEnumerable<Transaction> ShowAll()
+        public IEnumerable<Transaction> GetAll()
         {
             return this._transactionList.Select(t => t.CloneTransaction());
         }
@@ -87,7 +87,7 @@ namespace AssignmentFour.Repository
         /// </summary>
         /// <param name="type">Type of transactions to retrieve</param>
         /// <returns>IEnumerable list of Transactions of the specified type</returns>
-        public IEnumerable<Transaction> ShowTransactionsByType(TransactionType type)
+        public IEnumerable<Transaction> GetTransactionsByType(TransactionType type)
         {
             return this._transactionList.Where(t => t.TransactionType == type)
                                         .Select(t => t.CloneTransaction());
@@ -98,7 +98,7 @@ namespace AssignmentFour.Repository
         /// </summary>
         /// <param name="amount">Amount of transactions to retrieve</param>
         /// <returns>IEnumerable list of Transactions of the specified amount</returns>
-        public IEnumerable<Transaction> ShowTransactionByAmount(decimal amount)
+        public IEnumerable<Transaction> GetTransactionByAmount(decimal amount)
         {
             return this._transactionList.Where(t => t.Amount == amount)
                                         .Select(t => t.CloneTransaction());
@@ -109,7 +109,7 @@ namespace AssignmentFour.Repository
         /// </summary>
         /// <param name="description">Description of transactions to retrieve</param>
         /// <returns>IEnumerable list of Transactions of the specified description</returns>
-        public IEnumerable<Transaction> ShowTransactionsByDescription(string description)
+        public IEnumerable<Transaction> GetTransactionsByDescription(string description)
         {
             return this._transactionList.Where(t => t.Description.Contains(description))
                                         .Select(t => t.CloneTransaction());
@@ -118,9 +118,9 @@ namespace AssignmentFour.Repository
         /// <summary>
         /// Shows the transactions of the desired date
         /// </summary>
-        /// <param name="date">Date of the transactions to retrieve</param>
+        /// <param name="date">Date of the transactions to retrieve</param>s
         /// <returns>IEnumerable list of Transactions of the specified date</returns>
-        public IEnumerable<Transaction> ShowTransactionsByDate(DateOnly date)
+        public IEnumerable<Transaction> GetTransactionsByDate(DateOnly date)
         {
             return this._transactionList.Where(t => t.Date == date)
                                         .Select(t => t.CloneTransaction());
