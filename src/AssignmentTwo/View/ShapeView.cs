@@ -17,6 +17,7 @@ namespace AssignmentTwo.View
         public void DisplayMenu()
         {
             ShapeOption shapeOption;
+            Shape shape;
             int choice;
             bool exit = false;
             do
@@ -50,7 +51,7 @@ namespace AssignmentTwo.View
                                 break;
                             }
 
-                            Shape shape = new Circle("Circle", color, radius);
+                            shape = new Circle("Circle", color, radius);
                             Helper.DisplaySuccessMessage(this._service.GetDetails(shape));
                             break;
 
