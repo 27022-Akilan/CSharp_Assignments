@@ -97,7 +97,7 @@ namespace AssignmentFour.Service
         /// <returns>IEnumerable list of Transactions which cannot be modified</returns>
         public IEnumerable<Transaction> GetAllTransactions()
         {
-            return this._repository.ShowAll();
+            return this._repository.GetAll();
         }
 
         /// <summary>
@@ -107,7 +107,7 @@ namespace AssignmentFour.Service
         /// <returns>IEnumerable list of Transactions of the specified type</returns>
         public IEnumerable<Transaction> GetTransactionsByType(TransactionType type)
         {
-            return this._repository.ShowTransactionsByType(type);
+            return this._repository.GetTransactionsByType(type);
         }
 
         /// <summary>
@@ -117,7 +117,7 @@ namespace AssignmentFour.Service
         /// <returns>IEnumerable list of Transactions of the specified amount</returns>
         public IEnumerable<Transaction> GetTransactionsByAmount(decimal amount)
         {
-            return this._repository.ShowTransactionByAmount(amount);
+            return this._repository.GetTransactionByAmount(amount);
         }
 
         /// <summary>
@@ -132,7 +132,7 @@ namespace AssignmentFour.Service
                 return Enumerable.Empty<Transaction>();
             }
 
-            return this._repository.ShowTransactionsByDescription(description);
+            return this._repository.GetTransactionsByDescription(description);
         }
 
         /// <summary>
@@ -142,7 +142,7 @@ namespace AssignmentFour.Service
         /// <returns>IEnumerable list of Transactions of the specified date</returns>
         public IEnumerable<Transaction> GetTransactionByDate(DateOnly date)
         {
-            return this._repository.ShowTransactionsByDate(date);
+            return this._repository.GetTransactionsByDate(date);
         }
 
         /// <summary>
@@ -166,7 +166,7 @@ namespace AssignmentFour.Service
         /// <returns>Decimal value representing total income</returns>
         public decimal GetTotalIncome()
         {
-            return this._repository.ShowTransactionsByType(TransactionType.Income).Sum(t => t.Amount);
+            return this._repository.GetTransactionsByType(TransactionType.Income).Sum(t => t.Amount);
         }
 
         /// <summary>
@@ -175,7 +175,7 @@ namespace AssignmentFour.Service
         /// <returns>Decimal value representing total expense</returns>
         public decimal GetTotalExpense()
         {
-            return this._repository.ShowTransactionsByType(TransactionType.Expense).Sum(t => t.Amount);
+            return this._repository.GetTransactionsByType(TransactionType.Expense).Sum(t => t.Amount);
         }
 
         /// <summary>
