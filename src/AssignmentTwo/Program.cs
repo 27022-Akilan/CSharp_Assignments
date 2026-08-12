@@ -15,9 +15,9 @@ namespace Assignments
         /// <param name="args">Default arguments</param>
         public static void Main(string[] args)
         {
-            ShapeView viewShape = new ShapeView();
-            EmployeeView viewEmployee = new EmployeeView();
-            BankView viewAccount = new BankView();
+            ShapeView shapeView = new ShapeView();
+            EmployeeView employeeView = new EmployeeView();
+            BankView accountView = new BankView();
 
             Option option;
             int choice;
@@ -40,13 +40,13 @@ namespace Assignments
                     switch (option)
                     {
                         case Option.CreateAndViewShape:
-                            viewShape.DisplayMenu();
+                            shapeView.DisplayMenu();
                             break;
                         case Option.CreateAndViewEmployee:
-                            viewEmployee.DisplayMenu();
+                            employeeView.DisplayMenu();
                             break;
                         case Option.CreateAndViewAccount:
-                            viewAccount.DisplayMenu();
+                            accountView.DisplayMenu();
                             break;
                         case Option.Exit:
                             Helper.DisplaySuccessMessage("Exiting!!");
