@@ -1,19 +1,16 @@
-﻿using AssignmentThree.Model;
-using ConsoleTables;
-
-namespace AssignmentThree
+﻿namespace AssignmentThree.Utilities
 {
     /// <summary>
     ///  A helper class to Get and  validate the input
     /// </summary>
-    public class Helper
+    public static class ConsoleReader
     {
         /// <summary>
         /// To get the name of the product from the user.
         /// </summary>
         /// <param name="name">Contains the name and returned using out parameter</param>
         /// <param name="field">Contains the field to be displayed to the user.</param>
-        /// <returns>True - Successfully got the Name || False - Cant get the name , out of tries </returns>
+        /// <returns>True - Successfully got the valid Name || False - Cant get the name , out of tries </returns>
         public static bool GetName(out string name, string field)
         {
             int tries = 3;
@@ -28,8 +25,8 @@ namespace AssignmentThree
                     return true;
                 }
 
-                DisplayWarning(result);
-                DisplayWarning($"Number of Tries Left is:{tries}\n");
+                ConsolePresenter.DisplayWarning(result);
+                ConsolePresenter.DisplayWarning($"Number of Tries Left is:{tries}\n");
             }
             while (tries > 0);
             return false;
@@ -55,8 +52,8 @@ namespace AssignmentThree
                     return true;
                 }
 
-                DisplayWarning(result);
-                DisplayWarning($"Number of Tries Left is:{tries}\n");
+                ConsolePresenter.DisplayWarning(result);
+                ConsolePresenter.DisplayWarning($"Number of Tries Left is:{tries}\n");
             }
             while (tries > 0);
             return false;
@@ -81,8 +78,8 @@ namespace AssignmentThree
                     return true;
                 }
 
-                DisplayWarning(result);
-                DisplayWarning($"Number of Tries Left is:{tries}\n");
+                ConsolePresenter.DisplayWarning(result);
+                ConsolePresenter.DisplayWarning($"Number of Tries Left is:{tries}\n");
             }
             while (tries > 0);
             return false;
@@ -106,7 +103,7 @@ namespace AssignmentThree
                     return true;
                 }
 
-                Helper.DisplayWarning($"The entered value needs to be a number , Tries left {tries}");
+                ConsolePresenter.DisplayWarning($"The entered value needs to be a number , Tries left {tries}");
             }
             while (tries > 0);
 
@@ -132,8 +129,8 @@ namespace AssignmentThree
                     return true;
                 }
 
-                DisplayWarning(result);
-                DisplayWarning($"Number of Tries Left is:{tries}\n");
+                ConsolePresenter.DisplayWarning(result);
+                ConsolePresenter.DisplayWarning($"Number of Tries Left is:{tries}\n");
             }
             while (tries > 0);
 
@@ -167,74 +164,11 @@ namespace AssignmentThree
                     return true;
                 }
 
-                DisplayWarning($"Invalid input! Enter 'y' or 'n'. Tries left: {tries}");
+                ConsolePresenter.DisplayWarning($"Invalid input! Enter 'y' or 'n'. Tries left: {tries}");
             }
             while (tries > 0);
 
             return false;
-        }
-
-        /// <summary>
-        ///  Displays Failure message in Red color
-        /// </summary>
-        /// <param name="s">Input for failure message</param>
-        public static void DisplayError(string s)
-        {
-            Console.ForegroundColor = ConsoleColor.Red;
-            Console.WriteLine(s);
-            Console.ResetColor();
-        }
-
-        /// <summary>
-        ///  Displays Warning message in Yellow color
-        /// </summary>
-        /// <param name="s">Input for the Warning message</param>
-        public static void DisplayWarning(string s)
-        {
-            Console.ForegroundColor = ConsoleColor.Yellow;
-            Console.WriteLine(s);
-            Console.ResetColor();
-        }
-
-        /// <summary>
-        /// Displays Success message in Green color
-        /// </summary>
-        /// <param name="s">Input for the success message</param>
-        public static void DisplaySuccess(string s)
-        {
-            Console.ForegroundColor = ConsoleColor.Green;
-            Console.WriteLine(s);
-            Console.ResetColor();
-        }
-
-        /// <summary>
-        /// Displays the text in the gray color
-        /// </summary>
-        /// <param name="s">Input for the Grey color message</param>
-        public static void WriteLight(string s)
-        {
-            Console.ForegroundColor = ConsoleColor.DarkGray;
-            Console.WriteLine(s);
-            Console.ResetColor();
-        }
-
-        /// <summary>
-        /// This prints the Product details in a table format.
-        /// </summary>
-        /// <param name="list">Contains the List of the products, whereas list cant be changed</param>
-        public static void DisplayTable(IEnumerable<ProductInfo> list)
-        {
-            var table = new ConsoleTable("Id", "Name", "Price", "Quantity");
-            foreach (var products in list)
-            {
-                table.AddRow(products.Id, products.Name, products.Price, products.Quantity);
-            }
-
-            table.Configure(options =>
-            {
-                options.EnableCount = false;
-            });
-            table.Write();
         }
 
         /// <summary>

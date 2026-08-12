@@ -1,5 +1,6 @@
 ﻿using AssignmentThree.Model;
 using AssignmentThree.Service;
+using AssignmentThree.Utilities;
 
 namespace AssignmentThree.View
 {
@@ -38,9 +39,9 @@ namespace AssignmentThree.View
                "\n6.Exit" +
                "\n======================================================");
                 int choice;
-                if (!Helper.GetNumber(out choice))
+                if (!ConsoleReader.GetNumber(out choice))
                 {
-                    Helper.DisplayError("Invalid Choice so application aborting");
+                    ConsolePresenter.DisplayError("Invalid Choice so application aborting");
                     break;
                 }
 
@@ -53,10 +54,10 @@ namespace AssignmentThree.View
                         string productName, productId;
                         double productPrice;
                         long productQuantity;
-                        if (!Helper.GetId(out productId, "of the product") || !Helper.GetName(out productName, "Product Name")
-                            || !Helper.GetPrice(out productPrice) || !Helper.GetQuantity(out productQuantity))
+                        if (!ConsoleReader.GetId(out productId, "of the product") || !ConsoleReader.GetName(out productName, "Product Name")
+                            || !ConsoleReader.GetPrice(out productPrice) || !ConsoleReader.GetQuantity(out productQuantity))
                         {
-                            Helper.DisplayError("Aborting due to invalid tries!!");
+                            ConsolePresenter.DisplayError("Aborting due to invalid tries!!");
                             break;
                         }
 
@@ -70,19 +71,19 @@ namespace AssignmentThree.View
                         IEnumerable<ProductInfo> list = this._productService.GetAll();
                         if (list.Count() == 0)
                         {
-                            Helper.DisplayError("No products found");
+                            ConsolePresenter.DisplayError("No products found");
                             break;
                         }
 
-                        Helper.DisplayTable(list);
-                        if (Helper.GetId(out productId, "of the product to be Edited"))
+                        ConsolePresenter.DisplayTable(list);
+                        if (ConsoleReader.GetId(out productId, "of the product to be Edited"))
                         {
                             ProductInfo? product = this._productService.GetProduct(productId);
                             this.EditField(product);
                             break;
                         }
 
-                        Helper.DisplayError("The Type of Product Id is Invalid!");
+                        ConsolePresenter.DisplayError("The Type of Product Id is Invalid!");
                         break;
 
                     // Delete Product
@@ -91,20 +92,20 @@ namespace AssignmentThree.View
                         list = this._productService.GetAll();
                         if (list.Count() == 0)
                         {
-                            Helper.DisplayError("No Products found");
+                            ConsolePresenter.DisplayError("No Products found");
                             break;
                         }
 
-                        Helper.DisplayTable(list);
+                        ConsolePresenter.DisplayTable(list);
                         Console.WriteLine("Enter the Id to be deleted");
-                        Helper.GetId(out string id, "of the product to be deleted");
+                        ConsoleReader.GetId(out string id, "of the product to be deleted");
                         if (this._productService.Delete(id))
                         {
-                            Helper.DisplaySuccess("Deleted the product Successfully.");
+                            ConsolePresenter.DisplaySuccess("Deleted the product Successfully.");
                         }
                         else
                         {
-                            Helper.DisplayError("Cant Delete the Product , Id doesn't Exists");
+                            ConsolePresenter.DisplayError("Cant Delete the Product , Id doesn't Exists");
                         }
 
                         break;
@@ -114,18 +115,18 @@ namespace AssignmentThree.View
                         list = this._productService.GetAll();
                         if (list.Count() == 0)
                         {
-                            Helper.DisplayError("No products found");
+                            ConsolePresenter.DisplayError("No products found");
                             break;
                         }
 
-                        Helper.DisplayTable(list);
+                        ConsolePresenter.DisplayTable(list);
                         break;
 
                     // Search Product
                     case MenuOption.SearchProduct:
                         if (this._productService.IsEmptyRepository())
                         {
-                            Helper.DisplayError("No products found");
+                            ConsolePresenter.DisplayError("No products found");
                             break;
                         }
 
@@ -135,16 +136,16 @@ namespace AssignmentThree.View
                     // Exit
                     case MenuOption.Exit:
                         exitFlag = false;
-                        Helper.DisplaySuccess("Exiting the Application");
+                        ConsolePresenter.DisplaySuccess("Exiting the Application");
                         break;
 
                     // Default Method
                     default:
-                        Helper.DisplayError("Enter a valid number between 1-6");
+                        ConsolePresenter.DisplayError("Enter a valid number between 1-6");
                         break;
                 }
 
-                Helper.WriteLight("Press Any key To Continue");
+                ConsolePresenter.WriteLight("Press Any key To Continue");
                 Console.ReadKey();
             }
             while (exitFlag);
@@ -158,31 +159,31 @@ namespace AssignmentThree.View
         {
             if (product == null)
             {
-                Helper.DisplayError("No products found");
+                ConsolePresenter.DisplayError("No products found");
                 return;
             }
 
             Console.WriteLine($"\n--- Editing Product: {product.Name} (ID: {product.Id}) ---");
 
-            if (Helper.GetYesOrNo(out bool editName, "Edit Name?") && editName)
+            if (ConsoleReader.GetYesOrNo(out bool editName, "Edit Name?") && editName)
             {
-                if (Helper.GetName(out string newName, "New Name"))
+                if (ConsoleReader.GetName(out string newName, "New Name"))
                 {
                     product.Name = newName;
                 }
             }
 
-            if (Helper.GetYesOrNo(out bool editPrice, "Edit Price?") && editPrice)
+            if (ConsoleReader.GetYesOrNo(out bool editPrice, "Edit Price?") && editPrice)
             {
-                if (Helper.GetPrice(out double newPrice))
+                if (ConsoleReader.GetPrice(out double newPrice))
                 {
                     product.Price = newPrice;
                 }
             }
 
-            if (Helper.GetYesOrNo(out bool editQuantity, "Edit Quantity?") && editQuantity)
+            if (ConsoleReader.GetYesOrNo(out bool editQuantity, "Edit Quantity?") && editQuantity)
             {
-                if (Helper.GetQuantity(out long newQuantity))
+                if (ConsoleReader.GetQuantity(out long newQuantity))
                 {
                     product.Quantity = newQuantity;
                 }
@@ -190,11 +191,11 @@ namespace AssignmentThree.View
 
             if (this._productService.Edit(product))
             {
-                Helper.DisplaySuccess("Product updated successfully!");
+                ConsolePresenter.DisplaySuccess("Product updated successfully!");
             }
             else
             {
-                Helper.DisplayError("Failed to update product.");
+                ConsolePresenter.DisplayError("Failed to update product.");
             }
         }
 
@@ -205,19 +206,19 @@ namespace AssignmentThree.View
         {
             string searchName = string.Empty, searchId = string.Empty;
 
-            if (Helper.GetYesOrNo(out bool byName, "Search by Name?") && byName)
+            if (ConsoleReader.GetYesOrNo(out bool byName, "Search by Name?") && byName)
             {
-                Helper.GetName(out searchName, "Product Name");
+                ConsoleReader.GetName(out searchName, "Product Name");
             }
 
-            if (Helper.GetYesOrNo(out bool byId, "Search by ID?") && byId)
+            if (ConsoleReader.GetYesOrNo(out bool byId, "Search by ID?") && byId)
             {
-                Helper.GetId(out searchId, "of the Product to be Searched");
+                ConsoleReader.GetId(out searchId, "of the Product to be Searched");
             }
 
             if (!byName && !byId)
             {
-                Helper.DisplayError("Search cancelled (no search criteria selected).");
+                ConsolePresenter.DisplayError("Search cancelled (no search criteria selected).");
                 return;
             }
 
@@ -228,16 +229,16 @@ namespace AssignmentThree.View
             }
             catch (Exception ex)
             {
-                Helper.DisplayError($"Unexpected Error : {ex}");
+                ConsolePresenter.DisplayError($"Unexpected Error : {ex}");
             }
 
             if (productList != null && productList.Any())
             {
-                Helper.DisplayTable(productList);
+                ConsolePresenter.DisplayTable(productList);
                 return;
             }
 
-            Helper.DisplayError("No matching products found!");
+            ConsolePresenter.DisplayError("No matching products found!");
         }
 
         /// <summary>
@@ -249,11 +250,11 @@ namespace AssignmentThree.View
             switch (message)
             {
                 case OperationMessage.AddedSuccessFull:
-                    Helper.DisplaySuccess("Product Added Successfully");
+                    ConsolePresenter.DisplaySuccess("Product Added Successfully");
                     break;
 
                 case OperationMessage.ProductIdAlreadyExists:
-                    Helper.DisplayError("Product ID Already Exists \nCant Add!");
+                    ConsolePresenter.DisplayError("Product ID Already Exists \nCant Add!");
                     break;
             }
         }

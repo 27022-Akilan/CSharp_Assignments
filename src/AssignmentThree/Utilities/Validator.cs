@@ -1,6 +1,6 @@
 ﻿using AssignmentThree.ConstantMessages;
 
-namespace AssignmentThree
+namespace AssignmentThree.Utilities
 {
     /// <summary>
     /// Helper Class that handles all the Validations.
