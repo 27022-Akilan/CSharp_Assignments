@@ -1,4 +1,5 @@
 ﻿using AssignmentThree.Model;
+using AssignmentThree.Model.Enums;
 
 namespace AssignmentThree.Repository
 {
@@ -20,19 +21,19 @@ namespace AssignmentThree.Repository
         /// <param name="price">Price of the product</param>
         /// <param name="quantity">Quantity of the product</param>
         /// <returns>Success or Error Specific Message</returns>
-        public OperationMessage Add(string id, string name, double price, long quantity)
+        public OperationResult AddProduct(string id, string name, double price, long quantity)
         {
             foreach (ProductInfo product in this._product)
             {
                 if (product.Id.Equals(id))
                 {
-                    return OperationMessage.ProductIdAlreadyExists;
+                    return OperationResult.ProductIdAlreadyExists;
                 }
             }
 
             ProductInfo productInfo = new ProductInfo(id, name, price, quantity);
             this._product.Add(productInfo);
-            return OperationMessage.AddedSuccessFull;
+            return OperationResult.AddedSuccessFull;
         }
 
         /// <summary>
@@ -40,7 +41,7 @@ namespace AssignmentThree.Repository
         /// </summary>
         /// <param name="id">Id of the product to be searched</param>
         /// <returns>Product object - If Product exists || Null - Product does not exists</returns>
-        public ProductInfo? ShowProduct(string id)
+        public ProductInfo? GetProduct(string id)
         {
             foreach (ProductInfo product in this._product)
             {
@@ -58,7 +59,7 @@ namespace AssignmentThree.Repository
         /// </summary>
         /// <param name="editedProduct">Holds the entire information of the Edited Product </param>
         /// <returns>True - If Product Updated  || False - If Product is not Updated</returns>
-        public bool Update(ProductInfo editedProduct)
+        public bool UpdateProduct(ProductInfo editedProduct)
         {
             foreach (var product in this._product)
             {
@@ -75,20 +76,20 @@ namespace AssignmentThree.Repository
         }
 
         /// <summary>
-        ///  To show all the products
+        /// To show all the products.
         /// </summary>
         /// <returns>IEnumerable List which cannot be modified</returns>
-        public IEnumerable<ProductInfo> ShowAll()
+        public IEnumerable<ProductInfo> GetAllProducts()
         {
             return this._product.Select(p => new ProductInfo(p.Id, p.Name, p.Price, p.Quantity));
         }
 
         /// <summary>
-        /// It Deletes the particular product.
+        /// It deletes the particular product.
         /// </summary>
         /// <param name="id">Id of the product to be deleted.</param>
         /// <returns>True - Product Deleted || False - Cant Delete product</returns>
-        public bool DeleteById(string id)
+        public bool DeleteProductById(string id)
         {
             foreach (var product in this._product)
             {
@@ -103,12 +104,12 @@ namespace AssignmentThree.Repository
         }
 
         /// <summary>
-        /// To Search and return products based on the Name and Id
+        /// To search and return products based on the Name and Id
         /// </summary>
         /// <param name="searchName">Product Name to be searched</param>
         /// <param name="searchId">Product Id to be searched</param>
         /// <returns>Enumerable list of searched products</returns>
-        public IEnumerable<ProductInfo> Search(string searchName, string searchId)
+        public IEnumerable<ProductInfo> SearchProduct(string searchName, string searchId)
         {
             return this._product.Where(p => (p.Name != string.Empty && p.Name!.Contains(searchName, StringComparison.OrdinalIgnoreCase)) || p.Id.Equals(searchId))
         .Select(p => new ProductInfo(p.Id, p.Name, p.Price, p.Quantity));

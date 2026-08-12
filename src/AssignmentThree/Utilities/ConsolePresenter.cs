@@ -12,7 +12,7 @@ namespace AssignmentThree.Utilities
         ///  Displays Failure message in Red color
         /// </summary>
         /// <param name="s">Input for failure message</param>
-        public static void DisplayError(string s)
+        public static void DisplayErrorMessage(string s)
         {
             Console.ForegroundColor = ConsoleColor.Red;
             Console.WriteLine(s);
@@ -23,7 +23,7 @@ namespace AssignmentThree.Utilities
         ///  Displays Warning message in Yellow color
         /// </summary>
         /// <param name="s">Input for the Warning message</param>
-        public static void DisplayWarning(string s)
+        public static void DisplayWarningMessage(string s)
         {
             Console.ForegroundColor = ConsoleColor.Yellow;
             Console.WriteLine(s);
@@ -34,7 +34,7 @@ namespace AssignmentThree.Utilities
         /// Displays Success message in Green color
         /// </summary>
         /// <param name="s">Input for the success message</param>
-        public static void DisplaySuccess(string s)
+        public static void DisplaySuccessMessage(string s)
         {
             Console.ForegroundColor = ConsoleColor.Green;
             Console.WriteLine(s);
@@ -45,7 +45,7 @@ namespace AssignmentThree.Utilities
         /// Displays the text in the gray color
         /// </summary>
         /// <param name="s">Input for the Grey color message</param>
-        public static void WriteLight(string s)
+        public static void DisplayShadowMessage(string s)
         {
             Console.ForegroundColor = ConsoleColor.DarkGray;
             Console.WriteLine(s);

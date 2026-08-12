@@ -9,7 +9,7 @@
         /// Displayed when the product name is empty or contains only whitespace.
         /// </summary>
         public const string NameCantBeEmpty =
-            "Product name cannot be empty or consist only of whitespace.";
+            "Product name cannot be empty or consists only of whitespace.";
 
         /// <summary>
         /// Displayed when the product name contains only numeric characters.
@@ -27,7 +27,7 @@
         /// Displayed when the product ID is empty or contains only whitespace.
         /// </summary>
         public const string IdCantBeEmpty =
-            "Product ID cannot be empty or consist only of whitespace.";
+            "Product ID cannot be empty or consists only of whitespace.";
 
         /// <summary>
         /// Displayed when the entered price is invalid.
@@ -69,6 +69,6 @@
         /// Displayed when the input contains non-printable control characters.
         /// </summary>
         public const string CantHaveControlCharacters =
-            "Input contains invalid control characters such as ^A (Think so you pressed the key along with ctrl key). Please enter valid text.";
+            "Input contains invalid control characters such as ^A (You could have pressed the key along with ctrl key). Please enter valid text.";
     }
 }

@@ -1,4 +1,5 @@
 ﻿using AssignmentThree.Model;
+using AssignmentThree.Model.Enums;
 using AssignmentThree.Repository;
 
 namespace AssignmentThree.Service
@@ -27,9 +28,9 @@ namespace AssignmentThree.Service
         /// <param name="price">Price of the product</param>
         /// <param name="quantity">Quantity of the product</param>
         /// <returns>True - Success full Add | False - Cant Add</returns>
-        public OperationMessage Add(string id, string name, double price, long quantity)
+        public OperationResult AddProduct(string id, string name, double price, long quantity)
         {
-            return this._productRepo.Add(id, name, price, quantity);
+            return this._productRepo.AddProduct(id, name, price, quantity);
         }
 
         /// <summary>
@@ -39,7 +40,7 @@ namespace AssignmentThree.Service
         /// <returns>Product object - If Product Exists || Null - Product does not exists</returns>
         public ProductInfo? GetProduct(string id)
         {
-            return this._productRepo.ShowProduct(id);
+            return this._productRepo.GetProduct(id);
         }
 
         /// <summary>
@@ -47,18 +48,18 @@ namespace AssignmentThree.Service
         /// </summary>
         /// <param name="editedProduct">Has the entire Product information as an object</param>
         /// <returns>True - If Updated || False - If Not Updated</returns>
-        public bool Edit(ProductInfo editedProduct)
+        public bool EditProduct(ProductInfo editedProduct)
         {
-            return this._productRepo.Update(editedProduct);
+            return this._productRepo.UpdateProduct(editedProduct);
         }
 
         /// <summary>
         /// This service gets and returns the duplicated Product List
         /// </summary>
         /// <returns>A List of Products</returns>
-        public IEnumerable<ProductInfo> GetAll()
+        public IEnumerable<ProductInfo> GetAllProducts()
         {
-            return this._productRepo.ShowAll();
+            return this._productRepo.GetAllProducts();
         }
 
         /// <summary>
@@ -68,7 +69,7 @@ namespace AssignmentThree.Service
         /// <returns>True - Product Deleted || False - Cant Delete product</returns>
         public bool Delete(string id)
         {
-            return this._productRepo.DeleteById(id);
+            return this._productRepo.DeleteProductById(id);
         }
 
         /// <summary>
@@ -88,7 +89,7 @@ namespace AssignmentThree.Service
         /// <returns>Enumerable list of searched products</returns>
         public IEnumerable<ProductInfo> GetIfExists(string searchName, string searchId)
         {
-            return this._productRepo.Search(searchName, searchId);
+            return this._productRepo.SearchProduct(searchName, searchId);
         }
     }
 }

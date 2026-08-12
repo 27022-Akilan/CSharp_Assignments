@@ -1,4 +1,4 @@
-﻿namespace AssignmentThree.Model
+﻿namespace AssignmentThree.Model.Enums
 {
     /// <summary>
     ///  Enums to specify the Main menu option
@@ -11,7 +11,7 @@
         AddProduct = 1,
 
         /// <summary>
-        /// To edit Product
+        /// To edit product
         /// </summary>
         EditProduct,
 
@@ -26,12 +26,12 @@
         SearchProduct,
 
         /// <summary>
-        /// To Display products
+        /// To display products
         /// </summary>
         DisplayProduct,
 
         /// <summary>
-        /// To Exit the menu.
+        /// To exit the menu.
         /// </summary>
         Exit,
     }

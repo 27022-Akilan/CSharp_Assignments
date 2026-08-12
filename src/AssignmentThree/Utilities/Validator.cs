@@ -151,7 +151,7 @@ namespace AssignmentThree.Utilities
         /// To check whether the input is an AlphaNumeric one.
         /// </summary>
         /// <param name="input">Input to check whether it is AlphaNumeric or not</param>
-        /// <returns>True - If the input is alphanumeric || False - If the input is not AlphaNUmeric</returns>
+        /// <returns>True - If the input is alphanumeric || False - If the input is not AlphaNumeric</returns>
         public static bool IsAlphanumeric(string input)
         {
             return input.All(c => char.IsLetterOrDigit(c) || char.IsWhiteSpace(c));

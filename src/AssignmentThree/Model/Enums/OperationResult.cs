@@ -1,27 +1,27 @@
-﻿namespace AssignmentThree.Model
+﻿namespace AssignmentThree.Model.Enums
 {
     /// <summary>
     /// Contains the Operations return Messages
     /// </summary>
-    public enum OperationMessage
+    public enum OperationResult
     {
         /// <summary>
-        ///  Added Success full message
+        /// Added successful message
         /// </summary>
         AddedSuccessFull = 1,
 
         /// <summary>
-        ///  Product Id already in the Inventory.
+        /// Product Id already in the Inventory.
         /// </summary>
         ProductIdAlreadyExists,
 
         /// <summary>
-        ///  Product is not in the Inventory.
+        /// Product is not in the Inventory.
         /// </summary>
         ProductDoesNotExists,
 
         /// <summary>
-        /// To Exit te menu.
+        /// To exit the menu.
         /// </summary>
         Exit,
     }

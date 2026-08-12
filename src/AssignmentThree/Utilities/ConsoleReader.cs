@@ -9,24 +9,23 @@
         /// To get the name of the product from the user.
         /// </summary>
         /// <param name="name">Contains the name and returned using out parameter</param>
-        /// <param name="field">Contains the field to be displayed to the user.</param>
         /// <returns>True - Successfully got the valid Name || False - Cant get the name , out of tries </returns>
-        public static bool GetName(out string name, string field)
+        public static bool GetName(out string name)
         {
             int tries = 3;
             do
             {
                 tries--;
-                Console.WriteLine($"\nEnter the {field}");
-                name = Console.ReadLine() ?? string.Empty;
-                string result = Validator.ValidateName(name.Trim());
+                Console.WriteLine($"\nEnter the Name of the product");
+                name = Console.ReadLine()?.Trim() ?? string.Empty;
+                string result = Validator.ValidateName(name);
                 if (result == string.Empty)
                 {
                     return true;
                 }
 
-                ConsolePresenter.DisplayWarning(result);
-                ConsolePresenter.DisplayWarning($"Number of Tries Left is:{tries}\n");
+                ConsolePresenter.DisplayWarningMessage(result);
+                ConsolePresenter.DisplayWarningMessage($"Number of Tries Left is:{tries}\n");
             }
             while (tries > 0);
             return false;
@@ -36,24 +35,23 @@
         /// To get the product Id from the user.
         /// </summary>
         /// <param name="productId">It stores the Id of the product and returns as out parameter</param>
-        /// <param name="prompt">It stores the Prompt to be displayed.</param>
         /// <returns>True - Got the valid product Id || False - Cant get a valid product Id (out of tries)</returns>
-        public static bool GetId(out string productId, string prompt)
+        public static bool GetId(out string productId)
         {
             int tries = 3;
             do
             {
                 tries--;
-                Console.WriteLine($"\nEnter the ID {prompt}");
-                productId = Console.ReadLine() ?? string.Empty;
+                Console.WriteLine($"\nEnter the ID of the Product");
+                productId = Console.ReadLine()?.Trim() ?? string.Empty;
                 string result = Validator.ValidateId(productId);
                 if (result == string.Empty)
                 {
                     return true;
                 }
 
-                ConsolePresenter.DisplayWarning(result);
-                ConsolePresenter.DisplayWarning($"Number of Tries Left is:{tries}\n");
+                ConsolePresenter.DisplayWarningMessage(result);
+                ConsolePresenter.DisplayWarningMessage($"Number of Tries Left is:{tries}\n");
             }
             while (tries > 0);
             return false;
@@ -78,8 +76,8 @@
                     return true;
                 }
 
-                ConsolePresenter.DisplayWarning(result);
-                ConsolePresenter.DisplayWarning($"Number of Tries Left is:{tries}\n");
+                ConsolePresenter.DisplayWarningMessage(result);
+                ConsolePresenter.DisplayWarningMessage($"Number of Tries Left is:{tries}\n");
             }
             while (tries > 0);
             return false;
@@ -97,13 +95,13 @@
             {
                 tries--;
                 Console.WriteLine("\nEnter the Choice Number:");
-                string numberASString = ReadInput();
-                if (int.TryParse(numberASString, out number))
+                string numberAsString = ReadInput();
+                if (int.TryParse(numberAsString, out number))
                 {
                     return true;
                 }
 
-                ConsolePresenter.DisplayWarning($"The entered value needs to be a number , Tries left {tries}");
+                ConsolePresenter.DisplayWarningMessage($"The entered value needs to be a number , Tries left {tries}");
             }
             while (tries > 0);
 
@@ -129,8 +127,8 @@
                     return true;
                 }
 
-                ConsolePresenter.DisplayWarning(result);
-                ConsolePresenter.DisplayWarning($"Number of Tries Left is:{tries}\n");
+                ConsolePresenter.DisplayWarningMessage(result);
+                ConsolePresenter.DisplayWarningMessage($"Number of Tries Left is:{tries}\n");
             }
             while (tries > 0);
 
@@ -164,7 +162,7 @@
                     return true;
                 }
 
-                ConsolePresenter.DisplayWarning($"Invalid input! Enter 'y' or 'n'. Tries left: {tries}");
+                ConsolePresenter.DisplayWarningMessage($"Invalid input! Enter 'y' or 'n'. Tries left: {tries}");
             }
             while (tries > 0);
 
@@ -177,7 +175,7 @@
         /// <returns>Input string without control characters.</returns>
         private static string ReadInput()
         {
-            string input = Console.ReadLine() ?? string.Empty;
+            string input = Console.ReadLine()?.Trim() ?? string.Empty;
 
             // return input.Trim();
             return new string(input.Where(c => !char.IsControl(c)).ToArray()).Trim();
