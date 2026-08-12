@@ -3,7 +3,7 @@
 namespace AssignmentThree.Repository
 {
     /// <summary>
-    /// Used to store and retrive data (In-Memory)
+    /// Used to store and retrieve data (In-Memory)
     /// </summary>
     public class InventoryRepository : IInventoryRepository
     {
