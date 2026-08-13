@@ -55,7 +55,7 @@ namespace AssignmentFour.Service
                         ((Expense)transaction).Category);
                 }
 
-                return this._repository.Add(transactionWithId);
+                return this._repository.AddTransaction(transactionWithId);
             }
 
             return Messages.AddFailedDueToAmountLessThanZero;
@@ -88,7 +88,7 @@ namespace AssignmentFour.Service
         /// <returns>bool True - Transaction deleted | False - Transaction cannot delete</returns>
         public bool DeleteTransactionById(Guid id)
         {
-            return this._repository.DeleteById(id);
+            return this._repository.DeleteTransactionById(id);
         }
 
         /// <summary>
@@ -97,7 +97,7 @@ namespace AssignmentFour.Service
         /// <returns>IEnumerable list of Transactions which cannot be modified</returns>
         public IEnumerable<Transaction> GetAllTransactions()
         {
-            return this._repository.GetAll();
+            return this._repository.GetAllTransactions();
         }
 
         /// <summary>
@@ -117,7 +117,7 @@ namespace AssignmentFour.Service
         /// <returns>IEnumerable list of Transactions of the specified amount</returns>
         public IEnumerable<Transaction> GetTransactionsByAmount(decimal amount)
         {
-            return this._repository.GetTransactionByAmount(amount);
+            return this._repository.GetTransactionsByAmount(amount);
         }
 
         /// <summary>
