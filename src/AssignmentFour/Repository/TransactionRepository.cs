@@ -16,7 +16,7 @@ namespace AssignmentFour.Repository
         /// </summary>
         /// <param name="transaction">Transaction object</param>
         /// <returns>A message that tells about the result of Adding the Transaction</returns>
-        public string Add(Transaction transaction)
+        public string AddTransaction(Transaction transaction)
         {
             this._transactionList.Add(transaction);
 
@@ -59,25 +59,23 @@ namespace AssignmentFour.Repository
         /// </summary>
         /// <param name="transactionId">Id of the transaction to be deleted</param>
         /// <returns>True if the transaction found and deleted | False if the transaction cant be deleted</returns>
-        public bool DeleteById(Guid transactionId)
+        public bool DeleteTransactionById(Guid transactionId)
         {
-            foreach (Transaction transaction in this._transactionList)
+            Transaction? transaction = this._transactionList.FirstOrDefault(t => t.TransactionId == transactionId);
+            if (transaction == null)
             {
-                if (transaction.TransactionId == transactionId)
-                {
-                    this._transactionList.Remove(transaction);
-                    return true;
-                }
+                return false;
             }
 
-            return false;
+            this._transactionList.Remove(transaction);
+            return true;
         }
 
         /// <summary>
         /// Shows the entire transactions
         /// </summary>
         /// <returns>A cloned copy of all all transactions </returns>
-        public IEnumerable<Transaction> GetAll()
+        public IEnumerable<Transaction> GetAllTransactions()
         {
             return this._transactionList.Select(t => t.CloneTransaction());
         }
@@ -98,7 +96,7 @@ namespace AssignmentFour.Repository
         /// </summary>
         /// <param name="amount">Amount of transactions to retrieve</param>
         /// <returns>IEnumerable list of Transactions of the specified amount</returns>
-        public IEnumerable<Transaction> GetTransactionByAmount(decimal amount)
+        public IEnumerable<Transaction> GetTransactionsByAmount(decimal amount)
         {
             return this._transactionList.Where(t => t.Amount == amount)
                                         .Select(t => t.CloneTransaction());
