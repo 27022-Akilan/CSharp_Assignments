@@ -456,6 +456,12 @@ namespace AssignmentFour.View
         /// </summary>
         public void ShowSummary()
         {
+            if (this._service.GetAllTransactions().Count() == 0)
+            {
+                Helper.DisplayInfoMessage("No Transaction are added yet , cant display the summary");
+                return;
+            }
+
             Summary summary = this._service.GetSummary();
 
             Console.WriteLine("================= Summary =================" +
@@ -463,7 +469,8 @@ namespace AssignmentFour.View
                               $"\nTotal Expense: {summary.TotalExpense}" +
                               $"\nNet Balance: {summary.NetBalance}" +
                               $"\nTotal Transactions: {summary.TotalTransactions}" +
-                              $"\nAverage Transaction Value: {summary.AverageTransactionValue:F2}");
+                              $"\nAverage Transaction Value: {summary.AverageTransactionValue:F2}" +
+                              $"\n===========================================");
         }
 
         /// <summary>
