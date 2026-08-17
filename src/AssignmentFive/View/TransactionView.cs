@@ -94,7 +94,9 @@ namespace AssignmentFive.View
         public void DisplayMenu()
         {
             Helper.DisplayInfoMessage("\t\t\t\t\tTrack Every Rupee and Grow Every Dream");
+
             Console.WriteLine(
+                $"\nTo look into your transactions in Json format, Have a look into {Program.FilePath}" +
                 "\n===============================================" +
                 "\n1.Add Income" +
                 "\n2.Add Expense" +

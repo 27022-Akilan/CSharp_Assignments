@@ -1,6 +1,7 @@
 ﻿using System.Text.Json;
 using AssignmentFive.Model;
 using AssignmentFive.Model.Enums;
+using AssignmentFive.Repository.RepositoryHelper;
 
 namespace AssignmentFive.Repository
 {
@@ -141,51 +142,36 @@ namespace AssignmentFive.Repository
 
         private List<Transaction> LoadFile()
         {
-            List<Transaction> fileData = new List<Transaction>();
-
             if (!File.Exists(this._filePath))
             {
-                return fileData;
+                return new List<Transaction>();
             }
+
+            JsonSerializerOptions options = new JsonSerializerOptions();
+
+            options.Converters.Add(new TransactionConverter());
 
             string json = File.ReadAllText(this._filePath);
 
-            using JsonDocument document = JsonDocument.Parse(json);
-
-            foreach (JsonElement element in document.RootElement.EnumerateArray())
-            {
-                string rawText = element.GetRawText();
-
-                int type = element.GetProperty("Type").GetInt32();
-                TransactionType transactionType = (TransactionType)type;
-
-                if (transactionType == TransactionType.Income)
-                {
-                    Income? income = JsonSerializer.Deserialize<Income>(rawText);
-
-                    if (income != null)
-                    {
-                        fileData.Add(income);
-                    }
-                }
-
-                if (transactionType == TransactionType.Expense)
-                {
-                    Expense? expense = JsonSerializer.Deserialize<Expense>(rawText);
-
-                    if (expense != null)
-                    {
-                        fileData.Add(expense);
-                    }
-                }
-            }
-
-            return fileData;
+            return JsonSerializer.Deserialize<List<Transaction>>(
+                       json,
+                       options)
+                   ?? new List<Transaction>();
         }
 
         private void SaveTransactionsToFile()
         {
-            string json = JsonSerializer.Serialize(this._transactionList);
+            JsonSerializerOptions options = new JsonSerializerOptions()
+            {
+                WriteIndented = true,
+            };
+
+            options.Converters.Add(new TransactionConverter());
+
+            string json = JsonSerializer.Serialize(
+                this._transactionList,
+                options);
+
             File.WriteAllText(this._filePath, json);
         }
     }

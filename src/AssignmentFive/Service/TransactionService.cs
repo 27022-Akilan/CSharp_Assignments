@@ -35,11 +35,11 @@ namespace AssignmentFive.Service
             bool validationResult = this.IsValidAmount(transaction.Amount);
             if (validationResult)
             {
-                Transaction validTransaction = transaction.CloneTransaction();
-                /*Transaction transactionWithId;
+                // Transaction validTransaction = transaction.CloneTransaction();
+                Transaction transactionWithId;
                 if (transaction is Income)
                 {
-                    transactionWithId = new Income(s
+                    transactionWithId = new Income(
                         Guid.NewGuid(),
                         transaction.Amount,
                         transaction.Description,
@@ -55,8 +55,8 @@ namespace AssignmentFive.Service
                         transaction.Date,
                         ((Expense)transaction).Category);
                 }
-                */
-                return this._repository.AddTransaction(validTransaction);
+
+                return this._repository.AddTransaction(transactionWithId);
             }
 
             return Messages.AddFailedDueToAmountLessThanZero;
