@@ -21,10 +21,6 @@ namespace AssignmentEight.MathematicalOperations
                 int divisor = int.Parse(Console.ReadLine() ?? string.Empty);
                 Helper.DisplaySuccessMessage($"Division Result : {dividend / divisor}");
             }
-            catch (FormatException ex)
-            {
-                Console.WriteLine($"Operation Failed\nYou can not enter other than whole number.\n{ex.Message}");
-            }
 
             // Task 1
             catch (DivideByZeroException ex)

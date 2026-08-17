@@ -13,9 +13,27 @@ namespace Assignments
         /// </summary>
         public static void Main()
         {
-            Helper.DisplayInfoMessage("\t\t\t\t\t\t Make Mistakes and Learn :) ");
-            ArithmeticOperations operation = new ArithmeticOperations();
-            operation.Divide();
+            AppDomain.CurrentDomain.UnhandledException += HandleUnhandledException();
+            try
+            {
+                Helper.DisplayInfoMessage("\t\t\t\t\t\t Make Mistakes And Learn :) ");
+                ArithmeticOperations operation = new ArithmeticOperations();
+                operation.Divide();
+            }
+            catch (Exception ex)
+            {
+                Helper.DisplayErrorMessage($"Error : A global exception catch is invoked!!!!!\n{ex.Message}");
+            }
+        }
+
+        /// <summary>
+        /// Triggered when there is a Unhandled exception.
+        /// </summary>
+        /// <param name="sender">Who sends this Exception.</param>
+        /// <param name="e">Event data - Information about the event occurred.</param>
+        public static void HandleUnhandledException(object sender, UnhandledExceptionEventArgs e)
+        {
+            Helper.DisplayErrorMessage("Error : Unhandled Exception caught and triggered using AppDomain");
         }
     }
 }
