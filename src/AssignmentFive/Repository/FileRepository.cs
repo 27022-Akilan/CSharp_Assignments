@@ -21,7 +21,7 @@ namespace AssignmentFive.Repository
         public FileRepository(string filePath)
         {
             this._filePath = filePath;
-            this._transactionList = this.LoadFile();
+            this._transactionList = this.LoadTransactionsFromFile();
         }
 
         /// <summary>
@@ -140,7 +140,7 @@ namespace AssignmentFive.Repository
                                         .Select(t => t.CloneTransaction());
         }
 
-        private List<Transaction> LoadFile()
+        private List<Transaction> LoadTransactionsFromFile()
         {
             if (!File.Exists(this._filePath))
             {
