@@ -153,10 +153,7 @@ namespace AssignmentFive.Repository
 
             string json = File.ReadAllText(this._filePath);
 
-            return JsonSerializer.Deserialize<List<Transaction>>(
-                       json,
-                       options)
-                   ?? new List<Transaction>();
+            return JsonSerializer.Deserialize<List<Transaction>>(json, options) ?? new List<Transaction>();
         }
 
         private void SaveTransactionsToFile()
@@ -168,9 +165,7 @@ namespace AssignmentFive.Repository
 
             options.Converters.Add(new TransactionConverter());
 
-            string json = JsonSerializer.Serialize(
-                this._transactionList,
-                options);
+            string json = JsonSerializer.Serialize(this._transactionList, options);
 
             File.WriteAllText(this._filePath, json);
         }
