@@ -42,6 +42,10 @@ namespace AssignmentFive
             {
                 Helper.DisplayErrorMessage($"Error: The existing file {FilePath} is corrupted or not properly formatted.\n{ex.Message}");
             }
+            catch (Exception)
+            {
+                Helper.DisplayErrorMessage("Error : Unexpected Error , Please try after some time");
+            }
         }
     }
 }
