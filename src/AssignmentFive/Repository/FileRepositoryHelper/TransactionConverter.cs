@@ -105,7 +105,7 @@ namespace AssignmentFive.Repository.RepositoryHelper
 
         private static string GetRequiredString(JsonElement element, string propertyName)
         {
-            if (!element.TryGetProperty(propertyName, out var property) || property.ValueKind == JsonValueKind.Null)
+            if (!element.TryGetProperty(propertyName, out JsonElement property) || property.ValueKind == JsonValueKind.Null)
             {
                 throw new JsonException($"{propertyName} has been missed or modified \nCan not load file!!!");
             }
@@ -121,7 +121,7 @@ namespace AssignmentFive.Repository.RepositoryHelper
 
         private static decimal GetRequiredDecimal(JsonElement element, string propertyName)
         {
-            if (!element.TryGetProperty(propertyName, out var property) || property.ValueKind == JsonValueKind.Null)
+            if (!element.TryGetProperty(propertyName, out JsonElement property) || property.ValueKind == JsonValueKind.Null)
             {
                 throw new JsonException($"{propertyName} has been missed or modified \nCan not load file!!!");
             }
