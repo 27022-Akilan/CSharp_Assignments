@@ -13,17 +13,24 @@ namespace Assignments
         /// </summary>
         public static void Main()
         {
-            AppDomain.CurrentDomain.UnhandledException += HandleUnhandledException();
+            AppDomain.CurrentDomain.UnhandledException += HandleUnhandledException;
+            Helper.DisplayInfoMessage("\t\t\t\t\t\t Make Mistakes And Learn :) ");
+            ArithmeticOperations operation = new ArithmeticOperations();
+            operation.Divide();
+
             try
             {
-                Helper.DisplayInfoMessage("\t\t\t\t\t\t Make Mistakes And Learn :) ");
-                ArithmeticOperations operation = new ArithmeticOperations();
-                operation.Divide();
+                Console.WriteLine("\n\nEntered into Pick And Add method");
+                operation.PickAndAdd();
             }
             catch (Exception ex)
             {
-                Helper.DisplayErrorMessage($"Error : A global exception catch is invoked!!!!!\n{ex.Message}");
+                Helper.DisplayErrorMessage($"\nError : A global exception catch caught this exception\n{ex.Message}" +
+                    $"\nThis is for Programmer use only!!!" +
+                    $"\n{ex.StackTrace}");
             }
+
+            // Console.WriteLine("\nApplication Continues.........................");
         }
 
         /// <summary>
