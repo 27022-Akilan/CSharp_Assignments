@@ -1,7 +1,7 @@
 ﻿namespace AssignmentFour.Constants
 {
     /// <summary>
-    /// It holds the return messages.
+    /// It holds the return messages. 
     /// </summary>
     public class Messages
     {
@@ -53,6 +53,6 @@
         /// <summary>
         /// Validation error message for Date.
         /// </summary>
-        public const string ValidationErrorOnDate = "Invalid date : you input date should be less than or equal to current date.";
+        public const string AddFailedDueToAmountLessThanZero = "Transaction cant be added , because of amount less than 0";
     }
 }

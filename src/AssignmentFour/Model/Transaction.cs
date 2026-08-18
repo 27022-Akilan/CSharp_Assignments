@@ -43,7 +43,7 @@ namespace AssignmentFour.Model
         /// <summary>
         /// Gets or sets Type of the Transaction.
         /// </summary>
-        /// /// <value>
+        /// <value>
         /// Holds the Type of the Transaction.
         /// </value>
         public TransactionType TransactionType { get; set; }
