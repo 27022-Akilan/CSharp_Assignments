@@ -1,4 +1,5 @@
-﻿using AssignmentFour.Model;
+﻿using AssignmentFour.Constants;
+using AssignmentFour.Model;
 using AssignmentFour.Model.Enums;
 
 namespace AssignmentFour.Repository
@@ -8,8 +9,15 @@ namespace AssignmentFour.Repository
     /// </summary>
     public class TransactionRepository : IRepository
     {
-        // private Transaction? _transaction;
-        private List<Transaction> _transactionList = new List<Transaction>();
+        private List<Transaction> _transactionList;
+
+        /// <summary>
+        /// Initializes a new instance of the <see cref="TransactionRepository"/> class.
+        /// </summary>
+        public TransactionRepository()
+        {
+            this._transactionList = new List<Transaction>();
+        }
 
         /// <summary>
         /// Adds the transaction to the repository.
@@ -24,7 +32,7 @@ namespace AssignmentFour.Repository
         }
 
         /// <summary>
-        /// To update the existing Transaction.
+        /// Updates the existing Transaction.
         /// </summary>
         /// <param name="transaction">Edited details of the Transaction</param>
         /// <returns>True - Updated Successfully | False - Cannot Update</returns>
@@ -55,7 +63,7 @@ namespace AssignmentFour.Repository
         }
 
         /// <summary>
-        /// To delete the Transaction using Id
+        /// Deletes the Transaction using Id
         /// </summary>
         /// <param name="transactionId">Id of the transaction to be deleted</param>
         /// <returns>True if the transaction found and deleted | False if the transaction cant be deleted</returns>
@@ -72,19 +80,19 @@ namespace AssignmentFour.Repository
         }
 
         /// <summary>
-        /// Shows the entire transactions
+        /// Gets the entire transactions
         /// </summary>
-        /// <returns>A cloned copy of all all transactions </returns>
+        /// <returns>List of all transactions </returns>
         public IEnumerable<Transaction> GetAllTransactions()
         {
             return this._transactionList.Select(t => t.CloneTransaction());
         }
 
         /// <summary>
-        /// Shows the transactions of the desired type.
+        /// Gets the transactions of the desired type.
         /// </summary>
         /// <param name="type">Type of transactions to retrieve</param>
-        /// <returns>IEnumerable list of Transactions of the specified type</returns>
+        /// <returns>List of Transactions of the specified type</returns>
         public IEnumerable<Transaction> GetTransactionsByType(TransactionType type)
         {
             return this._transactionList.Where(t => t.TransactionType == type)
@@ -92,10 +100,10 @@ namespace AssignmentFour.Repository
         }
 
         /// <summary>
-        /// Shows the transactions of the desired amount
+        /// Gets the transactions of the desired amount
         /// </summary>
         /// <param name="amount">Amount of transactions to retrieve</param>
-        /// <returns>IEnumerable list of Transactions of the specified amount</returns>
+        /// <returns>List of Transactions of the specified amount</returns>
         public IEnumerable<Transaction> GetTransactionsByAmount(decimal amount)
         {
             return this._transactionList.Where(t => t.Amount == amount)
@@ -103,10 +111,10 @@ namespace AssignmentFour.Repository
         }
 
         /// <summary>
-        /// Shows the transactions of the desired description
+        /// Gets the transactions of the desired description
         /// </summary>
         /// <param name="description">Description of transactions to retrieve</param>
-        /// <returns>IEnumerable list of Transactions of the specified description</returns>
+        /// <returns>List of Transactions of the specified description</returns>
         public IEnumerable<Transaction> GetTransactionsByDescription(string description)
         {
             return this._transactionList.Where(t => t.Description.Contains(description))
@@ -114,10 +122,10 @@ namespace AssignmentFour.Repository
         }
 
         /// <summary>
-        /// Shows the transactions of the desired date
+        /// Gets the transactions of the desired date
         /// </summary>
         /// <param name="date">Date of the transactions to retrieve</param>s
-        /// <returns>IEnumerable list of Transactions of the specified date</returns>
+        /// <returns>List of Transactions of the specified date</returns>
         public IEnumerable<Transaction> GetTransactionsByDate(DateOnly date)
         {
             return this._transactionList.Where(t => t.Date == date)

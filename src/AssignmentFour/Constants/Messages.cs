@@ -1,4 +1,4 @@
-﻿namespace AssignmentFour.Model
+﻿namespace AssignmentFour.Constants
 {
     /// <summary>
     /// It holds the return messages. 
