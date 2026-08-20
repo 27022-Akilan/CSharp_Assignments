@@ -144,7 +144,8 @@ namespace AssignmentThree.Utilities
                 return false;
             }
 
-            return !word.All(char.IsDigit);
+            string noSpaces = new string(word.Where(c => !char.IsWhiteSpace(c)).ToArray());
+            return !noSpaces.All(char.IsDigit);
         }
 
         /// <summary>

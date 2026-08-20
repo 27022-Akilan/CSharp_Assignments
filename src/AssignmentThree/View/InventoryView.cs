@@ -260,16 +260,5 @@ namespace AssignmentThree.View
                     break;
             }
         }
-
-        // private bool IfProductExists()
-
-        // {
-        //    IEnumerable<ProductInfo> list = this._productService.GetAllProducts();
-        //    if (list.Count() == 0)
-        //    {
-        //        ConsolePresenter.DisplayError("No products found");
-        //    }
-        //    return true;
-        // }
     }
 }

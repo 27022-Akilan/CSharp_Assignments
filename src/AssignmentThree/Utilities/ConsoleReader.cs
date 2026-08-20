@@ -5,6 +5,8 @@
     /// </summary>
     public static class ConsoleReader
     {
+        private const int MaxTries = 3;
+
         /// <summary>
         /// To get the name of the product from the user.
         /// </summary>
@@ -12,7 +14,7 @@
         /// <returns>True - Successfully got the valid Name || False - Cant get the name , out of tries </returns>
         public static bool GetName(out string name)
         {
-            int tries = 3;
+            int tries = MaxTries;
             do
             {
                 tries--;
@@ -38,7 +40,7 @@
         /// <returns>True - Got the valid product Id || False - Cant get a valid product Id (out of tries)</returns>
         public static bool GetId(out string productId)
         {
-            int tries = 3;
+            int tries = MaxTries;
             do
             {
                 tries--;
@@ -64,7 +66,7 @@
         /// <returns>True - Got the valid product price || False - Cant get a valid product price (out of tries)</returns>
         public static bool GetPrice(out double productPrice)
         {
-            int tries = 3;
+            int tries = MaxTries;
             do
             {
                 tries--;
@@ -90,7 +92,7 @@
         /// <returns>True - Got the valid number || False - Invalid Number and out of tries</returns>
         public static bool GetNumber(out int number)
         {
-            int tries = 3;
+            int tries = MaxTries;
             do
             {
                 tries--;
@@ -115,7 +117,7 @@
         /// <returns>True - Got the valid Quantity || False - Invalid Quantity and out of tries</returns>
         public static bool GetQuantity(out long productQuantity)
         {
-            int tries = 3;
+            int tries = MaxTries;
             do
             {
                 tries--;
@@ -144,7 +146,7 @@
         public static bool GetYesOrNo(out bool shouldProceed, string promptMessage)
         {
             shouldProceed = false;
-            int tries = 3;
+            int tries = MaxTries;
             do
             {
                 tries--;

@@ -1,5 +1,4 @@
 ﻿using AssignmentThree.Model;
-using AssignmentThree.Model.Enums;
 
 namespace AssignmentThree.Repository
 {
@@ -16,24 +15,12 @@ namespace AssignmentThree.Repository
         /// <summary>
         /// Add the product into the Repository
         /// </summary>
-        /// <param name="id">Id of the product</param>
-        /// <param name="name">Name of the product</param>
-        /// <param name="price">Price of the product</param>
-        /// <param name="quantity">Quantity of the product</param>
-        /// <returns>Success or Error Specific Message</returns>
-        public OperationResult AddProduct(string id, string name, double price, long quantity)
+        /// <param name="product">Contains product</param>
+        /// <returns>True - If Added || False otherwise </returns>
+        public bool AddProduct(ProductInfo product)
         {
-            foreach (ProductInfo product in this._product)
-            {
-                if (product.Id.Equals(id))
-                {
-                    return OperationResult.ProductIdAlreadyExists;
-                }
-            }
-
-            ProductInfo productInfo = new ProductInfo(id, name, price, quantity);
-            this._product.Add(productInfo);
-            return OperationResult.AddedSuccessFull;
+            this._product.Add(product);
+            return true;
         }
 
         /// <summary>
@@ -43,15 +30,7 @@ namespace AssignmentThree.Repository
         /// <returns>Product object - If Product exists || Null - Product does not exists</returns>
         public ProductInfo? GetProduct(string id)
         {
-            foreach (ProductInfo product in this._product)
-            {
-                if (product.Id.Equals(id))
-                {
-                    return new ProductInfo(product.Id, product.Name, product.Price, product.Quantity);
-                }
-            }
-
-            return null;
+            return this._product.FirstOrDefault(p => p.Id.Equals(id));
         }
 
         /// <summary>
@@ -91,16 +70,14 @@ namespace AssignmentThree.Repository
         /// <returns>True - Product Deleted || False - Cant Delete product</returns>
         public bool DeleteProductById(string id)
         {
-            foreach (var product in this._product)
+            ProductInfo? product = this._product.FirstOrDefault(p => p.Id.Equals(id));
+            if (product == null)
             {
-                if (product.Id.Equals(id))
-                {
-                    this._product.Remove(product);
-                    return true;
-                }
+                return false;
             }
 
-            return false;
+            this._product.Remove(product);
+            return true;
         }
 
         /// <summary>
@@ -111,8 +88,12 @@ namespace AssignmentThree.Repository
         /// <returns>Enumerable list of searched products</returns>
         public IEnumerable<ProductInfo> SearchProduct(string searchName, string searchId)
         {
-            return this._product.Where(p => (p.Name != string.Empty && p.Name!.Contains(searchName, StringComparison.OrdinalIgnoreCase)) || p.Id.Equals(searchId))
-        .Select(p => new ProductInfo(p.Id, p.Name, p.Price, p.Quantity));
+            return this._product.Where(p => (
+                !string.IsNullOrEmpty(searchName)
+                && p.Name!.Contains(searchName, StringComparison.OrdinalIgnoreCase))
+                || (!string.IsNullOrEmpty(searchId)
+                && p.Id.Equals(searchId)))
+                .Select(p => new ProductInfo(p.Id, p.Name, p.Price, p.Quantity));
         }
 
         /// <summary>
@@ -121,7 +102,7 @@ namespace AssignmentThree.Repository
         /// <returns>True - If Products are Empty || False - If There products exists</returns>
         public bool IsEmpty()
         {
-            return this._product.Count() == 0 ? true : false;
+            return this._product.Any();
         }
     }
 }

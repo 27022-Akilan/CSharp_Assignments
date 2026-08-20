@@ -30,7 +30,9 @@ namespace AssignmentThree.Service
         /// <returns>True - Success full Add | False - Cant Add</returns>
         public OperationResult AddProduct(string id, string name, double price, long quantity)
         {
-            return this._productRepo.AddProduct(id, name, price, quantity);
+            ProductInfo product = new ProductInfo(id, name, price, quantity);
+            this._productRepo.AddProduct(product);
+            return OperationResult.AddedSuccessFull;
         }
 
         /// <summary>
@@ -91,5 +93,7 @@ namespace AssignmentThree.Service
         {
             return this._productRepo.SearchProduct(searchName, searchId);
         }
+
+        private bool IsValid()
     }
 }

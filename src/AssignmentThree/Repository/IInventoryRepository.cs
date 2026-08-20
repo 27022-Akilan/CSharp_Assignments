@@ -1,5 +1,4 @@
 ﻿using AssignmentThree.Model;
-using AssignmentThree.Model.Enums;
 
 namespace AssignmentThree.Repository
 {
@@ -11,12 +10,9 @@ namespace AssignmentThree.Repository
         /// <summary>
         /// Must be implemented in the derived class.
         /// </summary>
-        /// <param name="id">Contains the Product Id</param>
-        /// <param name="name">Contains the Product name</param>
-        /// <param name="price">Contains the Product Price</param>
-        /// <param name="quantity">Contains the Product Quantity</param>
-        /// <returns>An OperationMessage enum</returns>
-        OperationResult AddProduct(string id, string name, double price, long quantity);
+        /// <param name="product">Contains the Product.</param>
+        /// <returns>True - If Added || False otherwise </returns>
+        bool AddProduct(ProductInfo product);
 
         /// <summary>
         /// Must be implemented inside the derived class.
