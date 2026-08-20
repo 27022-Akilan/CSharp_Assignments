@@ -19,10 +19,5 @@
         /// Product is not in the Inventory.
         /// </summary>
         ProductDoesNotExists,
-
-        /// <summary>
-        /// To exit the menu.
-        /// </summary>
-        Exit,
     }
 }

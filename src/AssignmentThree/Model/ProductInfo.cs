@@ -21,12 +21,12 @@
         }
 
         /// <summary>
-        /// Gets or Sets the Id of the product
+        /// Gets the Id of the product
         /// </summary>
         /// <value>
         /// A string containing the Id of the Product.
         /// </value>
-        public string Id { get; set; }
+        public string Id { get; }
 
         /// <summary>
         ///  Gets or sets the Name of the Product
