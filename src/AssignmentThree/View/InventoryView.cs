@@ -53,86 +53,27 @@ namespace AssignmentThree.View
                 {
                     // Add Product
                     case MenuOption.AddProduct:
-                        string productName, productId;
-                        double productPrice;
-                        long productQuantity;
-                        if (!ConsoleReader.GetId(out productId) || !ConsoleReader.GetName(out productName)
-                            || !ConsoleReader.GetPrice(out productPrice) || !ConsoleReader.GetQuantity(out productQuantity))
-                        {
-                            ConsolePresenter.DisplayErrorMessage("Aborting due to invalid tries!!");
-                            break;
-                        }
-
-                        OperationResult message = this._productService.AddProduct(productId, productName, productPrice, productQuantity);
-                        this.DisplayMessage(message);
+                        this.HandleAddProduct();
                         break;
 
                     // Edit Product
                     case MenuOption.EditProduct:
-
-                        IEnumerable<ProductInfo> list = this._productService.GetAllProducts();
-                        if (list.Count() == 0)
-                        {
-                            ConsolePresenter.DisplayErrorMessage("No products found");
-                            break;
-                        }
-
-                        ConsolePresenter.DisplayTable(list);
-                        if (ConsoleReader.GetId(out productId))
-                        {
-                            ProductInfo? product = this._productService.GetProduct(productId);
-                            this.EditField(product);
-                            break;
-                        }
-
-                        ConsolePresenter.DisplayErrorMessage("The Type of Product Id is Invalid!");
+                        this.HandleEditProduct();
                         break;
 
                     // Delete Product
                     case MenuOption.DeleteProduct:
-
-                        list = this._productService.GetAllProducts();
-                        if (list.Count() == 0)
-                        {
-                            ConsolePresenter.DisplayErrorMessage("No Products found");
-                            break;
-                        }
-
-                        ConsolePresenter.DisplayTable(list);
-                        Console.WriteLine("Enter the Id to be deleted");
-                        ConsoleReader.GetId(out string id);
-                        if (this._productService.Delete(id))
-                        {
-                            ConsolePresenter.DisplaySuccessMessage("Deleted the product Successfully.");
-                        }
-                        else
-                        {
-                            ConsolePresenter.DisplayErrorMessage("Cant Delete the Product , Id doesn't Exists");
-                        }
-
+                        this.HandleDeleteProduct();
                         break;
 
                     // Display Product
                     case MenuOption.DisplayProduct:
-                        list = this._productService.GetAllProducts();
-                        if (list.Count() == 0)
-                        {
-                            ConsolePresenter.DisplayErrorMessage("No products found");
-                            break;
-                        }
-
-                        ConsolePresenter.DisplayTable(list);
+                        this.HandleDisplayProduct();
                         break;
 
                     // Search Product
                     case MenuOption.SearchProduct:
-                        if (this._productService.IsEmptyRepository())
-                        {
-                            ConsolePresenter.DisplayErrorMessage("No products found");
-                            break;
-                        }
-
-                        this.SearchProduct();
+                        this.HandleSearchProduct();
                         break;
 
                     // Exit
@@ -154,6 +95,106 @@ namespace AssignmentThree.View
         }
 
         /// <summary>
+        /// Handles addition of a new Product.
+        /// </summary>
+        public void HandleAddProduct()
+        {
+            string? productName, productId;
+            double productPrice;
+            long productQuantity;
+            if (!ConsoleReader.GetId(out productId) || !ConsoleReader.GetName(out productName)
+                || !ConsoleReader.GetPrice(out productPrice) || !ConsoleReader.GetQuantity(out productQuantity))
+            {
+                ConsolePresenter.DisplayErrorMessage("Aborting due to invalid tries!!");
+                return;
+            }
+
+            OperationResult message = this._productService.AddProduct(productId, productName, productPrice, productQuantity);
+            this.DisplayMessage(message);
+        }
+
+        /// <summary>
+        /// Handles editing of an existing Product.
+        /// </summary>
+        public void HandleEditProduct()
+        {
+            IEnumerable<ProductInfo> list = this._productService.GetAllProducts();
+            if (list.Count() == 0)
+            {
+                ConsolePresenter.DisplayErrorMessage("No products found");
+                return;
+            }
+
+            ConsolePresenter.DisplayTable(list);
+            if (ConsoleReader.GetId(out string productId))
+            {
+                ProductInfo? product = this._productService.GetProduct(productId);
+                this.EditField(product);
+            }
+
+            ConsolePresenter.DisplayErrorMessage("The Type of Product Id is Invalid!");
+        }
+
+        /// <summary>
+        /// Handles deletion of a Product.
+        /// </summary>
+        public void HandleDeleteProduct()
+        {
+            IEnumerable<ProductInfo> list = this._productService.GetAllProducts();
+            if (list.Count() == 0)
+            {
+                ConsolePresenter.DisplayErrorMessage("No Products found");
+                return;
+            }
+
+            ConsolePresenter.DisplayTable(list);
+            Console.WriteLine("Enter the Id to be deleted");
+
+            if (!ConsoleReader.GetId(out string id))
+            {
+                ConsolePresenter.DisplayErrorMessage("The Type of Product Id is Invalid!");
+                return;
+            }
+
+            if (!this._productService.Delete(id))
+            {
+                ConsolePresenter.DisplayErrorMessage("Cant Delete the Product , Id doesn't Exists");
+                return;
+            }
+
+            ConsolePresenter.DisplaySuccessMessage("Deleted the product Successfully.");
+        }
+
+        /// <summary>
+        /// Handles displaying all Products.
+        /// </summary>
+        public void HandleDisplayProduct()
+        {
+            IEnumerable<ProductInfo> list = this._productService.GetAllProducts();
+            if (list.Count() == 0)
+            {
+                ConsolePresenter.DisplayErrorMessage("No products found");
+                return;
+            }
+
+            ConsolePresenter.DisplayTable(list);
+        }
+
+        /// <summary>
+        /// Handles searching for a Product.
+        /// </summary>
+        public void HandleSearchProduct()
+        {
+            if (this._productService.IsEmptyRepository())
+            {
+                ConsolePresenter.DisplayErrorMessage("No products found");
+                return;
+            }
+
+            this.SearchProduct();
+        }
+
+        /// <summary>
         /// To Edit the user required field
         /// </summary>
         /// <param name="product">Product Info of the Product to be edited</param>
@@ -167,31 +208,25 @@ namespace AssignmentThree.View
 
             Console.WriteLine($"\n--- Editing Product: {product.Name} (ID: {product.Id}) ---");
 
+            string? newName = null;
+            double newPrice = -1;
+            long newQuantity = -1;
             if (ConsoleReader.GetYesOrNo(out bool editName, "Edit Name?") && editName)
             {
-                if (ConsoleReader.GetName(out string newName))
-                {
-                    product.Name = newName;
-                }
+                ConsoleReader.GetName(out newName);
             }
 
             if (ConsoleReader.GetYesOrNo(out bool editPrice, "Edit Price?") && editPrice)
             {
-                if (ConsoleReader.GetPrice(out double newPrice))
-                {
-                    product.Price = newPrice;
-                }
+                ConsoleReader.GetPrice(out newPrice);
             }
 
             if (ConsoleReader.GetYesOrNo(out bool editQuantity, "Edit Quantity?") && editQuantity)
             {
-                if (ConsoleReader.GetQuantity(out long newQuantity))
-                {
-                    product.Quantity = newQuantity;
-                }
+                ConsoleReader.GetQuantity(out newQuantity);
             }
 
-            if (this._productService.EditProduct(product))
+            if (this._productService.EditProduct(product.Id, newName, newPrice, newQuantity))
             {
                 ConsolePresenter.DisplaySuccessMessage("Product updated successfully!");
             }
@@ -257,6 +292,9 @@ namespace AssignmentThree.View
 
                 case OperationResult.ProductIdAlreadyExists:
                     ConsolePresenter.DisplayErrorMessage("Product ID Already Exists \nCant Add!");
+                    break;
+                case OperationResult.AddFailed:
+                    ConsolePresenter.DisplayErrorMessage("Product can not be added");
                     break;
             }
         }

@@ -19,5 +19,10 @@
         /// Product is not in the Inventory.
         /// </summary>
         ProductDoesNotExists,
+
+        /// <summary>
+        /// Product cant be added.
+        /// </summary>
+        AddFailed,
     }
 }

@@ -30,6 +30,11 @@ namespace AssignmentThree.Service
         /// <returns>True - Success full Add | False - Cant Add</returns>
         public OperationResult AddProduct(string id, string name, double price, long quantity)
         {
+            if (string.IsNullOrEmpty(id) || string.IsNullOrEmpty(name) || price <= 0 || quantity < 0)
+            {
+                return OperationResult.AddFailed;
+            }
+
             ProductInfo product = new ProductInfo(id, name, price, quantity);
             this._productRepo.AddProduct(product);
             return OperationResult.AddedSuccessFull;
@@ -42,17 +47,35 @@ namespace AssignmentThree.Service
         /// <returns>Product object - If Product Exists || Null - Product does not exists</returns>
         public ProductInfo? GetProduct(string id)
         {
+            if (string.IsNullOrEmpty(id))
+            {
+                return null;
+            }
+
             return this._productRepo.GetProduct(id);
         }
 
         /// <summary>
         /// To edit the product information.
         /// </summary>
-        /// <param name="editedProduct">Has the entire Product information as an object</param>
+        /// <param name="id">Product Id</param>
+        /// <param name="name">Product Name</param>
+        /// <param name="price">Product Price</param>
+        /// <param name="quantity">Product Quantity</param>
         /// <returns>True - If Updated || False - If Not Updated</returns>
-        public bool EditProduct(ProductInfo editedProduct)
+        public bool EditProduct(string id, string? name, double price, long quantity)
         {
-            return this._productRepo.UpdateProduct(editedProduct);
+            ProductInfo? product = this._productRepo.GetProduct(id);
+            if (product == null)
+            {
+                return false;
+            }
+
+            product.Name = name ?? product.Name;
+            product.Price = price == -1 ? product.Price : price;
+            product.Quantity = quantity == -1 ? product.Quantity : quantity;
+
+            return this._productRepo.UpdateProduct(product);
         }
 
         /// <summary>
@@ -71,6 +94,11 @@ namespace AssignmentThree.Service
         /// <returns>True - Product Deleted || False - Cant Delete product</returns>
         public bool Delete(string id)
         {
+            if (!string.IsNullOrEmpty(id))
+            {
+                return false;
+            }
+
             return this._productRepo.DeleteProductById(id);
         }
 
@@ -93,7 +121,5 @@ namespace AssignmentThree.Service
         {
             return this._productRepo.SearchProduct(searchName, searchId);
         }
-
-        private bool IsValid()
     }
 }
