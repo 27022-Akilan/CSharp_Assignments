@@ -1,5 +1,6 @@
 ﻿using AssignmentFour.Constants;
 using AssignmentFour.Model;
+using AssignmentFour.Model.DTO;
 using AssignmentFour.Model.Enums;
 using AssignmentFour.Repository;
 
@@ -10,7 +11,6 @@ namespace AssignmentFour.Service
     /// </summary>
     public class TransactionService
     {
-        private const int MinimumAmount = 1;
         private readonly IRepository _repository;
 
         /// <summary>
@@ -27,40 +27,42 @@ namespace AssignmentFour.Service
         /// </summary>
         /// <param name="transaction">Transaction object</param>
         /// <returns>String - Empty string for success otherwise a message for the representing the failure</returns>
-        public string AddTransaction(Transaction transaction)
+        public string AddTransaction(TransactionRequestModel transaction)
         {
             if (transaction == null)
             {
                 return Messages.AddFailedDueToNull;
             }
 
-            bool validationResult = this.IsValidAmount(transaction.Amount);
-            if (validationResult)
+            if (!this.IsValidAmount(transaction.Amount))
             {
-                Transaction transactionWithId;
-                if (transaction is Income)
-                {
-                    transactionWithId = new Income(
-                        Guid.NewGuid(),
-                        transaction.Amount,
-                        transaction.Description,
-                        transaction.Date,
-                        ((Income)transaction).Source);
-                }
-                else
-                {
-                    transactionWithId = new Expense(
-                        Guid.NewGuid(),
-                        transaction.Amount,
-                        transaction.Description,
-                        transaction.Date,
-                        ((Expense)transaction).Category);
-                }
+                return Messages.AddFailedDueToInvalidAmount;
+            }
 
+            Transaction transactionWithId;
+            if (transaction is IncomeRequestModel)
+            {
+                transactionWithId = new Income(
+                    Guid.NewGuid(),
+                    transaction.Amount,
+                    transaction.Description,
+                    transaction.Date,
+                    ((IncomeRequestModel)transaction).Source);
                 return this._repository.AddTransaction(transactionWithId);
             }
 
-            return Messages.AddFailedDueToAmountLessThanZero;
+            if (transaction is ExpenseRequestModel)
+            {
+                transactionWithId = new Expense(
+                    Guid.NewGuid(),
+                    transaction.Amount,
+                    transaction.Description,
+                    transaction.Date,
+                    ((ExpenseRequestModel)transaction).Category);
+                return this._repository.AddTransaction(transactionWithId);
+            }
+
+            return Messages.CantAddDueToInvalidType;
         }
 
         /// <summary>
@@ -75,7 +77,7 @@ namespace AssignmentFour.Service
                 return false;
             }
 
-            if (transaction.Amount <= 0)
+            if (!this.IsValidAmount(transaction.Amount))
             {
                 return false;
             }
@@ -196,7 +198,7 @@ namespace AssignmentFour.Service
         /// <returns>True - If validation success | False - Validation Failed</returns>
         public bool IsValidAmount(decimal amount)
         {
-            return amount >= MinimumAmount;
+            return amount >= Value.MinimumAmount;
         }
 
         /// <summary>

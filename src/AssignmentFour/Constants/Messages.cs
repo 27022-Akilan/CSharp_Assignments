@@ -1,7 +1,7 @@
 ﻿namespace AssignmentFour.Constants
 {
     /// <summary>
-    /// It holds the return messages. 
+    /// It holds the return messages.
     /// </summary>
     public class Messages
     {
@@ -53,6 +53,6 @@
         /// <summary>
         /// Validation error message for Date.
         /// </summary>
-        public const string AddFailedDueToAmountLessThanZero = "Transaction cant be added , because of amount less than 0";
+        public const string CantAddDueToInvalidType = "Cant add the transaction, due to invalid type of transaction";
     }
 }

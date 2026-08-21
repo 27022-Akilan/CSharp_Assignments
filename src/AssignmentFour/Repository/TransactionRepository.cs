@@ -117,7 +117,7 @@ namespace AssignmentFour.Repository
         /// <returns>List of Transactions of the specified description</returns>
         public IEnumerable<Transaction> GetTransactionsByDescription(string description)
         {
-            return this._transactionList.Where(t => t.Description.Contains(description))
+            return this._transactionList.Where(t => t.Description.Contains(description, StringComparison.OrdinalIgnoreCase))
                                         .Select(t => t.CloneTransaction());
         }
 

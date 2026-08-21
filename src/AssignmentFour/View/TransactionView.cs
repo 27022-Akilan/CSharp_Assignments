@@ -1,5 +1,6 @@
 ﻿using AssignmentFour.Constants;
 using AssignmentFour.Model;
+using AssignmentFour.Model.DTO;
 using AssignmentFour.Model.Enums;
 using AssignmentFour.Service;
 using ConsoleTables;
@@ -11,7 +12,7 @@ namespace AssignmentFour.View
     /// </summary>
     public class TransactionView
     {
-        private const int MaxTries = 3;
+        private const int MaxTries = Value.MaximumTries;
 
         private readonly InputView _getValidInput;
 
@@ -132,8 +133,8 @@ namespace AssignmentFour.View
                 return;
             }
 
-            Income income = new Income(Guid.Empty, amount, description, date, source);
-            string result = this._service.AddTransaction(income);
+            IncomeRequestModel incomeRequest = new IncomeRequestModel(amount, description, date, source);
+            string result = this._service.AddTransaction(incomeRequest);
 
             if (result == Messages.AddSuccess)
             {
@@ -168,8 +169,8 @@ namespace AssignmentFour.View
                 return;
             }
 
-            Expense expense = new Expense(Guid.Empty, amount, description, date, category);
-            string result = this._service.AddTransaction(expense);
+            ExpenseRequestModel expenseRequest = new ExpenseRequestModel(amount, description, date, category);
+            string result = this._service.AddTransaction(expenseRequest);
 
             if (result == Messages.AddSuccess)
             {
