@@ -26,11 +26,12 @@ namespace AssignmentThree.View
         /// </summary>
         public void DisplayMenu()
         {
-            Console.WriteLine("Inventory App");
             bool exitFlag = true;
             do
             {
                 Console.Clear();
+
+                ConsolePresenter.DisplaySuccessMessage("\t\t\t\t\t\tInventory App");
                 Console.WriteLine(
                     "======================================================" +
                     "\n1.Add Product" +
