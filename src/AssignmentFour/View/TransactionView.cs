@@ -12,8 +12,6 @@ namespace AssignmentFour.View
     /// </summary>
     public class TransactionView
     {
-        private const int MaxTries = Value.MaximumTries;
-
         private readonly InputView _getValidInput;
 
         private readonly TransactionService _service;
