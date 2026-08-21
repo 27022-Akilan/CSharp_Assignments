@@ -1,4 +1,6 @@
-﻿using AssignmentFive.Model;
+﻿using AssignmentFive.Constants;
+using AssignmentFive.Model;
+using AssignmentFive.Model.DTO;
 using AssignmentFive.Model.Enums;
 using AssignmentFive.Service;
 using ConsoleTables;
@@ -10,7 +12,7 @@ namespace AssignmentFive.View
     /// </summary>
     public class TransactionView
     {
-        private const int MaxTries = 3;
+        private const int MaxTries = Value.MaximumTries;
 
         private readonly InputView _getValidInput;
 
@@ -94,9 +96,7 @@ namespace AssignmentFive.View
         public void DisplayMenu()
         {
             Helper.DisplayInfoMessage("\t\t\t\t\tTrack Every Rupee and Grow Every Dream");
-
             Console.WriteLine(
-                $"\nTo look into your transactions in Json format, Have a look into {Program.FilePath}" +
                 "\n===============================================" +
                 "\n1.Add Income" +
                 "\n2.Add Expense" +
@@ -133,8 +133,8 @@ namespace AssignmentFive.View
                 return;
             }
 
-            Income income = new Income(Guid.Empty, amount, description, date, source);
-            string result = this._service.AddTransaction(income);
+            IncomeRequestModel incomeRequest = new IncomeRequestModel(amount, description, date, source);
+            string result = this._service.AddTransaction(incomeRequest);
 
             if (result == Messages.AddSuccess)
             {
@@ -147,7 +147,7 @@ namespace AssignmentFive.View
         }
 
         /// <summary>
-        /// Handles adding an Expense transaction
+        /// Handles adding an Expense transactionExpand commentComment on line R150Resolved
         /// </summary>
         public void AddExpense()
         {
@@ -169,8 +169,8 @@ namespace AssignmentFive.View
                 return;
             }
 
-            Expense expense = new Expense(Guid.Empty, amount, description, date, category);
-            string result = this._service.AddTransaction(expense);
+            ExpenseRequestModel expenseRequest = new ExpenseRequestModel(amount, description, date, category);
+            string result = this._service.AddTransaction(expenseRequest);
 
             if (result == Messages.AddSuccess)
             {

@@ -1,4 +1,4 @@
-﻿namespace AssignmentFive.Model
+﻿namespace AssignmentFive.Constants
 {
     /// <summary>
     /// It holds the return messages.
@@ -21,8 +21,13 @@
         public const string AddFailedDueToNull = "Transaction cant be added , because of Empty values";
 
         /// <summary>
-        /// Adding the transaction failed due to Invalid amount
+        /// Adding the transaction failed due to invalid amount
         /// </summary>
-        public const string AddFailedDueToAmountLessThanZero = "Transaction cant be added , because of amount less than 0";
+        public const string AddFailedDueToInvalidAmount = "Transaction cant be added , because of amount less than 1";
+
+        /// <summary>
+        /// Adding the transaction failed due to invalid type of transaction.
+        /// </summary>
+        public const string CantAddDueToInvalidType = "Cant add the transaction, due to invalid type of transaction";
     }
 }

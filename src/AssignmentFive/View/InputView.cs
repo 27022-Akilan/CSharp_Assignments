@@ -1,4 +1,5 @@
-﻿using AssignmentFive.Model.Enums;
+﻿using AssignmentFive.Constants;
+using AssignmentFive.Model.Enums;
 using AssignmentFive.Service;
 
 namespace AssignmentFive.View
@@ -8,7 +9,7 @@ namespace AssignmentFive.View
     /// </summary>
     public class InputView
     {
-        private const int MaxTries = 3;
+        private const int MaxTries = Value.MaximumTries;
 
         private readonly TransactionService _service;
 
