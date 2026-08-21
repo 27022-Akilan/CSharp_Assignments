@@ -18,7 +18,7 @@
         /// <summary>
         /// Investment as source of income.
         /// </summary>
-        Investment,
+        InvestmentReturns,
 
         /// <summary>
         /// Gift as source of income.
