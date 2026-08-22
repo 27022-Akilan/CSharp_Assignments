@@ -29,8 +29,6 @@ namespace Assignments
                     $"\nThis is for Programmer use only!!!" +
                     $"\n{ex.StackTrace}");
             }
-
-            // Console.WriteLine("\nApplication Continues.........................");
         }
 
         /// <summary>
