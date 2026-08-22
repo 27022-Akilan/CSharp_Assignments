@@ -87,7 +87,7 @@ namespace AssignmentFive.Repository
         /// To delete the Transaction using Id
         /// </summary>
         /// <param name="transactionId">Id of the transaction to be deleted</param>
-        /// <returns>True if the transaction found and deleted | False if the transaction cant be deleted</returns>
+        /// <returns>True if the transaction is found and deleted | False if the transaction cannot be deleted</returns>
         public bool DeleteTransactionById(Guid transactionId)
         {
             Transaction? transaction = this._transactionList.FirstOrDefault(t => t.TransactionId == transactionId);
