@@ -40,29 +40,42 @@ namespace AssignmentFive.Repository
         /// <summary>
         /// To update the existing Transaction.
         /// </summary>
-        /// <param name="transaction">Edited details of the Transaction</param>
+        /// <param name="transaction">Edited details of the Income</param>
         /// <returns>True - Updated Successfully | False - Cannot Update</returns>
-        public bool UpdateTransaction(Transaction transaction)
+        public bool UpdateIncome(Income transaction)
         {
-            foreach (Transaction field in this._transactionList)
+            foreach (Income field in this._transactionList)
             {
                 if (field.TransactionId == transaction.TransactionId)
                 {
                     field.Amount = transaction.Amount;
                     field.Date = transaction.Date;
                     field.Description = transaction.Description;
-
-                    if (transaction.TransactionType == TransactionType.Income)
-                    {
-                        ((Income)field).Source = ((Income)transaction).Source;
-                    }
-                    else if (transaction.TransactionType == TransactionType.Expense)
-                    {
-                        ((Expense)field).Category = ((Expense)transaction).Category;
-                    }
-
+                    field.Source = transaction.Source;
                     this.SaveTransactionsToFile();
+                    return true;
+                }
+            }
 
+            return false;
+        }
+
+        /// <summary>
+        /// To update the existing Transaction.
+        /// </summary>
+        /// <param name="transaction">Edited details of the Expense</param>
+        /// <returns>True - Updated Successfully | False - Cannot Update</returns>
+        public bool UpdateExpense(Expense transaction)
+        {
+            foreach (Expense field in this._transactionList)
+            {
+                if (field.TransactionId == transaction.TransactionId)
+                {
+                    field.Amount = transaction.Amount;
+                    field.Date = transaction.Date;
+                    field.Description = transaction.Description;
+                    field.Category = transaction.Category;
+                    this.SaveTransactionsToFile();
                     return true;
                 }
             }

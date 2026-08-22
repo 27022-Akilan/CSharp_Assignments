@@ -16,11 +16,18 @@ namespace AssignmentFive.Repository
         public string AddTransaction(Transaction transaction);
 
         /// <summary>
-        /// Updates a Transaction.
+        /// Updates a Income.
         /// </summary>
-        /// <param name="transaction">Transaction object</param>
+        /// <param name="transaction">Income object</param>
         /// <returns>True - Updated successfully | False - Cannot Update</returns>
-        public bool UpdateTransaction(Transaction transaction);
+        public bool UpdateIncome(Income transaction);
+
+        /// <summary>
+        /// Updates a Expense.
+        /// </summary>
+        /// <param name="transaction">Expense object</param>
+        /// <returns>True - Updated successfully | False - Cannot Update</returns>
+        public bool UpdateExpense(Expense transaction);
 
         /// <summary>
         /// Deletes a transaction by the ID.
