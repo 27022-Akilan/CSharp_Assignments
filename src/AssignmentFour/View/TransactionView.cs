@@ -290,12 +290,12 @@ namespace AssignmentFour.View
         public void SearchTransaction()
         {
             Console.WriteLine("Search By:" +
-                              "\n1. Type (Income/Expense)" +
-                              "\n2. Amount" +
-                              "\n3. Description" +
-                              "\n4. Date" +
-                              "\n5.Exit" +
-                              "\nEnter your choice (1-5):");
+                "\n1. Type (Income/Expense)" +
+                "\n2. Amount" +
+                "\n3. Description" +
+                "\n4. Date" +
+                "\n5.Exit" +
+                "\nEnter your choice (1-5):");
 
             string input = Console.ReadLine() ?? string.Empty;
             if (int.TryParse(input, out int choice))
@@ -319,7 +319,7 @@ namespace AssignmentFour.View
                     case TransactionSearchOption.Exit:
                         return;
                     default:
-                        Helper.DisplayWarningMessage("Invalid choice. Please enter a number between 1 and 5.");
+                        Helper.DisplayWarningMessage("Invalid Choice, Please enter a correct number");
                         break;
                 }
             }
@@ -465,12 +465,12 @@ namespace AssignmentFour.View
             Summary summary = this._service.GetSummary();
 
             Console.WriteLine("================= Summary =================" +
-                              $"\nTotal Income: {summary.TotalIncome}" +
-                              $"\nTotal Expense: {summary.TotalExpense}" +
-                              $"\nNet Balance: {summary.NetBalance}" +
-                              $"\nTotal Transactions: {summary.TotalTransactions}" +
-                              $"\nAverage Transaction Value: {summary.AverageTransactionValue:F2}" +
-                              $"\n===========================================");
+                $"\nTotal Income: {summary.TotalIncome}" +
+                $"\nTotal Expense: {summary.TotalExpense}" +
+                $"\nNet Balance: {summary.NetBalance}" +
+                $"\nTotal Transactions: {summary.TotalTransactions}" +
+                $"\nAverage Transaction Value: {summary.AverageTransactionValue:F2}" +
+                $"\n===========================================");
         }
 
         /// <summary>
