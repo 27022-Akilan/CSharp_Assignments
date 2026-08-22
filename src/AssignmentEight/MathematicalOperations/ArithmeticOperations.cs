@@ -13,13 +13,13 @@ namespace AssignmentEight.MathematicalOperations
         public void Divide()
         {
             Console.WriteLine("You had chosen divide operation!");
-            Console.Write("Enter the dividend: ");
             try
             {
+                Console.Write("\nEnter the dividend: ");
                 int dividend = int.Parse(Console.ReadLine() ?? string.Empty);
-                Console.Write("Enter the divisor: ");
+                Console.Write("\nEnter the divisor: ");
                 int divisor = int.Parse(Console.ReadLine() ?? string.Empty);
-                Helper.DisplaySuccessMessage($"Division Result : {dividend / divisor}");
+                Helper.DisplaySuccessMessage($"\nDivision Result : {dividend / divisor}");
             }
 
             // Task 1
@@ -34,13 +34,17 @@ namespace AssignmentEight.MathematicalOperations
         /// </summary>
         public void PickAndAdd()
         {
-            Console.Write("\n\nPress 1 to get started: ");
+            Console.Write("\nPress 1 to get started: ");
             if (int.Parse(Console.ReadLine() ?? string.Empty) == 1)
             {
-                Console.WriteLine("Your array is");
+                Console.WriteLine("\nYour array is");
                 int[] array = { 10, 20, 30, 40, 50, 60, 70 };
+                foreach (int num in array)
+                {
+                    Console.Write($"{num}\t");
+                }
 
-                Console.WriteLine("Enter the positions of the number to be added");
+                Console.WriteLine("\n\nEnter the positions of the number to be added");
 
                 try
                 {
@@ -54,7 +58,7 @@ namespace AssignmentEight.MathematicalOperations
 
                     Console.Write("Enter the second position: ");
                     int secondPosition;
-                    if (int.TryParse(Console.ReadLine() ?? string.Empty, out secondPosition))
+                    if (!int.TryParse(Console.ReadLine() ?? string.Empty, out secondPosition))
                     {
                         throw new InvalidUserInputException("You should enter a whole number only!");
                     }
@@ -65,13 +69,13 @@ namespace AssignmentEight.MathematicalOperations
                 // Task 2
                 catch (IndexOutOfRangeException ex)
                 {
-                    Console.WriteLine($"Entered position should be in between the range 0 to {array.Length}\n{ex.Message}");
+                    Helper.DisplayWarningMessage($"\nEntered position should be in between the range 0 to {array.Length}\n{ex.Message}");
                 }
 
                 // Task 3
                 catch (InvalidUserInputException ex)
                 {
-                    Console.WriteLine(ex.Message);
+                    Helper.DisplayWarningMessage(ex.Message);
                 }
 
                 return;
