@@ -3,6 +3,7 @@ using AssignmentFive.Model;
 using AssignmentFive.Model.DTO;
 using AssignmentFive.Model.Enums;
 using AssignmentFive.Repository;
+using AssignmentFive.Repository.Log;
 
 namespace AssignmentFive.Service
 {
@@ -13,13 +14,17 @@ namespace AssignmentFive.Service
     {
         private readonly IRepository _repository;
 
+        private readonly ILogger _logger;
+
         /// <summary>
         /// Initializes a new instance of the <see cref="TransactionService"/> class
         /// </summary>
-        /// <param name="repository">Repository object</param>
-        public TransactionService(IRepository repository)
+        /// <param name="repository">Repository instance</param>
+        /// <param name="logger">Logger instance</param>>
+        public TransactionService(IRepository repository, ILogger logger)
         {
             this._repository = repository;
+            this._logger = logger;
         }
 
         /// <summary>
@@ -31,11 +36,13 @@ namespace AssignmentFive.Service
         {
             if (transaction == null)
             {
+                this._logger.LogWarning("AddTransaction rejected due to null transaction request");
                 return Messages.AddFailedDueToNull;
             }
 
             if (!this.IsValidAmount(transaction.Amount))
             {
+                this._logger.LogWarning($"AddTransaction Rejected due to invalid Amount {transaction.Amount}");
                 return Messages.AddFailedDueToInvalidAmount;
             }
 
@@ -48,10 +55,10 @@ namespace AssignmentFive.Service
                     transaction.Description,
                     transaction.Date,
                     ((IncomeRequestModel)transaction).Source);
+                this._logger.LogInfo($"Income added with ID{transactionWithId.TransactionId} and Amount {transaction.Amount}");
                 return this._repository.AddTransaction(transactionWithId);
             }
-
-            if (transaction is ExpenseRequestModel)
+            else if (transaction is ExpenseRequestModel)
             {
                 transactionWithId = new Expense(
                     Guid.NewGuid(),
@@ -59,9 +66,11 @@ namespace AssignmentFive.Service
                     transaction.Description,
                     transaction.Date,
                     ((ExpenseRequestModel)transaction).Category);
+                this._logger.LogInfo($"Expense added with ID{transactionWithId.TransactionId} and Amount {transaction.Amount}");
                 return this._repository.AddTransaction(transactionWithId);
             }
 
+            this._logger.LogWarning($"AddTransaction rejected due invalid transaction type");
             return Messages.CantAddDueToInvalidType;
         }
 
@@ -72,21 +81,36 @@ namespace AssignmentFive.Service
         /// <returns>True - If transaction is Updated | False - If transaction can not be updated </returns>
         public bool Update(Transaction transaction)
         {
-            if (transaction == null || !this.IsValidAmount(transaction.Amount))
+            if (transaction == null)
             {
+                this._logger.LogWarning("UpdateTransaction rejected due to null transaction request");
                 return false;
             }
 
+            if (!this.IsValidAmount(transaction.Amount))
+            {
+                this._logger.LogWarning($"UpdateTransaction Rejected due to invalid Amount {transaction.Amount}");
+                return false;
+            }
+
+            bool result = false;
             if (transaction is Income)
             {
-                return this._repository.UpdateIncome((Income)transaction);
+                result = this._repository.UpdateIncome((Income)transaction);
             }
             else if (transaction is Expense)
             {
-                return this._repository.UpdateExpense((Expense)transaction);
+                result = this._repository.UpdateExpense((Expense)transaction);
             }
 
-            return false;
+            if (result)
+            {
+                this._logger.LogInfo($"{transaction.TransactionId} : Updated Successfully");
+                return result;
+            }
+
+            this._logger.LogError($"{transaction.TransactionId} : Cant Update");
+            return result;
         }
 
         /// <summary>
@@ -96,7 +120,15 @@ namespace AssignmentFive.Service
         /// <returns>bool True - Transaction deleted | False - Transaction cannot delete</returns>
         public bool DeleteTransactionById(Guid id)
         {
-            return this._repository.DeleteTransactionById(id);
+            bool result = this._repository.DeleteTransactionById(id);
+            if (result)
+            {
+                this._logger.LogInfo($"{id} : Deleted successfully");
+                return result;
+            }
+
+            this._logger.LogError($"{id} : Deleted successfully");
+            return result;
         }
 
         /// <summary>
@@ -105,6 +137,7 @@ namespace AssignmentFive.Service
         /// <returns>List of all transactions</returns>
         public IEnumerable<Transaction> GetAllTransactions()
         {
+            this._logger.LogInfo("Fetching all transactions.....");
             return this._repository.GetAllTransactions();
         }
 
@@ -115,6 +148,7 @@ namespace AssignmentFive.Service
         /// <returns>List of transactions of the specified type</returns>
         public IEnumerable<Transaction> GetTransactionsByType(TransactionType type)
         {
+            this._logger.LogInfo($"Fetching transaction by {type}.....");
             return this._repository.GetTransactionsByType(type);
         }
 
@@ -125,6 +159,7 @@ namespace AssignmentFive.Service
         /// <returns>List of transactions of the specified amount</returns>
         public IEnumerable<Transaction> GetTransactionsByAmount(decimal amount)
         {
+            this._logger.LogInfo($"Fetching transactions by {amount}.....");
             return this._repository.GetTransactionsByAmount(amount);
         }
 
@@ -135,6 +170,7 @@ namespace AssignmentFive.Service
         /// <returns>List of Transactions of the specified description</returns>
         public IEnumerable<Transaction> GetTransactionsByDescription(string description)
         {
+            this._logger.LogInfo($"Fetching transactions by {description}.....");
             if (string.IsNullOrWhiteSpace(description))
             {
                 return Enumerable.Empty<Transaction>();
@@ -150,6 +186,7 @@ namespace AssignmentFive.Service
         /// <returns>List of Transactions of the specified date</returns>
         public IEnumerable<Transaction> GetTransactionByDate(DateOnly date)
         {
+            this._logger.LogInfo($"Fetching transactions by {date}.....");
             return this._repository.GetTransactionsByDate(date);
         }
 
@@ -159,6 +196,7 @@ namespace AssignmentFive.Service
         /// <returns>Summary object</returns>
         public Summary GetSummary()
         {
+            this._logger.LogInfo($"Calculating the summary.....");
             decimal income = this.GetTotalIncome();
             decimal expense = this.GetTotalExpense();
             decimal netBalance = income - expense;

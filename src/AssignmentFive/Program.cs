@@ -1,4 +1,5 @@
 ﻿using AssignmentFive.Repository;
+using AssignmentFive.Repository.Log;
 using AssignmentFive.Service;
 using AssignmentFive.View;
 
@@ -20,30 +21,35 @@ namespace AssignmentFive
         /// <param name="args">Default arguments</param>
         public static void Main(string[] args)
         {
+            ILogger logger = FileLogger.GetInstance();
             try
             {
                 IRepository inMemoryRepository = new TransactionRepository();
                 IRepository fileRepository = new FileRepository(FilePath);
-                TransactionService service = new TransactionService(fileRepository);
+                TransactionService service = new TransactionService(fileRepository, logger);
                 InputView inputView = new InputView(service);
                 TransactionView view = new TransactionView(service, inputView);
 
                 view.StartApplication();
             }
-            catch (UnauthorizedAccessException)
+            catch (UnauthorizedAccessException ex)
             {
+                logger.LogError($"{ex.Message}");
                 Helper.DisplayErrorMessage("Error: The application does not have permission to access the file.");
             }
             catch (System.IO.IOException ex)
             {
+                logger.LogError($"{ex.Message}");
                 Helper.DisplayErrorMessage($"Error accessing the repository file: {ex.Message}");
             }
             catch (System.Text.Json.JsonException ex)
             {
+                logger.LogError($"{ex.Message}");
                 Helper.DisplayErrorMessage($"Error: The existing file {FilePath} is corrupted or not properly formatted.\n{ex.Message}");
             }
-            catch (Exception)
+            catch (Exception ex)
             {
+                logger.LogError($"{ex.Message}");
                 Helper.DisplayErrorMessage("Error : Unexpected Error , Please try after some time");
             }
         }

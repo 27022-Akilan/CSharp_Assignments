@@ -131,7 +131,7 @@ namespace AssignmentFive.View
                 return;
             }
 
-            IncomeRequestModel incomeRequest = new IncomeRequestModel(amount, description, date, source);
+            TransactionRequestModel incomeRequest = new IncomeRequestModel(amount, description, date, source);
             string result = this._service.AddTransaction(incomeRequest);
 
             if (result == Messages.AddSuccess)
@@ -167,7 +167,7 @@ namespace AssignmentFive.View
                 return;
             }
 
-            ExpenseRequestModel expenseRequest = new ExpenseRequestModel(amount, description, date, category);
+            TransactionRequestModel expenseRequest = new ExpenseRequestModel(amount, description, date, category);
             string result = this._service.AddTransaction(expenseRequest);
 
             if (result == Messages.AddSuccess)
