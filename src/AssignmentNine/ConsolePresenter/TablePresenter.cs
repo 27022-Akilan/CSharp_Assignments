@@ -14,7 +14,7 @@ namespace AssignmentNine.ConsolePresenter
         /// <param name="groups">List of tuple containing category,category's Maximum price, category's count</param>
         public static void DisplayProducts(IEnumerable<(string?, decimal, int)> groups)
         {
-            Console.WriteLine("The Category grouping with maximum price and count !!!!");
+            Console.WriteLine("\nThe Category grouping with maximum price and count !!!!");
             ConsoleTable table = new ConsoleTable("Category", "Maximum Price", "Total Products");
 
             table.Configure(options => options.EnableCount = false);
@@ -36,7 +36,8 @@ namespace AssignmentNine.ConsolePresenter
             ConsoleTable table = new ConsoleTable("Id", "Name", "Price", "Category");
             table.Configure(options => options.EnableCount = false);
 
-            Console.WriteLine("Here is your entire products");
+            // Console.WriteLine("Here is your entire products");
+
             foreach (Product product in productList)
             {
                 table.AddRow(product.Id, product.ProductName, product.Price, product.Category);

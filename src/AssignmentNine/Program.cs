@@ -23,6 +23,7 @@ namespace Assignments
             List<Supplier> suppliers = inventoryCreation.CreateSupplier();
 
             TaskOne taskOne = new TaskOne(products);
+            Console.WriteLine("The initial products are ");
             TablePresenter.DisplayProducts(products);
             taskOne.PerformTask();
 

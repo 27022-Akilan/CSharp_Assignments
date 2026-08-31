@@ -25,7 +25,7 @@
         /// </summary>
         GreaterThanOrEqualTo,
 
-        /// <summary> 
+        /// <summary>
         /// Less than or equal to operation
         /// </summary>
         LessThanEqualTo,

@@ -30,7 +30,7 @@ namespace AssignmentNine.Tasks
         public void WriteQueries()
         {
             // Default query given as lambda
-            Console.WriteLine("Filter by Books then sort by Price:");
+            Console.WriteLine("\nFilter by Books then sort by Price:");
 
             IEnumerable<Product> result = new QueryBuilder<Product>(this._products)
                                           .Filter(p => p.Category == "Books")
@@ -38,6 +38,16 @@ namespace AssignmentNine.Tasks
                                           .Execute();
 
             TablePresenter.DisplayProducts(result);
+
+            // Building the Query manually.
+            Console.WriteLine("\nResult of Joining the product with the Supplier !!");
+            var joinedResult = new QueryBuilder<Product>(this._products).Join(
+                                                        this._suppliers,
+                                                        product => product.Id,
+                                                        supplier => supplier.ProductId,
+                                                        (product, supplier) => (product.ProductName, supplier.SupplierName))
+                                                        .Execute();
+            TablePresenter.DisplayProductSupplier(joinedResult);
 
             Console.WriteLine(
                 "Build your query just by giving fields:" +
@@ -56,8 +66,7 @@ namespace AssignmentNine.Tasks
             Console.Write("\nEnter your choice: ");
             string userInput = Console.ReadLine() ?? string.Empty;
 
-            if (!int.TryParse(userInput, out int option) ||
-                !Enum.IsDefined(typeof(FilterOperation), option))
+            if (!int.TryParse(userInput, out int option) || !Enum.IsDefined(typeof(FilterOperation), option))
             {
                 Console.WriteLine("Invalid filter operation.");
                 return;
