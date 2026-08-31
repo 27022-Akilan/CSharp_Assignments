@@ -12,7 +12,7 @@
         {
             int[] array = { 10, 27, 1, 9, 56, 299, 78, 2, 8, 2 };
 
-            int number = array.OrderByDescending(a => a).Skip(1).First();
+            int number = array.OrderByDescending(a => a).Skip(1).FirstOrDefault();
 
             // int largest = array.Max();
             // array.Where(num => num < largest).Max();
