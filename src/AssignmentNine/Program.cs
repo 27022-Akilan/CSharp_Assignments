@@ -22,14 +22,14 @@ namespace Assignments
             List<Product> products = inventoryCreation.CreateProducts();
             List<Supplier> suppliers = inventoryCreation.CreateSupplier();
 
-            TaskOne taskOne = new TaskOne(products);
+            BasicQueries taskOne = new BasicQueries(products);
             Console.WriteLine("The initial products are ");
             TablePresenter.DisplayProducts(products);
             taskOne.PerformTask();
 
             ConsoleCleaner.Clean();
 
-            TaskTwo taskTwo = new TaskTwo(products, suppliers);
+            ComplexQueries taskTwo = new ComplexQueries(products, suppliers);
             TablePresenter.DisplayProducts(products);
             taskTwo.GroupByCategory();
 
@@ -44,7 +44,7 @@ namespace Assignments
 
             ConsoleCleaner.Clean();
 
-            TaskFour taskFour = new TaskFour(products);
+            ObjectQueries taskFour = new ObjectQueries(products);
             taskFour.SortBooksByPrice();
 
             ConsoleCleaner.Clean();

@@ -6,17 +6,17 @@ namespace AssignmentNine.Tasks
     /// <summary>
     /// Represents the task two.
     /// </summary>
-    public class TaskTwo
+    public class ComplexQueries
     {
         private List<Product> _productList;
         private List<Supplier> _supplierList;
 
         /// <summary>
-        /// Initializes a new instance of the <see cref="TaskTwo"/> class.
+        /// Initializes a new instance of the <see cref="ComplexQueries"/> class.
         /// </summary>
         /// <param name="productList">List of products</param>
         /// <param name="supplierList">List of suppliers</param>
-        public TaskTwo(List<Product> productList, List<Supplier> supplierList)
+        public ComplexQueries(List<Product> productList, List<Supplier> supplierList)
         {
             this._productList = productList;
             this._supplierList = supplierList;

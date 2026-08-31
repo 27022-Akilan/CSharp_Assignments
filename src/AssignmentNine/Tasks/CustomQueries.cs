@@ -7,18 +7,18 @@ namespace AssignmentNine.Tasks
     /// <summary>
     /// Represents the task five.
     /// </summary>
-    public class TaskFive
+    public class CustomQueries
     {
         private List<Product> _products;
 
         private List<Supplier> _suppliers;
 
         /// <summary>
-        /// Initializes a new instance of the <see cref="TaskFive"/> class.
+        /// Initializes a new instance of the <see cref="CustomQueries"/> class.
         /// </summary>
         /// <param name="products">List of products</param>
         /// <param name="suppliers">List of Suppliers</param>
-        public TaskFive(List<Product> products, List<Supplier> suppliers)
+        public CustomQueries(List<Product> products, List<Supplier> suppliers)
         {
             this._products = products;
             this._suppliers = suppliers;

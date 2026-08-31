@@ -7,15 +7,15 @@ namespace AssignmentNine.Tasks
     /// <summary>
     /// Represents the task four.
     /// </summary>
-    public class TaskFour
+    public class ObjectQueries
     {
         private List<Product> _products;
 
         /// <summary>
-        /// Initializes a new instance of the <see cref="TaskFour"/> class.
+        /// Initializes a new instance of the <see cref="ObjectQueries"/> class.
         /// </summary>
         /// <param name="products">Product list</param>
-        public TaskFour(List<Product> products)
+        public ObjectQueries(List<Product> products)
         {
             this._products = products;
         }

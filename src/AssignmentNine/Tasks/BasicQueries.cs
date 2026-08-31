@@ -6,16 +6,16 @@ namespace AssignmentNine.TaskOne
     /// <summary>
     /// Represents the task one functions
     /// </summary>
-    public class TaskOne
+    public class BasicQueries
     {
         private List<Product> _productList;
 
         /// <summary>
-        /// Initializes a new instance of the <see cref="TaskOne"/> class.
+        /// Initializes a new instance of the <see cref="BasicQueries"/> class.
         /// </summary>
         /// <param name="productCreation">Instance of product creation</param>
         /// <param name="productList">List of products</param>
-        public TaskOne(List<Product> productList)
+        public BasicQueries(List<Product> productList)
         {
             this._productList = productList;
         }
