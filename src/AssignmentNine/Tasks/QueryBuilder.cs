@@ -124,14 +124,14 @@ namespace AssignmentNine.Tasks
         /// <summary>
         /// Joins to List
         /// </summary>
-        /// <typeparam name="TInner"></typeparam>
-        /// <typeparam name="TKey"></typeparam>
-        /// <typeparam name="TResult"></typeparam>
-        /// <param name="inner"></param>
-        /// <param name="outerKeySelector"></param>
-        /// <param name="innerKeySelector"></param>
-        /// <param name="resultSelector"></param>
-        /// <returns></returns>
+        /// <typeparam name="TInner">Inner type</typeparam>
+        /// <typeparam name="TKey">Result of Inner type</typeparam>
+        /// <typeparam name="TResult">Entire result type</typeparam>
+        /// <param name="inner">Inner list</param>
+        /// <param name="outerKeySelector">Outer key function</param>
+        /// <param name="innerKeySelector">Inner key function</param>
+        /// <param name="resultSelector">result selector</param>
+        /// <returns>Joined query result</returns>
         public QueryBuilder<TResult> Join<TInner, TKey, TResult>(IEnumerable<TInner> inner, Func<T, TKey> outerKeySelector, Func<TInner, TKey> innerKeySelector, Func<T, TInner, TResult> resultSelector)
         {
             var joined = this._query.Join(inner, outerKeySelector, innerKeySelector, resultSelector);
