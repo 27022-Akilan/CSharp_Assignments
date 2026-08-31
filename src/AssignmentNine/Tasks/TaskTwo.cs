@@ -27,7 +27,10 @@ namespace AssignmentNine.Tasks
         /// </summary>
         public void GroupByCategory()
         {
-            var groups = this._productList.GroupBy(p => p.Category).Select(g => (g.Key, g.Max(g => g.Price), g.Count()));
+            var groups = this._productList.GroupBy(p => p.Category)
+                                          .Select(g =>
+                                          (g.Key, g.Max(g => g.Price), g.Count()));
+
             Console.WriteLine("Groups by Category and displays the maximum price, and count in each category.");
             TablePresenter.DisplayProducts(groups);
         }
