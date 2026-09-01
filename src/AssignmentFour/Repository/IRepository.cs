@@ -32,13 +32,6 @@ namespace AssignmentFour.Repository
         /// <summary>
         /// Deletes a transaction by the ID.
         /// </summary>
-        /// <param name="transaction">Expense object</param>
-        /// <returns>True - Updated successfully | False - Cannot Update</returns>
-        public bool UpdateExpense(Expense transaction);
-
-        /// <summary>
-        /// Deletes a transaction by the ID.
-        /// </summary>
         /// <param name="id">Id of the transaction to be deleted</param>
         /// <returns>True - Deleted successfully | False - Cannot Delete</returns>
         public bool DeleteTransactionById(Guid id);
