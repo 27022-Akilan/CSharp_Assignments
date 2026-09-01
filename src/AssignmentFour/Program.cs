@@ -15,12 +15,14 @@ namespace Assignments
         /// <param name="args">Default arguments</param>
         public static void Main(string[] args)
         {
+            string filePath = @"Transactions.json";
             IRepository repository = new TransactionRepository();
-            TransactionService service = new TransactionService(repository);
+            IRepository fileRepository = new FileRepository(filePath);
+            TransactionService service = new TransactionService(fileRepository);
             InputView inputView = new InputView(service);
-            TransactionView view = new TransactionView(service, inputView);
+            TransactionView transactionView = new TransactionView(service, inputView);
 
-            view.StartApplication();
+            transactionView.StartApplication();
         }
     }
 }

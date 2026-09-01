@@ -4,7 +4,7 @@ using AssignmentFour.Model.DTO;
 using AssignmentFour.Model.Enums;
 using AssignmentFour.Repository;
 
-namespace AssignmentFive.Service
+namespace AssignmentFour.Service
 {
     /// <summary>
     /// Provides services to the Expense tracker application
