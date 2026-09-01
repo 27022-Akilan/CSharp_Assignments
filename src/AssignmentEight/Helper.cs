@@ -1,17 +1,18 @@
 ﻿namespace AssignmentEight
 {
     /// <summary>
-    /// A helper class that have the general methods
+    /// General-purpose console helper methods shared across all task demos.
     /// </summary>
     public static class Helper
     {
         /// <summary>
-        /// Waits until user enters a key and then exists
+        /// Waits until the user presses a key.
         /// </summary>
         public static void PressKeyToContinue()
         {
-            DisplayShadowMessage("Press any key to continue");
+            DisplayShadowMessage("\nPress any key to continue...");
             Console.ReadKey();
+            Console.WriteLine();
         }
 
         /// <summary>
@@ -59,7 +60,7 @@
         }
 
         /// <summary>
-        /// Display the Messages like a shadow in light color
+        /// Displays a message in a dim gray, used for explanatory / "shadow" text.
         /// </summary>
         /// <param name="message">Message to be displayed.</param>
         public static void DisplayShadowMessage(string message)
@@ -70,13 +71,29 @@
         }
 
         /// <summary>
-        /// Displays a message indicating that the program is aborting due to maximum invalid tries attempted.
+        /// Displays the given prompt, reads a numeric value from the console, and converts
+        /// it into the requested enum type. Any value that parses as an integer is cast into
+        /// the enum, even if it does not correspond to a defined member, so callers can
+        /// handle "undefined" values themselves (e.g. via a default switch case).
         /// </summary>
-        public static void DisplayAbortMessage()
+        /// <typeparam name="TEnum">The enum type to convert the user input into.</typeparam>
+        /// <param name="prompt">The message to display before reading input.</param>
+        /// <param name="result">The resulting enum value if the input was a valid integer; otherwise, the default value.</param>
+        /// <returns><see langword="true"/> if the input was a valid integer; otherwise, <see langword="false"/>.</returns>
+        public static bool TryGetEnumInput<TEnum>(string prompt, out TEnum result)
+            where TEnum : struct, System.Enum
         {
-            Console.ForegroundColor = ConsoleColor.Red;
-            Console.WriteLine("Aborting due to Maximum Invalid Tries Attempted");
-            Console.ResetColor();
+            Console.Write(prompt);
+            string input = (Console.ReadLine() ?? string.Empty).Trim();
+
+            if (int.TryParse(input, out int numericValue))
+            {
+                result = (TEnum)(object)numericValue;
+                return true;
+            }
+
+            result = default;
+            return false;
         }
     }
 }
