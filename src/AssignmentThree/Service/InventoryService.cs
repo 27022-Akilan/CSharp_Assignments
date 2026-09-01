@@ -30,7 +30,7 @@ namespace AssignmentThree.Service
         /// <returns>True - Success full Add | False - Cant Add</returns>
         public OperationResult AddProduct(string id, string name, double price, long quantity)
         {
-            if (string.IsNullOrEmpty(id) || string.IsNullOrEmpty(name) || price <= 0 || quantity < 0)
+            if (string.IsNullOrEmpty(id) || string.IsNullOrEmpty(name) || price <= 0 || quantity < 0 || this.GetProduct(id) != null)
             {
                 return OperationResult.AddFailed;
             }
@@ -94,7 +94,7 @@ namespace AssignmentThree.Service
         /// <returns>True - Product Deleted || False - Cant Delete product</returns>
         public bool Delete(string id)
         {
-            if (!string.IsNullOrEmpty(id))
+            if (string.IsNullOrEmpty(id))
             {
                 return false;
             }

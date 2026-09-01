@@ -132,8 +132,10 @@ namespace AssignmentThree.View
                 ProductInfo? product = this._productService.GetProduct(productId);
                 this.EditField(product);
             }
-
-            ConsolePresenter.DisplayErrorMessage("The Type of Product Id is Invalid!");
+            else
+            {
+                ConsolePresenter.DisplayErrorMessage("The Type of Product Id is Invalid!");
+            }
         }
 
         /// <summary>
