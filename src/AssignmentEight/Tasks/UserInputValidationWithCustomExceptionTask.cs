@@ -4,8 +4,6 @@ namespace AssignmentEight.Tasks
 {
     /// <summary>
     /// Task 3: Defining and using custom exception classes.
-    /// Reads a number from the user and throws an InvalidUserInputException if it
-    /// is not a whole number between 1 and 100.
     /// </summary>
     public static class UserInputValidationWithCustomExceptionTask
     {

@@ -71,10 +71,7 @@
         }
 
         /// <summary>
-        /// Displays the given prompt, reads a numeric value from the console, and converts
-        /// it into the requested enum type. Any value that parses as an integer is cast into
-        /// the enum, even if it does not correspond to a defined member, so callers can
-        /// handle "undefined" values themselves (e.g. via a default switch case).
+        /// Displays the given prompt, reads a numeric value from the console, and converts into enum.
         /// </summary>
         /// <typeparam name="TEnum">The enum type to convert the user input into.</typeparam>
         /// <param name="prompt">The message to display before reading input.</param>

@@ -2,7 +2,6 @@
 {
     /// <summary>
     /// Task 1: Understanding and using try/catch/finally blocks.
-    /// Divides two user-supplied numbers and handles a DivideByZeroException if one occurs.
     /// </summary>
     public static class DivisionWithTryCatchFinallyTask
     {
@@ -27,12 +26,10 @@
             }
             catch (DivideByZeroException ex)
             {
-                // Task 1, step 3: meaningful error message in the catch block.
                 Helper.DisplayErrorMessage($"Error: Cannot divide {dividend} by zero. ({ex.Message})");
             }
             finally
             {
-                // Task 1, step 4: statement indicating the block has executed.
                 Helper.DisplayShadowMessage("The try/catch/finally block for division has finished executing.");
             }
         }

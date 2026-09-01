@@ -2,7 +2,6 @@
 {
     /// <summary>
     /// Task 5: Using and interpreting a locally caught exception's stack trace.
-    /// Throws an exception a few call frames deep, catches it, and prints its stack trace.
     /// </summary>
     public static class StackTraceInterpretationTask
     {

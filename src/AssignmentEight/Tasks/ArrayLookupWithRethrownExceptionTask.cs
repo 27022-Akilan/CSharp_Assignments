@@ -2,9 +2,6 @@
 {
     /// <summary>
     /// Task 2: Catching and throwing different types of exceptions.
-    /// Looks up a position in an array of integers. If the position is out of range,
-    /// the IndexOutOfRangeException is caught and a new IndexOutOfRangeException — same
-    /// type, but with our own custom message — is thrown and caught by an outer try/catch.
     /// </summary>
     public static class ArrayLookupWithRethrownExceptionTask
     {
@@ -26,7 +23,6 @@
                 return;
             }
 
-            // Outer try/catch: handles the new exception thrown from the inner catch block.
             try
             {
                 try
@@ -35,9 +31,7 @@
                 }
                 catch (IndexOutOfRangeException ex)
                 {
-                    // Task 2, step 3: throw a new exception with a custom message.
-                    // We reuse the built-in IndexOutOfRangeException type here, just with
-                    // our own message and the original exception attached as InnerException.
+                    // Task 2
                     throw new IndexOutOfRangeException(
                         $"Index {index} is outside the valid range of 0 to {numbers.Length - 1}.",
                         ex);
@@ -45,7 +39,7 @@
             }
             catch (IndexOutOfRangeException ex)
             {
-                // Task 2, step 4: catch the new exception and print its message.
+                // Task 2
                 Helper.DisplayErrorMessage($"Caught IndexOutOfRangeException: {ex.Message}");
             }
         }
