@@ -4,7 +4,7 @@ using AssignmentFour.Model.DTO;
 using AssignmentFour.Model.Enums;
 using AssignmentFour.Repository;
 
-namespace AssignmentFour.Service
+namespace AssignmentFive.Service
 {
     /// <summary>
     /// Provides services to the Expense tracker application
@@ -72,17 +72,21 @@ namespace AssignmentFour.Service
         /// <returns>True - If transaction is Updated | False - If transaction can not be updated </returns>
         public bool Update(Transaction transaction)
         {
-            if (transaction == null)
+            if (transaction == null || !this.IsValidAmount(transaction.Amount))
             {
                 return false;
             }
 
-            if (!this.IsValidAmount(transaction.Amount))
+            if (transaction is Income)
             {
-                return false;
+                return this._repository.UpdateIncome((Income)transaction);
+            }
+            else if (transaction is Expense)
+            {
+                return this._repository.UpdateExpense((Expense)transaction);
             }
 
-            return this._repository.UpdateTransaction(transaction);
+            return false;
         }
 
         /// <summary>
