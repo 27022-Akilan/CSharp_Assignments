@@ -19,15 +19,8 @@
 
             Console.WriteLine($"\nArray: [{string.Join(", ", numbers)}]");
             int index = -1;
-            Console.WriteLine($"\nThe index {index} is chose for simulating the IndexOutOfBounds exception because the array's starting index is 0.");
-
-            // Console.Write($"Enter an index to read valid range 0 - {numbers.Length - 1} : ");
-
-            // if (!int.TryParse(Console.ReadLine(), out int index))
-            // {
-            //    ConsoleHelper.DisplayWarningMessage("Please enter a whole number. Returning to the menu.");
-            //    return;
-            // }
+            Console.WriteLine($"\nThe index {index} is chose for simulating the IndexOutOfBounds exception because " +
+                              $"the array's starting index is 0.");
             try
             {
                 ConsoleHelper.DisplaySuccessMessage($"\nValue at index {index}: {numbers[index]}");
