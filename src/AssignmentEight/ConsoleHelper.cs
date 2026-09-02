@@ -1,9 +1,9 @@
 ﻿namespace AssignmentEight
 {
     /// <summary>
-    /// General-purpose console helper methods shared across all task demos.
+    /// General-purpose console ConsoleHelper methods shared across all task demos.
     /// </summary>
-    public static class Helper
+    public static class ConsoleHelper
     {
         /// <summary>
         /// Waits until the user presses a key.

@@ -1,6 +1,4 @@
 ﻿using AssignmentEight;
-using AssignmentEight.MathematicalOperations;
-using AssignmentEight.Menu;
 
 namespace Assignments
 {
@@ -10,13 +8,11 @@ namespace Assignments
     public class Program
     {
         /// <summary>
-        ///  Start of the application execution.
+        ///  Starts the application execution.
         /// </summary>
         public static void Main()
         {
-            ArithmeticOperations operation = new ArithmeticOperations();
             AppDomain.CurrentDomain.UnhandledException += HandleUnhandledException;
-
             MenuHandler.Run();
         }
 
@@ -28,9 +24,9 @@ namespace Assignments
         public static void HandleUnhandledException(object sender, UnhandledExceptionEventArgs e)
         {
             Exception? exception = e.ExceptionObject as Exception;
-            Helper.DisplayErrorMessage("Error : Unhandled Exception caught globally by AppDomain.UnhandledException." +
+            ConsoleHelper.DisplayErrorMessage("Error : Unhandled Exception caught globally by AppDomain.UnhandledException." +
                                         $"\nMessage : {exception?.Message}" +
-                                        $"If it will terminate the entire process {e.IsTerminating}");
+                                        $"\nIf it will terminate the entire process : {e.IsTerminating}");
         }
     }
 }

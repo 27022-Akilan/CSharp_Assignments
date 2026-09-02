@@ -6,6 +6,9 @@ MinimumVisualStudioVersion = 10.0.40219.1
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "src", "src", "{DCAA095E-2796-41FA-A1D0-1134E29309E7}"
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "tests", "tests", "{06861454-9561-492A-9F93-A33B6F7AE3AB}"
+	ProjectSection(SolutionItems) = preProject
+		src\AssignmentEight\Menu\MenuHandler.cs = src\AssignmentEight\Menu\MenuHandler.cs
+	EndProjectSection
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "unit", "unit", "{C778E127-C02C-4A37-8E85-3D86DCC063DC}"
 EndProject

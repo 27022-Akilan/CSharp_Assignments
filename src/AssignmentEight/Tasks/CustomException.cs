@@ -5,18 +5,20 @@ namespace AssignmentEight.Tasks
     /// <summary>
     /// Task 3: Defining and using custom exception classes.
     /// </summary>
-    public static class UserInputValidationWithCustomExceptionTask
+    public static class CustomException
     {
         private const int MinValue = 1;
         private const int MaxValue = 100;
 
         /// <summary>
-        /// Runs the demo.
+        ///  Creates a custom exception called InvalidUserInputException and catches it.
         /// </summary>
         public static void Run()
         {
-            Helper.DisplayInfoMessage("\n--- User input validation with a custom exception ---");
-            Console.Write($"Enter a whole number between {MinValue} and {MaxValue}: ");
+            ConsoleHelper.DisplayInfoMessage("\n===========================================================" +
+                                      "\n--- User input validation with a custom exception ---" +
+                                      "\n===========================================================");
+            Console.Write($"\n\nEnter a whole number between {MinValue} and {MaxValue}: ");
             string? input = Console.ReadLine();
 
             try
@@ -27,11 +29,11 @@ namespace AssignmentEight.Tasks
                         $"'{input}' is not a valid whole number between {MinValue} and {MaxValue}.");
                 }
 
-                Helper.DisplaySuccessMessage($"Thanks! You entered a valid number: {value}");
+                ConsoleHelper.DisplaySuccessMessage($"Thanks! You entered a valid number: {value}");
             }
             catch (InvalidUserInputException ex)
             {
-                Helper.DisplayErrorMessage($"Caught InvalidUserInputException: {ex.Message}");
+                ConsoleHelper.DisplayErrorMessage($"Caught InvalidUserInputException: {ex.Message}");
             }
         }
     }

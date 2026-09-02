@@ -7,35 +7,32 @@
     public enum TaskOption
     {
         /// <summary>
-        /// Demonstrates try/catch/finally while dividing two numbers.
+        /// Option for demonstrating a DivideByZeroException and how to catch it.
         /// </summary>
-        DivisionWithTryCatchFinally = 1,
+        DivisionByZero = 1,
 
         /// <summary>
-        /// Demonstrates catching an IndexOutOfRangeException and throwing a new,
-        /// more descriptive exception from within the catch block.
+        /// Option for demonstrating an ArrayIndexOutOfRangeException and to throw and catch it.
         /// </summary>
-        ArrayLookupWithRethrownException,
+        ArrayIndexOutOfRange,
 
         /// <summary>
-        /// Demonstrates validating user input and throwing a custom exception type
-        /// (InvalidUserInputException) when the input is invalid.
+        /// Option for demonstrating a custom exception class and how to throw/catch it.
         /// </summary>
-        UserInputValidationWithCustomException,
+        CustomException,
 
         /// <summary>
-        /// Demonstrates a truly unhandled exception being caught by the
-        /// AppDomain.UnhandledException global handler.
+        /// Option for demonstrating a global unhandled exception and how to catch it.
         /// </summary>
         GlobalUnhandledExceptionDemo,
 
         /// <summary>
-        /// Demonstrates throwing/catching an exception and reading its stack trace.
+        /// Option for demonstrating how to interpret a stack trace and understand the flow of an exception.
         /// </summary>
         StackTraceInterpretation,
 
         /// <summary>
-        /// Exits the application.
+        /// Option for exiting the application.
         /// </summary>
         Exit,
     }
