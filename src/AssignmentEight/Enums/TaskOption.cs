@@ -1,4 +1,4 @@
-﻿namespace AssignmentEight.Enum
+﻿namespace AssignmentEight.Enums
 {
     /// <summary>
     /// Represents each demo in the main menu. Named after what the demo actually does,

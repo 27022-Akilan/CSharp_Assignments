@@ -1,4 +1,4 @@
-﻿using AssignmentEight.Enum;
+﻿using AssignmentEight.Enums;
 using AssignmentEight.Tasks;
 
 namespace AssignmentEight
