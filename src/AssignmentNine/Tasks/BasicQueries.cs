@@ -25,6 +25,9 @@ namespace AssignmentNine.Tasks
         /// </summary>
         public void PerformTask()
         {
+            ConsoleHelper.DisplayInfoMessage("===============================" +
+                                            "\n--- Basic Queries ---" +
+                                            "\n===============================");
             TablePresenter.DisplayProducts("\nThe Initial products are...\n", this._productList);
 
             Console.Write("Enter the Category of the product to be searched : ");
@@ -58,20 +61,20 @@ namespace AssignmentNine.Tasks
 
             decimal average = filteredList.Average(p => p.Item2);
 
-            Console.WriteLine($"Products matched to your {category} and > {price} are");
+            Console.WriteLine($"\nProducts matched to your category {category} and > {price} are");
             TablePresenter.DisplayFilteredProducts(filteredList);
-            Console.WriteLine($"The average of these products price is : {average}");
+            Console.WriteLine($"\nThe average of these products price is : {average}");
 
             Console.Write("\nDo you need to sort the products in descending order of price (Y/N) : ");
             string input = Console.ReadLine() ?? string.Empty.Trim();
 
             if (input == "Y" || input == "y")
             {
-                Console.WriteLine($"Products that matched to your category : {category} and price > {price} and sorted by descending order is ");
+                Console.WriteLine($"\nProducts that matched to your category : {category} and price > {price} and sorted by descending order is ");
                 this.SortByDescending(filteredList);
             }
 
-            ConsoleCleaner.Clean();
+            ConsoleHelper.Clean();
         }
 
         /// <summary>

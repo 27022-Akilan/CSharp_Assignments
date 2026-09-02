@@ -29,13 +29,15 @@ namespace AssignmentNine.Tasks
         /// </summary>
         public void WriteQueries()
         {
+            TablePresenter.DisplayProducts("\nThe initial products are...", this._products);
+
             // Default query given as lambda
             IEnumerable<Product> result = new QueryBuilder<Product>(this._products)
                                           .Filter(p => p.Category == "Books")
                                           .SortBy(p => p.Price)
                                           .Execute();
 
-            TablePresenter.DisplayProducts("\nFiltered by Books then sort by Price:", result);
+            TablePresenter.DisplayProducts("\nFiltered the products by books and sorts in ascending order by price", result);
             var joinedResult = new QueryBuilder<Product>(this._products).Join(
                                                         this._suppliers,
                                                         product => product.Id,
@@ -110,6 +112,7 @@ namespace AssignmentNine.Tasks
 
             result = new QueryBuilder<Product>(this._products).Filter(propertyName, operation, value).Execute();
             TablePresenter.DisplayProducts("\nFiltered Result:\n", result);
+            ConsoleHelper.Clean();
         }
     }
 }

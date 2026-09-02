@@ -27,13 +27,17 @@ namespace AssignmentNine.Tasks
         /// </summary>
         public void GroupByCategory()
         {
-            TablePresenter.DisplayProducts("The initial products are : ", this._productList);
+            ConsoleHelper.DisplayInfoMessage("\n===============================" +
+                                             "\n   --- Complex Queries ---" +
+                                             "\n===============================");
+            TablePresenter.DisplayProducts("\nThe initial products are...\n", this._productList);
             var groups = this._productList.GroupBy(p => p.Category)
                                           .Select(g =>
                                           (g.Key, g.Max(g => g.Price), g.Count()));
 
             Console.WriteLine("Groups by Category and displays the maximum price, and count in each category.");
             TablePresenter.DisplayProducts(groups);
+            ConsoleHelper.Clean();
         }
 
         /// <summary>
@@ -41,15 +45,17 @@ namespace AssignmentNine.Tasks
         /// </summary>
         public void RelateProductAndSupplier()
         {
+            TablePresenter.DisplayProducts("\nThe initial products are...\n", this._productList);
+            TablePresenter.DisplaySupplier("\nThe initial suppliers are...\n", this._supplierList);
             var innerJoin = this._productList.Join(
                             this._supplierList,
                             p => p.Id,
                             s => s.ProductId,
                             (p, s) => (p.ProductName, s.SupplierName));
 
-            Console.WriteLine("Join Query result !!!");
+            Console.WriteLine("Relating the products with the supplier");
             TablePresenter.DisplayProductSupplier(innerJoin);
-            ConsoleCleaner.Clean();
+            ConsoleHelper.Clean();
         }
     }
 }

@@ -81,5 +81,24 @@ namespace AssignmentNine.ConsolePresenter
 
             table.Write();
         }
+
+        /// <summary>
+        /// Displays the Supplier information.
+        /// </summary>
+        /// <param name="prompt">Message to be displayed.</param>
+        /// <param name="suppliers">List of Supplier information.</param>
+        public static void DisplaySupplier(string prompt, IEnumerable<Supplier> suppliers)
+        {
+            Console.WriteLine(prompt);
+            ConsoleTable table = new ConsoleTable("SupplierId", "Name", "ProductId");
+            table.Configure(options => options.EnableCount = false);
+
+            foreach (Supplier supplier in suppliers)
+            {
+                table.AddRow(supplier.SupplierId, supplier.SupplierName, supplier.ProductId);
+            }
+
+            table.Write();
+        }
     }
 }

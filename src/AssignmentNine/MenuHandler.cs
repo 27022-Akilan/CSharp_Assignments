@@ -1,5 +1,4 @@
-﻿using AssignmentNine.ConsolePresenter;
-using AssignmentNine.Model;
+﻿using AssignmentNine.Model;
 using AssignmentNine.Model.Enum;
 using AssignmentNine.Tasks;
 
@@ -38,6 +37,7 @@ namespace AssignmentNine
             while (keepRunning)
             {
                 Console.Clear();
+                ConsoleHelper.DisplayInfoMessage("\t\t\tLanguage Integrated Query");
                 this.DisplayMenu();
 
                 if (!ConsoleHelper.TryGetEnumInput("\nEnter your choice : ", out MenuOption option))
@@ -52,7 +52,6 @@ namespace AssignmentNine
                         break;
                     case MenuOption.ComplexQueries:
                         complexQueries.GroupByCategory();
-                        ConsoleCleaner.Clean();
                         complexQueries.RelateProductAndSupplier();
                         break;
                     case MenuOption.ObjectQueries:

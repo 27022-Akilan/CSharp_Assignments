@@ -1,6 +1,4 @@
-﻿using AssignmentNine.ConsolePresenter;
-
-namespace AssignmentNine.Tasks
+﻿namespace AssignmentNine.Tasks
 {
     /// <summary>
     /// Represents the task three.
@@ -12,18 +10,13 @@ namespace AssignmentNine.Tasks
         /// </summary>
         public void PerformArrayOperations()
         {
+            ConsoleHelper.DisplayInfoMessage("\n===============================" +
+                                             "\n   --- Object Queries ---" +
+                                             "\n===============================");
             int[] array = { 10, 27, 1, 9, 56, 299, 78, 2, 8, 2 };
 
+            Console.WriteLine($"\nArray: [{string.Join(", ", array)}]");
             int number = array.OrderByDescending(a => a).Skip(1).FirstOrDefault();
-
-            // int largest = array.Max();
-            // array.Where(num => num < largest).Max();
-            Console.WriteLine("The Array is :\n");
-            foreach (int i in array)
-            {
-                Console.Write(i + " ");
-            }
-
             Console.WriteLine($"\nThe Second largest number is : {number}");
 
             int target = 10;
@@ -41,7 +34,7 @@ namespace AssignmentNine.Tasks
             }
 
             Console.WriteLine("===================");
-            ConsoleCleaner.Clean();
+            ConsoleHelper.Clean();
         }
     }
 }

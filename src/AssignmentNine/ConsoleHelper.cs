@@ -6,6 +6,80 @@
     public class ConsoleHelper
     {
         /// <summary>
+        /// Waits until the user presses a key.
+        /// </summary>
+        public static void PressKeyToContinue()
+        {
+            DisplayShadowMessage("\nPress any key to continue...");
+            Console.ReadKey();
+            Console.WriteLine();
+        }
+
+        /// <summary>
+        /// Displays a success message in green.
+        /// </summary>
+        /// <param name="message">Message to be displayed.</param>
+        public static void DisplaySuccessMessage(string message)
+        {
+            Console.ForegroundColor = ConsoleColor.Green;
+            Console.WriteLine(message);
+            Console.ResetColor();
+        }
+
+        /// <summary>
+        /// Displays an error message in red.
+        /// </summary>
+        /// <param name="message">Message to be displayed.</param>
+        public static void DisplayErrorMessage(string message)
+        {
+            Console.ForegroundColor = ConsoleColor.Red;
+            Console.WriteLine(message);
+            Console.ResetColor();
+        }
+
+        /// <summary>
+        /// Displays a warning message in yellow.
+        /// </summary>
+        /// <param name="message">Message to be displayed.</param>
+        public static void DisplayWarningMessage(string message)
+        {
+            Console.ForegroundColor = ConsoleColor.Yellow;
+            Console.WriteLine(message);
+            Console.ResetColor();
+        }
+
+        /// <summary>
+        /// Displays an informational message in cyan.
+        /// </summary>
+        /// <param name="message">Message to be displayed.</param>
+        public static void DisplayInfoMessage(string message)
+        {
+            Console.ForegroundColor = ConsoleColor.Cyan;
+            Console.WriteLine(message);
+            Console.ResetColor();
+        }
+
+        /// <summary>
+        /// Displays a message in a dim gray, used for explanatory / "shadow" text.
+        /// </summary>
+        /// <param name="message">Message to be displayed.</param>
+        public static void DisplayShadowMessage(string message)
+        {
+            Console.ForegroundColor = ConsoleColor.DarkGray;
+            Console.WriteLine(message);
+            Console.ResetColor();
+        }
+
+        /// <summary>
+        /// To Clean the console
+        /// </summary>
+        public static void Clean()
+        {
+            PressKeyToContinue();
+            Console.Clear();
+        }
+
+        /// <summary>
         /// Displays the given prompt, reads a numeric value from the console, and converts into enum.
         /// </summary>
         /// <typeparam name="TEnum">The enum type to convert the user input into.</typeparam>
