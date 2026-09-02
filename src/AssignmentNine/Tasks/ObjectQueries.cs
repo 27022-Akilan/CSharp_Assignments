@@ -1,4 +1,6 @@
-﻿namespace AssignmentNine.Tasks
+﻿using AssignmentNine.ConsolePresenter;
+
+namespace AssignmentNine.Tasks
 {
     /// <summary>
     /// Represents the task three.
@@ -39,6 +41,7 @@
             }
 
             Console.WriteLine("===================");
+            ConsoleCleaner.Clean();
         }
     }
 }

@@ -29,45 +29,50 @@ namespace AssignmentNine
         /// </summary>
         public void Run()
         {
+            BasicQueries basicQueries = new BasicQueries(this._products);
+            ComplexQueries complexQueries = new ComplexQueries(this._products, this._suppliers);
+            ObjectQueries objectQueries = new ObjectQueries();
+            QueryOptimization queryOptimization = new QueryOptimization(this._products);
+            CustomQueries customQueries = new CustomQueries(this._products, this._suppliers);
             bool keepRunning = true;
             while (keepRunning)
             {
                 Console.Clear();
                 this.DisplayMenu();
 
-                if (!ConsoleHelper.TryGetEnumInput("Enter your choice : ", out MenuOption task))
+                if (!ConsoleHelper.TryGetEnumInput("\nEnter your choice : ", out MenuOption option))
                 {
-
+                    Console.WriteLine("Invalid option !!!");
                 }
 
+                switch (option)
+                {
+                    case MenuOption.BasicQueries:
+                        basicQueries.PerformTask();
+                        break;
+                    case MenuOption.ComplexQueries:
+                        complexQueries.GroupByCategory();
+                        ConsoleCleaner.Clean();
+                        complexQueries.RelateProductAndSupplier();
+                        break;
+                    case MenuOption.ObjectQueries:
+                        objectQueries.PerformArrayOperations();
+                        break;
+                    case MenuOption.QueryOptimization:
+                        queryOptimization.SortBooksByPrice();
+                        break;
+                    case MenuOption.CustomQueries:
+                        customQueries.WriteQueries();
+                        break;
+                    case MenuOption.Exit:
+                        Console.WriteLine("Exiting the Application !!!");
+                        keepRunning = false;
+                        break;
+                    default:
+                        Console.WriteLine("Invalid option !!!");
+                        break;
+                }
             }
-
-
-
-            ConsoleCleaner.Clean();
-
-            ComplexQueries taskTwo = new ComplexQueries(this._products, this._suppliers);
-            TablePresenter.DisplayProducts(this._products);
-            taskTwo.GroupByCategory();
-
-            ConsoleCleaner.Clean();
-
-            taskTwo.RelateProductAndSupplier();
-
-            ConsoleCleaner.Clean();
-
-            ObjectQueries taskThree = new ObjectQueries();
-            taskThree.PerformArrayOperations();
-
-            ConsoleCleaner.Clean();
-
-            QueryOptimization taskFour = new QueryOptimization(this._products);
-            taskFour.SortBooksByPrice();
-
-            ConsoleCleaner.Clean();
-
-            CustomQueries taskFive = new CustomQueries(this._products, this._suppliers);
-            taskFive.WriteQueries();
         }
 
         private void DisplayMenu()

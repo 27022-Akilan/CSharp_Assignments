@@ -30,21 +30,19 @@ namespace AssignmentNine.Tasks
         public void WriteQueries()
         {
             // Default query given as lambda
-            Console.WriteLine("\nFilter by Books then sort by Price:");
-
             IEnumerable<Product> result = new QueryBuilder<Product>(this._products)
                                           .Filter(p => p.Category == "Books")
                                           .SortBy(p => p.Price)
                                           .Execute();
 
-            TablePresenter.DisplayProducts(result);
-            Console.WriteLine("\nResult of Joining the product with the Supplier !!");
+            TablePresenter.DisplayProducts("\nFiltered by Books then sort by Price:", result);
             var joinedResult = new QueryBuilder<Product>(this._products).Join(
                                                         this._suppliers,
                                                         product => product.Id,
                                                         supplier => supplier.ProductId,
                                                         (product, supplier) => (product.ProductName, supplier.SupplierName))
                                                         .Execute();
+            Console.WriteLine("\nResult of Joining the product with the Supplier !!");
             TablePresenter.DisplayProductSupplier(joinedResult);
 
             // Building the Query manually.
@@ -111,9 +109,7 @@ namespace AssignmentNine.Tasks
             }
 
             result = new QueryBuilder<Product>(this._products).Filter(propertyName, operation, value).Execute();
-
-            Console.WriteLine("\nFiltered Result:");
-            TablePresenter.DisplayProducts(result);
+            TablePresenter.DisplayProducts("\nFiltered Result:\n", result);
         }
     }
 }

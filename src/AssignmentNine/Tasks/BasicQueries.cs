@@ -25,6 +25,8 @@ namespace AssignmentNine.Tasks
         /// </summary>
         public void PerformTask()
         {
+            TablePresenter.DisplayProducts("\nThe Initial products are...\n", this._productList);
+
             Console.Write("Enter the Category of the product to be searched : ");
             string category = Console.ReadLine() ?? string.Empty;
             Console.Write("Enter the minimum price of the product to get it : ");
@@ -45,15 +47,16 @@ namespace AssignmentNine.Tasks
         /// <param name="price">Price of the product</param>
         public void FilterByCategoryAndPrice(string category, decimal price)
         {
-            IEnumerable<(string?, decimal)> filteredList = this._productList.Where(p => p.Category == category && p.Price > price)
-                                                                            .Select(p => (p.ProductName, p.Price));
+            IEnumerable<(string?, decimal)> filteredList = this._productList
+                                                                .Where(p => p.Category == category && p.Price > price)
+                                                                .Select(p => (p.ProductName, p.Price));
             if (!filteredList.Any())
             {
                 Console.WriteLine($"No products matched to your category : {category} and price > {price}.");
                 return;
             }
 
-            decimal average = this._productList.Average(p => p.Price);
+            decimal average = filteredList.Average(p => p.Item2);
 
             Console.WriteLine($"Products matched to your {category} and > {price} are");
             TablePresenter.DisplayFilteredProducts(filteredList);
@@ -64,10 +67,11 @@ namespace AssignmentNine.Tasks
 
             if (input == "Y" || input == "y")
             {
-                Console.WriteLine($"Products that matched to your {category} and > {price} and sorted by descending order is ");
+                Console.WriteLine($"Products that matched to your category : {category} and price > {price} and sorted by descending order is ");
                 this.SortByDescending(filteredList);
-                Console.WriteLine($"The average of these products price is : {average}");
             }
+
+            ConsoleCleaner.Clean();
         }
 
         /// <summary>

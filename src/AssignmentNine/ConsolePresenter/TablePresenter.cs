@@ -30,9 +30,11 @@ namespace AssignmentNine.ConsolePresenter
         /// <summary>
         /// To Display the Products.
         /// </summary>
-        /// <param name="productList">Contains the List of Product</param>
-        public static void DisplayProducts(IEnumerable<Product> productList)
+        /// <param name="prompt"> Prompt to be displayed</param>
+        /// <param name="productList">List of Product</param>
+        public static void DisplayProducts(string prompt, IEnumerable<Product> productList)
         {
+            Console.WriteLine(prompt);
             ConsoleTable table = new ConsoleTable("Id", "Name", "Price", "Category");
             table.Configure(options => options.EnableCount = false);
 

@@ -27,6 +27,7 @@ namespace AssignmentNine.Tasks
         /// </summary>
         public void GroupByCategory()
         {
+            TablePresenter.DisplayProducts("The initial products are : ", this._productList);
             var groups = this._productList.GroupBy(p => p.Category)
                                           .Select(g =>
                                           (g.Key, g.Max(g => g.Price), g.Count()));
@@ -48,6 +49,7 @@ namespace AssignmentNine.Tasks
 
             Console.WriteLine("Join Query result !!!");
             TablePresenter.DisplayProductSupplier(innerJoin);
+            ConsoleCleaner.Clean();
         }
     }
 }

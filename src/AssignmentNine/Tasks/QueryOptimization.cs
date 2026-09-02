@@ -29,16 +29,14 @@ namespace AssignmentNine.Tasks
             stopwatch.Start();
             IEnumerable<Product> products = this._products.OrderBy(p => p.Price).ToList().Where(p => p.Category == "Books");
             stopwatch.Stop();
-            Console.WriteLine("\nBooks in the Sorted Order on price is : ");
-            TablePresenter.DisplayProducts(products);
+            TablePresenter.DisplayProducts("\nBooks in the Sorted Order on price is : ", products);
             Console.WriteLine($"The time taken for the first query is :{stopwatch.ElapsedMilliseconds} ms");
 
             stopwatch.Restart();
             products = this._products.Where(p => p.Category == "Books").OrderBy(p => p.Price).ToList();
             stopwatch.Stop();
-            Console.WriteLine("\nBooks in the Sorted Order on price is : ");
-            TablePresenter.DisplayProducts(products);
             Console.WriteLine($"The time taken for the Second query is :{stopwatch.ElapsedMilliseconds} ms");
+            ConsoleCleaner.Clean();
         }
     }
 }
