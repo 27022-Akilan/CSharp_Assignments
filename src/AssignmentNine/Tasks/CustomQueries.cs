@@ -38,8 +38,6 @@ namespace AssignmentNine.Tasks
                                           .Execute();
 
             TablePresenter.DisplayProducts(result);
-
-            // Building the Query manually.
             Console.WriteLine("\nResult of Joining the product with the Supplier !!");
             var joinedResult = new QueryBuilder<Product>(this._products).Join(
                                                         this._suppliers,
@@ -49,6 +47,7 @@ namespace AssignmentNine.Tasks
                                                         .Execute();
             TablePresenter.DisplayProductSupplier(joinedResult);
 
+            // Building the Query manually.
             Console.WriteLine(
                 "Build your query just by giving fields:" +
                 "\nThe Properties are: 'Id', 'ProductName', 'Price', 'Category'");
