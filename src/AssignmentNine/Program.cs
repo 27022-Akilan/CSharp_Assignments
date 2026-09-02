@@ -39,12 +39,12 @@ namespace Assignments
 
             ConsoleCleaner.Clean();
 
-            TaskThree taskThree = new TaskThree();
+            ObjectQueries taskThree = new ObjectQueries();
             taskThree.PerformArrayOperations();
 
             ConsoleCleaner.Clean();
 
-            ObjectQueries taskFour = new ObjectQueries(products);
+            QueryOptimization taskFour = new QueryOptimization(products);
             taskFour.SortBooksByPrice();
 
             ConsoleCleaner.Clean();

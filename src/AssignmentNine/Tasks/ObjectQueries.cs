@@ -1,44 +1,44 @@
-﻿using System.Diagnostics;
-using AssignmentNine.ConsolePresenter;
-using AssignmentNine.Model;
-
-namespace AssignmentNine.Tasks
+﻿namespace AssignmentNine.Tasks
 {
     /// <summary>
-    /// Represents the task four.
+    /// Represents the task three.
     /// </summary>
     public class ObjectQueries
     {
-        private List<Product> _products;
-
         /// <summary>
-        /// Initializes a new instance of the <see cref="ObjectQueries"/> class.
+        /// Perform operation on arrays.
         /// </summary>
-        /// <param name="products">Product list</param>
-        public ObjectQueries(List<Product> products)
+        public void PerformArrayOperations()
         {
-            this._products = products;
-        }
+            int[] array = { 10, 27, 1, 9, 56, 299, 78, 2, 8, 2 };
 
-        /// <summary>
-        /// Sort the book in increasing order by price.
-        /// </summary>
-        public void SortBooksByPrice()
-        {
-            Stopwatch stopwatch = Stopwatch.StartNew();
-            stopwatch.Start();
-            IEnumerable<Product> products = this._products.OrderBy(p => p.Price).ToList().Where(p => p.Category == "Books");
-            stopwatch.Stop();
-            Console.WriteLine("\nBooks in the Sorted Order on price is : ");
-            TablePresenter.DisplayProducts(products);
-            Console.WriteLine($"The time taken for the first query is :{stopwatch.ElapsedMilliseconds} ms");
+            int number = array.OrderByDescending(a => a).Skip(1).FirstOrDefault();
 
-            stopwatch.Restart();
-            products = this._products.Where(p => p.Category == "Books").OrderBy(p => p.Price).ToList();
-            stopwatch.Stop();
-            Console.WriteLine("\nBooks in the Sorted Order on price is : ");
-            TablePresenter.DisplayProducts(products);
-            Console.WriteLine($"The time taken for the Second query is :{stopwatch.ElapsedMilliseconds} ms");
+            // int largest = array.Max();
+            // array.Where(num => num < largest).Max();
+            Console.WriteLine("The Array is :\n");
+            foreach (int i in array)
+            {
+                Console.Write(i + " ");
+            }
+
+            Console.WriteLine($"\nThe Second largest number is : {number}");
+
+            int target = 10;
+            Console.WriteLine();
+            var pairs = array.SelectMany(
+                (x, i) => array.Skip(i + 1)
+                              .Where(y => y + x == target)
+                              .Select(y => (x, y))).Distinct();
+
+            Console.WriteLine($"\nThe  Unique pairs that match to the target {target} is :" +
+                              "\n===================");
+            foreach ((int x, int y) in pairs)
+            {
+                Console.WriteLine($"{x} - {y}");
+            }
+
+            Console.WriteLine("===================");
         }
     }
 }
