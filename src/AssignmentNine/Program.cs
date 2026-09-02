@@ -1,7 +1,6 @@
 ﻿using AssignmentNine.ConsolePresenter;
 using AssignmentNine.InventoryCreation;
 using AssignmentNine.Model;
-using AssignmentNine.TaskOne;
 using AssignmentNine.Tasks;
 
 namespace Assignments
@@ -49,7 +48,7 @@ namespace Assignments
 
             ConsoleCleaner.Clean();
 
-            TaskFive taskFive = new TaskFive(products, suppliers);
+            CustomQueries taskFive = new CustomQueries(products, suppliers);
             taskFive.WriteQueries();
         }
     }

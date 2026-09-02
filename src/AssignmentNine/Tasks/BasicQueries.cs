@@ -1,7 +1,7 @@
 ﻿using AssignmentNine.ConsolePresenter;
 using AssignmentNine.Model;
 
-namespace AssignmentNine.TaskOne
+namespace AssignmentNine.Tasks
 {
     /// <summary>
     /// Represents the task one functions
