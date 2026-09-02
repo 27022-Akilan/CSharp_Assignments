@@ -40,7 +40,7 @@ namespace AssignmentNine
                 ConsoleHelper.DisplayInfoMessage("\t\t\tLanguage Integrated Query");
                 this.DisplayMenu();
 
-                if (!ConsoleHelper.TryGetEnumInput("\nEnter your choice : ", out MenuOption option))
+                if (!ConsoleHelper.TryGetEnum("\nEnter your choice : ", out MenuOption option))
                 {
                     Console.WriteLine("Invalid option !!!");
                 }

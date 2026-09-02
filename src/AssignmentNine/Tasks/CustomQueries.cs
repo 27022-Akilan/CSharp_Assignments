@@ -29,6 +29,9 @@ namespace AssignmentNine.Tasks
         /// </summary>
         public void WriteQueries()
         {
+            ConsoleHelper.DisplayInfoMessage("==========================================================" +
+                                            "\n--- Made queries by passing Lambda expressions ---" +
+                                            "\n==========================================================");
             TablePresenter.DisplayProducts("\nThe initial products are...", this._products);
 
             // Default query given as lambda
@@ -46,10 +49,20 @@ namespace AssignmentNine.Tasks
                                                         .Execute();
             Console.WriteLine("\nResult of Joining the product with the Supplier !!");
             TablePresenter.DisplayProductSupplier(joinedResult);
+            this.MakeQuery();
+        }
 
+        private void MakeQuery()
+        {
+            ConsoleHelper.Clean();
+            ConsoleHelper.DisplayInfoMessage("========================================" +
+                                            "\n--- Make Queries By Yourself :) ---" +
+                                            "\n========================================");
+
+            TablePresenter.DisplayProducts("The Initial products are ...", this._products);
             // Building the Query manually.
             Console.WriteLine(
-                "Build your query just by giving fields:" +
+                "\nBuild your query just by giving fields:" +
                 "\nThe Properties are: 'Id', 'ProductName', 'Price', 'Category'");
 
             Console.Write("\nEnter the property name: ");
@@ -62,26 +75,19 @@ namespace AssignmentNine.Tasks
                 "\n4. Greater than or equal to" +
                 "\n5. Less than or equal to");
 
-            Console.Write("\nEnter your choice: ");
-            string userInput = Console.ReadLine() ?? string.Empty;
-
-            if (!int.TryParse(userInput, out int option) || !Enum.IsDefined(typeof(FilterOperation), option))
+            if (!ConsoleHelper.TryGetEnum("Enter your choice : ", out FilterOperation operation))
             {
                 Console.WriteLine("Invalid filter operation.");
                 return;
             }
 
-            FilterOperation operation = (FilterOperation)option;
-
-            Console.Write("\nEnter the value to filter by: ");
-            string valueInput = Console.ReadLine() ?? string.Empty;
-
+            Console.Write($"\nEnter the value the be given for filtering by the {propertyName} : ");
+            string inputValue = Console.ReadLine() ?? string.Empty;
             object value;
-
             switch (propertyName)
             {
                 case "Id":
-                    if (!int.TryParse(valueInput, out int id))
+                    if (!int.TryParse(inputValue, out int id))
                     {
                         Console.WriteLine("Invalid integer value.");
                         return;
@@ -91,7 +97,7 @@ namespace AssignmentNine.Tasks
                     break;
 
                 case "Price":
-                    if (!decimal.TryParse(valueInput, out decimal price))
+                    if (!decimal.TryParse(inputValue, out decimal price))
                     {
                         Console.WriteLine("Invalid decimal value.");
                         return;
@@ -102,7 +108,7 @@ namespace AssignmentNine.Tasks
 
                 case "ProductName":
                 case "Category":
-                    value = valueInput;
+                    value = inputValue;
                     break;
 
                 default:
@@ -110,7 +116,7 @@ namespace AssignmentNine.Tasks
                     return;
             }
 
-            result = new QueryBuilder<Product>(this._products).Filter(propertyName, operation, value).Execute();
+            var result = new QueryBuilder<Product>(this._products).Filter(propertyName, operation, value).Execute();
             TablePresenter.DisplayProducts("\nFiltered Result:\n", result);
             ConsoleHelper.Clean();
         }

@@ -86,7 +86,7 @@
         /// <param name="prompt">The message to display before reading input.</param>
         /// <param name="result">The resulting enum value if the input was a valid integer; otherwise, the default value.</param>
         /// <returns>True if the input was a valid integer mapped to the enum; otherwise false</returns>
-        public static bool TryGetEnumInput<TEnum>(string prompt, out TEnum result)
+        public static bool TryGetEnum<TEnum>(string prompt, out TEnum result)
             where TEnum : struct, System.Enum
         {
             Console.Write(prompt);
