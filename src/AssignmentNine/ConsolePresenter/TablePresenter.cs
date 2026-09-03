@@ -37,9 +37,6 @@ namespace AssignmentNine.ConsolePresenter
             Console.WriteLine(prompt);
             ConsoleTable table = new ConsoleTable("Id", "Name", "Price", "Category");
             table.Configure(options => options.EnableCount = false);
-
-            // Console.WriteLine("Here is your entire products");
-
             foreach (Product product in productList)
             {
                 table.AddRow(product.Id, product.ProductName, product.Price, product.Category);

@@ -60,6 +60,7 @@ namespace AssignmentNine.Tasks
                                             "\n========================================");
 
             TablePresenter.DisplayProducts("The Initial products are ...", this._products);
+
             // Building the Query manually.
             Console.WriteLine(
                 "\nBuild your query just by giving fields:" +
