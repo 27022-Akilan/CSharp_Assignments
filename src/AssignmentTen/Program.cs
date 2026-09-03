@@ -26,14 +26,14 @@ namespace Assignments
 
             try
             {
-                Console.WriteLine($"\nAddition : {operation.Add(number1, number2)}" +
-                             $"\nSubtraction : {operation.Subtract(number1, number2)}" +
-                             $"\nMultiplication : {operation.Multiply(number1, number2)}" +
-                             $"\nDivision : {operation.Divide(number1, number2)}");
+                Console.WriteLine($"\nAddition : {operation.Add(number1, number2)}");
+                Console.WriteLine($"\nSubtraction : {operation.Subtract(number1, number2)}");
+                Console.WriteLine($"\nMultiplication : {operation.Multiply(number1, number2)}");
+                Console.WriteLine($"\nDivision : {operation.Divide(number1, number2)}");
             }
             catch (DivideByZeroException ex)
             {
-                Console.WriteLine($"An Exception Caught : {ex.Message}");
+                Console.WriteLine($"\nAn Exception Caught : {ex.Message}");
             }
             finally
             {
