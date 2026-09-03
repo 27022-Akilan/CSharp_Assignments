@@ -1,4 +1,4 @@
-﻿namespace AssignmentTen
+﻿namespace Utilities
 {
     /// <summary>
     /// Represents the 
