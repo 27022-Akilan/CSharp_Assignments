@@ -81,7 +81,7 @@ namespace AssignmentFour.View
                     return true;
                 },
                 d => !string.IsNullOrWhiteSpace(d),
-                new ValidationMessages(string.Empty, Messages.ValidationErrorOnDescription), // ParseError never hit: parser above always returns true
+                new ValidationMessages(string.Empty, Messages.ValidationErrorOnDescription),
                 out description);
 
         /// <summary>
@@ -182,7 +182,7 @@ namespace AssignmentFour.View
 
                 if (int.TryParse(choiceString, out int choice) && Enum.IsDefined(typeof(T), choice))
                 {
-                    result = (T)(object)choice; // box through object: can't cast int -> T directly under an Enum constraint
+                    result = (T)(object)choice;
                     return true;
                 }
 

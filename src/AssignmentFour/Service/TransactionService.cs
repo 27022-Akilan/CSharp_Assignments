@@ -1,7 +1,7 @@
 ﻿using AssignmentFour.Constants;
 using AssignmentFour.Model;
-using AssignmentFour.Model.DTO;
 using AssignmentFour.Model.Enums;
+using AssignmentFour.Model.RequestModel;
 using AssignmentFour.Repository;
 
 namespace AssignmentFour.Service
