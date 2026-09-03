@@ -15,9 +15,7 @@
   </ItemGroup>
 
   <ItemGroup>
-    <Reference Include="MathUtils">
-      <HintPath>..\..\MathUtils\bin\Debug\net6.0\MathUtils.dll</HintPath>
-    </Reference>
+    <ProjectReference Include="..\..\MathUtils\MathUtils.csproj" />
   </ItemGroup>
 
 </Project>
