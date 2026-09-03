@@ -1,6 +1,6 @@
 ﻿using AssignmentFour.Model.Enums;
 
-namespace AssignmentFour.Model.DTO
+namespace AssignmentFour.Model.RequestModel
 {
     /// <summary>
     /// Represents a request model for the Income.
