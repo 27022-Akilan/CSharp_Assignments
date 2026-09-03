@@ -1,4 +1,6 @@
-﻿namespace AssignmentEight
+﻿using AssignmentEight.Enums;
+
+namespace AssignmentEight
 {
     /// <summary>
     /// General-purpose console ConsoleHelper methods shared across all task demos.
@@ -10,62 +12,27 @@
         /// </summary>
         public static void PressKeyToContinue()
         {
-            DisplayShadowMessage("\nPress any key to continue...");
+            DisplayMessage("\nPress any key to continue...", MessageType.Shadow);
             Console.ReadKey();
             Console.WriteLine();
         }
 
         /// <summary>
-        /// Displays a success message in green.
+        /// Displays the message in different color for different type of the message.
         /// </summary>
-        /// <param name="message">Message to be displayed.</param>
-        public static void DisplaySuccessMessage(string message)
+        /// <param name="message">Message to be displayed</param>
+        /// <param name="type">Type of the message</param>
+        public static void DisplayMessage(string message, MessageType type)
         {
-            Console.ForegroundColor = ConsoleColor.Green;
-            Console.WriteLine(message);
-            Console.ResetColor();
-        }
-
-        /// <summary>
-        /// Displays an error message in red.
-        /// </summary>
-        /// <param name="message">Message to be displayed.</param>
-        public static void DisplayErrorMessage(string message)
-        {
-            Console.ForegroundColor = ConsoleColor.Red;
-            Console.WriteLine(message);
-            Console.ResetColor();
-        }
-
-        /// <summary>
-        /// Displays a warning message in yellow.
-        /// </summary>
-        /// <param name="message">Message to be displayed.</param>
-        public static void DisplayWarningMessage(string message)
-        {
-            Console.ForegroundColor = ConsoleColor.Yellow;
-            Console.WriteLine(message);
-            Console.ResetColor();
-        }
-
-        /// <summary>
-        /// Displays an informational message in cyan.
-        /// </summary>
-        /// <param name="message">Message to be displayed.</param>
-        public static void DisplayInfoMessage(string message)
-        {
-            Console.ForegroundColor = ConsoleColor.Cyan;
-            Console.WriteLine(message);
-            Console.ResetColor();
-        }
-
-        /// <summary>
-        /// Displays a message in a dim gray, used for explanatory / "shadow" text.
-        /// </summary>
-        /// <param name="message">Message to be displayed.</param>
-        public static void DisplayShadowMessage(string message)
-        {
-            Console.ForegroundColor = ConsoleColor.DarkGray;
+            Console.ForegroundColor = type switch
+            {
+                MessageType.Success => ConsoleColor.Green,
+                MessageType.Warning => ConsoleColor.Yellow,
+                MessageType.Error => ConsoleColor.Red,
+                MessageType.Info => ConsoleColor.Blue,
+                MessageType.Shadow => ConsoleColor.DarkGray,
+                _ => ConsoleColor.White
+            };
             Console.WriteLine(message);
             Console.ResetColor();
         }

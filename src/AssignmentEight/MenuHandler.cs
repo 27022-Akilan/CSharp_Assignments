@@ -18,12 +18,12 @@ namespace AssignmentEight
             while (keepRunning)
             {
                 Console.Clear();
-                ConsoleHelper.DisplayInfoMessage("\t\t\t\tMake Mistakes And Learn!!!\n");
+                ConsoleHelper.DisplayMessage("\t\t\t\tMake Mistakes And Learn :)\n", MessageType.Info);
                 PrintMenu();
 
                 if (!ConsoleHelper.TryGetEnumInput("\nEnter your choice: ", out TaskOption choice))
                 {
-                    ConsoleHelper.DisplayWarningMessage("Please enter a number.");
+                    ConsoleHelper.DisplayMessage("Please enter a number.", MessageType.Warning);
                     continue;
                 }
 
@@ -50,7 +50,7 @@ namespace AssignmentEight
                         keepRunning = false;
                         break;
                     default:
-                        ConsoleHelper.DisplayWarningMessage("Invalid choice. Please pick an option from the menu.");
+                        ConsoleHelper.DisplayMessage("Invalid choice. Please pick an option from the menu.", MessageType.Warning);
                         break;
                 }
 
@@ -84,8 +84,10 @@ namespace AssignmentEight
             }
             catch (IndexOutOfRangeException ex)
             {
-                ConsoleHelper.DisplayErrorMessage($"\n\nCaught an exception: {ex.Message}");
-                ConsoleHelper.DisplayShadowMessage("The exception was re-thrown from the ArrayIndexOutOfBounds task and handled in MenuHandler.");
+                ConsoleHelper.DisplayMessage($"\n\nCaught an exception: {ex.Message}", MessageType.Error);
+                ConsoleHelper.DisplayMessage(
+                                              "The exception was re-thrown from the ArrayIndexOutOfBounds task and handled in MenuHandler.",
+                                              MessageType.Shadow);
             }
         }
     }

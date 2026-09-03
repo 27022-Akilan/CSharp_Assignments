@@ -1,4 +1,6 @@
-﻿namespace AssignmentEight.Tasks
+﻿using AssignmentEight.Enums;
+
+namespace AssignmentEight.Tasks
 {
     /// <summary>
     /// Interpreting a locally caught exception's stack trace.
@@ -10,27 +12,32 @@
         /// </summary>
         public static void Run()
         {
-            ConsoleHelper.DisplayInfoMessage("\n==============================================" +
+            ConsoleHelper.DisplayMessage(
+                                             "\n==============================================" +
                                              "\n--- Stack trace interpretation ---" +
-                                             "\n==============================================");
+                                             "\n==============================================",
+                                             MessageType.Info);
 
             try
             {
-                ConsoleHelper.DisplayWarningMessage("\nWe have methods Run(), Outer() Middle() and Inner() defined and the exception is handled in the Run() method." +
+                ConsoleHelper.DisplayMessage(
+                                            "\nWe have methods Run(), Outer() Middle() and Inner() defined and the exception is handled in the Run() method." +
                                             "\nWhen we call these methods in sequence, the exception will be thrown from Inner() and" +
-                                             "propagated up through Middle() and Outer() to the catch block in Run()." +
-                                             "\nLets now see how the stack trace looks like: ");
+                                            "propagated up through Middle() and Outer() to the catch block in Run()." +
+                                            "\nLets now see how the stack trace looks like: ",
+                                            MessageType.Warning);
                 Outer();
             }
             catch (Exception ex)
             {
-                ConsoleHelper.DisplayErrorMessage($"Caught exception: {ex.Message}");
+                ConsoleHelper.DisplayMessage($"Caught exception: {ex.Message}", MessageType.Error);
                 Console.WriteLine("\nStack trace:");
                 Console.WriteLine(ex.StackTrace);
-                ConsoleHelper.DisplayInfoMessage(
+                ConsoleHelper.DisplayMessage(
                    "\nInterpretation: Each line above is one call frame, listed innermost (where the " +
                    "exception was thrown) first and outermost (closer to Main) last." +
-                   "\nThis is why Inner() -> Middle() -> Outer() -> Run() shows up in that order below.");
+                   "\nThis is why Inner() -> Middle() -> Outer() -> Run() shows up in that order below.",
+                   MessageType.Warning);
             }
         }
 

@@ -1,4 +1,5 @@
 ﻿using AssignmentEight.CustomException;
+using AssignmentEight.Enums;
 
 namespace AssignmentEight.Tasks
 {
@@ -15,9 +16,11 @@ namespace AssignmentEight.Tasks
         /// </summary>
         public static void Run()
         {
-            ConsoleHelper.DisplayInfoMessage("\n===========================================================" +
-                                      "\n--- User input validation with a custom exception ---" +
-                                      "\n===========================================================");
+            ConsoleHelper.DisplayMessage(
+                                         "\n===========================================================" +
+                                         "\n--- User input validation with a custom exception ---" +
+                                         "\n===========================================================",
+                                         MessageType.Info);
             Console.Write($"\n\nEnter a whole number between {MinValue} and {MaxValue}: ");
             string? input = Console.ReadLine();
 
@@ -29,11 +32,11 @@ namespace AssignmentEight.Tasks
                         $"'{input}' is not a valid whole number between {MinValue} and {MaxValue}.");
                 }
 
-                ConsoleHelper.DisplaySuccessMessage($"Thanks! You entered a valid number: {value}");
+                ConsoleHelper.DisplayMessage($"Thanks! You entered a valid number: {value}", MessageType.Success);
             }
             catch (InvalidUserInputException ex)
             {
-                ConsoleHelper.DisplayErrorMessage($"Caught InvalidUserInputException: {ex.Message}");
+                ConsoleHelper.DisplayMessage($"Caught InvalidUserInputException: {ex.Message}", MessageType.Error);
             }
         }
     }

@@ -1,4 +1,5 @@
 ﻿using System.Text.Json;
+using AssignmentEight.Enums;
 
 namespace AssignmentEight.Tasks
 {
@@ -12,15 +13,18 @@ namespace AssignmentEight.Tasks
         /// </summary>
         public static void Run()
         {
-            ConsoleHelper.DisplayInfoMessage("\n==============================================" +
+            ConsoleHelper.DisplayMessage(
+                                             "\n==============================================" +
                                              "\n--- Global Unhandled Exception ---" +
-                                             "\n==============================================");
-            ConsoleHelper.DisplayWarningMessage(
+                                             "\n==============================================",
+                                             MessageType.Info);
+            ConsoleHelper.DisplayMessage(
                                          "\nIntentionally a Json Exception was thrown to simulate the Unhandled global exception" +
                                          "\nThis is a scenario where the exception is not handled locally." +
                                          "\nThe AppDomain.UnhandledException " +
                                          "handler registered in Program.cs will catch it globally, print a message, and then the " +
-                                         "process will exit (this is normal .NET behavior for unhandled exceptions).");
+                                         "process will exit (this is normal .NET behavior for unhandled exceptions).",
+                                         MessageType.Warning);
 
             ConsoleHelper.PressKeyToContinue();
             ThrowUnhandledException();

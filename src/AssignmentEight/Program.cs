@@ -1,4 +1,5 @@
 ﻿using AssignmentEight;
+using AssignmentEight.Enums;
 
 namespace Assignments
 {
@@ -24,9 +25,11 @@ namespace Assignments
         public static void HandleUnhandledException(object sender, UnhandledExceptionEventArgs e)
         {
             Exception? exception = e.ExceptionObject as Exception;
-            ConsoleHelper.DisplayErrorMessage("Error : Unhandled Exception caught globally by AppDomain.UnhandledException." +
+            ConsoleHelper.DisplayMessage(
+                                        "Error : Unhandled Exception caught globally by AppDomain.UnhandledException." +
                                         $"\nMessage : {exception?.Message}" +
-                                        $"\nIf it will terminate the entire process : {e.IsTerminating}");
+                                        $"\nIf it will terminate the entire process : {e.IsTerminating}",
+                                        MessageType.Error);
         }
     }
 }

@@ -1,4 +1,6 @@
-﻿namespace AssignmentEight.Tasks
+﻿using AssignmentEight.Enums;
+
+namespace AssignmentEight.Tasks
 {
     /// <summary>
     /// Demonstration of throwing and catching Array index out of bounds exceptions.
@@ -10,10 +12,11 @@
         /// </summary>
         public static void Run()
         {
-            ConsoleHelper.DisplayInfoMessage(
+            ConsoleHelper.DisplayMessage(
                                       "\n===============================================" +
                                       "\n--- Array Index Out Of Bounds Exception --- " +
-                                      "\n===============================================");
+                                      "\n===============================================",
+                                      MessageType.Info);
 
             int[] numbers = { 10, 20, 30, 40, 50 };
 
@@ -23,7 +26,7 @@
                               $"the array's starting index is 0.");
             try
             {
-                ConsoleHelper.DisplaySuccessMessage($"\nValue at index {index}: {numbers[index]}");
+                ConsoleHelper.DisplayMessage($"\nValue at index {index}: {numbers[index]}", MessageType.Success);
             }
             catch (IndexOutOfRangeException ex)
             {

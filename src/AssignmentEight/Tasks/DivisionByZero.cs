@@ -1,4 +1,6 @@
-﻿namespace AssignmentEight.Tasks
+﻿using AssignmentEight.Enums;
+
+namespace AssignmentEight.Tasks
 {
     /// <summary>
     /// Represents a demonstration of handling division by zero exceptions.
@@ -10,9 +12,11 @@
         /// </summary>
         public static void Run()
         {
-            ConsoleHelper.DisplayInfoMessage("\n========================================" +
-                                             "\n--- Division By Zero Exception --- " +
-                                             "\n========================================");
+            ConsoleHelper.DisplayMessage(
+                                        "\n========================================" +
+                                        "\n--- Division By Zero Exception --- " +
+                                        "\n========================================",
+                                        MessageType.Info);
             int dividend = 10;
             int divisor = 0;
             Console.WriteLine($"\nThe dividend is {dividend} and the divisor is {divisor} , " +
@@ -20,15 +24,15 @@
             try
             {
                 int result = dividend / divisor;
-                ConsoleHelper.DisplaySuccessMessage($"Result: {dividend} / {divisor} = {result}");
+                ConsoleHelper.DisplayMessage($"Result: {dividend} / {divisor} = {result}", MessageType.Success);
             }
             catch (DivideByZeroException ex)
             {
-                ConsoleHelper.DisplayErrorMessage($"Exception: Cannot divide {dividend} by {divisor}. \nException Message : {ex.Message}");
+                ConsoleHelper.DisplayMessage($"Exception: Cannot divide {dividend} by {divisor}. \nException Message : {ex.Message}", MessageType.Error);
             }
             finally
             {
-                ConsoleHelper.DisplayShadowMessage("\nThe finally block for division has being executed.Bye bye buddy!!!");
+                ConsoleHelper.DisplayMessage("\nThe finally block for division has being executed.Bye bye buddy!!!", MessageType.Shadow);
             }
         }
     }
