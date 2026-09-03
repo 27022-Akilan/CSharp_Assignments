@@ -24,7 +24,7 @@
         /// <summary>
         /// Option for demonstrating a global unhandled exception and how to catch it.
         /// </summary>
-        GlobalUnhandledExceptionDemo,
+        GlobalUnhandledException,
 
         /// <summary>
         /// Option for demonstrating how to interpret a stack trace and understand the flow of an exception.

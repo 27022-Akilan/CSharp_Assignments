@@ -39,7 +39,7 @@ namespace AssignmentEight
                     case TaskOption.CustomException:
                         Tasks.CustomException.Run();
                         break;
-                    case TaskOption.GlobalUnhandledExceptionDemo:
+                    case TaskOption.GlobalUnhandledException:
                         GlobalUnhandledException.Run();
                         break;
                     case TaskOption.StackTraceInterpretation:
