@@ -36,7 +36,7 @@ namespace ValueAndReferenceType
             Console.WriteLine($"Before change : {number}" +
                               $"\nAfter change : {valueType.Number}");
 
-            Console.WriteLine("============================" +
+            Console.WriteLine("\n============================" +
                               "\n--- Reference Type ---" +
                               "\n============================");
             Console.WriteLine($"Before change : {number}" +

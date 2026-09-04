@@ -13,11 +13,12 @@ namespace Assignments
         /// <param name="args">Default arguments</param>
         public static void Main(string[] args)
         {
-            Console.WriteLine("Hello, World!");
-
             ValueAndReference valueAndReference = new ValueAndReference();
-
             valueAndReference.CreateValue();
+
+            StackVsHeap stackVsHeap = new StackVsHeap();
+            stackVsHeap.AnalyseHeapMemory();
+            stackVsHeap.AnalyseStackMemory();
         }
     }
 }
