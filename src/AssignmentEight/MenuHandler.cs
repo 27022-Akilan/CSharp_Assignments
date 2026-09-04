@@ -13,15 +13,14 @@ namespace AssignmentEight
         /// </summary>
         public static void Run()
         {
-            bool keepRunning = true;
-
-            while (keepRunning)
+            TaskOption choice = TaskOption.Exit;
+            do
             {
                 Console.Clear();
                 ConsoleHelper.DisplayMessage("\t\t\t\tMake Mistakes And Learn :)\n", MessageType.Info);
                 PrintMenu();
 
-                if (!ConsoleHelper.TryGetEnumInput("\nEnter your choice: ", out TaskOption choice))
+                if (!ConsoleHelper.TryGetEnumInput("\nEnter your choice: ", out choice))
                 {
                     ConsoleHelper.DisplayMessage("Please enter a number.", MessageType.Warning);
                     continue;
@@ -47,18 +46,13 @@ namespace AssignmentEight
                         break;
                     case TaskOption.Exit:
                         Console.WriteLine("Exiting the application. Goodbye!");
-                        keepRunning = false;
                         break;
                     default:
                         ConsoleHelper.DisplayMessage("Invalid choice. Please pick an option from the menu.", MessageType.Warning);
                         break;
                 }
-
-                if (keepRunning)
-                {
-                    ConsoleHelper.PressKeyToContinue();
-                }
             }
+            while (choice != TaskOption.Exit);
         }
 
         private static void PrintMenu()
