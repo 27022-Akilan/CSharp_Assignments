@@ -10,12 +10,9 @@
         /// </summary>
         public void AnalyseHeapMemory()
         {
-            int[] array = new int[10_000_00];
+            int[]? array = new int[1000000];
             Console.WriteLine("Look into the Memory usage by Debug -> Windows -> Show Diagnostic Tool");
             array = null;
-            GC.Collect();
-            GC.WaitForPendingFinalizers();
-            GC.Collect();
             Console.ReadKey();
         }
 
@@ -28,13 +25,6 @@
             int num2 = 10;
             int num3 = 10;
             int num4 = 10;
-            int num5 = 10;
-            int num6 = 10;
-            int num7 = 10;
-            int num8 = 10;
-            int num9 = 10;
-            int num10 = 10;
-
             int sumOfFirstFour = num1 + num2 + num3 + num4;
             Console.WriteLine("\nSee the local variables inside the Debug -> Windows -> Locals");
             Console.ReadKey();
