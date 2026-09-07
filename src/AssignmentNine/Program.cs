@@ -17,7 +17,7 @@ namespace Assignments
         {
             try
             {
-                InventoryCreation inventoryCreation = new InventoryCreation();
+                InventoryData inventoryCreation = new InventoryData();
                 List<Product> products = inventoryCreation.CreateProducts();
                 List<Supplier> suppliers = inventoryCreation.CreateSupplier();
                 MenuHandler menuHandler = new MenuHandler(products, suppliers);

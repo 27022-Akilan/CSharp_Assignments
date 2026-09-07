@@ -5,7 +5,7 @@ namespace AssignmentNine.InventoryCreation
     /// <summary>
     /// Responsible for creating Products
     /// </summary>
-    public class InventoryCreation
+    public class InventoryData
     {
         /// <summary>
         /// Creates the products
