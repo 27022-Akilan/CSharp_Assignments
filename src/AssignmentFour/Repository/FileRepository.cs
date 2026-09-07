@@ -53,7 +53,7 @@ namespace AssignmentFour.Repository
             toBeUpdatedIncome.Amount = transaction.Amount;
             toBeUpdatedIncome.Date = transaction.Date;
             toBeUpdatedIncome.Description = transaction.Description;
-            ((Income)toBeUpdatedIncome).Source = transaction.Source;
+            toBeUpdatedIncome.Source = transaction.Source;
             this.SaveTransactionsToFile();
             return true;
         }
@@ -74,7 +74,7 @@ namespace AssignmentFour.Repository
             toBeUpdatedExpense.Amount = transaction.Amount;
             toBeUpdatedExpense.Date = transaction.Date;
             toBeUpdatedExpense.Description = transaction.Description;
-            ((Expense)toBeUpdatedExpense).Category = transaction.Category;
+            toBeUpdatedExpense.Category = transaction.Category;
             this.SaveTransactionsToFile();
             return true;
         }
