@@ -51,7 +51,7 @@ namespace AssignmentNine
                         basicQueries.PerformTask();
                         break;
                     case MenuOption.ComplexQueries:
-                        complexQueries.GroupByCategory();
+                        complexQueries.PerformQuery();
                         complexQueries.RelateProductAndSupplier();
                         break;
                     case MenuOption.ObjectQueries:

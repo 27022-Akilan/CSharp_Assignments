@@ -40,29 +40,19 @@ namespace AssignmentNine.Tasks
                 return;
             }
 
-            this.FilterByCategoryAndPrice(category, price);
-        }
-
-        /// <summary>
-        /// Filters and Display the product by category and price
-        /// </summary>
-        /// <param name="category">Category of the product</param>
-        /// <param name="price">Price of the product</param>
-        public void FilterByCategoryAndPrice(string category, decimal price)
-        {
-            IEnumerable<(string?, decimal)> filteredList = this._productList
-                                                                .Where(p => p.Category == category && p.Price > price)
-                                                                .Select(p => (p.ProductName, p.Price));
+            IEnumerable<(string?, decimal)> filteredList = this.FilterByCategoryAndPrice(category, price);
             if (!filteredList.Any())
             {
                 Console.WriteLine($"No products matched to your category : {category} and price > {price}.");
                 return;
             }
 
-            decimal average = filteredList.Average(p => p.Item2);
+            decimal average = this.CalculateAverage(filteredList);
 
-            Console.WriteLine($"\nProducts matched to your category {category} and > {price} are");
-            TablePresenter.DisplayFilteredProducts(filteredList);
+            TablePresenter.DisplayFilteredProducts(
+                                                    $"\nProducts matched to your category {category} and > {price} are",
+                                                    filteredList);
+
             Console.WriteLine($"\nThe average of these products price is : {average}");
 
             Console.Write("\nDo you need to sort the products in descending order of price (Y/N) : ");
@@ -70,20 +60,45 @@ namespace AssignmentNine.Tasks
 
             if (input == "Y" || input == "y")
             {
-                Console.WriteLine($"\nProducts that matched to your category : {category} and price > {price} and sorted by descending order is ");
-                this.SortByDescending(filteredList);
+                IEnumerable<(string?, decimal)> sortedList = this.SortByDescending(filteredList);
+                TablePresenter.DisplayFilteredProducts(
+                    $"\nProducts that matched to your category : {category} and price > {price} and sorted by descending order is ",
+                    sortedList.OrderByDescending(p => p.Item2));
             }
 
             ConsoleHelper.Clean();
         }
 
         /// <summary>
+        /// Filters and Display the product by category and price
+        /// </summary>
+        /// <param name="category">Category of the product</param>
+        /// <param name="price">Price of the product</param>
+        /// <returns>Filtered List by category and price.</returns>
+        public IEnumerable<(string?, decimal)> FilterByCategoryAndPrice(string category, decimal price)
+        {
+            return this._productList.Where(p => p.Category == category && p.Price > price)
+                             .Select(p => (p.ProductName, p.Price));
+        }
+
+        /// <summary>
+        /// Calculates the average of products price.
+        /// </summary>
+        /// <param name="list">List of products.</param>
+        /// <returns>Average of the products price</returns>
+        private decimal CalculateAverage(IEnumerable<(string?, decimal)> list)
+        {
+            return list.Average(p => p.Item2);
+        }
+
+        /// <summary>
         /// Sorts the products in descending order by product price.
         /// </summary>
         /// <param name="list">List to be sorted</param>
-        public void SortByDescending(IEnumerable<(string?, decimal)> list)
+        /// <return>Sorted list in Descending order.</return>
+        private IEnumerable<(string?, decimal)> SortByDescending(IEnumerable<(string?, decimal)> list)
         {
-            TablePresenter.DisplayFilteredProducts(list.OrderByDescending(p => p.Item2));
+            return list.OrderByDescending(p => p.Item2);
         }
     }
 }

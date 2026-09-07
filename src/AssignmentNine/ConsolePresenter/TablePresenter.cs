@@ -11,17 +11,18 @@ namespace AssignmentNine.ConsolePresenter
         /// <summary>
         /// Displays the group of product with category
         /// </summary>
+        /// <param name="prompt">Prompt to be displayed.</param>
         /// <param name="groups">List of tuple containing category,category's Maximum price, category's count</param>
-        public static void DisplayProducts(IEnumerable<(string?, decimal, int)> groups)
+        public static void DisplayProducts(string prompt, IEnumerable<(Product?, int)> groups)
         {
             Console.WriteLine("\nThe Category grouping with maximum price and count !!!!");
-            ConsoleTable table = new ConsoleTable("Category", "Maximum Price", "Total Products");
+            ConsoleTable table = new ConsoleTable("Category", "Product Id", "Product Name", "Product Price", "Total Products");
 
             table.Configure(options => options.EnableCount = false);
 
             foreach (var group in groups)
             {
-                table.AddRow(group.Item1!, group.Item2, group.Item3);
+                table.AddRow(group.Item1!.Category, group.Item1!.Id, group.Item1!.ProductName, group.Item1!.Price, group.Item2);
             }
 
             table.Write();
@@ -48,9 +49,11 @@ namespace AssignmentNine.ConsolePresenter
         /// <summary>
         /// Displays the name and price of the product.
         /// </summary>
-        /// <param name="filteredList">List of product with name and price</param>
-        public static void DisplayFilteredProducts(IEnumerable<(string?, decimal)> filteredList)
+        /// <param name="prompt">Prompt to be displayed.</param>
+        /// <param name="filteredList">List of product with name and price.</param>
+        public static void DisplayFilteredProducts(string prompt, IEnumerable<(string?, decimal)> filteredList)
         {
+            Console.WriteLine(prompt);
             ConsoleTable table = new ConsoleTable("Name", "Price");
             table.Configure(options => options.EnableCount = false);
 

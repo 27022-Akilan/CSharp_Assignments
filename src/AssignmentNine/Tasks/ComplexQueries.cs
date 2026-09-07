@@ -25,19 +25,28 @@ namespace AssignmentNine.Tasks
         /// <summary>
         /// Groups the products by Category.
         /// </summary>
-        public void GroupByCategory()
+        public void PerformQuery()
         {
             ConsoleHelper.DisplayInfoMessage("\n===============================" +
                                              "\n   --- Complex Queries ---" +
                                              "\n===============================");
             TablePresenter.DisplayProducts("\nThe initial products are...\n", this._productList);
-            var groups = this._productList.GroupBy(p => p.Category)
-                                          .Select(g =>
-                                          (g.Key, g.Max(g => g.Price), g.Count()));
 
-            Console.WriteLine("Groups by Category and displays the maximum price, and count in each category.");
-            TablePresenter.DisplayProducts(groups);
+            IEnumerable<(Product?, int)> groups = this.GroupByCategory();
+
+            Console.WriteLine();
+            TablePresenter.DisplayProducts("Groups by Category and displays the maximum price, and count in each category.", groups);
             ConsoleHelper.Clean();
+        }
+
+        /// <summary>
+        /// Groups by category and gives the product count in each category and product with maximum price.
+        /// </summary>
+        /// <returns>List of Product with product count in each category</returns>
+        public IEnumerable<(Product?, int)> GroupByCategory()
+        {
+            return this._productList.GroupBy(p => p.Category)
+                                    .Select(g => (g.MaxBy(p => p.Price), g.Count()));
         }
 
         /// <summary>
