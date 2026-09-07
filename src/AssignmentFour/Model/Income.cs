@@ -1,4 +1,5 @@
-﻿using AssignmentFour.Model.Enums;
+﻿using AssignmentFour.Enums;
+using AssignmentFour.Model.Enums;
 
 namespace AssignmentFour.Model
 {

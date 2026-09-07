@@ -13,6 +13,6 @@
         /// <summary>
         /// Constant field to denote the minimum amount.
         /// </summary>
-        public const int MinimumAmount = 5;
+        public const int MinimumAmount = 1;
     }
 }
