@@ -9,7 +9,6 @@ namespace AssignmentFour.Repository
     /// </summary>
     public class TransactionRepository : IRepository
     {
-        // private Transaction? _transaction;
         private List<Transaction> _transactionList = new List<Transaction>();
 
         /// <summary>
@@ -40,7 +39,7 @@ namespace AssignmentFour.Repository
             toBeUpdatedExpense.Amount = transaction.Amount;
             toBeUpdatedExpense.Date = transaction.Date;
             toBeUpdatedExpense.Description = transaction.Description;
-            ((Income)toBeUpdatedExpense).Source = transaction.Source;
+            toBeUpdatedExpense.Source = transaction.Source;
             return true;
         }
 
@@ -60,7 +59,7 @@ namespace AssignmentFour.Repository
             toBeUpdatedExpense.Amount = transaction.Amount;
             toBeUpdatedExpense.Date = transaction.Date;
             toBeUpdatedExpense.Description = transaction.Description;
-            ((Expense)toBeUpdatedExpense).Category = transaction.Category;
+            toBeUpdatedExpense.Category = transaction.Category;
             return true;
         }
 
