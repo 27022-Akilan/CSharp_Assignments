@@ -43,7 +43,7 @@
         /// <summary>
         /// Invalid Amount.
         /// </summary>
-        public const string ValidationErrorOnAmount = "Your amount should be greater than 0";
+        public const string ValidationErrorOnAmount = "Your amount should be greater than or equal to 1";
 
         /// <summary>
         /// Invalid Date format message.
