@@ -16,7 +16,8 @@ namespace Assignments
         public static void Main(string[] args)
         {
             string filePath = @"Transactions.json";
-            IRepository repository = new TransactionRepository();
+
+            // IRepository repository = new TransactionRepository();
             IRepository fileRepository = new FileRepository(filePath);
             TransactionService service = new TransactionService(fileRepository);
             InputView inputView = new InputView(service);
