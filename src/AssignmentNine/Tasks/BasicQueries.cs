@@ -48,13 +48,10 @@ namespace AssignmentNine.Tasks
             }
 
             decimal average = this.CalculateAverage(filteredList);
-
             TablePresenter.DisplayFilteredProducts(
                                                     $"\nProducts matched to your category {category} and > {price} are",
                                                     filteredList);
-
             Console.WriteLine($"\nThe average of these products price is : {average}");
-
             Console.Write("\nDo you need to sort the products in descending order of price (Y/N) : ");
             string input = Console.ReadLine() ?? string.Empty.Trim();
 

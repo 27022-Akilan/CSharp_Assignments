@@ -47,8 +47,7 @@ namespace AssignmentNine.Tasks
                                                         supplier => supplier.ProductId,
                                                         (product, supplier) => (product.ProductName, supplier.SupplierName))
                                                         .Execute();
-            Console.WriteLine("\nResult of Joining the product with the Supplier !!");
-            TablePresenter.DisplayProductSupplier(joinedResult);
+            TablePresenter.DisplayProductSupplier("\nResult of Joining the product with the Supplier !!", joinedResult);
             this.MakeQuery();
         }
 

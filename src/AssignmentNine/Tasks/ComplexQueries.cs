@@ -33,9 +33,13 @@ namespace AssignmentNine.Tasks
             TablePresenter.DisplayProducts("\nThe initial products are...\n", this._productList);
 
             IEnumerable<(Product?, int)> groups = this.GroupByCategory();
-
-            Console.WriteLine();
             TablePresenter.DisplayProducts("Groups by Category and displays the maximum price, and count in each category.", groups);
+            ConsoleHelper.Clean();
+
+            TablePresenter.DisplayProducts("\nThe initial products are...\n", this._productList);
+            TablePresenter.DisplaySupplier("\nThe initial suppliers are...\n", this._supplierList);
+            IEnumerable<(string?, string)> innerJoin = this.RelateProductAndSupplier();
+            TablePresenter.DisplayProductSupplier("\nRelating the products with the supplier.", innerJoin);
             ConsoleHelper.Clean();
         }
 
@@ -50,21 +54,16 @@ namespace AssignmentNine.Tasks
         }
 
         /// <summary>
-        /// Joins the product and supplier.
+        /// Joins the supplier and product.
         /// </summary>
-        public void RelateProductAndSupplier()
+        /// <returns>List of joined product with supplier.</returns>
+        public IEnumerable<(string?, string)> RelateProductAndSupplier()
         {
-            TablePresenter.DisplayProducts("\nThe initial products are...\n", this._productList);
-            TablePresenter.DisplaySupplier("\nThe initial suppliers are...\n", this._supplierList);
-            var innerJoin = this._productList.Join(
+            return this._productList.Join(
                             this._supplierList,
                             p => p.Id,
                             s => s.ProductId,
                             (p, s) => (p.ProductName, s.SupplierName));
-
-            Console.WriteLine("Relating the products with the supplier");
-            TablePresenter.DisplayProductSupplier(innerJoin);
-            ConsoleHelper.Clean();
         }
     }
 }

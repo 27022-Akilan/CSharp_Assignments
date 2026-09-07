@@ -68,8 +68,9 @@ namespace AssignmentNine.ConsolePresenter
         /// <summary>
         /// Displays the product and their supplier name.
         /// </summary>
+        /// <param name="prompt">Prompt to be displayed.</param>
         /// <param name="productSupplier">List of (product name, supplier name)</param>
-        public static void DisplayProductSupplier(IEnumerable<(string?, string)> productSupplier)
+        public static void DisplayProductSupplier(string prompt, IEnumerable<(string?, string)> productSupplier)
         {
             ConsoleTable table = new ConsoleTable("Product Name", "Supplier Name");
             table.Configure(options => options.EnableCount = false);
