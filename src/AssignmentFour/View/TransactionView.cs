@@ -338,12 +338,6 @@ namespace AssignmentFour.View
             }
 
             IEnumerable<Transaction> result = this._service.GetTransactionsByType(type);
-            if (!result.Any())
-            {
-                Helper.DisplayInfoMessage($"No transactions found for type: {type}");
-                return;
-            }
-
             this.DisplayTransaction(result);
         }
 
@@ -359,12 +353,6 @@ namespace AssignmentFour.View
             }
 
             IEnumerable<Transaction> result = this._service.GetTransactionsByAmount(amount);
-            if (!result.Any())
-            {
-                Helper.DisplayInfoMessage($"No transactions found for amount: {amount}");
-                return;
-            }
-
             this.DisplayTransaction(result);
         }
 
@@ -380,12 +368,6 @@ namespace AssignmentFour.View
             }
 
             IEnumerable<Transaction> transaction = this._service.GetTransactionsByDescription(description);
-            if (!transaction.Any())
-            {
-                Helper.DisplayInfoMessage($"No transactions found for description: {description}");
-                return;
-            }
-
             this.DisplayTransaction(transaction);
         }
 
@@ -400,8 +382,8 @@ namespace AssignmentFour.View
                 return;
             }
 
-            IEnumerable<Transaction> result = this._service.GetTransactionByDate(date);
-            this.DisplayTransaction(result);
+            IEnumerable<Transaction> transaction = this._service.GetTransactionByDate(date);
+            this.DisplayTransaction(transaction);
         }
 
         /// <summary>
@@ -443,12 +425,6 @@ namespace AssignmentFour.View
         public void ShowTransactions()
         {
             IEnumerable<Transaction> transactions = this._service.GetAllTransactions();
-            if (transactions.Count() == 0)
-            {
-                Helper.DisplayInfoMessage("No Transactions available to show");
-                return;
-            }
-
             this.DisplayTransaction(transactions);
         }
 
@@ -477,12 +453,18 @@ namespace AssignmentFour.View
         /// <summary>
         /// To display the transaction in table format
         /// </summary>
-        /// <param name="resultTransaction">Immutable List of Objects</param>
-        public void DisplayTransaction(IEnumerable<Transaction> resultTransaction)
+        /// <param name="transactions">Immutable List of Objects</param>
+        public void DisplayTransaction(IEnumerable<Transaction> transactions)
         {
+            if (transactions.Any())
+            {
+                Console.WriteLine("No results found !!");
+                return;
+            }
+
             ConsoleTable table = new ConsoleTable("S.No", "Amount", "Description", "Date", "Type", "Source/Category");
             int serialNumber = 1;
-            foreach (Transaction transaction in resultTransaction)
+            foreach (Transaction transaction in transactions)
             {
                 if (transaction is Income)
                 {
