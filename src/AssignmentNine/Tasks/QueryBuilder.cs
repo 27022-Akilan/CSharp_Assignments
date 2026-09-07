@@ -41,6 +41,7 @@ namespace AssignmentNine.Tasks
         /// <exception cref="NotSupportedException">Exception if its not a desired exception</exception>
         public QueryBuilder<T> Filter(string propertyName, FilterOperation operation, object value)
         {
+            this.HandleException(propertyName, operation, value);
             var parameter = Expression.Parameter(typeof(T), "x");
 
             var property = Expression.Property(parameter, propertyName);
