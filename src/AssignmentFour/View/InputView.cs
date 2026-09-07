@@ -1,4 +1,5 @@
 ﻿using AssignmentFour.Constants;
+using AssignmentFour.Enums;
 using AssignmentFour.Model.Enums;
 using AssignmentFour.Service;
 

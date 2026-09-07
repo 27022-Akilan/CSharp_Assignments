@@ -1,5 +1,6 @@
 ﻿using System.Text.Json;
 using System.Text.Json.Serialization;
+using AssignmentFour.Enums;
 using AssignmentFour.Model;
 using AssignmentFour.Model.Enums;
 

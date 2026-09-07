@@ -44,20 +44,18 @@ namespace AssignmentFour.Repository
         /// <returns>True - Updated Successfully | False - Cannot Update</returns>
         public bool UpdateIncome(Income transaction)
         {
-            foreach (Income field in this._transactionList)
+            Income? toBeUpdatedIncome = (Income?)this._transactionList.FirstOrDefault(t => t.TransactionId == transaction.TransactionId && t.TransactionType == transaction.TransactionType);
+            if (toBeUpdatedIncome == null)
             {
-                if (field.TransactionId == transaction.TransactionId)
-                {
-                    field.Amount = transaction.Amount;
-                    field.Date = transaction.Date;
-                    field.Description = transaction.Description;
-                    field.Source = transaction.Source;
-                    this.SaveTransactionsToFile();
-                    return true;
-                }
+                return false;
             }
 
-            return false;
+            toBeUpdatedIncome.Amount = transaction.Amount;
+            toBeUpdatedIncome.Date = transaction.Date;
+            toBeUpdatedIncome.Description = transaction.Description;
+            ((Income)toBeUpdatedIncome).Source = transaction.Source;
+            this.SaveTransactionsToFile();
+            return true;
         }
 
         /// <summary>
@@ -67,20 +65,18 @@ namespace AssignmentFour.Repository
         /// <returns>True - Updated Successfully | False - Cannot Update</returns>
         public bool UpdateExpense(Expense transaction)
         {
-            foreach (Expense field in this._transactionList)
+            Expense? toBeUpdatedExpense = (Expense?)this._transactionList.FirstOrDefault(t => t.TransactionId == transaction.TransactionId && t.TransactionType == transaction.TransactionType);
+            if (toBeUpdatedExpense == null)
             {
-                if (field.TransactionId == transaction.TransactionId)
-                {
-                    field.Amount = transaction.Amount;
-                    field.Date = transaction.Date;
-                    field.Description = transaction.Description;
-                    field.Category = transaction.Category;
-                    this.SaveTransactionsToFile();
-                    return true;
-                }
+                return false;
             }
 
-            return false;
+            toBeUpdatedExpense.Amount = transaction.Amount;
+            toBeUpdatedExpense.Date = transaction.Date;
+            toBeUpdatedExpense.Description = transaction.Description;
+            ((Expense)toBeUpdatedExpense).Category = transaction.Category;
+            this.SaveTransactionsToFile();
+            return true;
         }
 
         /// <summary>
