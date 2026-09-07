@@ -338,12 +338,6 @@ namespace AssignmentFour.View
             }
 
             IEnumerable<Transaction> result = this._service.GetTransactionsByType(type);
-            if (!result.Any())
-            {
-                Helper.DisplayInfoMessage($"No transactions found for type: {type}");
-                return;
-            }
-
             this.DisplayTransaction(result);
         }
 
