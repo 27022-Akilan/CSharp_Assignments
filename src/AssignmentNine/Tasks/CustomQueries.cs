@@ -49,6 +49,7 @@ namespace AssignmentNine.Tasks
                                                         .Execute();
             TablePresenter.DisplayProductSupplier("\nResult of Joining the product with the Supplier !!", joinedResult);
             this.MakeQuery();
+            ConsoleHelper.Clean();
         }
 
         private void MakeQuery()
@@ -63,10 +64,18 @@ namespace AssignmentNine.Tasks
             // Building the Query manually.
             Console.WriteLine(
                 "\nBuild your query just by giving fields:" +
-                "\nThe Properties are: 'Id', 'ProductName', 'Price', 'Category'");
+                "\n1.Id" +
+                "\n2.ProductName" +
+                "\n3.Price" +
+                "\n4.Category");
 
-            Console.Write("\nEnter the property name: ");
-            string propertyName = Console.ReadLine() ?? string.Empty;
+            PropertyOption propertyOption;
+
+            if (!ConsoleHelper.TryGetEnum("Enter the choice for the property : ", out propertyOption))
+            {
+                Console.WriteLine("Invalid input aborting !!");
+                return;
+            }
 
             Console.WriteLine(
                 "\n1. Contains" +
@@ -81,33 +90,40 @@ namespace AssignmentNine.Tasks
                 return;
             }
 
-            Console.Write($"\nEnter the value the be given for filtering by the {propertyName} : ");
+            Console.Write($"\nEnter the value to be given for filter {Enum.GetName(propertyOption)} : ");
             string inputValue = Console.ReadLine() ?? string.Empty;
             object value;
-            switch (propertyName)
+            string propertyName;
+            switch (propertyOption)
             {
-                case "Id":
+                case PropertyOption.Id:
                     if (!int.TryParse(inputValue, out int id))
                     {
                         Console.WriteLine("Invalid integer value.");
                         return;
                     }
 
+                    propertyName = nameof(Product.Id);
                     value = id;
                     break;
 
-                case "Price":
+                case PropertyOption.Price:
                     if (!decimal.TryParse(inputValue, out decimal price))
                     {
                         Console.WriteLine("Invalid decimal value.");
                         return;
                     }
 
+                    propertyName = nameof(Product.Price);
                     value = price;
                     break;
 
-                case "ProductName":
-                case "Category":
+                case PropertyOption.Category:
+                    propertyName = nameof(Product.Category);
+                    value = inputValue;
+                    break;
+                case PropertyOption.ProductName:
+                    propertyName = nameof(Product.ProductName);
                     value = inputValue;
                     break;
 

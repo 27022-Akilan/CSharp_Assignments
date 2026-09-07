@@ -30,7 +30,6 @@ namespace AssignmentNine.Tasks
             Console.WriteLine("\nQuery 1 : Sort in ascending order then select only books category" +
                               "\nQuery 2 : Select the category book then sort in ascending order");
             Stopwatch stopwatch = Stopwatch.StartNew();
-            stopwatch.Start();
             IEnumerable<Product> products = this._products.OrderBy(p => p.Price).ToList().Where(p => p.Category == "Books");
             stopwatch.Stop();
             TablePresenter.DisplayProducts("\nBooks in the Sorted Order on price is : ", products);

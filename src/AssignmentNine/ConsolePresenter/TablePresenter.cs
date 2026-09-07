@@ -36,6 +36,12 @@ namespace AssignmentNine.ConsolePresenter
         public static void DisplayProducts(string prompt, IEnumerable<Product> productList)
         {
             Console.WriteLine(prompt);
+            if (!productList.Any())
+            {
+                Console.WriteLine("Empty");
+                return;
+            }
+
             ConsoleTable table = new ConsoleTable("Id", "Name", "Price", "Category");
             table.Configure(options => options.EnableCount = false);
             foreach (Product product in productList)

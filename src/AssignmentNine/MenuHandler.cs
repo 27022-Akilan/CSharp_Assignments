@@ -43,6 +43,7 @@ namespace AssignmentNine
                 if (!ConsoleHelper.TryGetEnum("\nEnter your choice : ", out MenuOption option))
                 {
                     Console.WriteLine("Invalid option !!!");
+                    continue;
                 }
 
                 switch (option)

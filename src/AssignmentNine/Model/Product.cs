@@ -21,27 +21,27 @@
         }
 
         /// <summary>
-        /// Gets or sets the product id.
+        /// Gets the product id.
         /// </summary>
         /// <value>Id of the product</value>
-        public int Id { get; set; }
+        public int Id { get; }
 
         /// <summary>
-        /// Gets or sets the Product name.
+        /// Gets the Product name.
         /// </summary>
         /// <value>Price of the product</value>
-        public string? ProductName { get; set; }
+        public string? ProductName { get; }
 
         /// <summary>
-        /// Gets or sets the product price.
+        /// Gets the product price.
         /// </summary>
         /// <value>Price of the product</value>
-        public decimal Price { get; set; }
+        public decimal Price { get; }
 
         /// <summary>
-        /// Gets or sets the product category.
+        /// Gets the product category.
         /// </summary>
         /// <value>Category of the product</value>
-        public string? Category { get; set; }
+        public string? Category { get; }
     }
 }
