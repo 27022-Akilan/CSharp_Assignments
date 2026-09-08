@@ -13,9 +13,16 @@ namespace Assignments
         /// <param name="args">Default arguments.</param>
         public static void Main(string[] args)
         {
-            using (var fileWriter = new FileOperator("Demo.txt"))
+            string filePath = "Demo.txt";
+            using (var fileWriter = new FileWriter(filePath))
             {
                 fileWriter.Write("Hii buddy, Happy coding");
+            }
+
+            // Test whether the file can be opened again as the previous one releases the handle.
+            using (var fileReader = new FileReader(filePath))
+            {
+                fileReader.Read();
             }
         }
     }

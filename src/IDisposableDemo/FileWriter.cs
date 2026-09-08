@@ -1,18 +1,19 @@
 ﻿namespace IDisposableDemo
 {
     /// <summary>
-    /// Represents the file operations.
+    /// Represents the file Writer.
     /// </summary>
-    public class FileOperator : IDisposable
+    public class FileWriter : IDisposable
     {
         private StreamWriter _writer;
         private string _filePath;
 
         /// <summary>
-        /// Initializes a new instance of the <see cref="FileOperator"/> class.
+        /// Initializes a new instance of the <see cref="FileWriter"/> class.
         /// </summary>
         /// <param name="filePath">Path of the file</param>
-        public FileOperator(string filePath)
+        /// <param name="writer">Writer object</param>>
+        public FileWriter(string filePath)
         {
             this._filePath = filePath;
             this._writer = new StreamWriter(this._filePath);
