@@ -43,7 +43,7 @@ namespace AssignmentFour.View
                 prompt,
                 decimal.TryParse,
                 this._service.IsValidAmount,
-                new ValidationMessages(Messages.InvalidAmountFormat, Messages.ValidationErrorOnAmount),
+                new ValidationMessages(Messages.ValidationErrorOnAmountFormat, Messages.ValidationErrorOnAmount),
                 out amount);
 
         /// <summary>
@@ -76,7 +76,7 @@ namespace AssignmentFour.View
                 prompt,
                 DateOnly.TryParse,
                 this._service.IsValidDate,
-                new ValidationMessages(Messages.InvalidDateFormat, Messages.ValidationErrorOnDate),
+                new ValidationMessages(Messages.ValidationErrorOnDateFormat, Messages.ValidationErrorOnDate),
                 out date);
 
         /// <summary>
