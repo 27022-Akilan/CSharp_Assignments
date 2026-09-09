@@ -11,7 +11,7 @@ namespace AssignmentFour.Repository
     /// </summary>
     public class FileRepository : IRepository
     {
-        private List<Transaction> _transactionList = new List<Transaction>();
+        private List<Transaction> _transactions = new List<Transaction>();
 
         private string _filePath;
 
@@ -22,7 +22,7 @@ namespace AssignmentFour.Repository
         public FileRepository(string filePath)
         {
             this._filePath = filePath;
-            this._transactionList = this.LoadTransactionsFromFile();
+            this._transactions = this.LoadTransactionsFromFile();
         }
 
         /// <summary>
@@ -32,7 +32,7 @@ namespace AssignmentFour.Repository
         /// <returns>A message that tells about the result of Adding the Transaction</returns>
         public string AddTransaction(Transaction transaction)
         {
-            this._transactionList.Add(transaction);
+            this._transactions.Add(transaction);
             this.SaveTransactionsToFile();
             return Messages.AddSuccess;
         }
@@ -44,16 +44,16 @@ namespace AssignmentFour.Repository
         /// <returns>True - Updated Successfully | False - Cannot Update</returns>
         public bool UpdateIncome(Income transaction)
         {
-            Income? toBeUpdatedIncome = (Income?)this._transactionList.FirstOrDefault(t => t.TransactionId == transaction.TransactionId && t.TransactionType == transaction.TransactionType);
-            if (toBeUpdatedIncome == null)
+            Income? incomeToBeUpdated = (Income?)this._transactions.FirstOrDefault(t => t.TransactionId == transaction.TransactionId && t.TransactionType == transaction.TransactionType);
+            if (incomeToBeUpdated == null)
             {
                 return false;
             }
 
-            toBeUpdatedIncome.Amount = transaction.Amount;
-            toBeUpdatedIncome.Date = transaction.Date;
-            toBeUpdatedIncome.Description = transaction.Description;
-            toBeUpdatedIncome.Source = transaction.Source;
+            incomeToBeUpdated.Amount = transaction.Amount;
+            incomeToBeUpdated.Date = transaction.Date;
+            incomeToBeUpdated.Description = transaction.Description;
+            incomeToBeUpdated.Source = transaction.Source;
             this.SaveTransactionsToFile();
             return true;
         }
@@ -65,16 +65,16 @@ namespace AssignmentFour.Repository
         /// <returns>True - Updated Successfully | False - Cannot Update</returns>
         public bool UpdateExpense(Expense transaction)
         {
-            Expense? toBeUpdatedExpense = (Expense?)this._transactionList.FirstOrDefault(t => t.TransactionId == transaction.TransactionId && t.TransactionType == transaction.TransactionType);
-            if (toBeUpdatedExpense == null)
+            Expense? expenseToBeUpdated = (Expense?)this._transactions.FirstOrDefault(t => t.TransactionId == transaction.TransactionId && t.TransactionType == transaction.TransactionType);
+            if (expenseToBeUpdated == null)
             {
                 return false;
             }
 
-            toBeUpdatedExpense.Amount = transaction.Amount;
-            toBeUpdatedExpense.Date = transaction.Date;
-            toBeUpdatedExpense.Description = transaction.Description;
-            toBeUpdatedExpense.Category = transaction.Category;
+            expenseToBeUpdated.Amount = transaction.Amount;
+            expenseToBeUpdated.Date = transaction.Date;
+            expenseToBeUpdated.Description = transaction.Description;
+            expenseToBeUpdated.Category = transaction.Category;
             this.SaveTransactionsToFile();
             return true;
         }
@@ -86,13 +86,13 @@ namespace AssignmentFour.Repository
         /// <returns>True if the transaction is found and deleted | False if the transaction cannot be deleted</returns>
         public bool DeleteTransactionById(Guid transactionId)
         {
-            Transaction? transaction = this._transactionList.FirstOrDefault(t => t.TransactionId == transactionId);
+            Transaction? transaction = this._transactions.FirstOrDefault(t => t.TransactionId == transactionId);
             if (transaction == null)
             {
                 return false;
             }
 
-            this._transactionList.Remove(transaction);
+            this._transactions.Remove(transaction);
             this.SaveTransactionsToFile();
             return true;
         }
@@ -103,7 +103,7 @@ namespace AssignmentFour.Repository
         /// <returns>A cloned copy of all all transactions </returns>
         public IEnumerable<Transaction> GetAllTransactions()
         {
-            return this._transactionList.Select(t => t.CloneTransaction());
+            return this._transactions.Select(t => t.CloneTransaction());
         }
 
         /// <summary>
@@ -113,7 +113,7 @@ namespace AssignmentFour.Repository
         /// <returns>IEnumerable list of Transactions of the specified type</returns>
         public IEnumerable<Transaction> GetTransactionsByType(TransactionType type)
         {
-            return this._transactionList.Where(t => t.TransactionType == type)
+            return this._transactions.Where(t => t.TransactionType == type)
                                         .Select(t => t.CloneTransaction());
         }
 
@@ -124,7 +124,7 @@ namespace AssignmentFour.Repository
         /// <returns>IEnumerable list of Transactions of the specified amount</returns>
         public IEnumerable<Transaction> GetTransactionsByAmount(decimal amount)
         {
-            return this._transactionList.Where(t => t.Amount == amount)
+            return this._transactions.Where(t => t.Amount == amount)
                                         .Select(t => t.CloneTransaction());
         }
 
@@ -135,7 +135,7 @@ namespace AssignmentFour.Repository
         /// <returns>IEnumerable list of Transactions of the specified description</returns>
         public IEnumerable<Transaction> GetTransactionsByDescription(string description)
         {
-            return this._transactionList.Where(t => t.Description.Contains(description))
+            return this._transactions.Where(t => t.Description.Contains(description))
                                         .Select(t => t.CloneTransaction());
         }
 
@@ -146,7 +146,7 @@ namespace AssignmentFour.Repository
         /// <returns>IEnumerable list of Transactions of the specified date</returns>
         public IEnumerable<Transaction> GetTransactionsByDate(DateOnly date)
         {
-            return this._transactionList.Where(t => t.Date == date)
+            return this._transactions.Where(t => t.Date == date)
                                         .Select(t => t.CloneTransaction());
         }
 
@@ -175,7 +175,7 @@ namespace AssignmentFour.Repository
 
             options.Converters.Add(new TransactionConverter());
 
-            string json = JsonSerializer.Serialize(this._transactionList, options);
+            string json = JsonSerializer.Serialize(this._transactions, options);
 
             File.WriteAllText(this._filePath, json);
         }

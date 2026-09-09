@@ -13,7 +13,7 @@
         /// <summary>
         /// Transaction Added failed message
         /// </summary>
-        public const string AddFailed = "Transaction cant be added.";
+        public const string AddFailed = "Transaction cant be added , because of Storage error";
 
         /// <summary>
         /// Adding the transaction failed due to Null
@@ -28,7 +28,7 @@
         /// <summary>
         /// Adding the transaction failed due to invalid type of transaction.
         /// </summary>
-        public const string CantAddDueToInvalidType = "Cant add the transaction, due to invalid type of transaction";
+        public const string CantAddDueToInvalidType = "Transaction cant be added , due to invalid type of transaction";
 
         /// <summary>
         /// Validation of description failed message
@@ -38,7 +38,7 @@
         /// <summary>
         /// Type of the Amount is not correct message.
         /// </summary>
-        public const string InvalidAmountFormat = "Your input Should contains number only!";
+        public const string ValidationErrorOnAmountFormat = "Your input Should contains number only!";
 
         /// <summary>
         /// Invalid Amount.
@@ -48,7 +48,7 @@
         /// <summary>
         /// Invalid Date format message.
         /// </summary>
-        public const string InvalidDateFormat = "Invalid date format. Please enter as DD/MM/YYYY";
+        public const string ValidationErrorOnDateFormat = "Invalid date format. Please enter as DD/MM/YYYY";
 
         /// <summary>
         /// Validation error message for Date.

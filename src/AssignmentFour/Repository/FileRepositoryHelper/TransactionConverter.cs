@@ -108,13 +108,13 @@ namespace AssignmentFour.Repository.RepositoryHelper
         {
             if (!element.TryGetProperty(propertyName, out JsonElement property) || property.ValueKind == JsonValueKind.Null)
             {
-                throw new JsonException($"{propertyName} has been missed or modified \nCan not load file!!!");
+                throw new JsonException($"{propertyName} has been missed or modified\nCan not load file!!!");
             }
 
             string? value = property.GetString();
             if (string.IsNullOrWhiteSpace(value))
             {
-                throw new JsonException($"{propertyName} is empty (File is modified) \\nCan not load file!!!");
+                throw new JsonException($"{propertyName} is empty (File is modified)\nCan not load file!!!");
             }
 
             return value;
@@ -124,12 +124,12 @@ namespace AssignmentFour.Repository.RepositoryHelper
         {
             if (!element.TryGetProperty(propertyName, out JsonElement property) || property.ValueKind == JsonValueKind.Null)
             {
-                throw new JsonException($"{propertyName} has been missed or modified \nCan not load file!!!");
+                throw new JsonException($"{propertyName} has been missed or (File is modified)\nCan not load file!!!");
             }
 
             if (!property.TryGetDecimal(out decimal value))
             {
-                throw new JsonException($"{propertyName} is empty or edited (File is modified) \\nCan not load file!!!");
+                throw new JsonException($"{propertyName} is not in a valid type (File is modified)\nCan not load file!!!");
             }
 
             return value;
