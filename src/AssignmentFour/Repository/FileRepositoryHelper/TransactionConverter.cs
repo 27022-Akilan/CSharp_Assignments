@@ -83,7 +83,7 @@ namespace AssignmentFour.Repository.RepositoryHelper
 
                 if (!Enum.TryParse(sourceText, true, out Source source))
                 {
-                    throw new JsonException($"Invalid transaction type inside the file: {transactionTypeText}");
+                    throw new JsonException($"Invalid source type inside the file: {transactionTypeText}");
                 }
 
                 return new Income(transactionId, amount, description, date, source);
@@ -95,7 +95,7 @@ namespace AssignmentFour.Repository.RepositoryHelper
 
                 if (!Enum.TryParse(categoryText, true, out Category category))
                 {
-                    throw new JsonException($"Invalid transaction type inside the file: {transactionTypeText}");
+                    throw new JsonException($"Invalid category type inside the file: {transactionTypeText}");
                 }
 
                 return new Expense(transactionId, amount, description, date, category);

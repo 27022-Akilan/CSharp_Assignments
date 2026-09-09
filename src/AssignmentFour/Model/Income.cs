@@ -4,7 +4,7 @@ using AssignmentFour.Model.Enums;
 namespace AssignmentFour.Model
 {
     /// <summary>
-    /// Derived class for the Income.
+    /// Represents a class for the Income.
     /// </summary>
     public class Income : Transaction
     {
