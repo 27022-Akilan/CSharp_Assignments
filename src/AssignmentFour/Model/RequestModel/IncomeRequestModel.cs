@@ -24,7 +24,7 @@ namespace AssignmentFour.Model.RequestModel
         /// <summary>
         /// Gets the source
         /// </summary>
-        /// <value>Contains the source of the expense</value>
+        /// <value>Contains the source of the income</value>
         public Source Source { get; }
     }
 }

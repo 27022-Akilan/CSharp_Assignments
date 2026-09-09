@@ -3,7 +3,7 @@
 namespace AssignmentFour.Model
 {
     /// <summary>
-    /// A derived class for the expense
+    /// Represents a  class for the expense.
     /// </summary>
     public class Expense : Transaction
     {
