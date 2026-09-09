@@ -6,42 +6,42 @@
     public enum MenuOption
     {
         /// <summary>
-        /// Option for Adding a new Income.
+        /// Option to add a new Income.
         /// </summary>
         AddIncome = 1,
 
         /// <summary>
-        /// Option for Adding a new Expense.
+        /// Option to add a new Expense.
         /// </summary>
         AddExpense,
 
         /// <summary>
-        /// Option for Updating a transaction.
+        /// Option to update a transaction.
         /// </summary>
         UpdateTransaction,
 
         /// <summary>
-        /// Option for deleting a transaction.
+        /// Option to delete a transaction.
         /// </summary>
         DeleteTransaction,
 
         /// <summary>
-        /// Option for searching a transaction.
+        /// Option to search a transaction.
         /// </summary>
         SearchTransaction,
 
         /// <summary>
-        /// Option for Show all transaction.
+        /// Option to show all transaction.
         /// </summary>
         ShowTransactions,
 
         /// <summary>
-        /// Option for Show summary of all transaction
+        /// Option to show summary of all transaction
         /// </summary>
         ShowSummary,
 
         /// <summary>
-        /// Option for exiting the menu
+        /// Option to exit the menu
         /// </summary>
         Exit,
     }
