@@ -20,7 +20,7 @@ namespace AssignmentFour.Repository
         {
             this._transactionList.Add(transaction);
 
-            return Messages.AddSuccess;
+            return ResultMessages.AddSuccess;
         }
 
         /// <summary>

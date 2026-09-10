@@ -135,7 +135,7 @@ namespace AssignmentFour.View
             IncomeRequestModel incomeRequest = new IncomeRequestModel(amount, description, date, source);
             string result = this._service.AddTransaction(incomeRequest);
 
-            if (result == Messages.AddSuccess)
+            if (result == ResultMessages.AddSuccess)
             {
                 Helper.DisplaySuccessMessage(result);
             }
@@ -171,7 +171,7 @@ namespace AssignmentFour.View
             ExpenseRequestModel expenseRequest = new ExpenseRequestModel(amount, description, date, category);
             string result = this._service.AddTransaction(expenseRequest);
 
-            if (result == Messages.AddSuccess)
+            if (result == ResultMessages.AddSuccess)
             {
                 Helper.DisplaySuccessMessage(result);
             }
