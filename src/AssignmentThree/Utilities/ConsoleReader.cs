@@ -178,8 +178,6 @@
         private static string ReadInput()
         {
             string input = Console.ReadLine()?.Trim() ?? string.Empty;
-
-            // return input.Trim();
             return new string(input.Where(c => !char.IsControl(c)).ToArray()).Trim();
         }
     }
