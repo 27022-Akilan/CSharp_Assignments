@@ -11,11 +11,11 @@ namespace AssignmentNine.ConsolePresenter
         /// <summary>
         /// Displays the group of product with category
         /// </summary>
-        /// <param name="tableDescription">Description of the table.</param>
+        /// <param name="message">Description of the table.</param>
         /// <param name="groups">List of tuple containing category,category's Maximum price, category's count</param>
-        public static void DisplayProducts(string tableDescription, IEnumerable<(Product?, int)> groups)
+        public static void DisplayProducts(string message, IEnumerable<(Product?, int)> groups)
         {
-            Console.WriteLine(tableDescription);
+            Console.WriteLine(message);
             ConsoleTable table = new ConsoleTable("Category", "Product Id", "Product Name", "Product Price", "Total Products");
 
             table.Configure(options => options.EnableCount = false);
@@ -31,11 +31,11 @@ namespace AssignmentNine.ConsolePresenter
         /// <summary>
         /// To Display the Products.
         /// </summary>
-        /// <param name="tableDescription"> Description of the table.</param>
+        /// <param name="message"> Description of the table.</param>
         /// <param name="productList">List of Product</param>
-        public static void DisplayProducts(string tableDescription, IEnumerable<Product> productList)
+        public static void DisplayProducts(string message, IEnumerable<Product> productList)
         {
-            Console.WriteLine(tableDescription);
+            Console.WriteLine(message);
             if (!productList.Any())
             {
                 Console.WriteLine("Empty");
@@ -55,11 +55,11 @@ namespace AssignmentNine.ConsolePresenter
         /// <summary>
         /// Displays the name and price of the product.
         /// </summary>
-        /// <param name="tableDescription">Description of the table.</param>
+        /// <param name="message">Description of the table.</param>
         /// <param name="filteredList">List of product with name and price.</param>
-        public static void DisplayFilteredProducts(string tableDescription, IEnumerable<(string?, decimal)> filteredList)
+        public static void DisplayFilteredProducts(string message, IEnumerable<(string?, decimal)> filteredList)
         {
-            Console.WriteLine(tableDescription);
+            Console.WriteLine(message);
             ConsoleTable table = new ConsoleTable("Name", "Price");
             table.Configure(options => options.EnableCount = false);
 
@@ -74,11 +74,11 @@ namespace AssignmentNine.ConsolePresenter
         /// <summary>
         /// Displays the product and their supplier name.
         /// </summary>
-        /// <param name="tableDescription">Description of the table.</param>
+        /// <param name="message">Description of the table.</param>
         /// <param name="productSupplier">List of (product name, supplier name)</param>
-        public static void DisplayProductSupplier(string tableDescription, IEnumerable<(string?, string)> productSupplier)
+        public static void DisplayProductSupplier(string message, IEnumerable<(string?, string)> productSupplier)
         {
-            Console.WriteLine(tableDescription);
+            Console.WriteLine(message);
             ConsoleTable table = new ConsoleTable("Product Name", "Supplier Name");
             table.Configure(options => options.EnableCount = false);
 
@@ -93,11 +93,11 @@ namespace AssignmentNine.ConsolePresenter
         /// <summary>
         /// Displays the Supplier information.
         /// </summary>
-        /// <param name="tableDescription">Description of the table.</param>
+        /// <param name="message">Description of the table.</param>
         /// <param name="suppliers">List of Supplier information.</param>
-        public static void DisplaySupplier(string tableDescription, IEnumerable<Supplier> suppliers)
+        public static void DisplaySupplier(string message, IEnumerable<Supplier> suppliers)
         {
-            Console.WriteLine(tableDescription);
+            Console.WriteLine(message);
             ConsoleTable table = new ConsoleTable("SupplierId", "Name", "ProductId");
             table.Configure(options => options.EnableCount = false);
 
