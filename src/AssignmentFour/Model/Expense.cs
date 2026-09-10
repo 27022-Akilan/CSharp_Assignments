@@ -10,11 +10,11 @@ namespace AssignmentFour.Model
         /// <summary>
         /// Initializes a new instance of the <see cref="Expense"/> class.
         /// </summary>
-        /// <param name="id">Contains the Id of the Transaction</param>
-        /// <param name="amount">Contains the Amount</param>
-        /// <param name="description">Contains the Description</param>
-        /// <param name="date">Contains the date and Time</param>
-        /// <param name="category">Contains the category of the expense</param>
+        /// <param name="id">Id of the Expense</param>
+        /// <param name="amount">Amount of the expense.</param>
+        /// <param name="description">Description of the expense.</param>
+        /// <param name="date">Date of the expense.</param>
+        /// <param name="category">Category of the expense</param>
         public Expense(Guid id, decimal amount, string description, DateOnly date, Category category)
             : base(id, amount, TransactionType.Expense, description, date)
         {

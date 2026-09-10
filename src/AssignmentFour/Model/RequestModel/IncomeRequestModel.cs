@@ -11,10 +11,10 @@ namespace AssignmentFour.Model.RequestModel
         /// <summary>
         /// Initializes a new instance of the <see cref="IncomeRequestModel"/> class.
         /// </summary>
-        /// <param name="amount">Contains amount</param>
-        /// <param name="description">Contains description</param>
-        /// <param name="date">Contains date</param>
-        /// <param name="source">Contains source</param>
+        /// <param name="amount">Amount of the income.</param>
+        /// <param name="description">Description of the income.</param>
+        /// <param name="date">Date of the income.</param>
+        /// <param name="source">Source of the income.</param>
         public IncomeRequestModel(decimal amount, string description, DateOnly date, Source source)
             : base(amount, TransactionType.Income, description, date)
         {

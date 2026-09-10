@@ -11,11 +11,11 @@ namespace AssignmentFour.Model
         /// <summary>
         /// Initializes a new instance of the <see cref="Income"/> class.
         /// </summary>
-        /// <param name="id">Contains the Id of the Transaction</param>
-        /// <param name="amount">Contains the Amount</param>
-        /// <param name="description">Contains the Description</param>
-        /// <param name="date">Contains the date and Time</param>
-        /// <param name="source">Contains the source of the Income</param>
+        /// <param name="id">Id of the income.</param>
+        /// <param name="amount">Amount of the income.</param>
+        /// <param name="description">Description of the income</param>
+        /// <param name="date">Date ofd the income.</param>
+        /// <param name="source">Source of the Income</param>
         public Income(Guid id, decimal amount, string description, DateOnly date, Source source)
             : base(id, amount, TransactionType.Income, description, date)
         {

@@ -10,11 +10,11 @@ namespace AssignmentFour.Model
         /// <summary>
         /// Initializes a new instance of the <see cref="Transaction"/> class.
         /// </summary>
-        /// <param name="id">Contains the Id of the Transaction</param>
-        /// <param name="amount">Contains the Amount</param>
+        /// <param name="id">Id of the Transaction</param>
+        /// <param name="amount">Amount of the transaction.</param>
         /// <param name="type">Type of the account (Income / Expense)</param>
-        /// <param name="description">Contains the Description</param>
-        /// <param name="date">Contains the date and Time</param>
+        /// <param name="description">Description of the transaction.</param>
+        /// <param name="date">Date of the transaction made.</param>
         public Transaction(Guid id, decimal amount, TransactionType type, string description, DateOnly date)
         {
             this.TransactionId = id;
