@@ -10,10 +10,10 @@ namespace AssignmentFour.Model.RequestModel
         /// <summary>
         /// Initializes a new instance of the <see cref="TransactionRequestModel"/> class.
         /// </summary>
-        /// <param name="amount">Contains the Amount</param>
+        /// <param name="amount">Amount of the transaction.</param>
         /// <param name="type">Type of the account (Income / Expense)</param>
-        /// <param name="description">Contains the Description</param>
-        /// <param name="date">Contains the date and Time</param>
+        /// <param name="description">Description of the transaction.</param>
+        /// <param name="date">Date of the transaction.</param>
         public TransactionRequestModel(decimal amount, TransactionType type, string description, DateOnly date)
         {
             this.Amount = amount;
