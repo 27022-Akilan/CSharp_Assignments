@@ -1,8 +1,7 @@
-﻿using AssignmentNine;
-using AssignmentNine.InventoryCreation;
+﻿using AssignmentNine.InitialData;
 using AssignmentNine.Model;
 
-namespace Assignments
+namespace AssignmentNine
 {
     /// <summary>
     /// Entry point of the Application.
@@ -17,7 +16,7 @@ namespace Assignments
         {
             try
             {
-                InventoryData inventoryCreation = new InventoryData();
+                InventoryManager inventoryCreation = new InventoryManager();
                 List<Product> products = inventoryCreation.CreateProducts();
                 List<Supplier> suppliers = inventoryCreation.CreateSupplier();
                 MenuHandler menuHandler = new MenuHandler(products, suppliers);

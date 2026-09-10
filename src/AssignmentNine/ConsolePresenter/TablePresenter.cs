@@ -11,11 +11,11 @@ namespace AssignmentNine.ConsolePresenter
         /// <summary>
         /// Displays the group of product with category
         /// </summary>
-        /// <param name="prompt">Prompt to be displayed.</param>
+        /// <param name="tableDescription">Description of the table.</param>
         /// <param name="groups">List of tuple containing category,category's Maximum price, category's count</param>
-        public static void DisplayProducts(string prompt, IEnumerable<(Product?, int)> groups)
+        public static void DisplayProducts(string tableDescription, IEnumerable<(Product?, int)> groups)
         {
-            Console.WriteLine("\nThe Category grouping with maximum price and count !!!!");
+            Console.WriteLine(tableDescription);
             ConsoleTable table = new ConsoleTable("Category", "Product Id", "Product Name", "Product Price", "Total Products");
 
             table.Configure(options => options.EnableCount = false);
@@ -31,11 +31,11 @@ namespace AssignmentNine.ConsolePresenter
         /// <summary>
         /// To Display the Products.
         /// </summary>
-        /// <param name="prompt"> Prompt to be displayed</param>
+        /// <param name="tableDescription"> Description of the table.</param>
         /// <param name="productList">List of Product</param>
-        public static void DisplayProducts(string prompt, IEnumerable<Product> productList)
+        public static void DisplayProducts(string tableDescription, IEnumerable<Product> productList)
         {
-            Console.WriteLine(prompt);
+            Console.WriteLine(tableDescription);
             if (!productList.Any())
             {
                 Console.WriteLine("Empty");
@@ -55,11 +55,11 @@ namespace AssignmentNine.ConsolePresenter
         /// <summary>
         /// Displays the name and price of the product.
         /// </summary>
-        /// <param name="prompt">Prompt to be displayed.</param>
+        /// <param name="tableDescription">Description of the table.</param>
         /// <param name="filteredList">List of product with name and price.</param>
-        public static void DisplayFilteredProducts(string prompt, IEnumerable<(string?, decimal)> filteredList)
+        public static void DisplayFilteredProducts(string tableDescription, IEnumerable<(string?, decimal)> filteredList)
         {
-            Console.WriteLine(prompt);
+            Console.WriteLine(tableDescription);
             ConsoleTable table = new ConsoleTable("Name", "Price");
             table.Configure(options => options.EnableCount = false);
 
@@ -74,10 +74,11 @@ namespace AssignmentNine.ConsolePresenter
         /// <summary>
         /// Displays the product and their supplier name.
         /// </summary>
-        /// <param name="prompt">Prompt to be displayed.</param>
+        /// <param name="tableDescription">Description of the table.</param>
         /// <param name="productSupplier">List of (product name, supplier name)</param>
-        public static void DisplayProductSupplier(string prompt, IEnumerable<(string?, string)> productSupplier)
+        public static void DisplayProductSupplier(string tableDescription, IEnumerable<(string?, string)> productSupplier)
         {
+            Console.WriteLine(tableDescription);
             ConsoleTable table = new ConsoleTable("Product Name", "Supplier Name");
             table.Configure(options => options.EnableCount = false);
 
@@ -92,11 +93,11 @@ namespace AssignmentNine.ConsolePresenter
         /// <summary>
         /// Displays the Supplier information.
         /// </summary>
-        /// <param name="prompt">Message to be displayed.</param>
+        /// <param name="tableDescription">Description of the table.</param>
         /// <param name="suppliers">List of Supplier information.</param>
-        public static void DisplaySupplier(string prompt, IEnumerable<Supplier> suppliers)
+        public static void DisplaySupplier(string tableDescription, IEnumerable<Supplier> suppliers)
         {
-            Console.WriteLine(prompt);
+            Console.WriteLine(tableDescription);
             ConsoleTable table = new ConsoleTable("SupplierId", "Name", "ProductId");
             table.Configure(options => options.EnableCount = false);
 

@@ -1,27 +1,27 @@
 ﻿namespace AssignmentNine.Model.Enum
 {
     /// <summary>
-    /// Options for property name.
+    /// Options for product property.
     /// </summary>
-    public enum PropertyOption
+    public enum ProductProperty
     {
         /// <summary>
-        /// Option for product id.
+        /// Option to product id.
         /// </summary>
         Id = 1,
 
         /// <summary>
-        /// Option for product name.
+        /// Option to product name.
         /// </summary>
         ProductName,
 
         /// <summary>
-        /// Option for product price.
+        /// Option to product price.
         /// </summary>
         Price,
 
         /// <summary>
-        /// Option for product category.
+        /// Option to product category.
         /// </summary>
         Category,
     }

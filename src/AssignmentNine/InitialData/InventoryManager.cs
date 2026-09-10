@@ -1,11 +1,11 @@
 ﻿using AssignmentNine.Model;
 
-namespace AssignmentNine.InventoryCreation
+namespace AssignmentNine.InitialData
 {
     /// <summary>
     /// Responsible for creating Products
     /// </summary>
-    public class InventoryData
+    public class InventoryManager
     {
         /// <summary>
         /// Creates the products

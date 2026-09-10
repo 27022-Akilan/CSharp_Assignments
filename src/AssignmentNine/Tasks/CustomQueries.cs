@@ -69,7 +69,7 @@ namespace AssignmentNine.Tasks
                 "\n3.Price" +
                 "\n4.Category");
 
-            PropertyOption propertyOption;
+            ProductProperty propertyOption;
 
             if (!ConsoleHelper.TryGetEnum("Enter the choice for the property : ", out propertyOption))
             {
@@ -90,13 +90,13 @@ namespace AssignmentNine.Tasks
                 return;
             }
 
-            Console.Write($"\nEnter the value to be given for filter {Enum.GetName(propertyOption)} : ");
+            Console.Write($"\nEnter the value for{Enum.GetName(propertyOption)} ({operation}) : ");
             string inputValue = Console.ReadLine() ?? string.Empty;
             object value;
             string propertyName;
             switch (propertyOption)
             {
-                case PropertyOption.Id:
+                case ProductProperty.Id:
                     if (!int.TryParse(inputValue, out int id))
                     {
                         Console.WriteLine("Invalid integer value.");
@@ -107,7 +107,7 @@ namespace AssignmentNine.Tasks
                     value = id;
                     break;
 
-                case PropertyOption.Price:
+                case ProductProperty.Price:
                     if (!decimal.TryParse(inputValue, out decimal price))
                     {
                         Console.WriteLine("Invalid decimal value.");
@@ -118,11 +118,11 @@ namespace AssignmentNine.Tasks
                     value = price;
                     break;
 
-                case PropertyOption.Category:
+                case ProductProperty.Category:
                     propertyName = nameof(Product.Category);
                     value = inputValue;
                     break;
-                case PropertyOption.ProductName:
+                case ProductProperty.ProductName:
                     propertyName = nameof(Product.ProductName);
                     value = inputValue;
                     break;
