@@ -34,7 +34,7 @@ namespace AssignmentFour.Repository
         {
             this._transactions.Add(transaction);
             this.SaveTransactionsToFile();
-            return Messages.AddSuccess;
+            return ResultMessages.AddSuccess;
         }
 
         /// <summary>

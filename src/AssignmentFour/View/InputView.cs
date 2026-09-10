@@ -43,7 +43,7 @@ namespace AssignmentFour.View
                 prompt,
                 decimal.TryParse,
                 this._service.IsValidAmount,
-                new ValidationMessages(Messages.ValidationErrorOnAmountFormat, Messages.ValidationErrorOnAmount),
+                new ValidationMessages(ResultMessages.InvalidAmountFormat, ResultMessages.InvalidAmount),
                 out amount);
 
         /// <summary>
@@ -62,7 +62,7 @@ namespace AssignmentFour.View
                     return true;
                 },
                 d => !string.IsNullOrWhiteSpace(d),
-                new ValidationMessages(string.Empty, Messages.ValidationErrorOnDescription),
+                new ValidationMessages(string.Empty, ResultMessages.InvalidDescription),
                 out description);
 
         /// <summary>
@@ -76,7 +76,7 @@ namespace AssignmentFour.View
                 prompt,
                 DateOnly.TryParse,
                 this._service.IsValidDate,
-                new ValidationMessages(Messages.ValidationErrorOnDateFormat, Messages.ValidationErrorOnDate),
+                new ValidationMessages(ResultMessages.InvalidDateFormat, ResultMessages.InvalidDate),
                 out date);
 
         /// <summary>
