@@ -2,8 +2,8 @@
 
 ## 1 .Explain what the .NET platform is and its primary purpose. 
 .NET is a development platform which is provides us a **environment** to run our application.
-**Purpose of .NET :**  Imagine if we need to connect to db,work with files, manage memory, handle exceptions, we cant implement these things by ourself rather than focusing on the core logic , so the .NET runtime provides resuable services,libraries,tools  so this handles internally.
-**THE RUNTIME CAN :** Manage memory,perform GC,execute compiled code,handle exceptions.
+**Purpose of .NET** **:**  Imagine if we need to connect to db,work with files, manage memory, handle exceptions, we cant implement these things by ourself rather than focusing on the core logic , so the .NET runtime provides resuable services,libraries,tools  so this handles internally.
+**THE RUNTIME CAN** **:** Manage memory,perform GC,execute compiled code,handle exceptions.
 
 ## 2.What are the key components of the .NET platform? 
 The major components are `CLR` `CTS` `CLS` `JIT` `ASSEMBLIES AND METADATA` .
@@ -64,10 +64,10 @@ Important thing is that its not cleared immediately when its not referred, it pe
 Main objectives : Manages memory on heap,removes unused objects,executes memory defragmentation.
 **Defragmentation** can be done in `Mark and sweep algorithm` or `Reference counting` but the reference counting is not used wider because of the cyclic references.
 
-**Advantages :**
-1.Automatic memory management.
-2.Reduces memory leaks.
-3.Memory reuse.
+**Advantages** **:**
+- 1.Automatic memory management.
+- 2.Reduces memory leaks.
+- 3.Memory reuse.
 
 ## 7.What is the purpose of the Globalization and Localization features in .NET? 
 Globalization and Localization are essentially for building applications that work seamlessly across different regions ,regions and cultural conventions.
