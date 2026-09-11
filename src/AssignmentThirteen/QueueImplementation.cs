@@ -3,45 +3,46 @@
     /// <summary>
     /// Represents the Queue implementation for a waiting list.
     /// </summary>
-    public class QueueImplementation
+    /// <typeparam name="T">Generic type</typeparam>
+    public class QueueImplementation<T>
     {
-        private Queue<string> _waitingQueue = new Queue<string>();
+        private Queue<T> _waitingQueue = new Queue<T>();
 
         /// <summary>
         /// To add,serve display people on the queue.
         /// </summary>
-        public void PerformOperations()
+        /// <param name="items">Names of the people</param>
+        public void PerformOperations(T[] items)
         {
             Console.WriteLine($"======================================" +
-                              "\nWaiting List Queue Implementation" +
+                              "\nWaiting List - Queue Implementation" +
                               "\n\"======================================");
 
-            this.AddPeopleToQueue("Kavin anna");
-            this.DisplayQueue();
-            this.AddPeopleToQueue("Akilan");
-            this.DisplayQueue();
-            this.AddPeopleToQueue("Vishnu");
-            this.DisplayQueue();
+            foreach (T item in items)
+            {
+                this.AddItemToQueue(item);
+                this.DisplayQueue();
+            }
 
-            this.ServePeopleOnQueue();
+            this.ServeItemOnQueue();
             this.DisplayQueue();
-            this.ServePeopleOnQueue();
+            this.ServeItemOnQueue();
             this.DisplayQueue();
         }
 
-        private void AddPeopleToQueue(string peopleName)
+        private void AddItemToQueue(T item)
         {
-            this._waitingQueue.Enqueue(peopleName);
-            Console.WriteLine($"Added {peopleName} to the Queue");
+            this._waitingQueue.Enqueue(item);
+            Console.WriteLine($"Added {item} to the Queue");
         }
 
-        private void ServePeopleOnQueue()
+        private void ServeItemOnQueue()
         {
             if (this._waitingQueue.Count > 0)
             {
-                Console.WriteLine("\n\nServing the first person on the queue.");
-                string personName = this._waitingQueue.Dequeue();
-                Console.WriteLine($"{personName} Served and discarded from the Queue.");
+                Console.WriteLine("\n\nServing the first item on the queue.");
+                T item = this._waitingQueue.Dequeue();
+                Console.WriteLine($"{item} is served and discarded from the Queue.");
                 return;
             }
 
@@ -52,16 +53,19 @@
         {
             if (this._waitingQueue.Count == 0)
             {
-                Console.WriteLine("No people on the queue");
+                Console.WriteLine("No item on the queue");
                 return;
             }
 
-            Console.WriteLine("The person's in the Queue are :");
+            Console.WriteLine("\n\nThe item's in the Queue are :" +
+                              "\n===============================================");
             int i = 1;
-            foreach (var personName in this._waitingQueue)
+            foreach (var item in this._waitingQueue)
             {
-                Console.WriteLine($"{i++}.{personName}");
+                Console.WriteLine($"{i++}.{item}");
             }
+
+            Console.WriteLine("===============================================\n");
         }
     }
 }

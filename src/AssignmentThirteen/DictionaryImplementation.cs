@@ -1,59 +1,70 @@
 ﻿namespace AssignmentThirteen
 {
     /// <summary>
-    /// Represents the student info (name - mark) in dictionary format.
+    /// Represents the dictionary in Generic format.
     /// </summary>
-    public class DictionaryImplementation
+    /// <typeparam name="TKey">Generic key type.</typeparam>
+    /// <typeparam name="TValue">Generic Value type.</typeparam>
+    public class DictionaryImplementation<TKey, TValue>
+        where TKey : notnull
     {
-        private Dictionary<string, int> _studentsMark = new Dictionary<string, int>();
+        private Dictionary<TKey, TValue> _items = new Dictionary<TKey, TValue>();
 
         /// <summary>
-        /// Performs operation like Add,Delete and remove student and their marks.
+        /// Performs operation like Add,Delete and remove items.
         /// </summary>
-        public void PerformOperations()
+        /// <param name="itemKey">Key of the item.</param>
+        /// <param name="itemValue">Value of the item.</param>
+        /// <param name="itemsToBeDeleted">Items to be deleted.</param>
+        public void PerformOperations(TKey[] itemKey, TValue[] itemValue, TKey[] itemsToBeDeleted)
         {
             Console.WriteLine("==================================================================" +
-                              "\n     Representing student and their marks using Dictionary" +
+                              "\n     Representing Item and their value in Dictionary" +
                               "\n==================================================================");
 
-            this.AddStudentMark("Kavin", 90);
-            this.AddStudentMark("Akilan", 89);
-            this.AddStudentMark("Alice", 77);
-            this.DisplayStudentsMark();
+            int length = itemKey.Length;
+            for (int i = 0; i < length; i++)
+            {
+                this.AddItem(itemKey[i], itemValue[i]);
+            }
 
-            this.RemoveStudent("Jai");
-            this.RemoveStudent("Alice");
-            this.DisplayStudentsMark();
+            this.DisplayItem();
+
+            foreach (TKey item in itemsToBeDeleted)
+            {
+                this.RemoveItem(item);
+                this.DisplayItem();
+            }
         }
 
-        private void AddStudentMark(string studentName, int mark)
+        private void AddItem(TKey itemKey, TValue itemValue)
         {
-            if (this._studentsMark.TryAdd(studentName, mark))
+            if (this._items.TryAdd(itemKey, itemValue))
             {
-                Console.WriteLine($"Student :{studentName} Mark : {mark} added successfully");
+                Console.WriteLine($"ItemKey :{itemKey} | Item Value : {itemValue} added successfully");
                 return;
             }
 
-            Console.WriteLine($"Student : {studentName} already exists so cannot be added.");
+            Console.WriteLine($"ItemKey : {itemKey} already exists so cannot be added.");
         }
 
-        private void RemoveStudent(string studentName)
+        private void RemoveItem(TKey itemKey)
         {
-            if (this._studentsMark.Remove(studentName))
+            if (this._items.Remove(itemKey))
             {
-                Console.WriteLine($"\n{studentName} removed.");
+                Console.WriteLine($"\n{itemKey} removed.");
                 return;
             }
 
-            Console.WriteLine($"\nStudent : {studentName} not found so cannot be deleted.");
+            Console.WriteLine($"\nItem Key : {itemKey} not found so cannot be deleted.");
         }
 
-        private void DisplayStudentsMark()
+        private void DisplayItem()
         {
-            Console.WriteLine("\n\nThe marks of each student is :");
-            foreach (var student in this._studentsMark)
+            Console.WriteLine("\n\nItem and their value is :");
+            foreach (var student in this._items)
             {
-                Console.WriteLine($"Student name : {student.Key}  Mark : {student.Value}");
+                Console.WriteLine($"Item Key : {student.Key}  Item Value : {student.Value}");
             }
         }
     }
