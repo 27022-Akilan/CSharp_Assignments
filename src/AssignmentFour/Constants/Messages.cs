@@ -49,10 +49,5 @@
         /// Invalid Date format message.
         /// </summary>
         public const string ValidationErrorOnDateFormat = "Invalid date format. Please enter as DD/MM/YYYY";
-
-        /// <summary>
-        /// Validation error message for Date.
-        /// </summary>
-        public const string CantAddDueToInvalidType = "Cant add the transaction, due to invalid type of transaction";
     }
 }

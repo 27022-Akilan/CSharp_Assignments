@@ -26,7 +26,7 @@ namespace Assignments
                 // IRepository repository = new TransactionRepository();
                 IRepository fileRepository = new FileRepository(FilePath);
                 TransactionService service = new TransactionService(fileRepository);
-                InputView inputView = new InputView(service);
+                InputReader inputView = new InputReader(service);
                 TransactionView transactionView = new TransactionView(service, inputView);
 
                 transactionView.StartApplication();

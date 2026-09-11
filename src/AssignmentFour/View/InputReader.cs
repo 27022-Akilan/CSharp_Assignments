@@ -8,7 +8,7 @@ namespace AssignmentFour.View
     /// <summary>
     /// Gets the User input and Validate
     /// </summary>
-    public class InputView
+    public class InputReader
     {
         private const int MaxTries = Value.MaximumTries;
 
@@ -24,17 +24,10 @@ namespace AssignmentFour.View
         private readonly record struct ValidationMessages(string parseError, string validationError);
 
         /// <summary>
-        /// Groups the two warning messages that always travel together for a given field.
-        /// </summary>
-        /// <param name="parseError">Shown when the raw input cannot be parsed into T.</param>
-        /// <param name="validationError">Shown when parsing succeeds but the value fails validation.</param>
-        private readonly record struct ValidationMessages(string parseError, string validationError);
-
-        /// <summary>
-        /// Initializes a new instance of the <see cref="InputView"/> class
+        /// Initializes a new instance of the <see cref="InputReader"/> class
         /// </summary>
         /// <param name="service">Service instance</param>
-        public InputView(TransactionService service)
+        public InputReader(TransactionService service)
         {
             this._service = service;
         }
