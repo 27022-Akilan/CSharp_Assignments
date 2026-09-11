@@ -90,7 +90,7 @@ namespace AssignmentNine.Tasks
                 return;
             }
 
-            Console.Write($"\nEnter the value for{Enum.GetName(propertyOption)} ({operation}) : ");
+            Console.Write(this.GetInputPrompt(propertyOption, operation));
             string inputValue = Console.ReadLine() ?? string.Empty;
             object value;
             string propertyName;
@@ -135,6 +135,25 @@ namespace AssignmentNine.Tasks
             var result = new QueryBuilder<Product>(this._products).Filter(propertyName, operation, value).Execute();
             TablePresenter.DisplayProducts("\nFiltered Result:\n", result);
             ConsoleHelper.Clean();
+        }
+
+        private string GetInputPrompt(ProductProperty property, FilterOperation operation)
+        {
+            string propertyName = property.ToString();
+            return operation switch
+            {
+                FilterOperation.Contains => $"Enter the value that {propertyName} should contain :",
+
+                FilterOperation.StartsWith => $"Enter the value that {propertyName} should start with : ",
+
+                FilterOperation.EndsWith => $"Enter the value that the {propertyName} should end with :",
+
+                FilterOperation.GreaterThanOrEqualTo => $"Enter the minimum value for {propertyName} : ",
+
+                FilterOperation.LessThanEqualTo => $"Enter the maximum value for {propertyName} : ",
+
+                _ => $"Enter the value for {propertyName} : "
+            };
         }
     }
 }
