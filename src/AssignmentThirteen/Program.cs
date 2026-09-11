@@ -35,6 +35,9 @@ namespace Assignments
             string[] studentToBeDeleted = { "Jai", "Alice" };
             dictionaryImplementation.PerformOperations(studentNames, studentMark, studentToBeDeleted);
             WaitAndClear();
+
+            IEnumerableImplementation enumerableImplementation = new IEnumerableImplementation();
+            enumerableImplementation.PerformOperations();
         }
 
         private static void WaitAndClear()
