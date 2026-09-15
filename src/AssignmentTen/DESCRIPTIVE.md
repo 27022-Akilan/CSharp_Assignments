@@ -58,11 +58,25 @@ Shared Dependencies
 |When its assigned to some other variable its copied and assigned|When its assigned to some other variable the reference is copied and assigned|
 
 ## 6.Describe the concept of garbage collection on .NET and its advantages. 
-The **Garbage Collector** is the part of the .NET runtime responsible fo automatically reclaiming the memory occupied by managed objects that are no longer reachable by the application.
+The **Garbage Collector** is the part of the .NET runtime responsible for automatically reclaiming the memory occupied by managed objects that are no longer reachable by the application.
 Its done automatically by the GC so we don't need to care about the memory management in the Managed code.
 Important thing is that its not cleared immediately when its not referred, it periodically or it has a threshold and caches the memory.
 Main objectives : Manages memory on heap,removes unused objects,executes memory defragmentation.
 **Defragmentation** can be done in `Mark and sweep algorithm` or `Reference counting` but the reference counting is not used wider because of the cyclic references.
+
+**Generations of GC** **:** 
+
+The managed heap is divided into three generations for performance optimization:
+
+Generation 0 – Newly allocated, short-lived objects (e.g., temporary variables).
+Collected most frequently. 
+Survivors move to Gen 1.
+
+Generation 1 – Acts as a buffer for medium-lived objects.
+Collected less often than Gen 0.
+
+Generation 2 – Long-lived objects (e.g., static data, caches).
+Collected least frequently due to higher cost.
 
 **Advantages** **:**
 - 1.Automatic memory management.
