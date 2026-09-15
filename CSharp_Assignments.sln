@@ -16,6 +16,9 @@ EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "AssignmentTwo", "src\AssignmentTwo\AssignmentTwo.csproj", "{14BACB78-6571-4E71-B4F0-3C22D4637D0A}"
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "AssignmentEleven", "AssignmentEleven", "{02EA681E-C7D8-13C7-8484-4AC65E1B71E8}"
+	ProjectSection(SolutionItems) = preProject
+		Understandings.md = Understandings.md
+	EndProjectSection
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ValueAndReferenceType", "src\ValueAndReferenceType\ValueAndReferenceType.csproj", "{1A5075B0-FDEF-4DB6-A3F1-24EC3B7D5C8D}"
 EndProject
