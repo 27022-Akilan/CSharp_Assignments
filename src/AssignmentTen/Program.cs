@@ -1,6 +1,6 @@
 ﻿using Utilities;
 
-namespace Assignments
+namespace AssignmentTen
 {
     /// <summary>
     /// Entry point of the application.
