@@ -1,7 +1,7 @@
 ﻿namespace AssignmentNine.Model.Enum
 {
     /// <summary>
-    /// Represent the Filter operations.
+    /// Represent the filter operations.
     /// </summary>
     public enum FilterOperation
     {

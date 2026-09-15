@@ -26,7 +26,7 @@
         QueryOptimization,
 
         /// <summary>
-        /// Option for custom exception (Fluent API) task
+        /// Option for custom query (Fluent API) task
         /// </summary>
         CustomQueries,
 
