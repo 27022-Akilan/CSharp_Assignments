@@ -15,7 +15,7 @@ copied.
 
 Conceptually:
 
-``` text
+``` 
 A = 10
 B = A
 
@@ -47,7 +47,7 @@ When a reference-type variable is assigned to another variable, the
 
 Conceptually:
 
-``` text
+``` 
 A ──── > Object <───── B
 ```
 
@@ -133,7 +133,7 @@ The method receives a copy of the value.
 
 For a reference type:
 
-``` text
+``` 
 caller reference -> copy -> method parameter -> same object
 ```
 
@@ -183,7 +183,7 @@ The object is reachable.
 
 If there is no longer any path from live references to that object:
 
-``` text
+``` 
 variable → null
 
 object
@@ -216,7 +216,7 @@ The GC decides when collection should occur.
 
 So:
 
-``` text
+``` 
 unreachable
     ≠
 immediately deleted
@@ -414,7 +414,7 @@ objects it owns.
 
 This is probably the most important concept in the entire topic.
 
-``` text
+``` 
 Dispose()
     ↓
 Release resources deterministically
@@ -422,7 +422,7 @@ Release resources deterministically
 
 while:
 
-``` text
+``` 
 Garbage Collector
     ↓
 Reclaim unreachable managed memory
@@ -457,7 +457,7 @@ C# provides `using`.
 
 Conceptually:
 
-``` text
+``` 
 Acquire resource
       ↓
 Use resource
@@ -481,7 +481,7 @@ using (resource)
 
 behaves like a protected lifetime:
 
-``` text
+``` 
 try
 {
     use resource
@@ -502,7 +502,7 @@ The important design goal is predictable cleanup.
 
 For example:
 
-``` text
+``` 
 using
   ↓
 Dispose
