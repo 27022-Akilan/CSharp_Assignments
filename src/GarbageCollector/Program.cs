@@ -10,7 +10,7 @@ namespace Assignments
         /// <summary>
         /// Starts the application.
         /// </summary>
-        /// <param name="args">Default arguments</param>
+        /// <param name="args">Default arguments.</param>
         public static void Main(string[] args)
         {
             Console.WriteLine($"The initial memory before object creation is : {GC.GetTotalMemory(false)}");

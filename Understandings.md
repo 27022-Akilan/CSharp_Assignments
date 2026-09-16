@@ -95,6 +95,16 @@ implementation.
 For example, a value type can be a field inside a reference-type object
 and therefore be part of that object's memory.
 
+Main Observations:
+- The local variables(value types) which are declared inside the methods are stored in the stack then it gets destroyed when the method completes.
+- Stack is also used to store method calls which helps us to track method flows and mainly used on recursion tracing and all.
+
+- Whereas reference types are also like that when the method gets completed the reference to gets destroyed.Then the GC takes over the action and collects it but not very instantly.
+
+- Times when value types are stored in the HEAP : 
+  - For example, we have class and inside it we have defined a value type `int` in the class. Here the int is stored in the heap not in stack because its inside a reference type `class`.
+  - So always don't think stack -> value types heap -> reference types.
+
 So:
 
 > **"Value type means stack" and "reference type means heap" are not the
@@ -183,18 +193,24 @@ no reachable path
 
 the object becomes eligible for collection.
 
+Scenarios when an object life time ends :
+- It depends on the scope where it has been declared.
+- As so when the object is created inside the the method after the gets executed then the objects accessibility is gone then its eligible for getting collected by the GC.
+- When the object is a static one then its life time would be through out the application when its running.
+- Important thing : GC doesn't collect immediately after the lifetime of object is completed. It works on its own defined rules.
+
 ------------------------------------------------------------------------
 
 # 5. Eligible for GC Does Not Mean Immediately Destroyed
 
-This distinction is extremely important.
+The distinction is extremely important.
 
 When an object becomes unreachable, .NET does not necessarily destroy it
 at that exact moment.
 
 Instead:
 
-> **The object becomes eligible for garbage collection.**
+**The object becomes eligible for garbage collection.**
 
 The GC decides when collection should occur.
 
@@ -215,7 +231,7 @@ memory has not yet been reclaimed.
 
 The .NET Garbage Collector automatically manages **managed memory**.
 
-Its job is broadly to:
+Its job is to:
 
 1.  Identify objects that are no longer reachable.
 2.  Reclaim their managed memory.
@@ -226,6 +242,64 @@ This means application code normally does not need to manually free
 ordinary managed objects.
 
 That is one of the major benefits of a managed runtime.
+
+
+How GC knows that this object is un-referenced ? 
+1. Reference counting 
+2. Mark and sweep.
+The reference counting has a drawback of Cyclic references so mark and sweep is used.
+
+1.Reference Counting :
+- Basically it maintains a reference count for each object and when its 0 then it can be marked to GC to collect it.
+- THers is an flaw in this where an unreferenced object is noted as its use full.
+```
+obj a = obj b
+obj b = obj a
+
+Here the a is referencing b and b is referncing the a but no other thing is actually pointing to it then so its useless 
+but you can see that Refernce count of A - 1 and Reference count of B - 1 so GC doesn't collects it but its useless.
+```
+- So to overcome this we have Mark and Sweep algorithm.
+
+2.Mark and Sweep :
+- It has 4 Phases 
+    1. Mark
+    2. Sweep
+    3. Compact
+    4. Finalization.
+    1. 
+
+### Mark :
+- Starts identifying the application roots.(Static,stack,threads, CPU registers)
+- From the roots it explores all the references if they are reached they are marked as **Alive** .
+- Objects which are unreachable are remain Unmarked.
+- So the unmarked one's are eligible to be collected by GC.
+
+### Sweep :
+- The unmarked objects i.e unreferenced one's are collected by the GC in this phase.
+- Only the unmarked objects are collected by the GC.
+
+### Compact :
+- Main purpose : Defragmentation
+- After sweeping empty spaces remains , which creates fragmentation.
+
+```
+We have a sequence of 10 bytes,
+
+Memory is filled till 6 bytes.
+
+Then 4,5 byte are collected by the GC.
+
+Now the memory looks like 1-3 filled 4,5 empty 6 - filled 7-10 empty.
+
+Now When we need to store 5 bytes of sequential data we can't store,but it has the space but not in a sequential manner.
+So for this the GC moves the 6 byte to the 4 byte location , now we have sequential bytes of 6 bytes free and we can use it.
+
+```
+
+### Finalization :
+- If an object has an Finalizer (~ClassName()), GC puts in the Finalization Queue,
+- So before completely removing it it runs the Finalizer to handle resource allocation inside the Finalizer.
 
 ------------------------------------------------------------------------
 # 7. Garbage Collector Generations
