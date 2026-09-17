@@ -16,9 +16,23 @@
                 string inputFilePath = @"SampleData.txt";
                 string destinationFilePath = @"OutputFile.txt";
                 string dummyFilePath = @"Dummy.txt";
+
+                Console.WriteLine("==================================" +
+                                  "\nNormal File operations" +
+                                  "\n==================================");
+
                 FileOperator fileOperator = new FileOperator(inputFilePath, destinationFilePath);
-                await fileOperator.Write();
-                await Task.WhenAll(fileOperator.ReadUsingBufferedStream(), fileOperator.ReadUsingCustomBuffer(), fileOperator.ProcessUsingMemoryStream());
+                fileOperator.Write();
+                fileOperator.ReadUsingCustomBuffer();
+                fileOperator.ReadUsingBufferedStream();
+                fileOperator.ProcessUsingMemoryStream();
+
+                Console.WriteLine("==================================" +
+                                  "\nAsynchronous File operations" +
+                                  "\n==================================");
+                AsynchronousFileOperator asynchronousFileOperator = new AsynchronousFileOperator(inputFilePath, destinationFilePath);
+                await asynchronousFileOperator.Write();
+                await Task.WhenAll(asynchronousFileOperator.ReadUsingBufferedStream(), asynchronousFileOperator.ReadUsingCustomBuffer(), asynchronousFileOperator.ProcessUsingMemoryStream());
 
                 StreamOptimizer streamOptimizer = new StreamOptimizer(dummyFilePath);
                 streamOptimizer.OptimizeStream();
