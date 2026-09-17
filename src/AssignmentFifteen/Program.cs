@@ -27,14 +27,14 @@
             {
                 Console.WriteLine("Error: Access denied to the file.");
             }
-            catch (IOException ex)
-            {
-                Console.WriteLine($"I/O Error: {ex.Message}");
-            }
-            catch (Exception ex)
-            {
-                Console.WriteLine($"Unexpected error: {ex.Message}");
-            }
+            //catch (IOException ex)
+            //{
+            //    Console.WriteLine($"I/O Error: {ex.Message}");
+            //}
+            //catch (Exception ex)
+            //{
+            //    Console.WriteLine($"Unexpected error: {ex.Message}");
+            //}
         }
     }
 }
