@@ -45,19 +45,6 @@ namespace AssignmentFour.View
                 this._service.IsValidAmount,
                 new ValidationMessages(ResultMessages.InvalidAmountFormat, ResultMessages.InvalidAmount),
                 out amount);
-        public bool TryReadDecimal(string prompt, out decimal amount)
-        {
-            amount = default;
-            for (int i = 1; i <= MaxTries; i++)
-            {
-                Console.WriteLine(prompt);
-                if (decimal.TryParse(Console.ReadLine(), out amount))
-                {
-                    bool validationResult = this._service.IsValidAmount(amount);
-                    if (validationResult)
-                    {
-                        return true;
-                    }
 
         /// <summary>
         /// Try's to read a valid Description.

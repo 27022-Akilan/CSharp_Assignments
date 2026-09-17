@@ -456,7 +456,7 @@ namespace AssignmentFour.View
         /// <param name="transactions">Immutable List of Objects</param>
         private void DisplayTransaction(IEnumerable<Transaction> transactions)
         {
-            if (transactions.Any())
+            if (!transactions.Any())
             {
                 Console.WriteLine("No results found !!");
                 return;
