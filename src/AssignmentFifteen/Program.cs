@@ -8,8 +8,8 @@
         /// <summary>
         /// Starts the application.
         /// </summary>
-        /// <param name="args">Default arguments.</param>
-        public static void Main(string[] args)
+        /// <returns>A task object<returns>
+        public static async Task Main()
         {
             try
             {
@@ -17,10 +17,8 @@
                 string destinationFilePath = @"OutputFile.txt";
                 FileOperator fileOperator = new FileOperator(inputFilePath, destinationFilePath);
 
-                fileOperator.Write();
-                fileOperator.ReadUsingBufferedStream();
-                fileOperator.ReadUsingCustomBuffer();
-                fileOperator.ProcessUsingMemoryStream();
+                await fileOperator.Write();
+                await Task.WhenAll(fileOperator.ReadUsingBufferedStream(), fileOperator.ReadUsingCustomBuffer(), fileOperator.ProcessUsingMemoryStream());
             }
             catch (UnauthorizedAccessException)
             {
