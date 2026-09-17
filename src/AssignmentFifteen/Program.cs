@@ -15,10 +15,13 @@
             {
                 string inputFilePath = @"SampleData.txt";
                 string destinationFilePath = @"OutputFile.txt";
+                string dummyFilePath = @"Dummy.txt";
                 FileOperator fileOperator = new FileOperator(inputFilePath, destinationFilePath);
-
                 await fileOperator.Write();
                 await Task.WhenAll(fileOperator.ReadUsingBufferedStream(), fileOperator.ReadUsingCustomBuffer(), fileOperator.ProcessUsingMemoryStream());
+
+                StreamOptimizer streamOptimizer = new StreamOptimizer(dummyFilePath);
+                streamOptimizer.OptimizeStream();
             }
             catch (UnauthorizedAccessException)
             {

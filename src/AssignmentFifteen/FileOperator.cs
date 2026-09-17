@@ -32,7 +32,8 @@ namespace AssignmentFifteen
             string data = "\nHii Buddy lets learn C#, Have a nice day.";
             byte[] bytes = Encoding.UTF8.GetBytes(data);
 
-            using FileStream fileStream = new FileStream(this._inputFilePath, FileMode.OpenOrCreate, FileAccess.Write);
+            // byte[] bytes = new byte[1024 * 1024];
+            using FileStream fileStream = new FileStream(this._inputFilePath, FileMode.OpenOrCreate, FileAccess.Write, FileShare.None, bufferSize: 1024 * 1024);
             Console.WriteLine("Writing into the file Started !!");
             Stopwatch stopwatch = new Stopwatch();
             stopwatch.Start();
@@ -76,7 +77,7 @@ namespace AssignmentFifteen
         /// <returns>A task object</returns>
         public async Task ReadUsingBufferedStream()
         {
-            using FileStream fileStream = new FileStream("SampleData1.txt", FileMode.Open, FileAccess.Read);
+            using FileStream fileStream = new FileStream(this._inputFilePath, FileMode.Open, FileAccess.Read);
             using BufferedStream bufferedStream = new BufferedStream(fileStream);
             byte[] bytes = new byte[8];
 
@@ -99,7 +100,7 @@ namespace AssignmentFifteen
         public async Task ProcessUsingMemoryStream()
         {
             int available;
-            using FileStream inputFile = new FileStream("SampleData2.txt", FileMode.Open, FileAccess.Read);
+            using FileStream inputFile = new FileStream(this._inputFilePath, FileMode.Open, FileAccess.Read);
             using FileStream destinationFile = new FileStream(this._destinationFilePath, FileMode.OpenOrCreate, FileAccess.Write);
 
             byte[] buffer = new byte[25 * 1024]; // 25 kb
