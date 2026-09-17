@@ -13,11 +13,14 @@
         {
             try
             {
-                string filePath = @"SampleData.txt";
-                FileOperator fileOperator = new FileOperator(filePath);
+                string inputFilePath = @"SampleData.txt";
+                string destinationFilePath = @"OutputFile.txt";
+                FileOperator fileOperator = new FileOperator(inputFilePath, destinationFilePath);
+
                 fileOperator.Write();
-                fileOperator.ReadUsingCustomBuffer();
                 fileOperator.ReadUsingBufferedStream();
+                fileOperator.ReadUsingCustomBuffer();
+                fileOperator.ProcessUsingMemoryStream();
             }
             catch (UnauthorizedAccessException)
             {
