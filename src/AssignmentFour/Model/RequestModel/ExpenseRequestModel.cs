@@ -10,10 +10,10 @@ namespace AssignmentFour.Model.RequestModel
         /// <summary>
         /// Initializes a new instance of the <see cref="ExpenseRequestModel"/> class.
         /// </summary>
-        /// <param name="amount">Contains amount</param>
-        /// <param name="description">Contains description</param>
-        /// <param name="date">Contains date</param>
-        /// <param name="category">Contains source</param>
+        /// <param name="amount">Amount of the expense.</param>
+        /// <param name="description">Description of the expense.</param>
+        /// <param name="date">Date of the expense.</param>
+        /// <param name="category">Category of the expense.</param>
         public ExpenseRequestModel(decimal amount, string description, DateOnly date, Category category)
             : base(amount, TransactionType.Expense, description, date)
         {

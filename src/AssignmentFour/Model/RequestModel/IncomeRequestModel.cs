@@ -1,4 +1,5 @@
-﻿using AssignmentFour.Model.Enums;
+﻿using AssignmentFour.Enums;
+using AssignmentFour.Model.Enums;
 
 namespace AssignmentFour.Model.RequestModel
 {
@@ -10,10 +11,10 @@ namespace AssignmentFour.Model.RequestModel
         /// <summary>
         /// Initializes a new instance of the <see cref="IncomeRequestModel"/> class.
         /// </summary>
-        /// <param name="amount">Contains amount</param>
-        /// <param name="description">Contains description</param>
-        /// <param name="date">Contains date</param>
-        /// <param name="source">Contains source</param>
+        /// <param name="amount">Amount of the income.</param>
+        /// <param name="description">Description of the income.</param>
+        /// <param name="date">Date of the income.</param>
+        /// <param name="source">Source of the income.</param>
         public IncomeRequestModel(decimal amount, string description, DateOnly date, Source source)
             : base(amount, TransactionType.Income, description, date)
         {
@@ -23,7 +24,7 @@ namespace AssignmentFour.Model.RequestModel
         /// <summary>
         /// Gets the source
         /// </summary>
-        /// <value>Contains the source of the expense</value>
+        /// <value>Contains the source of the income</value>
         public Source Source { get; }
     }
 }
