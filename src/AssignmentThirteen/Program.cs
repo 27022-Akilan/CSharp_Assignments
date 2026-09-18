@@ -38,6 +38,11 @@ namespace Assignments
 
             IEnumerableImplementation enumerableImplementation = new IEnumerableImplementation();
             enumerableImplementation.PerformOperations();
+            WaitAndClear();
+
+            ReadOnlyDictionaryImplementation readOnlyDictionaryImplementation = new ReadOnlyDictionaryImplementation();
+            readOnlyDictionaryImplementation.PerformOperations();
+            WaitAndClear();
         }
 
         private static void WaitAndClear()
