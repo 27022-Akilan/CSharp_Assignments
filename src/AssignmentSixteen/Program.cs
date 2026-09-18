@@ -16,6 +16,12 @@ namespace Assignments
             Notifier notifier = new Notifier();
             notifier.OnAction += DisplayMessage;
             notifier.SendNotification();
+
+            ArrayOperator arrayOperator = new ArrayOperator();
+            arrayOperator.PerformOperations(new int[] { 6, 5, 4, 3, 2, 1 });
+
+            ListOperator listOperator = new ListOperator();
+            listOperator.FilterAndSquareEvenNumbers(new List<int> { 1, 2, 3, 4, 5, 6 });
         }
 
         /// <summary>
