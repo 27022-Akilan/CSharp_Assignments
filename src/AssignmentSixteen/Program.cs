@@ -2,6 +2,8 @@
 
 namespace Assignments
 {
+    public record Book(string title, string author, string iSBN);
+
     /// <summary>
     /// Represents the entry point of the application.
     /// </summary>
@@ -16,18 +18,32 @@ namespace Assignments
             Notifier notifier = new Notifier();
             notifier.OnAction += DisplayMessage;
             notifier.SendNotification();
+            WaitAndClear();
 
             ArrayOperator arrayOperator = new ArrayOperator();
             arrayOperator.PerformOperations(new int[] { 6, 5, 4, 3, 2, 1 });
+            WaitAndClear();
 
             ListOperator listOperator = new ListOperator();
             listOperator.FilterAndSquareEvenNumbers(new List<int> { 1, 2, 3, 4, 5, 6 });
+            WaitAndClear();
 
             ProductManager productManager = new ProductManager();
             List<Product> products = productManager.CreateProducts();
             productManager.SortAndDisplayProducts(products, SortByName);
             productManager.SortAndDisplayProducts(products, SortByCategory);
             productManager.SortAndDisplayProducts(products, SortByPrice);
+            WaitAndClear();
+
+            Book book1 = new Book("Clean Code", "Kavin", "BCC1");
+            Book book2 = new Book("MVC", "Akilan", "BMVC101");
+            Book book3 = new Book("Clean Code", "Kavin", "BCC1");
+            DisplayBook(book1);
+            DisplayBook(book2);
+            DisplayBook(book3);
+            CompareBookValues(book1, book2);
+            CompareBookValues(book1, book3);
+            ChangeBookDetailsAndDisplay();
         }
 
         /// <summary>
@@ -82,6 +98,47 @@ namespace Assignments
         public static int SortByPrice(Product product1, Product product2)
         {
             return product1.Price.CompareTo(product2.Price);
+        }
+
+        private static void CompareBookValues(Book book1, Book book2)
+        {
+            Console.WriteLine("Conmparing books :\nBook1");
+            DisplayBook(book1);
+            Console.WriteLine("\nBook2");
+            DisplayBook(book2);
+            if (book1 == book2)
+            {
+                Console.WriteLine("Book values are equal !!");
+                return;
+            }
+
+            Console.WriteLine("Book values are not equal !!");
+        }
+
+        private static void DisplayBook(Book book)
+        {
+            var (title, author, isbn) = book;
+            Console.WriteLine($"Title : {title}");
+            Console.WriteLine($"Author : {author}");
+            Console.WriteLine($"ISBN : {isbn}");
+        }
+
+        private static void ChangeBookDetailsAndDisplay()
+        {
+            Book originalBook = new Book("C++", "Kavin", "Cpp101");
+            Console.WriteLine("Original book before with operator : ");
+            DisplayBook(originalBook);
+            Book updatedBook = originalBook with { title = "LabView" };
+            Console.WriteLine("Original book after extending by another book and changing Title to 'LabView' : ");
+            DisplayBook(originalBook);
+        }
+
+        private static void WaitAndClear()
+        {
+            Console.ForegroundColor = ConsoleColor.DarkGray;
+            Console.WriteLine("Press Any key to continue..");
+            Console.ReadKey();
+            Console.Clear();
         }
     }
 }
