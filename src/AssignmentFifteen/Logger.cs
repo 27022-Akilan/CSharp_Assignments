@@ -9,7 +9,7 @@ namespace AssignmentFifteen
     {
         private static readonly object _lock = new object();
 
-        private string _logFilePath = "log.txt";
+        private string _commonFileNameExtension = "log.txt";
 
         /// <summary>
         /// Logs the errors into the file.
@@ -18,15 +18,13 @@ namespace AssignmentFifteen
         /// <param name="userId">Unique id of the user.</param>
         public void LogError(string message, string userId)
         {
+            string userFile = userId + "_" + this._commonFileNameExtension;
             byte[] errorBuffer = Encoding.UTF8.GetBytes(message);
-            lock (_lock)
+            using (FileStream fileStream = new FileStream(userFile, FileMode.Append))
             {
-                using (FileStream fileStream = new FileStream(this._logFilePath, FileMode.Append))
-                {
-                    Console.WriteLine($"User Id :{userId}....Writing into the file !!");
-                    fileStream.Write(errorBuffer, 0, errorBuffer.Length);
-                    Console.WriteLine($"User Id :{userId}....Written successfully !!");
-                }
+                Console.WriteLine($"User Id :{userId}....Writing into the file !!");
+                fileStream.Write(errorBuffer, 0, errorBuffer.Length);
+                Console.WriteLine($"User Id :{userId}....Written successfully !!");
             }
         }
     }

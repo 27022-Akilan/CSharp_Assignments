@@ -28,10 +28,10 @@ namespace AssignmentFifteen
             Parallel.For(0, 100, userId =>
             {
                 string userIdAsString = userId.ToString();
-                this._logger.LogError($"{userId} : Error on login..", userIdAsString);
+                this._logger.LogError($"Error on login..", userIdAsString);
             });
             stopwatch.Stop();
-            Console.WriteLine("Tested for multiple users single file :" +
+            Console.WriteLine("Time taken for logging errors of multiple users on their own file :" +
                               $"{stopwatch.ElapsedMilliseconds}");
         }
     }
