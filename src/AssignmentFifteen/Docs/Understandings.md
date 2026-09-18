@@ -1,4 +1,4 @@
-﻿# Understandings – File Streams and Buffering
+﻿# Understandings – Stream optimizer and Logger optimizer
 
 ## Writing to the File
 
@@ -203,3 +203,57 @@ If I want to display the file contents as they are, I should not add an extra ne
 
 ---
 
+# Logger Task 
+ 
+The main purpose of this task was to improve the existing logger by reducing unnecessary memory usage and making it safe and efficient when multiple users log errors at the same time.
+ 
+## What I Did and Why
+ 
+### 1. Identified the Issues
+ 
+The original logger was using a `MemoryStream` between the message and the `FileStream`.
+ 
+The flow was:
+ 
+`Message → byte[] → MemoryStream → FileStream`
+ 
+I identified that the `MemoryStream` was unnecessary because I could directly write the `byte[]` to the file.
+ 
+### 2. Removed the Unnecessary MemoryStream
+ 
+I changed the logger to:
+ 
+`Message → byte[] → FileStream`
+ 
+This reduces unnecessary memory allocation and copying.
+ 
+### 3. Made the Logger Thread-Safe
+ 
+When multiple users write to the same `log.txt`, multiple threads may try to access the file at the same time.
+ 
+I used a `static lock` around the file-writing operation so that only one thread writes to the file at a time.
+ 
+### 4. Created Separate Log Files
+ 
+Instead of making every user write to the same file, I created a separate file based on the username.
+ 
+For example:
+ 
+`User_1 → UserId_1_log.txt`  
+`User_2 → UserId_2_log.txt`
+ 
+This reduces contention between different users because they are writing to different files.
+ 
+### 5. Created a Load Test
+ 
+I used `Parallel.For` to mock multiple users logging errors simultaneously.
+ 
+For example:
+ 
+- 100 mock users
+- Each user generates 100 errors
+ 
+Compared their performance speed using the `Stopwatch` and noted the time difference.
+So by using the different files its faster than the one which is using the same file.
+And `Different files` doesn't need `lock` mechanism as it works on different files , 
+If so same user works on different threads then its need a lock , but here the problem is not about that hence I didn't used it.

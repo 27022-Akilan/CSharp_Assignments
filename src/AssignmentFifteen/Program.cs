@@ -1,4 +1,7 @@
-﻿namespace AssignmentFifteen
+﻿using AssignmentFifteen.BasicFileOperations;
+using AssignmentFifteen.LoggerImplementation;
+
+namespace AssignmentFifteen
 {
     /// <summary>
     /// Represents the entry point of the application.

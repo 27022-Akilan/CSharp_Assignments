@@ -1,6 +1,6 @@
 ﻿using System.Text;
 
-namespace AssignmentFifteen
+namespace AssignmentFifteen.LoggerImplementation
 {
     /// <summary>
     /// Represents the logging functionality into the file.

@@ -1,6 +1,6 @@
 ﻿using System.Diagnostics;
 
-namespace AssignmentFifteen
+namespace AssignmentFifteen.LoggerImplementation
 {
     /// <summary>
     /// Represents the load testing functionality.

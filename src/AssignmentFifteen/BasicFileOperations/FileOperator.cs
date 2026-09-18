@@ -1,7 +1,7 @@
 ﻿using System.Diagnostics;
 using System.Text;
 
-namespace AssignmentFifteen
+namespace AssignmentFifteen.BasicFileOperations
 {
     /// <summary>
     /// Represents the operations on the file.
