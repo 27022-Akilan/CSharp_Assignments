@@ -26,7 +26,7 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "GarbageCollector", "src\Gar
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "IDisposableDemo", "src\IDisposableDemo\IDisposableDemo.csproj", "{983BE90F-5085-42BF-9168-4754B9FE1BBE}"
 EndProject
-Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Docs", "Docs", "{7F93D654-3278-4C43-B07C-65F847BD9FB3}"
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Documents", "Documents", "{7F93D654-3278-4C43-B07C-65F847BD9FB3}"
 	ProjectSection(SolutionItems) = preProject
 		Understandings.md = Understandings.md
 	EndProjectSection
