@@ -60,7 +60,7 @@ If we `need the list` then we can have a limit for the list size, after the limi
 stops at that point.
 
 ## Initial Analysis
-![Initial Analysis]("C:\C#\C#_Assignment\Demo_Asg\src\AssignmentTwele\OutputScreenShot\Task3 -Method2 Initial.png")
+![Initial Analysis]("OutputScreenShot\Task3 -Method2 Initial.png")
 
 ## Final Analysis
 ![Final Analysis]("C:\C#\C#_Assignment\Demo_Asg\src\AssignmentTwele\OutputScreenShot\Task3-Method 2 Final.png")
