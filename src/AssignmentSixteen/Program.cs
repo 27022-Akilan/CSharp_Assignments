@@ -1,4 +1,5 @@
 ﻿using AssignmentSixteen;
+using AssignmentSixteen.Task7;
 
 namespace Assignments
 {
@@ -44,8 +45,32 @@ namespace Assignments
             CompareBookValues(book1, book2);
             CompareBookValues(book1, book3);
             ChangeBookDetailsAndDisplay();
+            WaitAndClear();
+
+            List<Shape> shapes = new List<Shape>();
+            Shape rectangle = new Rectangle("Rectangle", 5, 4);
+            Shape circle = new Circle("Circle", 5);
+            Shape triangle = new Triangle("Triangle", 3, 7);
+            shapes.Add(rectangle);
+            shapes.Add(circle);
+            shapes.Add(triangle);
+
+            foreach (Shape shape in shapes)
+            {
+                DisplayShapeDetails(shape);
+            }
         }
 
+        public static void DisplayShapeDetails(Shape shape)
+        {
+            switch (shape)
+            {
+                case Circle:
+                    var circle = shape as Circle;
+                    circle.Name;
+
+            }
+        }
         /// <summary>
         /// Displays the message to the user.
         /// </summary>
@@ -102,7 +127,7 @@ namespace Assignments
 
         private static void CompareBookValues(Book book1, Book book2)
         {
-            Console.WriteLine("Conmparing books :\nBook1");
+            Console.WriteLine("Comparing books :\nBook1");
             DisplayBook(book1);
             Console.WriteLine("\nBook2");
             DisplayBook(book2);
@@ -137,6 +162,7 @@ namespace Assignments
         {
             Console.ForegroundColor = ConsoleColor.DarkGray;
             Console.WriteLine("Press Any key to continue..");
+            Console.ResetColor();
             Console.ReadKey();
             Console.Clear();
         }
