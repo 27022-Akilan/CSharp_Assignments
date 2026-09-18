@@ -13,39 +13,39 @@
         {
             try
             {
-                string inputFilePath = @"SampleData.txt";
-                string destinationFilePath = @"OutputFile.txt";
-                string dummyFilePath = @"Dummy.txt";
+                //string inputFilePath = @"SampleData.txt";
+                //string destinationFilePath = @"OutputFile.txt";
+                //string dummyFilePath = @"Dummy.txt";
 
-                Console.WriteLine("==================================" +
-                                  "\nNormal File operations" +
-                                  "\n==================================");
+                //Console.WriteLine("==================================" +
+                //                  "\nNormal File operations" +
+                //                  "\n==================================");
 
-                FileOperator fileOperator = new FileOperator(inputFilePath, destinationFilePath);
-                fileOperator.Write();
-                fileOperator.ReadUsingCustomBuffer();
-                fileOperator.ReadUsingBufferedStream();
-                fileOperator.ProcessUsingMemoryStream();
+                //FileOperator fileOperator = new FileOperator(inputFilePath, destinationFilePath);
+                //fileOperator.Write();
+                //fileOperator.ReadUsingCustomBuffer();
+                //fileOperator.ReadUsingBufferedStream();
+                //fileOperator.ProcessUsingMemoryStream();
 
-                Console.WriteLine("==================================" +
-                                  "\nAsynchronous File operations" +
-                                  "\n==================================");
-                AsynchronousFileOperator asynchronousFileOperator = new AsynchronousFileOperator(inputFilePath, destinationFilePath);
-                await asynchronousFileOperator.Write();
-                await Task.WhenAll(asynchronousFileOperator.ReadUsingBufferedStream(), asynchronousFileOperator.ReadUsingCustomBuffer(), asynchronousFileOperator.ProcessUsingMemoryStream());
+                //Console.WriteLine("==================================" +
+                //                  "\nAsynchronous File operations" +
+                //                  "\n==================================");
+                //AsynchronousFileOperator asynchronousFileOperator = new AsynchronousFileOperator(inputFilePath, destinationFilePath);
+                //await asynchronousFileOperator.Write();
+                //await Task.WhenAll(asynchronousFileOperator.ReadUsingBufferedStream(), asynchronousFileOperator.ReadUsingCustomBuffer(), asynchronousFileOperator.ProcessUsingMemoryStream());
 
-                Console.WriteLine("==================================" +
-                                  "\n      Optimizing stream" +
-                                  "\n==================================");
-                StreamOptimizer streamOptimizer = new StreamOptimizer(dummyFilePath);
-                streamOptimizer.OptimizeStream();
+                //Console.WriteLine("==================================" +
+                //                  "\n      Optimizing stream" +
+                //                  "\n==================================");
+                //StreamOptimizer streamOptimizer = new StreamOptimizer(dummyFilePath);
+                //streamOptimizer.OptimizeStream();
 
                 Console.WriteLine("==================================" +
                                   "\n     Logger Implementation" +
                                   "\n==================================");
 
-                Logger logger = new Logger();
-                logger.LogError("Error occurred on authentication");
+                LoadTester loadTest = new LoadTester(new Logger());
+                loadTest.TestLoad();
             }
             catch (UnauthorizedAccessException)
             {

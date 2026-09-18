@@ -15,16 +15,17 @@ namespace AssignmentFifteen
         /// Logs the errors into the file.
         /// </summary>
         /// <param name="message">Error message.</param>
-        public void LogError(string message)
+        /// <param name="userId">Unique id of the user.</param>
+        public void LogError(string message, string userId)
         {
             byte[] errorBuffer = Encoding.UTF8.GetBytes(message);
             lock (_lock)
             {
                 using (FileStream fileStream = new FileStream(this._logFilePath, FileMode.Append))
                 {
-                    Console.WriteLine("Writing into the file !!");
+                    Console.WriteLine($"User Id :{userId}....Writing into the file !!");
                     fileStream.Write(errorBuffer, 0, errorBuffer.Length);
-                    Console.WriteLine("Written successfully !!");
+                    Console.WriteLine($"User Id :{userId}....Written successfully !!");
                 }
             }
         }
