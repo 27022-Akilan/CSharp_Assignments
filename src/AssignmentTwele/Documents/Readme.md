@@ -34,7 +34,7 @@ The memory grows by time increasingly..,
 AllocateMemory() continuously creates a new int[1000] arrays and adds them to _memory allocation. Since the list maintains reference
 to the every allocated array and the list is never destroyed, the array remains reachable and the GC cannot reclaim as the loop executes 
 indefinitely.
-![Diagnosis Tool]("C:\C#\C#_Assignment\Demo_Asg\src\AssignmentTwele\OutputScreenShot\Task1 (2).png")
+![Diagnosis Tool](OutputScreenShot/Task1.png)
 
 
 ## Task 2 - Implementing Memory Management Best Practices :
@@ -53,15 +53,15 @@ while (true)
 }
 ```
 
-![Diagnosis Tool]("C:\C#\C#_Assignment\Demo_Asg\src\AssignmentTwele\OutputScreenShot\Task3-Analysis For method 1.png")
+![Diagnosis Tool](OutputScreenShot/Task3AnalysisFormethod1.png)
 
 ### Case 2 :
 If we `need the list` then we can have a limit for the list size, after the limit reaches the growing of the memory
 stops at that point.
 
 ## Initial Analysis
-![Initial Analysis]("OutputScreenShot/Task3Method2Initial.png")
+![Initial Analysis](OutputScreenShot/Task3Method2Initial.png)
 
 ## Final Analysis
-![Final Analysis]("C:\C#\C#_Assignment\Demo_Asg\src\AssignmentTwele\OutputScreenShot\Task3-Method 2 Final.png")
+![Final Analysis](OutputScreenShot/Task3Method2Final.png")
 
