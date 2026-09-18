@@ -15,7 +15,7 @@ namespace AssignmentFifteen.BasicFileOperations
         /// <param name="filePath">path of the file</param>
         public StreamOptimizer(string filePath)
         {
-            _filePath = filePath;
+            this._filePath = filePath;
         }
 
         /// <summary>
@@ -27,13 +27,13 @@ namespace AssignmentFifteen.BasicFileOperations
 
             // To write
             byte[] buffer = Encoding.ASCII.GetBytes(data);
-            using (FileStream fileStream = new FileStream(_filePath, FileMode.OpenOrCreate))
+            using (FileStream fileStream = new FileStream(this._filePath, FileMode.OpenOrCreate))
             {
                 fileStream.Write(buffer, 0, buffer.Length);
             }
 
             // To Read
-            using (FileStream fileStream = new FileStream(_filePath, FileMode.Open))
+            using (FileStream fileStream = new FileStream(this._filePath, FileMode.Open))
             {
                 byte[] readBuffer = new byte[1024];
                 int bytesRead = 0;
