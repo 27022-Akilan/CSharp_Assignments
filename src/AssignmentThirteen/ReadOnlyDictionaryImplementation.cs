@@ -36,9 +36,17 @@
         private IReadOnlyDictionary<string, int> GenerateDictionary()
         {
             Dictionary<string, int> dictionary = new Dictionary<string, int>();
-            dictionary.Add("Apple", 10);
-            dictionary.Add("Banana", 32);
-            dictionary.Add("Grapes", 20);
+            try
+            {
+                dictionary.Add("Apple", 10);
+                dictionary.Add("Apple", 32);
+                dictionary.Add("Grapes", 20);
+            }
+            catch (ArgumentException ex)
+            {
+                Console.WriteLine(ex.Message);
+            }
+
             return dictionary;
         }
     }
