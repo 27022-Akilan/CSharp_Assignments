@@ -17,7 +17,7 @@ book1.Title = "LabView";
         }
 
         public string Title {get; set;}
-    }
+    }   
 ```
 
 You can also create a mutable record by but its record is not designed for that.

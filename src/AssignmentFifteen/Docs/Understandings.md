@@ -1,11 +1,11 @@
-﻿# Understandings – Stream optimizer and Logger optimizer
+﻿# Understandings
 
+# Stream optimizer 
 ## Writing to the File
 
 Initially, the code was using a `MemoryStream` before writing the data to the actual file.
 
-The flow was roughly:
-
+Its like,
 ```
 String -> byte[] -> MemoryStream -> Array -> Another byte[] -> FileStream -> File.
 ```
@@ -20,7 +20,7 @@ Encoding.ASCII.GetBytes(data)
 
 Since I already have the bytes, I can directly give them to the `FileStream`.
 
-So the simpler flow is:
+Now it becomes like,
 
 ```
 String -> byte[] -> FileStream -> File
@@ -243,6 +243,13 @@ For example:
 `User_2 → UserId_2_log.txt`
  
 This reduces contention between different users because they are writing to different files.
+
+So It doesn't gives me the overhead of using lock I don't need these , but when two log errors from 
+different threads came for a same user, then the race condition occurs as both tries to access the shared stream,
+To over come this,
+
+First I have created a Dictionary of user mapped with their own locks, so when the two threads of same user comes in
+we can handle by locking the critical section using the `userlock` but not by a global static `lock`.`
  
 ### 5. Created a Load Test
  
@@ -257,3 +264,20 @@ Compared their performance speed using the `Stopwatch` and noted the time differ
 So by using the different files its faster than the one which is using the same file.
 And `Different files` doesn't need `lock` mechanism as it works on different files , 
 If so same user works on different threads then its need a lock , but here the problem is not about that hence I didn't used it.
+
+
+## Difference between Synchronous and Asynchronous :
+
+Here asynchronous doesn't mean that it automatically fasts the performance or time consumption.
+
+When its Synchronous its flow will be like 
+
+```
+1.Read() -> 2.Reads file -> 3. Rest of the Method 
+```
+
+When thread enters the `2.Reads file` Section reading the file then the threads get blocked by this read operation,
+I will not do anything (idle state) till the read operation gets completed.
+
+But when its asynchronous rather than blocking the thread completely, the threads get some other work assigned by the thread pool manager,
+It goes and do some works , then when the operation gets completed same thread or some other thread can get back and resume it. 
