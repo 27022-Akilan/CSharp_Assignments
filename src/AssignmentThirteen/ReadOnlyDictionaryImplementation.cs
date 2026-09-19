@@ -6,7 +6,7 @@
     public class ReadOnlyDictionaryImplementation
     {
         /// <summary>
-        /// Creates performs operations on dictionary.
+        /// Creates and performs operations on dictionary.
         /// </summary>
         public void PerformOperations()
         {

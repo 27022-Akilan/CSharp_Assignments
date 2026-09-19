@@ -1,6 +1,4 @@
-﻿using AssignmentThirteen;
-
-namespace Assignments
+﻿namespace AssignmentThirteen
 {
     /// <summary>
     /// Represents the entry point of the application.

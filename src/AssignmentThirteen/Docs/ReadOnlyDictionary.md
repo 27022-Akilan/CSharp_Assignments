@@ -1,7 +1,7 @@
-﻿# ReadOnly Dictionary and ReadOnly Collection – My Understanding
+﻿# ReadOnly Dictionary – Understandings
  
 ## ReadOnly Dictionary
- 
+
 A `ReadOnlyDictionary<TKey, TValue>` is used when I want to expose a dictionary to another part of my application without allowing that code to modify it through the exposed reference.
  
 A normal `Dictionary` allows:
