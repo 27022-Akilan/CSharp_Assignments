@@ -26,7 +26,7 @@ namespace AssignmentFifteen.BasicFileOperations
         /// Writes the data into the file using FileStreamer.
         /// </summary>
         /// <returns>A Task object</returns>
-        public async Task Write()
+        public async Task WriteAsync()
         {
             const long oneGB = 1024 * 1024 * 1024;
             string data = "\nHii Buddy lets learn C#, Have a nice day.";
@@ -54,7 +54,7 @@ namespace AssignmentFifteen.BasicFileOperations
         /// Reading the file using the custom buffer.
         /// </summary>
         /// <returns>A task object.</returns>
-        public async Task ReadUsingCustomBuffer()
+        public async Task ReadUsingCustomBufferAsync()
         {
             using FileStream fileStream = new FileStream(this._inputFilePath, FileMode.Open, FileAccess.Read, FileShare.Read, bufferSize: 1024 * 1024, true);
             byte[] bytes = new byte[8];
@@ -75,10 +75,10 @@ namespace AssignmentFifteen.BasicFileOperations
         /// Reading the file using the custom buffer.
         /// </summary>
         /// <returns>A task object</returns>
-        public async Task ReadUsingBufferedStream()
+        public async Task ReadUsingBufferedStreamAsync()
         {
             using FileStream fileStream = new FileStream(this._inputFilePath, FileMode.Open, FileAccess.Read, FileShare.Read, bufferSize: 1024 * 1024, true);
-            using BufferedStream bufferedStream = new BufferedStream(fileStream);
+            using BufferedStream bufferedStream = new BufferedStream(fileStream, bufferSize: 1024 * 1024);
             byte[] bytes = new byte[8];
 
             Stopwatch stopwatch = new Stopwatch();
@@ -97,7 +97,7 @@ namespace AssignmentFifteen.BasicFileOperations
         /// To process the file contents taken from the file and process and put into other file.
         /// </summary>
         /// <returns>A task object.</returns>
-        public async Task ProcessUsingMemoryStream()
+        public async Task ProcessUsingMemoryStreamAsync()
         {
             int available;
             using FileStream inputFile = new FileStream(this._inputFilePath, FileMode.Open, FileAccess.Read, FileShare.Read, bufferSize: 1024 * 1024, true);

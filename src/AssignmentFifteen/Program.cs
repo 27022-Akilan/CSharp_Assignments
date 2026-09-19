@@ -34,8 +34,8 @@ namespace AssignmentFifteen
                                   "\nAsynchronous File operations" +
                                   "\n==================================");
                 AsynchronousFileOperator asynchronousFileOperator = new AsynchronousFileOperator(inputFilePath, destinationFilePath);
-                await asynchronousFileOperator.Write();
-                await Task.WhenAll(asynchronousFileOperator.ReadUsingBufferedStream(), asynchronousFileOperator.ReadUsingCustomBuffer(), asynchronousFileOperator.ProcessUsingMemoryStream());
+                await asynchronousFileOperator.WriteAsync();
+                await Task.WhenAll(asynchronousFileOperator.ReadUsingBufferedStreamAsync(), asynchronousFileOperator.ReadUsingCustomBufferAsync(), asynchronousFileOperator.ProcessUsingMemoryStreamAsync());
 
                 Console.WriteLine("==================================" +
                                   "\n      Optimizing stream" +
