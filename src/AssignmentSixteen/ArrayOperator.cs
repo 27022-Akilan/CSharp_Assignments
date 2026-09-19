@@ -11,9 +11,9 @@
         /// <param name="array">Array of integers in which operations to be performed.</param>
         public void PerformOperations(int[] array)
         {
-            this.DisplayArray(array, "\nThe original array is : ");
-            int[] sortedArray = this.SortArray(array);
-            this.DisplayArray(sortedArray, "\nThe sorted array is : ");
+            DisplayArray(array, "\nThe original array is : ");
+            int[] sortedArray = SortArray(array);
+            DisplayArray(sortedArray, "\nThe sorted array is : ");
         }
 
         /// <summary>

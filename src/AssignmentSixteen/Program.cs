@@ -16,37 +16,75 @@ namespace Assignments
         /// <param name="args">Default arguments.</param>
         public static void Main(string[] args)
         {
+            PerformTask1();
+            PerformTask3();
+            PerformTask4();
+            PerformTask5();
+            PerformTask6();
+            PerformTask7();
+        }
+
+        private static void PerformTask1()
+        {
+            Console.WriteLine("=====Task 1=====");
             Notifier notifier = new Notifier();
             notifier.OnAction += DisplayMessage;
             notifier.SendNotification();
             WaitAndClear();
+        }
 
+        private static void PerformTask3()
+        {
+            Console.WriteLine("=====Task 3=====");
             ArrayOperator arrayOperator = new ArrayOperator();
             arrayOperator.PerformOperations(new int[] { 6, 5, 4, 3, 2, 1 });
             WaitAndClear();
+        }
 
+        private static void PerformTask4()
+        {
+            Console.WriteLine("=====Task 4=====");
             ListOperator listOperator = new ListOperator();
             listOperator.FilterAndSquareEvenNumbers(new List<int> { 1, 2, 3, 4, 5, 6 });
             WaitAndClear();
+        }
 
+        private static void PerformTask5()
+        {
+            Console.WriteLine("=====Task 5=====");
             ProductManager productManager = new ProductManager();
             List<Product> products = productManager.CreateProducts();
+            Console.WriteLine("\n\n====Sorts by Name====\n\n");
             productManager.SortAndDisplayProducts(products, SortByName);
+            Console.WriteLine("\n\n====Sorts by Category====\n\n");
             productManager.SortAndDisplayProducts(products, SortByCategory);
+            Console.WriteLine("\n\n====Sorts by Price====\n\n");
             productManager.SortAndDisplayProducts(products, SortByPrice);
             WaitAndClear();
+        }
 
+        private static void PerformTask6()
+        {
+            Console.WriteLine("=====Task 6=====");
             Book book1 = new Book("Clean Code", "Kavin", "BCC1");
             Book book2 = new Book("MVC", "Akilan", "BMVC101");
             Book book3 = new Book("Clean Code", "Kavin", "BCC1");
+            Console.WriteLine("\n==== Books List ====");
             DisplayBook(book1);
             DisplayBook(book2);
             DisplayBook(book3);
+            Console.WriteLine("\n==== Comparing Books ====");
             CompareBookValues(book1, book2);
+            Console.WriteLine("\n==== Comparing Books ====");
             CompareBookValues(book1, book3);
+            Console.WriteLine("\n==== Changing book details using 'with{}'====");
             ChangeBookDetailsAndDisplay();
             WaitAndClear();
+        }
 
+        private static void PerformTask7()
+        {
+            Console.WriteLine("=====Task 7=====");
             List<Shape> shapes = new List<Shape>();
             Shape rectangle = new Rectangle("Rectangle", 5, 4);
             Shape circle = new Circle("Circle", 5);
@@ -59,68 +97,48 @@ namespace Assignments
             {
                 DisplayShapeDetails(shape);
             }
+
+            WaitAndClear();
         }
 
-        public static void DisplayShapeDetails(Shape shape)
+        private static void DisplayShapeDetails(Shape shape)
         {
             switch (shape)
             {
-                case Circle:
-                    var circle = shape as Circle;
-                    circle.Name;
-
+                case Circle circle:
+                    Console.WriteLine($"Name : {circle.Name} | Radius : {circle.Radius}| Area of the circle : {circle.CalculateArea()}");
+                    break;
+                case Triangle triangle:
+                    Console.WriteLine($"Name : {triangle.Name} | Base Length : {triangle.BaseLength} | Height : {triangle.Height} | Area of Triangle : {triangle.CalculateArea()}");
+                    break;
+                case Rectangle rectangle:
+                    Console.WriteLine($"Name: {rectangle.Name} | Base Length: {rectangle.Length} | Height : {rectangle.Breadth} | Area of Triangle : {rectangle.CalculateArea()}");
+                    break;
+                case null:
+                    Console.WriteLine("Shape cant be null !!");
+                    break;
+                default:
+                    Console.WriteLine("No properties are defined for this shape");
+                    break;
             }
         }
-        /// <summary>
-        /// Displays the message to the user.
-        /// </summary>
-        /// <param name="message">Message to be displayed.</param>
-        public static void DisplayMessage(string message)
+
+        private static void DisplayMessage(string message)
         {
             Console.WriteLine(message);
         }
 
-        /// <summary>
-        /// Compares product by name and returns an integer representing the result.
-        /// </summary>
-        /// <param name="product1">Product 1</param>
-        /// <param name="product2">Product 2</param>
-        /// <returns>
-        /// -1 if product 1 name is smaller than product 2 name
-        /// 0 If two products names are equal
-        /// 1 otherwise
-        /// </returns>
-        public static int SortByName(Product product1, Product product2)
+        private static int SortByName(Product product1, Product product2)
         {
             return string.Compare(product1.Name, product2.Name);
         }
 
-        /// <summary>
-        /// Compares product by category and returns an integer representing the result.
-        /// </summary>
-        /// <param name="product1">Product 1</param>
-        /// <param name="product2">Product 2</param>
-        /// <returns>
-        /// -1 if product 1 category is smaller than product 2 category
-        /// 0 If two products category are equal
-        /// 1 otherwise
-        /// </returns>
-        public static int SortByCategory(Product product1, Product product2)
+        private static int SortByCategory(Product product1, Product product2)
         {
             return string.Compare(product1.Category, product2.Category);
         }
 
-        /// <summary>
-        /// Compares product by price and returns an integer representing the result.
-        /// </summary>
-        /// <param name="product1">Product 1</param>
-        /// <param name="product2">Product 2</param>
-        /// <returns>
-        /// -1 if product 1 price is smaller than product 2 price
-        /// 0 If two products price are equal
-        /// 1 otherwise
-        /// </returns>
-        public static int SortByPrice(Product product1, Product product2)
+        private static int SortByPrice(Product product1, Product product2)
         {
             return product1.Price.CompareTo(product2.Price);
         }
@@ -161,7 +179,7 @@ namespace Assignments
         private static void WaitAndClear()
         {
             Console.ForegroundColor = ConsoleColor.DarkGray;
-            Console.WriteLine("Press Any key to continue..");
+            Console.WriteLine("\nPress Any key to continue..");
             Console.ResetColor();
             Console.ReadKey();
             Console.Clear();

@@ -13,9 +13,9 @@
         /// <param name="price">Price of the product.</param>
         public Product(string name, string category, decimal price)
         {
-            this.Name = name;
-            this.Category = category;
-            this.Price = price;
+            Name = name;
+            Category = category;
+            Price = price;
         }
 
         /// <summary>

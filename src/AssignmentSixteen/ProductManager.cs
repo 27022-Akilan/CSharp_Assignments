@@ -38,7 +38,7 @@
         public void SortAndDisplayProducts(List<Product> products, SortDelegate sortDelegate)
         {
             products.Sort((product1, product2) => sortDelegate(product1, product2));
-            this.DisplayProducts(products);
+            DisplayProducts(products);
         }
 
         private void DisplayProducts(List<Product> products)
