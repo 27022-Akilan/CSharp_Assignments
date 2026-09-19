@@ -7,7 +7,7 @@ namespace AssignmentFifteen.LoggerImplementation
     /// </summary>
     public class Logger
     {
-        private static readonly object _lock = new object();
+        private static readonly Dictionary<string, object> _userLocks = new Dictionary<string, object>();
 
         private string _commonFileNameExtension = "log.txt";
 
@@ -18,13 +18,27 @@ namespace AssignmentFifteen.LoggerImplementation
         /// <param name="userId">Unique id of the user.</param>
         public void LogError(string message, string userId)
         {
-            string userFile = userId + "_" + this._commonFileNameExtension;
-            byte[] errorBuffer = Encoding.UTF8.GetBytes(message);
-            using (FileStream fileStream = new FileStream(userFile, FileMode.Append))
+            object? userLock;
+
+            lock (_userLocks)
             {
-                Console.WriteLine($"User Id :{userId}....Writing into the file !!");
-                fileStream.Write(errorBuffer, 0, errorBuffer.Length);
-                Console.WriteLine($"User Id :{userId}....Written successfully !!");
+                if (!_userLocks.TryGetValue(userId, out userLock))
+                {
+                    userLock = new object();
+                    _userLocks[userId] = userLock;
+                }
+            }
+
+            lock (userLock)
+            {
+                string userFile = userId + "_" + this._commonFileNameExtension;
+                byte[] errorBuffer = Encoding.UTF8.GetBytes(message);
+                using (FileStream fileStream = new FileStream(userFile, FileMode.Append))
+                {
+                    Console.WriteLine($"User Id :{userId}....Writing into the file !!");
+                    fileStream.Write(errorBuffer, 0, errorBuffer.Length);
+                    Console.WriteLine($"User Id :{userId}....Written successfully !!");
+                }
             }
         }
     }

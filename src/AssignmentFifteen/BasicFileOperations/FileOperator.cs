@@ -74,8 +74,8 @@ namespace AssignmentFifteen.BasicFileOperations
         /// </summary>
         public void ReadUsingBufferedStream()
         {
-            using FileStream fileStream = new FileStream(this._inputFilePath, FileMode.Open, FileAccess.Read, FileShare.Read, bufferSize: 1024 * 1024);
-            using BufferedStream bufferedStream = new BufferedStream(fileStream);
+            using FileStream fileStream = new FileStream(this._inputFilePath, FileMode.Open, FileAccess.Read);
+            using BufferedStream bufferedStream = new BufferedStream(fileStream, bufferSize: 1024 * 1024);
             byte[] bytes = new byte[8];
 
             Stopwatch stopwatch = new Stopwatch();
