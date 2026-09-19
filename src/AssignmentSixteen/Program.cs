@@ -16,15 +16,15 @@ namespace Assignments
         /// <param name="args">Default arguments.</param>
         public static void Main(string[] args)
         {
-            PerformTask1();
-            PerformTask3();
-            PerformTask4();
-            PerformTask5();
-            PerformTask6();
-            PerformTask7();
+            PerformEventsTask();
+            PerformArrayOperations();
+            PerformListOperations();
+            PerformDelegateOperations();
+            PerformRecordOperations();
+            PerformPatternMatching();
         }
 
-        private static void PerformTask1()
+        private static void PerformEventsTask()
         {
             Console.WriteLine("=====Task 1=====");
             Notifier notifier = new Notifier();
@@ -33,7 +33,7 @@ namespace Assignments
             WaitAndClear();
         }
 
-        private static void PerformTask3()
+        private static void PerformArrayOperations()
         {
             Console.WriteLine("=====Task 3=====");
             ArrayOperator arrayOperator = new ArrayOperator();
@@ -41,7 +41,7 @@ namespace Assignments
             WaitAndClear();
         }
 
-        private static void PerformTask4()
+        private static void PerformListOperations()
         {
             Console.WriteLine("=====Task 4=====");
             ListOperator listOperator = new ListOperator();
@@ -49,7 +49,7 @@ namespace Assignments
             WaitAndClear();
         }
 
-        private static void PerformTask5()
+        private static void PerformDelegateOperations()
         {
             Console.WriteLine("=====Task 5=====");
             ProductManager productManager = new ProductManager();
@@ -63,7 +63,7 @@ namespace Assignments
             WaitAndClear();
         }
 
-        private static void PerformTask6()
+        private static void PerformRecordOperations()
         {
             Console.WriteLine("=====Task 6=====");
             Book book1 = new Book("Clean Code", "Kavin", "BCC1");
@@ -82,7 +82,7 @@ namespace Assignments
             WaitAndClear();
         }
 
-        private static void PerformTask7()
+        private static void PerformPatternMatching()
         {
             Console.WriteLine("=====Task 7=====");
             List<Shape> shapes = new List<Shape>();

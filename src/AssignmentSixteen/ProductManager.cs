@@ -1,9 +1,12 @@
 ﻿namespace AssignmentSixteen
 {
+    /// <summary>
+    /// Represents the management of products.
+    /// </summary>
     public class ProductManager
     {
         /// <summary>
-        /// Sorting delegate that takes two products ans returns an int representing the result.
+        /// Sorting delegate that takes two products and returns an int representing the result.
         /// </summary>
         /// <param name="product1">Product 1</param>
         /// <param name="product2">Product 2</param>
