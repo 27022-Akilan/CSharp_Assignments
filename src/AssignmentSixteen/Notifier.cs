@@ -21,7 +21,7 @@
         /// </summary>
         public void SendNotification()
         {
-            OnAction?.Invoke("Notification arrived !!");
+            this.OnAction?.Invoke("Notification arrived !!");
         }
     }
 }
