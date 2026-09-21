@@ -25,7 +25,7 @@
         {
             Array.Sort(array, (a, b) =>
             {
-                return a - b;
+                return a.CompareTo(b);
             });
 
             return array;

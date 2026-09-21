@@ -78,7 +78,7 @@ namespace Assignments
             Console.WriteLine("\n==== Comparing Books ====");
             CompareBookValues(book1, book3);
             Console.WriteLine("\n==== Changing book details using 'with{}'====");
-            ChangeBookDetailsAndDisplay();
+            UpdateBookAndDisplay();
             WaitAndClear();
         }
 
@@ -166,7 +166,7 @@ namespace Assignments
             Console.WriteLine($"ISBN : {isbn}");
         }
 
-        private static void ChangeBookDetailsAndDisplay()
+        private static void UpdateBookAndDisplay()
         {
             Book originalBook = new Book("C++", "Kavin", "Cpp101");
             Console.WriteLine("Original book before with operator : ");
