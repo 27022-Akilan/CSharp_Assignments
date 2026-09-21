@@ -1,4 +1,4 @@
-﻿namespace AssignmentSixteen.Task7
+﻿namespace AssignmentSixteen.Models.Shapes
 {
     /// <summary>
     /// Represents the Triangle properties.
@@ -14,8 +14,8 @@
         public Triangle(string name, decimal baseLength, decimal height)
             : base(name)
         {
-            this.BaseLength = baseLength;
-            this.Height = height;
+            BaseLength = baseLength;
+            Height = height;
         }
 
         /// <summary>
@@ -36,7 +36,16 @@
         /// <returns>Decimal - Returns the area of the triangle</returns>
         public override decimal CalculateArea()
         {
-            return 0.5m * this.BaseLength * this.Height;
+            return 0.5m * BaseLength * Height;
+        }
+
+        /// <inheritdoc/>
+        public override void DisplayDetails()
+        {
+            Console.WriteLine($"Shape name :{Name}" +
+                              $"\nBase Length of the {Name} : {BaseLength}" +
+                              $"\nHeight of the {Name} : {Height}" +
+                              $"\nArea : {CalculateArea()}");
         }
     }
 }

@@ -1,4 +1,7 @@
-﻿namespace AssignmentSixteen
+﻿using AssignmentSixteen.Helper;
+using AssignmentSixteen.Models;
+
+namespace AssignmentSixteen.Task5
 {
     /// <summary>
     /// Represents the management of products.
@@ -16,10 +19,22 @@
         public delegate int SortDelegate(Product product1, Product product2);
 
         /// <summary>
-        /// Creates a list of products.
+        /// Performs operations on List of products ad use delegates to sort them.
         /// </summary>
-        /// <returns>List of products.</returns>
-        public List<Product> CreateProducts()
+        public void PerformDelegateOperation()
+        {
+            Console.WriteLine("=== Task 5 ===");
+            List<Product> products = this.CreateProducts();
+            Console.WriteLine("\n\n====Sorts by Name====\n\n");
+            this.SortAndDisplayProducts(products, this.SortByName);
+            Console.WriteLine("\n\n====Sorts by Category====\n\n");
+            this.SortAndDisplayProducts(products, this.SortByCategory);
+            Console.WriteLine("\n\n====Sorts by Price====\n\n");
+            this.SortAndDisplayProducts(products, this.SortByPrice);
+            ConsoleHelper.WaitAndClear();
+        }
+
+        private List<Product> CreateProducts()
         {
             List<Product> products = new List<Product>()
             {
@@ -33,18 +48,28 @@
             return products;
         }
 
-        /// <summary>
-        /// Sorts the products based on the comparator function (sortDelegate) and displays the products in sorted order.
-        /// </summary>
-        /// <param name="products">List of products to be sorted</param>
-        /// <param name="sortDelegate">Delegate representing the particular compare parameter.</param>
-        public void SortAndDisplayProducts(List<Product> products, SortDelegate sortDelegate)
+        private void SortAndDisplayProducts(List<Product> products, SortDelegate sortDelegate)
         {
             products.Sort((product1, product2) => sortDelegate(product1, product2));
             this.DisplayProducts(products);
         }
 
-        private void DisplayProducts(List<Product> products)
+        private int SortByName(Product product1, Product product2)
+        {
+            return string.Compare(product1.Name, product2.Name);
+        }
+
+        private int SortByCategory(Product product1, Product product2)
+        {
+            return string.Compare(product1.Category, product2.Category);
+        }
+
+        private int SortByPrice(Product product1, Product product2)
+        {
+            return product1.Price.CompareTo(product2.Price);
+        }
+
+        private void DisplayProducts(IEnumerable<Product> products)
         {
             foreach (Product product in products)
             {

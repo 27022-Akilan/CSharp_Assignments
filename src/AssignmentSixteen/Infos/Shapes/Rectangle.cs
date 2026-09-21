@@ -1,4 +1,4 @@
-﻿namespace AssignmentSixteen.Task7
+﻿namespace AssignmentSixteen.Models.Shapes
 {
     /// <summary>
     /// Represents rectangle properties.
@@ -14,8 +14,8 @@
         public Rectangle(string name, decimal length, decimal breadth)
             : base(name)
         {
-            this.Length = length;
-            this.Breadth = breadth;
+            Length = length;
+            Breadth = breadth;
         }
 
         /// <summary>
@@ -37,6 +37,15 @@
         public override decimal CalculateArea()
         {
             return Length * Breadth;
+        }
+
+        /// <inheritdoc/>
+        public override void DisplayDetails()
+        {
+            Console.WriteLine($"Shape name :{Name}" +
+                              $"\nLength of the {Name} : {Length}" +
+                              $"\nBreadth of the {Name} : {Breadth}" +
+                              $"\nArea : {CalculateArea()}");
         }
     }
 }

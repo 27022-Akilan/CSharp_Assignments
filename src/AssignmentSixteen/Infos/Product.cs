@@ -1,4 +1,4 @@
-﻿namespace AssignmentSixteen
+﻿namespace AssignmentSixteen.Models
 {
     /// <summary>
     /// Represents the product information.

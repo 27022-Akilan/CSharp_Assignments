@@ -1,4 +1,4 @@
-﻿namespace AssignmentSixteen.Task7
+﻿namespace AssignmentSixteen.Models.Shapes
 {
     /// <summary>
     /// Represents a generic Shape with basic properties and methods.
@@ -11,7 +11,7 @@
         /// <param name="name">Name of the shape</param>
         public Shape(string name)
         {
-            this.Name = name;
+            Name = name;
         }
 
         /// <summary>
@@ -25,5 +25,10 @@
         /// </summary>
         /// <returns>decimal</returns>
         public abstract decimal CalculateArea();
+
+        /// <summary>
+        /// Displays the details of the Shape.
+        /// </summary>
+        public abstract void DisplayDetails();
     }
 }

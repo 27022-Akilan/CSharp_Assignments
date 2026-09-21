@@ -1,9 +1,9 @@
-﻿namespace AssignmentSixteen
+﻿namespace AssignmentSixteen.Task3
 {
     /// <summary>
     /// Represents the array operations.
     /// </summary>
-    public class ArrayOperator
+    public class ArrayManager
     {
         /// <summary>
         /// Performs operations on the array.
@@ -11,9 +11,10 @@
         /// <param name="array">Array of integers in which operations to be performed.</param>
         public void PerformOperations(int[] array)
         {
-            this.DisplayArray(array, "\nThe original array is : ");
+            Console.WriteLine("=====Task 3=====");
+            this.DisplayArray("\nThe original array is : ", array);
             int[] sortedArray = this.SortArray(array);
-            this.DisplayArray(sortedArray, "\nThe sorted array is : ");
+            this.DisplayArray("\nThe sorted array is : ", sortedArray);
         }
 
         /// <summary>
@@ -31,7 +32,7 @@
             return array;
         }
 
-        private void DisplayArray(int[] array, string message)
+        private void DisplayArray(string message, int[] array)
         {
             Console.WriteLine(message);
             foreach (int number in array)

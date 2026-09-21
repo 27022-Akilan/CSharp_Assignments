@@ -1,4 +1,4 @@
-﻿namespace AssignmentSixteen
+﻿namespace AssignmentSixteen.Task1
 {
     /// <summary>
     /// Represents the notification operations.
@@ -21,7 +21,7 @@
         /// </summary>
         public void SendNotification()
         {
-            this.OnAction?.Invoke("Notification arrived !!");
+            OnAction?.Invoke("Notification arrived !!");
         }
     }
 }

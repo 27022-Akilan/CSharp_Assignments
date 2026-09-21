@@ -1,4 +1,4 @@
-﻿namespace AssignmentSixteen.Task7
+﻿namespace AssignmentSixteen.Models.Shapes
 {
     /// <summary>
     /// Represents Circle properties.
@@ -13,7 +13,7 @@
         public Circle(string name, decimal radius)
             : base(name)
         {
-            this.Radius = radius;
+            Radius = radius;
         }
 
         /// <summary>
@@ -28,7 +28,15 @@
         /// <returns>Decimal - Returns the area of the circle</returns>
         public override decimal CalculateArea()
         {
-            return (decimal)Math.PI * this.Radius * this.Radius;
+            return (decimal)Math.PI * Radius * Radius;
+        }
+
+        /// <inheritdoc/>
+        public override void DisplayDetails()
+        {
+            Console.WriteLine($"Shape name :{Name}" +
+                              $"\nRadius of the {Name} : {Radius}" +
+                              $"\nArea : {CalculateArea()}");
         }
     }
 }
