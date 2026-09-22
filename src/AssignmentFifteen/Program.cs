@@ -33,7 +33,7 @@ namespace AssignmentFifteen
                 Console.WriteLine("==================================" +
                                   "\nAsynchronous File operations" +
                                   "\n==================================");
-                AsynchronousFileOperator asynchronousFileOperator = new AsynchronousFileOperator(inputFilePath, destinationFilePath);
+                OptimizedFileOperator asynchronousFileOperator = new OptimizedFileOperator(inputFilePath, destinationFilePath);
                 await asynchronousFileOperator.WriteAsync();
                 await Task.WhenAll(asynchronousFileOperator.ReadUsingBufferedStreamAsync(), asynchronousFileOperator.ReadUsingCustomBufferAsync(), asynchronousFileOperator.ProcessUsingMemoryStreamAsync());
 

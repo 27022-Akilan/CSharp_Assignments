@@ -5,18 +5,18 @@ namespace AssignmentFifteen.BasicFileOperations
 {
     /// <summary>
     /// Represents the operations on the file.
-    /// </summary>
-    public class AsynchronousFileOperator
+    /// </summary>s
+    public class OptimizedFileOperator
     {
         private readonly string _inputFilePath;
         private readonly string _destinationFilePath;
 
         /// <summary>
-        /// Initializes a new instance of the <see cref="AsynchronousFileOperator"/> class.
+        /// Initializes a new instance of the <see cref="OptimizedFileOperator"/> class.
         /// </summary>
         /// <param name="inputFilePath">Relative path of the file.</param>
         /// <param name="destinationFilePath">Relative path of the destination file.</param>
-        public AsynchronousFileOperator(string inputFilePath, string destinationFilePath)
+        public OptimizedFileOperator(string inputFilePath, string destinationFilePath)
         {
             this._inputFilePath = inputFilePath;
             this._destinationFilePath = destinationFilePath;
