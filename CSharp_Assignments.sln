@@ -46,11 +46,6 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "GarbageCollector", "src\Gar
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "IDisposableDemo", "src\IDisposableDemo\IDisposableDemo.csproj", "{983BE90F-5085-42BF-9168-4754B9FE1BBE}"
 EndProject
-Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Documents (2)", "Documents (2)", "{0ED9021F-425A-4FCC-BC1D-9BDA37EB6BBE}"
-	ProjectSection(SolutionItems) = preProject
-		Understandings.md = Understandings.md
-	EndProjectSection
-EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
