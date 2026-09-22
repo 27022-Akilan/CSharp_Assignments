@@ -1,0 +1,136 @@
+﻿using AssignmentFour.Constants;
+using AssignmentFour.Model;
+using AssignmentFour.Model.Enums;
+
+namespace AssignmentFour.Repository
+{
+    /// <summary>
+    /// Repository for storing the Transaction Details.
+    /// </summary>
+    public class TransactionRepository : IRepository
+    {
+        private List<Transaction> _transactionList = new List<Transaction>();
+
+        /// <summary>
+        /// Adds the transaction to the repository.
+        /// </summary>
+        /// <param name="transaction">Transaction object</param>
+        /// <returns>A message that tells about the result of Adding the Transaction</returns>
+        public string AddTransaction(Transaction transaction)
+        {
+            this._transactionList.Add(transaction);
+
+            return ResultMessages.AddSuccess;
+        }
+
+        /// <summary>
+        /// To update the existing Transaction.
+        /// </summary>
+        /// <param name="transaction">Edited details of the Income</param>
+        /// <returns>True - Updated Successfully | False - Cannot Update</returns>
+        public bool UpdateIncome(Income transaction)
+        {
+            Income? toBeUpdatedExpense = (Income?)this._transactionList.FirstOrDefault(t => t.TransactionId == transaction.TransactionId && t.TransactionType == transaction.TransactionType);
+            if (toBeUpdatedExpense == null)
+            {
+                return false;
+            }
+
+            toBeUpdatedExpense.Amount = transaction.Amount;
+            toBeUpdatedExpense.Date = transaction.Date;
+            toBeUpdatedExpense.Description = transaction.Description;
+            toBeUpdatedExpense.Source = transaction.Source;
+            return true;
+        }
+
+        /// <summary>
+        /// To update the existing Transaction.
+        /// </summary>
+        /// <param name="transaction">Edited details of the Expense</param>
+        /// <returns>True - Updated Successfully | False - Cannot Update</returns>
+        public bool UpdateExpense(Expense transaction)
+        {
+            Expense? toBeUpdatedExpense = (Expense?)this._transactionList.FirstOrDefault(t => t.TransactionId == transaction.TransactionId && t.TransactionType == transaction.TransactionType);
+            if (toBeUpdatedExpense == null)
+            {
+                return false;
+            }
+
+            toBeUpdatedExpense.Amount = transaction.Amount;
+            toBeUpdatedExpense.Date = transaction.Date;
+            toBeUpdatedExpense.Description = transaction.Description;
+            toBeUpdatedExpense.Category = transaction.Category;
+            return true;
+        }
+
+        /// <summary>
+        /// To delete the Transaction using Id
+        /// </summary>
+        /// <param name="transactionId">Id of the transaction to be deleted</param>
+        /// <returns>True if the transaction is found and deleted | False if the transaction cannot be deleted</returns>
+        public bool DeleteTransactionById(Guid transactionId)
+        {
+            Transaction? transaction = this._transactionList.FirstOrDefault(t => t.TransactionId == transactionId);
+            if (transaction == null)
+            {
+                return false;
+            }
+
+            this._transactionList.Remove(transaction);
+            return true;
+        }
+
+        /// <summary>
+        /// Shows the entire transactions
+        /// </summary>
+        /// <returns>A cloned copy of all all transactions </returns>
+        public IEnumerable<Transaction> GetAllTransactions()
+        {
+            return this._transactionList.Select(t => t.CloneTransaction());
+        }
+
+        /// <summary>
+        /// Shows the transactions of the desired type.
+        /// </summary>
+        /// <param name="type">Type of transactions to retrieve</param>
+        /// <returns>IEnumerable list of Transactions of the specified type</returns>
+        public IEnumerable<Transaction> GetTransactionsByType(TransactionType type)
+        {
+            return this._transactionList.Where(t => t.TransactionType == type)
+                                        .Select(t => t.CloneTransaction());
+        }
+
+        /// <summary>
+        /// Shows the transactions of the desired amount
+        /// </summary>
+        /// <param name="amount">Amount of transactions to retrieve</param>
+        /// <returns>IEnumerable list of Transactions of the specified amount</returns>
+        public IEnumerable<Transaction> GetTransactionsByAmount(decimal amount)
+        {
+            return this._transactionList.Where(t => t.Amount == amount)
+                                        .Select(t => t.CloneTransaction());
+        }
+
+        /// <summary>
+        /// Shows the transactions of the desired description
+        /// </summary>
+        /// <param name="description">Description of transactions to retrieve</param>
+        /// <returns>IEnumerable list of Transactions of the specified description</returns>
+        public IEnumerable<Transaction> GetTransactionsByDescription(string description)
+        {
+            return this._transactionList.Where(t => t.Description.Contains(description))
+                                        .Select(t => t.CloneTransaction());
+        }
+
+        /// <summary>
+        /// Shows the transactions of the desired date
+        /// </summary>
+        /// <param name="date">Date of the transactions to retrieve</param>s
+        /// <returns>IEnumerable list of Transactions of the specified date</returns>
+        public IEnumerable<Transaction> GetTransactionsByDate(DateOnly date)
+        {
+            return this._transactionList.Where(t => t.Date == date)
+                                        .Select(t => t.CloneTransaction());
+        }
+    }
+}
