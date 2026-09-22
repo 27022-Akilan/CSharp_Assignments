@@ -1,4 +1,5 @@
 ﻿using AssignmentFour.Constants;
+using AssignmentFour.Enums;
 using AssignmentFour.Model.Enums;
 using AssignmentFour.Service;
 
@@ -7,7 +8,7 @@ namespace AssignmentFour.View
     /// <summary>
     /// Gets the User input and Validate
     /// </summary>
-    public class InputView
+    public class InputReader
     {
         private const int MaxTries = Value.MaximumTries;
 
@@ -23,10 +24,10 @@ namespace AssignmentFour.View
         private readonly record struct ValidationMessages(string parseError, string validationError);
 
         /// <summary>
-        /// Initializes a new instance of the <see cref="InputView"/> class
+        /// Initializes a new instance of the <see cref="InputReader"/> class
         /// </summary>
         /// <param name="service">Service instance</param>
-        public InputView(TransactionService service)
+        public InputReader(TransactionService service)
         {
             this._service = service;
         }
@@ -42,7 +43,7 @@ namespace AssignmentFour.View
                 prompt,
                 decimal.TryParse,
                 this._service.IsValidAmount,
-                new ValidationMessages(Messages.InvalidAmountFormat, Messages.ValidationErrorOnAmount),
+                new ValidationMessages(ResultMessages.InvalidAmountFormat, ResultMessages.InvalidAmount),
                 out amount);
 
         /// <summary>
@@ -61,7 +62,7 @@ namespace AssignmentFour.View
                     return true;
                 },
                 d => !string.IsNullOrWhiteSpace(d),
-                new ValidationMessages(string.Empty, Messages.ValidationErrorOnDescription),
+                new ValidationMessages(string.Empty, ResultMessages.InvalidDescription),
                 out description);
 
         /// <summary>
@@ -75,7 +76,7 @@ namespace AssignmentFour.View
                 prompt,
                 DateOnly.TryParse,
                 this._service.IsValidDate,
-                new ValidationMessages(Messages.InvalidDateFormat, Messages.ValidationErrorOnDate),
+                new ValidationMessages(ResultMessages.InvalidDateFormat, ResultMessages.InvalidDate),
                 out date);
 
         /// <summary>

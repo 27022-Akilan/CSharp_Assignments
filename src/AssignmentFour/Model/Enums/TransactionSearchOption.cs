@@ -6,27 +6,27 @@
     public enum TransactionSearchOption
     {
         /// <summary>
-        /// Option for searching a transaction by type.
+        /// Option to search transaction by type.
         /// </summary>
         ByType = 1,
 
         /// <summary>
-        /// Option for searching a transaction by amount.
+        /// Option to search transaction by amount.
         /// </summary>
         ByAmount,
 
         /// <summary>
-        /// Option for searching a transaction by description.
+        /// Option to search transaction by description.
         /// </summary>
         ByDescription,
 
         /// <summary>
-        /// Option for searching a transaction by date.
+        /// Option to search a transaction by date.
         /// </summary>
         ByDate,
 
         /// <summary>
-        /// Option for exiting the search menu.
+        /// Option to exit the search menu.
         /// </summary>
         Exit,
     }

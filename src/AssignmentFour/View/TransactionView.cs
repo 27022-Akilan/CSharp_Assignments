@@ -1,4 +1,5 @@
 ﻿using AssignmentFour.Constants;
+using AssignmentFour.Enums;
 using AssignmentFour.Model;
 using AssignmentFour.Model.Enums;
 using AssignmentFour.Model.RequestModel;
@@ -12,7 +13,7 @@ namespace AssignmentFour.View
     /// </summary>
     public class TransactionView
     {
-        private readonly InputView _getValidInput;
+        private readonly InputReader _getValidInput;
 
         private readonly TransactionService _service;
 
@@ -21,7 +22,7 @@ namespace AssignmentFour.View
         /// </summary>
         /// <param name="service">Instance of the Service Layer</param>
         /// <param name="getValidInput">Instance of the Input view Layer</param>
-        public TransactionView(TransactionService service, InputView getValidInput)
+        public TransactionView(TransactionService service, InputReader getValidInput)
         {
             this._service = service;
             this._getValidInput = getValidInput;
@@ -91,7 +92,7 @@ namespace AssignmentFour.View
         /// <summary>
         /// Displays the main menu
         /// </summary>
-        public void DisplayMenu()
+        private void DisplayMenu()
         {
             Helper.DisplayInfoMessage("\t\t\t\t\tTrack Every Rupee and Grow Every Dream");
             Console.WriteLine(
@@ -111,7 +112,7 @@ namespace AssignmentFour.View
         /// <summary>
         /// Handles adding an Income transaction
         /// </summary>
-        public void AddIncome()
+        private void AddIncome()
         {
             if (!this.TryReadCommonFields(
                 "Enter the Amount for Income:",
@@ -134,7 +135,7 @@ namespace AssignmentFour.View
             IncomeRequestModel incomeRequest = new IncomeRequestModel(amount, description, date, source);
             string result = this._service.AddTransaction(incomeRequest);
 
-            if (result == Messages.AddSuccess)
+            if (result == ResultMessages.AddSuccess)
             {
                 Helper.DisplaySuccessMessage(result);
             }
@@ -147,7 +148,7 @@ namespace AssignmentFour.View
         /// <summary>
         /// Handles adding an Expense transaction
         /// </summary>
-        public void AddExpense()
+        private void AddExpense()
         {
             if (!this.TryReadCommonFields(
                 "Enter the Amount for Expense:",
@@ -170,7 +171,7 @@ namespace AssignmentFour.View
             ExpenseRequestModel expenseRequest = new ExpenseRequestModel(amount, description, date, category);
             string result = this._service.AddTransaction(expenseRequest);
 
-            if (result == Messages.AddSuccess)
+            if (result == ResultMessages.AddSuccess)
             {
                 Helper.DisplaySuccessMessage(result);
             }
@@ -183,7 +184,7 @@ namespace AssignmentFour.View
         /// <summary>
         /// Updates an existing transaction. Asks Y/N per field for editing.
         /// </summary>
-        public void UpdateTransaction()
+        private void UpdateTransaction()
         {
             IEnumerable<Transaction> transactions = this._service.GetAllTransactions().ToList();
             if (transactions.Count() == 0)
@@ -287,7 +288,7 @@ namespace AssignmentFour.View
         /// <summary>
         /// Displays the search options for transactions
         /// </summary>
-        public void SearchTransaction()
+        private void SearchTransaction()
         {
             Console.WriteLine("Search By:" +
                 "\n1. Type (Income/Expense)" +
@@ -328,7 +329,7 @@ namespace AssignmentFour.View
         /// <summary>
         /// Searches transactions by their type (Income or Expense) and displays the results.
         /// </summary>
-        public void SearchByType()
+        private void SearchByType()
         {
             if (!this._getValidInput.TryReadType("Enter the type of transaction to search (Income/Expense):", out TransactionType type))
             {
@@ -337,19 +338,13 @@ namespace AssignmentFour.View
             }
 
             IEnumerable<Transaction> result = this._service.GetTransactionsByType(type);
-            if (!result.Any())
-            {
-                Helper.DisplayInfoMessage($"No transactions found for type: {type}");
-                return;
-            }
-
             this.DisplayTransaction(result);
         }
 
         /// <summary>
         /// Searches transactions by their amount and displays the results.
         /// </summary>
-        public void SearchByAmount()
+        private void SearchByAmount()
         {
             if (!this._getValidInput.TryReadDecimal("Enter the amount for transaction to search:", out decimal amount))
             {
@@ -358,19 +353,13 @@ namespace AssignmentFour.View
             }
 
             IEnumerable<Transaction> result = this._service.GetTransactionsByAmount(amount);
-            if (!result.Any())
-            {
-                Helper.DisplayInfoMessage($"No transactions found for amount: {amount}");
-                return;
-            }
-
             this.DisplayTransaction(result);
         }
 
         /// <summary>
         /// Searches transactions by their date and displays the results.
         /// </summary>
-        public void SearchByDescription()
+        private void SearchByDescription()
         {
             if (!this._getValidInput.TryReadDescription("Enter the Description of the Transaction to be search:", out string description))
             {
@@ -379,19 +368,13 @@ namespace AssignmentFour.View
             }
 
             IEnumerable<Transaction> transaction = this._service.GetTransactionsByDescription(description);
-            if (!transaction.Any())
-            {
-                Helper.DisplayInfoMessage($"No transactions found for description: {description}");
-                return;
-            }
-
             this.DisplayTransaction(transaction);
         }
 
         /// <summary>
         /// Searches transactions by their date and displays the results.
         /// </summary>
-        public void SearchByDate()
+        private void SearchByDate()
         {
             if (!this._getValidInput.TryReadDate("Enter the date for transaction to search:", out DateOnly date))
             {
@@ -399,14 +382,14 @@ namespace AssignmentFour.View
                 return;
             }
 
-            IEnumerable<Transaction> result = this._service.GetTransactionByDate(date);
-            this.DisplayTransaction(result);
+            IEnumerable<Transaction> transaction = this._service.GetTransactionByDate(date);
+            this.DisplayTransaction(transaction);
         }
 
         /// <summary>
         /// Deletes an existing transaction selected by index
         /// </summary>
-        public void DeleteTransaction()
+        private void DeleteTransaction()
         {
             List<Transaction> transactions = this._service.GetAllTransactions().ToList();
             if (transactions.Count == 0)
@@ -439,22 +422,16 @@ namespace AssignmentFour.View
         /// <summary>
         /// Shows the all the transaction.
         /// </summary>
-        public void ShowTransactions()
+        private void ShowTransactions()
         {
             IEnumerable<Transaction> transactions = this._service.GetAllTransactions();
-            if (transactions.Count() == 0)
-            {
-                Helper.DisplayInfoMessage("No Transactions available to show");
-                return;
-            }
-
             this.DisplayTransaction(transactions);
         }
 
         /// <summary>
         /// Shows the summary of all the transaction.
         /// </summary>
-        public void ShowSummary()
+        private void ShowSummary()
         {
             if (this._service.GetAllTransactions().Count() == 0)
             {
@@ -476,12 +453,18 @@ namespace AssignmentFour.View
         /// <summary>
         /// To display the transaction in table format
         /// </summary>
-        /// <param name="resultTransaction">Immutable List of Objects</param>
-        public void DisplayTransaction(IEnumerable<Transaction> resultTransaction)
+        /// <param name="transactions">Immutable List of Objects</param>
+        private void DisplayTransaction(IEnumerable<Transaction> transactions)
         {
+            if (!transactions.Any())
+            {
+                Console.WriteLine("No results found !!");
+                return;
+            }
+
             ConsoleTable table = new ConsoleTable("S.No", "Amount", "Description", "Date", "Type", "Source/Category");
             int serialNumber = 1;
-            foreach (Transaction transaction in resultTransaction)
+            foreach (Transaction transaction in transactions)
             {
                 if (transaction is Income)
                 {
@@ -506,7 +489,7 @@ namespace AssignmentFour.View
         /// <param name="description">Validated description output.</param>
         /// <param name="date">Validated date output.</param>
         /// <returns>True if all three fields were collected successfully; otherwise false.</returns>
-        public bool TryReadCommonFields(string amountPrompt, string descriptionPrompt, string datePrompt, out decimal amount, out string description, out DateOnly date)
+        private bool TryReadCommonFields(string amountPrompt, string descriptionPrompt, string datePrompt, out decimal amount, out string description, out DateOnly date)
         {
             description = string.Empty;
             date = default;

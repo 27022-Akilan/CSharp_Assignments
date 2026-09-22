@@ -31,12 +31,12 @@ namespace AssignmentFour.Service
         {
             if (transaction == null)
             {
-                return Messages.AddFailedDueToNull;
+                return ResultMessages.AddFailedDueToMissingValues;
             }
 
             if (!this.IsValidAmount(transaction.Amount))
             {
-                return Messages.AddFailedDueToInvalidAmount;
+                return ResultMessages.AddFailedDueToInvalidAmount;
             }
 
             Transaction transactionWithId;
@@ -62,7 +62,7 @@ namespace AssignmentFour.Service
                 return this._repository.AddTransaction(transactionWithId);
             }
 
-            return Messages.CantAddDueToInvalidType;
+            return ResultMessages.AddFailedDueToInvalidType;
         }
 
         /// <summary>
