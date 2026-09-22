@@ -281,3 +281,21 @@ I will not do anything (idle state) till the read operation gets completed.
 
 But when its asynchronous rather than blocking the thread completely, the threads get some other work assigned by the thread pool manager,
 It goes and do some works , then when the operation gets completed same thread or some other thread can get back and resume it. 
+
+
+## Difference between Buffered stream and Memory stream : 
+
+### Buffered stream :
+- Its a stream which wraps around another stream, and uses a inmemory buffer to reduce the I/O calls which is more expensive.
+- It improves the performance when there are many small read/writes frequently.
+- The buffered stream will have an internal bufffer with a default size lets assume that its about 1mb, when the program requests 10 kb of data,
+the buffered stream will get 1mb of data from the file and stores it in the buffer then returns only the 10kb of data and next time when the program requests
+another 10kb of data then it takes from the internal buffer rather than communicating with the actual file.
+- So this reduces the no.of calls and improves the performance and may also has a overhead of creating and maintaining a internal buffer.
+
+### Memory stream :
+- It stores the data inside the **RAM** .
+- It doesnt involves file,network or disk access. Its mainly used when you need to represent a data as a stream of bytes.In this scenario we can go with the memory stream.
+- Its faster because everithing is stored in the memory.
+- It has a overhead of memory stream cant hold a large amount of data as it uses the **RAM** .
+- Mainly used of temproary data storage as streams.
