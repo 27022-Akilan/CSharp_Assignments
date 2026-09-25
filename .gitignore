@@ -222,7 +222,7 @@ project.lock.json
 AppPackages/
 
 # editorConfig
-**/.editorConfig
+**/.editorconfig
 
 #####
 # End of core ignore list, below put you custom 'per project' settings (patterns or path)
