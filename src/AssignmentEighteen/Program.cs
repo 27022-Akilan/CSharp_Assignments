@@ -1,4 +1,8 @@
-﻿using AssignmentEighteen.Task4;
+﻿using AssignmentEighteen.ArrayManager;
+using AssignmentEighteen.Task1;
+using AssignmentEighteen.Task3;
+using AssignmentEighteen.Task4;
+using AssignmentEighteen.Task5;
 
 namespace Assignments
 {
@@ -14,17 +18,20 @@ namespace Assignments
         /// <returns>Task</returns>
         public static async Task Main(string[] args)
         {
-            //WebsiteScrapper scrapper = new WebsiteScrapper();
-            //await scrapper.GetContent();
+            WebsiteScrapper scrapper = new WebsiteScrapper();
+            await scrapper.GetContent();
 
-            //ArrayManager arrayManager = new ArrayManager();
-            //arrayManager.SquareArray();
+            ArrayManager arrayManager = new ArrayManager();
+            arrayManager.SquareArray();
 
-            //ThreadImplementation threadImplementation = new ThreadImplementation();
-            //threadImplementation.RunThread();
+            ThreadImplementation threadImplementation = new ThreadImplementation();
+            threadImplementation.RunThread();
 
             DataAnalyser dataAnalyser = new DataAnalyser();
-            await dataAnalyser.AnalyseData();
+            await dataAnalyser.AnalyseDataAsync();
+
+            DeadlockRecoverer deadlockRecoverer = new DeadlockRecoverer();
+            await deadlockRecoverer.DeadlockMethodAsync();
         }
     }
 }

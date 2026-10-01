@@ -11,7 +11,7 @@ namespace AssignmentEighteen.Task4
         /// Analyse the data and display the number of key value pairs.
         /// </summary>
         /// <returns>Task object</returns>
-        public async Task AnalyseData()
+        public async Task AnalyseDataAsync()
         {
             long result = await this.MethodC();
             Console.WriteLine($"The number of key value pairs is {result}");
