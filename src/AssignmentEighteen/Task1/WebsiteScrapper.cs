@@ -9,7 +9,7 @@
         /// Gets the content from the website.
         /// </summary>
         /// <returns>A task object.</returns>
-        public async Task GetContent()
+        public async Task GetContentAsync()
         {
             HttpClient client = new HttpClient();
             string url = "https://openlibrary.org/search.json?q=the+lord+of+the+rings";

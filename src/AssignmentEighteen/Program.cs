@@ -3,6 +3,8 @@ using AssignmentEighteen.Task1;
 using AssignmentEighteen.Task3;
 using AssignmentEighteen.Task4;
 using AssignmentEighteen.Task5;
+using AssignmentEighteen.Task6;
+using AssignmentEighteen.Task7;
 
 namespace Assignments
 {
@@ -19,7 +21,7 @@ namespace Assignments
         public static async Task Main(string[] args)
         {
             WebsiteScrapper scrapper = new WebsiteScrapper();
-            await scrapper.GetContent();
+            await scrapper.GetContentAsync();
 
             ArrayManager arrayManager = new ArrayManager();
             arrayManager.SquareArray();
@@ -32,6 +34,12 @@ namespace Assignments
 
             DeadlockRecoverer deadlockRecoverer = new DeadlockRecoverer();
             await deadlockRecoverer.DeadlockMethodAsync();
+
+            ConfigureAwaitManager configureAwaitManager = new ConfigureAwaitManager();
+            await configureAwaitManager.MethodBAsync();
+
+            ExceptionHandler exceptionHandler = new ExceptionHandler();
+            await exceptionHandler.HandleExceptionAsync();
         }
     }
 }

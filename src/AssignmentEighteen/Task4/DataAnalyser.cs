@@ -13,7 +13,7 @@ namespace AssignmentEighteen.Task4
         /// <returns>Task object</returns>
         public async Task AnalyseDataAsync()
         {
-            long result = await this.MethodC();
+            long result = await this.MethodCAsync();
             Console.WriteLine($"The number of key value pairs is {result}");
         }
 
@@ -21,7 +21,7 @@ namespace AssignmentEighteen.Task4
         /// Represents the large CPU bound operation.
         /// </summary>
         /// <returns>URL for web service call.</returns>
-        public async Task<string> MethodA()
+        public async Task<string> MethodAAsync()
         {
             Console.WriteLine($"Method A : Performing CPU bound operation.");
             for (long i = 0; i < 500000000; i++)
@@ -38,10 +38,10 @@ namespace AssignmentEighteen.Task4
         /// Gets the response from the URL.
         /// </summary>
         /// <returns>Response from the API.</returns>
-        public async Task<string> MethodB()
+        public async Task<string> MethodBAsync()
         {
             Console.WriteLine($"Method B : Calling Method A to get the URL");
-            string url = await this.MethodA();
+            string url = await this.MethodAAsync();
             Console.WriteLine($"Method B : Got the URL : {url}");
 
             using HttpClient client = new HttpClient();
@@ -54,10 +54,10 @@ namespace AssignmentEighteen.Task4
         ///  Caculates the number of key value pairs in the response.
         /// </summary>
         /// <returns>Number of key value pairs in the response.</returns>
-        public async Task<long> MethodC()
+        public async Task<long> MethodCAsync()
         {
             Console.WriteLine($"Method C : Getting response from the Method B");
-            string json = await this.MethodB();
+            string json = await this.MethodBAsync();
 
             Console.WriteLine("Method C : Started processing Json...");
 
