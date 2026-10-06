@@ -1,10 +1,4 @@
-﻿using AssignmentEighteen.ArrayManager;
-using AssignmentEighteen.Task1;
-using AssignmentEighteen.Task3;
-using AssignmentEighteen.Task4;
-using AssignmentEighteen.Task5;
-using AssignmentEighteen.Task6;
-using AssignmentEighteen.Task7;
+﻿using AssignmentEighteen;
 
 namespace Assignments
 {
@@ -20,26 +14,8 @@ namespace Assignments
         /// <returns>Task</returns>
         public static async Task Main(string[] args)
         {
-            WebsiteScrapper scrapper = new WebsiteScrapper();
-            await scrapper.GetContentAsync();
-
-            ArrayManager arrayManager = new ArrayManager();
-            arrayManager.SquareArray();
-
-            ThreadImplementation threadImplementation = new ThreadImplementation();
-            threadImplementation.RunThread();
-
-            DataAnalyser dataAnalyser = new DataAnalyser();
-            await dataAnalyser.AnalyseDataAsync();
-
-            DeadlockRecoverer deadlockRecoverer = new DeadlockRecoverer();
-            await deadlockRecoverer.DeadlockMethodAsync();
-
-            ConfigureAwaitManager configureAwaitManager = new ConfigureAwaitManager();
-            await configureAwaitManager.MethodBAsync();
-
-            ExceptionHandler exceptionHandler = new ExceptionHandler();
-            await exceptionHandler.HandleExceptionAsync();
+            TaskNavigator taskNavigator = new TaskNavigator();
+            await taskNavigator.NavigateMenu();
         }
     }
 }

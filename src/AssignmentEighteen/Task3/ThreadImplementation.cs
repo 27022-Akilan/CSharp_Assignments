@@ -1,4 +1,6 @@
-﻿namespace AssignmentEighteen.Task3
+﻿using AssignmentEighteen.IOHelper;
+
+namespace AssignmentEighteen.Task3
 {
     /// <summary>
     /// Represents the implemenatation of threads.
@@ -22,7 +24,7 @@
             t1.Join();
             t2.Join();
 
-            Console.WriteLine($"The result of summing up the array is : {this._additionResult}" +
+            ConsolePresenter.DisplayMessage($"The result of summing up the array is : {this._additionResult}" +
                               $"\nThe result of multiplying the array is : {this._multiplicationResult}");
         }
 

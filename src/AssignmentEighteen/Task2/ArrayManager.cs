@@ -1,6 +1,7 @@
 ﻿using System.Diagnostics;
+using AssignmentEighteen.IOHelper;
 
-namespace AssignmentEighteen.ArrayManager
+namespace AssignmentEighteen.Task2
 {
     /// <summary>
     /// Represents the functionalities to create and manipulate array.
@@ -45,7 +46,7 @@ namespace AssignmentEighteen.ArrayManager
 
         private void PrintArray(string message, int[] array)
         {
-            Console.WriteLine(message);
+            ConsolePresenter.DisplayMessage(message);
             foreach (int number in array)
             {
                 Console.Write($"{number},");
@@ -54,7 +55,7 @@ namespace AssignmentEighteen.ArrayManager
 
         private void PrintTime(string type, long time)
         {
-            Console.WriteLine($"\nThe time taken for squaring the array using [{type}] " +
+            ConsolePresenter.DisplayMessage($"\nThe time taken for squaring the array using [{type}] " +
                               $"\n====================" +
                               $"\n{time}" +
                               $"\n====================");

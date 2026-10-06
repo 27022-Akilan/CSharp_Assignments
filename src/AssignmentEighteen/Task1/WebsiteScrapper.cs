@@ -1,4 +1,6 @@
-﻿namespace AssignmentEighteen.Task1
+﻿using AssignmentEighteen.IOHelper;
+
+namespace AssignmentEighteen.Task1
 {
     /// <summary>
     /// Represents the functionalities to get the data from the Website using the url.
@@ -18,14 +20,14 @@
             if (response.IsSuccessStatusCode)
             {
                 string json = await response.Content.ReadAsStringAsync();
-                Console.WriteLine($"Content on the URL  [{url}] is : ");
-                Console.WriteLine(new string('=', Console.WindowWidth));
-                Console.WriteLine(json.Substring(0, 300));
-                Console.WriteLine(new string('=', Console.WindowWidth));
+                ConsolePresenter.DisplayMessage($"Content on the URL  [{url}] is : ");
+                ConsolePresenter.DisplayMessage(new string('=', Console.WindowWidth));
+                ConsolePresenter.DisplayMessage(json.Substring(0, 300));
+                ConsolePresenter.DisplayMessage(new string('=', Console.WindowWidth));
             }
             else
             {
-                Console.WriteLine($"Cant fetch from [{url}] at this moment");
+                ConsolePresenter.DisplayMessage($"Cant fetch from [{url}] at this moment");
             }
         }
     }

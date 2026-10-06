@@ -1,4 +1,6 @@
-﻿namespace AssignmentEighteen.Task5
+﻿using AssignmentEighteen.IOHelper;
+
+namespace AssignmentEighteen.Task5
 {
     /// <summary>
     /// Represents the functionalities to recover from the deadlock.
@@ -16,7 +18,7 @@
             // So its a DeadLock when there's like a UI thread.
             // var result = this.SomeOperationAsync().Result;
             var result = await this.SomeOperationAsync();
-            Console.WriteLine(result);
+            ConsolePresenter.DisplayMessage(result);
         }
 
         private async Task<string> SomeOperationAsync()

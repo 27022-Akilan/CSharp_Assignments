@@ -1,4 +1,6 @@
-﻿namespace AssignmentEighteen.Task7
+﻿using AssignmentEighteen.IOHelper;
+
+namespace AssignmentEighteen.Task7
 {
     /// <summary>
     /// Represents handling the exception.
@@ -18,7 +20,7 @@
             catch (InvalidOperationException)
             {
                 // This catch block will not be reached as the VoidMathodAsync return type is void so the exception gets swallowed.
-                Console.WriteLine("Exception caught from the async void method");
+                ConsolePresenter.DisplayMessage("Exception caught from the async void method");
             }
 
             try
@@ -27,7 +29,7 @@
             }
             catch (InvalidOperationException)
             {
-                Console.WriteLine("Exception caught from the async Task method");
+                ConsolePresenter.DisplayMessage("Exception caught from the async Task method");
             }
 
             // Intentional wait for using async methods.
