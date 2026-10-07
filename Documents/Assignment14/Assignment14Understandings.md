@@ -26,7 +26,7 @@ there is no cyclic dependency between Math app and display app.
 After adding project E(Report App)
 
 1.Utility App
-2.Display Appssssss
+2.Display App
 3.Math App
 4.Report App
 5.Greetings App
