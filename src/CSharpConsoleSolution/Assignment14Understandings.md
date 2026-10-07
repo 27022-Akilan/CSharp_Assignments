@@ -8,7 +8,7 @@ Here in the question they have stated
 
 B -> C and C -> B :: Cyclic dependency
 
-"C:\C#\C#_Assignment\Demo_Asg\Documents\Assignment14\Images\Screenshot 2026-10-07 151210.png"
+![Build Order](Images/BuildOrder.png)
 
 The compiler cant decide which to build first as B <-> C are depending on each other.
 
@@ -30,6 +30,7 @@ After adding project E(Report App)
 3.Math App
 4.Report App
 5.Greetings App
+
 ![Build Order](Images/CyclicDependency.png)
 
 The exact positions the projects that do not have a dependency relationship
