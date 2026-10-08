@@ -13,7 +13,7 @@ namespace AssignmentSeventeen.Task1
         /// <returns>Assembly object.</returns>
         public Assembly LoadAssembly()
         {
-            string pluginPath = Path.Combine(AppContext.BaseDirectory, "Plugin", "SampleProject.dll");
+            string pluginPath = Path.Combine(AppContext.BaseDirectory, @"..\..\..\Plugin\SampleProject.dll");
             return Assembly.LoadFrom(pluginPath);
         }
 
