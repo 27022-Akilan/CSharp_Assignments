@@ -1,4 +1,5 @@
-﻿using System.Reflection;
+﻿using System.Collections;
+using System.Reflection;
 using System.Text;
 
 namespace AssignmentSeventeen.Task7
@@ -23,6 +24,11 @@ namespace AssignmentSeventeen.Task7
 
             foreach (PropertyInfo property in properties)
             {
+                if (property.GetIndexParameters().Length > 0)
+                {
+                    continue;
+                }
+
                 object? propertyValue = property.GetValue(value);
                 if (propertyValue == null)
                 {
@@ -36,6 +42,30 @@ namespace AssignmentSeventeen.Task7
                         propertyType == typeof(string))
                     {
                         result.Append($"{property.Name} : {propertyValue};");
+                    }
+                    else if (typeof(IEnumerable).IsAssignableFrom(propertyType))
+                    {
+                        StringBuilder collectionResult = new StringBuilder();
+
+                        foreach (object? item in (IEnumerable)propertyValue)
+                        {
+                            if (item == null)
+                            {
+                                collectionResult.Append("null;");
+                            }
+                            else if (item.GetType().IsPrimitive ||
+                                item is string ||
+                                item is decimal)
+                            {
+                                collectionResult.Append($"{item};");
+                            }
+                            else
+                            {
+                                collectionResult.Append($"{{{this.Serialize(item)}}};");
+                            }
+                        }
+
+                        result.Append($"{property.Name} : {{{collectionResult}}};");
                     }
                     else
                     {

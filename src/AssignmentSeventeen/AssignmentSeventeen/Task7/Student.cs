@@ -22,5 +22,11 @@
         /// </summary>
         /// <value>CGPA of the student.</value>
         public double CGPA { get; set; }
+
+        /// <summary>
+        /// Gets or sets the List of subjects.
+        /// </summary>
+        /// <value>List of subjects.</value>
+        public List<string>? Subjects { get; set; }
     }
 }
