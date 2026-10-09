@@ -1,6 +1,4 @@
-﻿using AssignmentSeventeen;
-
-namespace Assignments
+﻿namespace AssignmentSeventeen
 {
     /// <summary>
     /// Entry point of the application.
