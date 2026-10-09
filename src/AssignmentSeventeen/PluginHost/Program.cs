@@ -50,9 +50,10 @@ namespace Assignments
                 IPlugin chosePlugin = pluginList[choice - 1];
                 Console.Write("Enter the string to be encrypted : ");
                 string message = Console.ReadLine() ?? string.Empty;
-
-                Console.WriteLine($"Encrypted message : {chosePlugin.Encryption(message)}");
-                Console.WriteLine($"Decrypted message : {chosePlugin.Decryption(message)}");
+                string encryptedMessage = chosePlugin.Encryption(message);
+                Console.WriteLine($"Encrypted message : {encryptedMessage}");
+                string decryptedMessage = chosePlugin.Decryption(encryptedMessage);
+                Console.WriteLine($"Decrypted message : {decryptedMessage}");
                 return;
             }
 

@@ -14,7 +14,7 @@ namespace Assignments
         /// <inheritdoc/>
         public string Decryption(string textMessage)
         {
-            return textMessage.Substring(0, textMessage.Length - 1);
+            return textMessage.Substring(0, textMessage.Length);
         }
     }
 }
