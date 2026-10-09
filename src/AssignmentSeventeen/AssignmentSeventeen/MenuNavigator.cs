@@ -4,6 +4,7 @@ using AssignmentSeventeen.Task2;
 using AssignmentSeventeen.Task3;
 using AssignmentSeventeen.Task4;
 using AssignmentSeventeen.Task5;
+using AssignmentSeventeen.Task6;
 using SampleProject;
 
 namespace AssignmentSeventeen
@@ -39,6 +40,9 @@ namespace AssignmentSeventeen
 
             PluginHost pluginHost = new PluginHost();
             pluginHost.ManagePlugins();
+
+            InterfaceMocker interfaceMocker = new InterfaceMocker();
+            interfaceMocker.MockInterface();
         }
     }
 }
