@@ -13,7 +13,7 @@ namespace Assignments
         /// <param name="args">Default arguments.</param>
         public static void Main(string[] args)
         {
-            MenuNaviagtor navigator = new MenuNaviagtor();
+            MenuNavigator navigator = new MenuNavigator();
             navigator.NavigateMenu();
         }
     }

@@ -18,4 +18,8 @@
     <Folder Include="Plugin\" />
   </ItemGroup>
 
+  <ItemGroup>
+    <ProjectReference Include="..\SampleProject\SampleProject.csproj" />
+  </ItemGroup>
+
 </Project>
