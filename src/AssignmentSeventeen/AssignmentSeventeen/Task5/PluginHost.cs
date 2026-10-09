@@ -1,18 +1,17 @@
 ﻿using System.Reflection;
 using Contract;
 
-namespace Assignments
+namespace AssignmentSeventeen.Task5
 {
     /// <summary>
-    /// Entry point of the application.
+    /// Represents the functionalities to manage plugins.
     /// </summary>
-    public class Program
+    public class PluginHost
     {
         /// <summary>
-        /// Starts the application.
+        /// Manages the plugins.
         /// </summary>
-        /// <param name="args">Default arguments.</param>
-        public static void Main(string[] args)
+        public void ManagePlugins()
         {
             List<IPlugin> pluginList = new List<IPlugin>();
             string[] pluginFiles = Directory.GetFiles(@"..\..\..\..\Plugins", "*.dll");
@@ -30,9 +29,6 @@ namespace Assignments
                         Console.WriteLine($"Valid plugin found : {type.FullName}");
                         IPlugin plugin = (IPlugin)Activator.CreateInstance(type)!;
                         pluginList.Add(plugin);
-                        //string encryptedMessage = plugin.Encryption("akil");
-                        //string decryptedMessage = plugin.Decryption(encryptedMessage);
-                        //Console.WriteLine($"Encrypted : {encryptedMessage}\n Decrypted : {decryptedMessage}");
                     }
                 }
             }
