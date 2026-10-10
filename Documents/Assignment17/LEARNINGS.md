@@ -1,4 +1,4 @@
-# Reflection in C# — Learnings
+# Reflection in C# ï¿½ Learnings
  
 ## Task 1: Inspect Assembly Metadata
 - Learned to load assemblies using `Assembly.LoadFile()`.
@@ -28,7 +28,6 @@
 ## Task 6: Mocking Framework
 - Learned to generate types that implement interfaces at runtime.
 - Used `TypeBuilder` and `MethodBuilder` to create mock implementations.
-- Understood how dynamically generated mocks can support unit testing.
  
 ## Task 7: Serialization API
 - Implemented a basic serializer using Reflection to inspect object properties.
